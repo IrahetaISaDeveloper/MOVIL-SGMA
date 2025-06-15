@@ -1,0 +1,318 @@
+/* Variables CSS */
+:root {
+    --primary-red: #A32F2A;
+    --secondary-gray: #4A4A4A;
+    --light-gray: #D9D9D9;
+    --text-color-light: #FFFFFF;
+    --text-color-dark: #333333;
+    --link-color: #FBB03B;
+    --background-color: #333333;
+    --header-bg: #3a3a3a;
+    --back-button-bg: #444;
+    --back-button-hover: #555;
+    --error-red: #EF5350;
+
+    --base-font-size: 1.05rem;
+    --input-padding-y: 14px; /* Padding vertical para inputs/selects */
+    --input-padding-x: 18px; /* Padding horizontal para inputs/selects */
+    --button-padding: 18px;
+    --gap-spacing: 22px;
+}
+
+/* Reset y estilos generales de body */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color-light);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* Contenedor principal de la app */
+.full-screen-app-container {
+    background-color: var(--background-color);
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    min-height: -webkit-fill-available;
+    min-height: 100vh;
+}
+
+/* Estilos de la cabecera */
+.app-header {
+    background-color: var(--header-bg);
+    padding: 1.2em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.header-title {
+    font-size: 1.45rem;
+    margin: 0;
+    color: var(--text-color-light);
+    flex-grow: 1;
+    text-align: center;
+    margin-left: -70px;
+}
+
+.back-button {
+    color: var(--text-color-light);
+    text-decoration: none;
+    padding: 0.7em 1.2em;
+    background-color: var(--back-button-bg);
+    border-radius: 10px;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.back-button:hover {
+    background-color: var(--back-button-hover);
+}
+
+.back-button i {
+    font-size: 1.1em;
+}
+
+/* Contenido principal del registro */
+.registro-main-content {
+    flex-grow: 1;
+    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede la altura */
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.registro-main-content .subtitle {
+    color: var(--text-color-light);
+    font-size: var(--base-font-size);
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.registro-form {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-spacing);
+}
+
+.input-group {
+    width: 100%;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text-color-light);
+    font-size: var(--base-font-size);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input { /* Solo para inputs de texto/email/password */
+    width: 100%;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    background-color: var(--light-gray);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-color-dark);
+    font-size: var(--base-font-size);
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: #888;
+}
+
+/* Estilos para el mensaje de error del correo */
+.error-message {
+    color: var(--error-red);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    min-height: 1.2em;
+}
+
+/* Estilos de botones */
+.btn {
+    width: 100%;
+    padding: var(--button-padding);
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.primary-btn {
+    background-color: var(--primary-red);
+    color: var(--text-color-light);
+}
+
+.primary-btn:hover {
+    background-color: #8a2a26;
+}
+
+/*
+   ========================================================================
+   NUEVOS ESTILOS PARA EL COMBOBOX PERSONALIZADO
+   ========================================================================
+*/
+.custom-select-wrapper {
+    position: relative; /* Es importante para posicionar el dropdown absoluto */
+    width: 100%;
+}
+
+.custom-select-trigger {
+    width: 100%;
+    padding: var(--input-padding-y) var(--input-padding-x); /* Usa los paddings de input */
+    background-color: var(--light-gray);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-color-dark);
+    font-size: var(--base-font-size);
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none; /* Evita que el texto del trigger se seleccione */
+}
+
+.custom-select-trigger span {
+    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible */
+}
+
+.custom-select-trigger .select-arrow {
+    transition: transform 0.2s ease;
+    margin-left: 10px;
+    color: var(--text-color-dark);
+}
+
+.custom-select-trigger.active .select-arrow {
+    transform: rotate(180deg); /* Rota la flecha cuando el dropdown está abierto */
+}
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 5px); /* Posiciona 5px debajo del trigger */
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* ¡CLAVE! Habilita el desplazamiento si las opciones son muchas */
+    max-height: 180px; /* Define una altura máxima antes de que aparezca el scroll */
+    display: none; /* Oculto por defecto */
+    padding: 5px 0; /* Padding interno para las opciones */
+}
+
+.custom-options.open {
+    display: block; /* Muestra el dropdown cuando la clase 'open' está activa */
+}
+
+.custom-option {
+    padding: 12px var(--input-padding-x); /* Padding para cada opción individual */
+    cursor: pointer;
+    font-size: var(--base-font-size);
+    color: var(--text-color-dark);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.custom-option:hover,
+.custom-option.selected {
+    background-color: var(--primary-red);
+    color: var(--text-color-light);
+}
+
+/*
+   ========================================================================
+   MEDIA QUERIES - Ajustes para pantallas pequeñas y alturas reducidas
+   (Estos ya incluyen ajustes para el nuevo combobox)
+   ========================================================================
+*/
+
+/* Ajustes para pantallas con un ancho máximo de 380px (móviles pequeños) */
+@media (max-width: 380px) {
+    .registro-main-content {
+        padding: 20px;
+    }
+    .registro-form {
+        gap: 15px;
+    }
+    .input-group input,
+    .custom-select-trigger, /* Asegurar que el trigger del combobox se ajuste */
+    .custom-option { /* Asegurar que las opciones se ajusten */
+        font-size: 0.95rem;
+        padding: 12px 15px;
+    }
+    .btn {
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+    .header-title {
+        font-size: 1.3rem;
+    }
+    .back-button {
+        font-size: 0.9em;
+        padding: 0.6em 1em;
+    }
+    .registro-main-content .subtitle {
+        margin-bottom: 25px;
+    }
+}
+
+/* NUEVA MEDIA QUERY: Ajustes específicos para pantallas con poca ALTURA (móviles cortos) */
+@media (max-height: 600px) {
+    .registro-main-content {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .registro-form {
+        gap: 10px;
+    }
+    .input-group label {
+        margin-bottom: 4px;
+    }
+    .input-group input,
+    .custom-select-trigger, /* Asegurar que el trigger del combobox se ajuste */
+    .custom-option { /* Asegurar que las opciones se ajusten */
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    .btn {
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 1rem;
+    }
+    .registro-main-content .subtitle {
+        margin-bottom: 15px;
+    }
+    .custom-options {
+        max-height: 120px; /* Reducir aún más la altura máxima del dropdown para pantallas muy cortas */
+    }
+}

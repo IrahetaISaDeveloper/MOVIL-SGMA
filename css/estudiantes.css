@@ -5,45 +5,141 @@
   box-sizing: border-box;
 }
 
+:root {
+  --app-bg: #2b2b2b;
+  --header-bg: #3a3a3a; /* Un gris un poco diferente para la cabecera */
+  --card-bg: white;
+  --text-light: white;
+  --text-highlight: #dcdcdc;
+  --btn-bg: #8b1c1c;
+  --btn-hover-bg: #a52a2a;
+  --back-button-bg: #444; /* Fondo para el botón de volver/salir */
+  --back-button-hover: #555;
+  --font-size-welcome: 1.3rem; /* Variable para el tamaño del mensaje de bienvenida */
+}
+
 body {
   font-family: "Segoe UI", sans-serif;
-  background-color: #2b2b2b;
-  color: white;
+  background-color: var(--app-bg);
+  color: var(--text-light);
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: start;
+  justify-content: center; /* Centra el contenedor principal horizontalmente */
+  align-items: center; /* Centra el contenedor principal verticalmente */
 }
 
 /* Contenedor principal como app */
-.app-container {
+.full-screen-app-container {
+  background-color: var(--app-bg); /* Mismo fondo para que se mezcle */
   width: 100%;
-  max-width: 400px;
+  max-width: 450px; /* Un poco más de ancho si las tarjetas lo necesitan */
+  height: 100vh; /* Ocupa el 100% del alto de la ventana */
+  border-radius: 20px; /* Bordes redondeados para la "app" */
+  overflow: hidden; /* Importante para que el contenido respete los bordes */
+  display: flex;
+  flex-direction: column; /* Apila la cabecera y el contenido verticalmente */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sutil sombra */
+
+  /* Para que ocupe el espacio completo en iOS y otros móviles */
+  min-height: -webkit-fill-available;
+  min-height: 100vh;
+}
+
+/* En pantallas pequeñas, quitar el radio de borde para que ocupe toda la pantalla */
+@media (max-width: 500px) {
+  .full-screen-app-container {
+    border-radius: 0;
+  }
+}
+
+/* --- ESTILOS DE LA CABECERA --- */
+.app-header {
+  background-color: var(--header-bg);
+  padding: 1em 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espacia el botón a la izquierda y el título */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0; /* Evita que la cabecera se encoja */
+}
+
+.header-title { /* Estilo para el h1 en la cabecera */
+  font-size: 1.3rem; /* Tamaño de fuente para el título "Inicio" */
+  margin: 0; /* Reset del margen */
+  color: var(--text-light);
+  flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+  text-align: center; /* Centra el título */
+  /* Ajusta este margen si el botón "Salir" es muy ancho y se solapa */
+  margin-left: -70px; /* Compensar el espacio del botón "Salir" */
+}
+
+.back-button {
+  color: var(--text-light);
+  text-decoration: none;
+  padding: 0.6em 1em;
+  background-color: var(--back-button-bg);
+  border-radius: 8px;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.back-button:hover {
+  background-color: var(--back-button-hover);
+}
+
+.back-button i {
+  font-size: 1em;
+}
+
+/* --- ESTILOS DEL CONTENIDO PRINCIPAL Y CENTRADO DE TARJETAS --- */
+.estudiantes-main-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column; /* Apila el mensaje de bienvenida y el cards-wrapper */
+  justify-content: center; /* CENTRA EL CONTENIDO VERTICALMENTE */
+  align-items: center; /* CENTRA EL CONTENIDO HORIZONTALMENTE */
   padding: 20px;
-  text-align: center;
 }
 
-/* Encabezado */
-h1 {
-  font-size: 1.3rem;
-  margin-bottom: 30px;
-  color: #fff;
+/* Nuevo estilo para el mensaje de bienvenida fuera de la cabecera */
+.welcome-message {
+  font-size: var(--font-size-welcome); /* Usa la variable definida en :root */
+  margin-bottom: 30px; /* Espacio debajo del mensaje de bienvenida */
+  color: var(--text-light);
+  text-align: center; /* Asegura que el texto esté centrado */
 }
-h1 span {
+
+.welcome-message span {
   font-weight: bold;
-  color: #dcdcdc;
+  color: var(--text-highlight);
 }
 
-/* Tarjetas estilo app */
+
+.cards-wrapper {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
 .card {
-  background-color: white;
+  background-color: var(--card-bg);
   border-radius: 20px;
   padding: 30px 20px;
-  margin-bottom: 25px;
   box-shadow: 0 0 5px #000;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .card img {
@@ -52,10 +148,9 @@ h1 span {
   margin-bottom: 15px;
 }
 
-/* Botones estilo app */
 .btn {
-  background-color: #8b1c1c;
-  color: white;
+  background-color: var(--btn-bg);
+  color: var(--text-light);
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
@@ -67,21 +162,28 @@ h1 span {
               inset 3px 3px 5px rgba(0,0,0,0.3);
   cursor: pointer;
   transition: background-color 0.2s;
+  text-decoration: none;
 }
 
 .btn:hover {
-  background-color: #a52a2a;
+  background-color: var(--btn-hover-bg);
 }
 
 .arrow {
   font-size: 1.2rem;
 }
 
-/* Solo si quieres que se vea sin scroll */
-@media screen and (max-height: 700px) {
-  .app-container {
+/* Media query para ajustar el centrado en pantallas más pequeñas */
+@media screen and (max-height: 600px) {
+  .estudiantes-main-content {
     justify-content: flex-start;
-    padding-top: 10px;
+    padding-top: 20px;
   }
 }
 
+/* Medias queries para el contenedor principal en pantallas más grandes */
+@media (min-width: 501px) {
+  .full-screen-app-container {
+    border-radius: 20px;
+  }
+}

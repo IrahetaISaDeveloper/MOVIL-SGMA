@@ -16,6 +16,11 @@
     --spacing-m: 12px;
     --spacing-l: 16px;
     --spacing-xl: 20px;
+
+    /* Nuevas variables para el botón de volver y la cabecera */
+    --header-bg: #282828; /* Un fondo un poco diferente para la cabecera */
+    --back-button-bg: #444; /* Un gris oscuro para el fondo del botón */
+    --back-button-hover: #555; /* Un gris ligeramente más claro al pasar el ratón */
 }
 
 
@@ -24,70 +29,124 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh; /* Asegura que ocupe al menos el 100% de la altura de la vista */
-    display: flex; /* Para centrar el contenido principal si no ocupa toda la altura */
-    flex-direction: column; /* Apila el contenido si hay varios elementos en el body */
-    font-family: 'Roboto', sans-serif; /* Asegúrate de que Roboto esté importado o sea una fuente segura */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-light);
-    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
-    -webkit-font-smoothing: antialiased; /* Suavizado de fuentes para mejor visualización */
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Contenedor principal de la app */
-.main-container {
-    flex-grow: 1; /* Permite que el contenedor crezca y ocupe el espacio disponible */
-    width: 100%; /* Ocupa todo el ancho */
+/* Nuevo contenedor principal de la app */
+.full-screen-app-container {
+    background-color: var(--bg-dark);
+    width: 100%;
+    max-width: 600px; /* Un poco más grande para esta página si es necesario */
+    height: 100vh; /* Ocupa el 100% del alto de la vista */
+    border-radius: 20px; /* Bordes redondeados para el "marco de la app" */
+    overflow: hidden; /* Muy importante para que el contenido respete los bordes */
+    display: flex;
+    flex-direction: column; /* Apila la cabecera y el contenido verticalmente */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Sombra para simular una app */
+
+    /* Para que ocupe el espacio completo en iOS y otros móviles */
+    min-height: -webkit-fill-available;
+    min-height: 100vh;
+}
+
+/* En pantallas pequeñas, quitar el radio de borde para que ocupe toda la pantalla */
+@media (max-width: 500px) {
+    .full-screen-app-container {
+        border-radius: 0;
+    }
+}
+
+
+/* --- ESTILOS DE LA CABECERA (NUEVOS) --- */
+.app-header {
+    background-color: var(--header-bg); /* Fondo de la cabecera */
+    padding: 1em 1.5em; /* Espaciado interno */
+    display: flex;
+    align-items: center; /* Alinea verticalmente el botón y el título */
+    justify-content: space-between; /* Espacia el botón a la izquierda y el título al centro */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
+}
+
+.app-header h1 {
+    margin: 0; /* Reinicia el margen del h1 */
+    font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
+    font-weight: 700;
+    color: var(--text-light);
+    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+    text-align: center; /* Centra el título */
+    /* Asegúrate de que el título no se solape con el botón */
+    margin-left: -50px; /* Ajusta este valor si el botón es más grande o más pequeño */
+}
+
+.back-button {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex; /* Para alinear el icono y el texto */
+    align-items: center;
+    gap: 0.5em; /* Espacio entre el icono y el texto */
+    flex-shrink: 0; /* Evita que el botón se encoja */
+    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
+}
+
+.back-button:hover {
+    background-color: var(--back-button-hover);
+}
+
+.back-button i {
+    font-size: 1em;
+}
+
+/* --- ESTILOS DEL CONTENIDO PRINCIPAL (AJUSTADOS) --- */
+.mis-trabajos-main-content {
+    flex-grow: 1; /* Permite que el contenido ocupe todo el espacio restante */
+    overflow-y: auto; /* Permite el desplazamiento vertical si el contenido excede la altura */
+    -webkit-overflow-scrolling: touch; /* Desplazamiento suave en iOS */
+    padding: var(--spacing-xl); /* Padding interior para el contenido */
+    box-sizing: border-box; /* Incluye padding en el tamaño total */
+    width: 100%; /* Ocupa todo el ancho disponible */
     max-width: 550px; /* Limita el ancho máximo para tabletas/escritorios */
-    margin: 0 auto; /* Centrar horizontalmente */
-    padding: var(--spacing-xl); /* Padding interior */
-    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+    margin: 0 auto; /* Centrar horizontalmente dentro del main-content */
 }
 
-h1 {
-    text-align: center;
-    font-weight: 700;
-    font-size: 1.8em; /* Tamaño de título responsivo */
-    margin-bottom: var(--spacing-xl);
-    color: var(--text-light);
-}
 
-h2 {
-    font-size: 1.2em; /* Tamaño para los títulos de trabajo */
-    font-weight: 700;
-    margin: 0 0 var(--spacing-s) 0;
-    color: var(--text-light);
-}
+/* El resto de tus estilos CSS para .jobs-list, .job-card, etc.,
+   permanecen prácticamente iguales, ya que ahora aplican dentro del
+   nuevo .mis-trabajos-main-content */
 
-p {
-    margin: 0;
-}
-
-/* --- LISTA DE TARJETAS DE TRABAJO --- */
 .jobs-list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl); /* Espacio entre las tarjetas */
+    gap: var(--spacing-xl);
 }
 
-/* --- ESTILO INDIVIDUAL DE CADA TARJETA --- */
 .job-card {
     background-color: var(--card-bg);
-    border-radius: var(--border-radius-card); /* Bordes redondeados para toda la tarjeta */
+    border-radius: var(--border-radius-card);
     display: flex;
-    flex-direction: column; /* Por defecto, apiladas para móviles */
-    overflow: hidden; /* Muy importante para que la imagen respete el border-radius */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra más prominente */
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* --- SECCIÓN DE LA IMAGEN DE LA TARJETA --- */
 .card-image {
     width: 100%;
-    height: 180px; /* Altura fija para la imagen en móvil */
-    position: relative; /* Para la superposición del texto */
-    overflow: hidden; /* Asegura que la imagen no se salga de los bordes redondeados superiores */
-    /* Bordes redondeados solo arriba si la tarjeta está en columna */
+    height: 180px;
+    position: relative;
+    overflow: hidden;
     border-top-left-radius: var(--border-radius-card);
     border-top-right-radius: var(--border-radius-card);
 }
@@ -95,7 +154,7 @@ p {
 .card-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* La imagen cubre el espacio sin distorsionarse */
+    object-fit: cover;
     display: block;
 }
 
@@ -106,7 +165,7 @@ p {
     width: 100%;
     padding: var(--spacing-l);
     box-sizing: border-box;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent); /* Degradado más oscuro */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
     color: var(--text-light);
 }
 
@@ -121,14 +180,12 @@ p {
     opacity: 0.85;
 }
 
-
-/* --- SECCIÓN DE DETALLES DE LA TARJETA --- */
 .card-details {
     padding: var(--spacing-l);
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Ocupa el espacio restante en el diseño de tarjeta */
-    gap: var(--spacing-s); /* Espacio entre las líneas de información */
+    flex-grow: 1;
+    gap: var(--spacing-s);
 }
 
 .info-line {
@@ -138,32 +195,30 @@ p {
 
 .info-line strong {
     color: var(--text-strong);
-    font-weight: 500; /* Puedes ajustar el peso si quieres más o menos negrita */
+    font-weight: 500;
 }
 
-
-/* --- ESTILOS DE ESTADO (FINALIZADO, EN PROCESO, RECHAZADO) --- */
 .status {
     display: flex;
     align-items: center;
     gap: var(--spacing-s);
     font-weight: 500;
     margin-top: var(--spacing-m);
-    margin-bottom: var(--spacing-s); /* Ajuste de margen inferior */
-    font-size: 0.9em; /* Tamaño de fuente del estado */
-    padding: var(--spacing-s) var(--spacing-m); /* Padding para el "badge" del estado */
-    border-radius: var(--border-radius-status); /* Bordes redondeados para el badge */
-    max-width: fit-content; /* El ancho se ajusta al contenido */
+    margin-bottom: var(--spacing-s);
+    font-size: 0.9em;
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: var(--border-radius-status);
+    max-width: fit-content;
 }
 
 .status svg {
-    width: 18px; /* Tamaño del icono de estado */
-    height: 18px; /* Tamaño del icono de estado */
+    width: 18px;
+    height: 18px;
 }
 
 .status.finalizado {
     background-color: var(--status-finalizado);
-    color: var(--text-light); /* Texto blanco para este color */
+    color: var(--text-light);
 }
 .status.finalizado svg {
     fill: var(--text-light);
@@ -171,7 +226,7 @@ p {
 
 .status.en-proceso {
     background-color: var(--status-en-proceso);
-    color: var(--bg-dark); /* Texto oscuro para contraste en amarillo */
+    color: var(--bg-dark);
 }
 .status.en-proceso svg {
     fill: var(--bg-dark);
@@ -185,8 +240,6 @@ p {
     fill: var(--text-light);
 }
 
-
-/* --- ENLACE A LA BITÁCORA --- */
 .logbook-link {
     color: var(--accent-blue);
     text-decoration: none;
@@ -194,14 +247,14 @@ p {
     display: flex;
     align-items: center;
     gap: var(--spacing-s);
-    margin-top: auto; /* Empuja el enlace al fondo si hay espacio extra */
-    align-self: flex-start; /* Asegura que se alinee a la izquierda */
+    margin-top: auto;
+    align-self: flex-start;
     font-size: 0.95em;
     transition: color 0.2s ease;
 }
 
 .logbook-link:hover {
-    color: #308ce0; /* Azul ligeramente más oscuro al pasar el ratón */
+    color: #308ce0;
 }
 
 .logbook-link svg {
@@ -212,7 +265,7 @@ p {
 }
 
 .logbook-link:hover svg {
-    transform: translateX(3px); /* Animación de desplazamiento */
+    transform: translateX(3px);
     fill: #308ce0;
 }
 
@@ -221,33 +274,35 @@ p {
 
 /* Para tabletas en orientación vertical o dispositivos más grandes */
 @media (min-width: 600px) {
-    .main-container {
+    /* El padding del main-container original se mueve a .mis-trabajos-main-content */
+    .mis-trabajos-main-content {
         padding: var(--spacing-xl) 30px; /* Más padding lateral */
     }
 
-    h1 {
+    /* El h1 se movió a la cabecera, así que estos estilos ya no aplican aquí directamente */
+    /* h1 {
         font-size: 2.2em;
         margin-bottom: 40px;
-    }
+    } */
 
     .job-card {
-        flex-direction: row; /* La imagen y los detalles se ponen lado a lado */
-        height: 220px; /* Altura fija para la tarjeta completa */
-        border-radius: var(--border-radius-card); /* Asegura los bordes en la tarjeta completa */
+        flex-direction: row;
+        height: 220px;
+        border-radius: var(--border-radius-card);
     }
 
     .card-image {
         flex-shrink: 0;
-        width: 200px; /* Ancho fijo para la imagen en desktop/tablet */
-        height: 100%; /* Ocupa toda la altura de la tarjeta */
-        border-top-left-radius: var(--border-radius-card); /* Bordes redondeados solo para la esquina superior izquierda */
-        border-bottom-left-radius: var(--border-radius-card); /* Bordes redondeados solo para la esquina inferior izquierda */
-        border-top-right-radius: 0; /* Anula el border-radius de la parte superior derecha */
+        width: 200px;
+        height: 100%;
+        border-top-left-radius: var(--border-radius-card);
+        border-bottom-left-radius: var(--border-radius-card);
+        border-top-right-radius: 0;
     }
 
     .card-details {
-        padding: var(--spacing-xl); /* Más padding dentro de los detalles */
-        justify-content: space-between; /* Distribuye el espacio verticalmente */
+        padding: var(--spacing-xl);
+        justify-content: space-between;
     }
 
     h2 {
@@ -260,7 +315,7 @@ p {
 
     .status {
         font-size: 0.9em;
-        margin-top: var(--spacing-m); /* Ajusta margen si la tarjeta es horizontal */
+        margin-top: var(--spacing-m);
     }
 
     .logbook-link {
@@ -270,40 +325,41 @@ p {
 
 /* Para escritorios pequeños o tabletas en orientación horizontal */
 @media (min-width: 800px) {
-    .main-container {
+    .full-screen-app-container {
         max-width: 900px; /* Permite más ancho */
+    }
+    .mis-trabajos-main-content {
         padding: 40px;
     }
 
     .jobs-list {
-        display: grid; /* Cambia a grid para diseño de múltiples columnas */
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* 2-3 columnas */
-        gap: 30px; /* Espacio entre elementos de la grid */
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
     }
 
     .job-card {
-        flex-direction: column; /* Vuelve a apilar para el grid, como tarjetas individuales */
-        height: auto; /* Altura automática en grid */
+        flex-direction: column;
+        height: auto;
     }
 
     .card-image {
-        width: 100%; /* La imagen ocupa todo el ancho de la tarjeta */
-        height: 200px; /* Altura de la imagen en el grid */
-        /* Restaurar bordes redondeados completos en la parte superior de la imagen */
+        width: 100%;
+        height: 200px;
         border-top-left-radius: var(--border-radius-card);
         border-top-right-radius: var(--border-radius-card);
-        border-bottom-left-radius: 0; /* Asegurarse de que no haya bordes inferiores */
+        border-bottom-left-radius: 0;
     }
 
     .card-details {
         padding: var(--spacing-xl);
-        justify-content: flex-start; /* Alinea al inicio si hay más contenido */
+        justify-content: flex-start;
     }
 }
 
 /* Para escritorios grandes */
 @media (min-width: 1200px) {
-    .main-container {
+    .full-screen-app-container {
         max-width: 1100px;
     }
 }

@@ -26,21 +26,19 @@ body {
 
 .login-container {
     background-color: transparent; /* Darker gray for the container */
-    border-radius: 20px; /* Slightly rounded corners */
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%; /* Responsive width */
     max-width: 500px; /* Max width for larger screens */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .title {
     color: var(--text-color-light);
     font-size: 1.8rem;
     margin-bottom: 30px;
-    align-self: flex-start; /* Aligns "Inicio de Sesión" to the left */
+    align-items: center; /* Aligns "Inicio de Sesión" to the left */
 }
 
 .logo-section {
@@ -142,6 +140,26 @@ body {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* --- Nuevos estilos para el mensaje de registro --- */
+.signup-prompt {
+    color: var(--text-color-light);
+    font-size: 0.9rem;
+    margin-top: 15px; /* Espacio superior para separarlo de los botones */
+    text-align: center;
+}
+
+.signup-link {
+    color: var(--link-color); /* Usar el color naranja/oro para el enlace */
+    text-decoration: none;
+    font-weight: bold; /* Hacer el enlace un poco más notorio */
+    transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+    color: #e09b2e; /* Un tono ligeramente más oscuro al pasar el ratón */
+}
+
+
 /* Media Queries for finer adjustments */
 @media (max-width: 320px) {
     .login-container {
@@ -160,5 +178,9 @@ body {
     .btn {
         font-size: 1rem;
         padding: 12px;
+    }
+
+    .signup-prompt {
+        font-size: 0.85rem; /* Ajustar tamaño de fuente en pantallas pequeñas */
     }
 }

@@ -108,9 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
           progressPercentage: 50,
           remainingTime: "12h restantes",
           totalTime: "24h totales",
-          vehicleImage: "imgs/sedan_default.jpg", // Add a default image for this
+          vehicleImage: "imgs/volvo.jpg", // Add a default image for this
           tasks: [
-            { icon: "fas fa-engine", text: "Revisión de motor" },
+            { icon: "fas fa-gears", text: "Revisión de motor" },
             { icon: "fas fa-oil-can", text: "Cambio de aceite" },
             { icon: "fas fa-cogs", text: "Ajuste de transmisión" },
           ],

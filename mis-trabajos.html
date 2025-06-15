@@ -5,85 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Trabajos</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="CSS/mis-trabajos.css">
 </head>
 <body>
 
-    <div class="main-container">
-        <h1>Mis trabajos</h1>
+    <div class="full-screen-app-container">
+        <header class="app-header">
+            <a href="estudiante.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Volver
+            </a>
+            <h1>Mis trabajos</h1> </header>
 
-        <div class="jobs-list">
-            <div class="job-card">
-                <div class="card-image">
-                    <img src="imgs/volvo.jpg" alt="Volvo Gris">
-                    <div class="image-overlay">
-                        <p class="car-model">Volvo – XC40</p>
-                        <p class="owner-name">José E.</p>
+        <main class="mis-trabajos-main-content">
+            <div class="jobs-list">
+                <div class="job-card">
+                    <div class="card-image">
+                        <img src="imgs/volvo.jpg" alt="Volvo Gris">
+                        <div class="image-overlay">
+                            <p class="car-model">Volvo – XC40</p>
+                            <p class="owner-name">José E.</p>
+                        </div>
+                    </div>
+                    <div class="card-details">
+                        <h2>Corrección de Inyectores</h2>
+                        <p class="info-line"><strong>Placa:</strong> P258-654</p>
+                        <p class="info-line"><strong>Estudiante Asignado:</strong> Manuel Pérez</p>
+                        <p class="info-line"><strong>Modulo:</strong> Sistema de alimentación del motor</p>
+                        <div class="status finalizado">
+                            Finalizado
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <a href="#" class="logbook-link">
+                            Ver bitácora
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+                        </a>
                     </div>
                 </div>
-                <div class="card-details">
-                    <h2>Corrección de Inyectores</h2>
-                    <p class="info-line"><strong>Placa:</strong> P258-654</p>
-                    <p class="info-line"><strong>Estudiante Asignado:</strong> Manuel Pérez</p>
-                    <p class="info-line"><strong>Modulo:</strong> Sistema de alimentación del motor</p>
-                    <div class="status finalizado">
-                        Finalizado
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <a href="#" class="logbook-link">
-                        Ver bitácora
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
-                    </a>
-                </div>
-            </div>
 
-            <div class="job-card">
-                <div class="card-image">
-                    <img src="imgs/volvo.jpg" alt="Volvo Gris">
-                    <div class="image-overlay">
-                        <p class="car-model">Volvo – XC40</p>
-                        <p class="owner-name">José E.</p>
+                <div class="job-card">
+                    <div class="card-image">
+                        <img src="imgs/volvo.jpg" alt="Volvo Gris">
+                        <div class="image-overlay">
+                            <p class="car-model">Volvo – XC40</p>
+                            <p class="owner-name">José E.</p>
+                        </div>
+                    </div>
+                    <div class="card-details">
+                        <h2>Ajustes eléctricos completo</h2>
+                        <p class="info-line"><strong>Placa:</strong> P258-654</p>
+                        <p class="info-line"><strong>Estudiante Asignado:</strong> Manuel Pérez</p>
+                        <p class="info-line"><strong>Modulo:</strong> Sistemas Electricos</p>
+                        <div class="status en-proceso">
+                            En proceso
+                        </div>
+                        <a href="car-update.html" class="logbook-link">
+                            Actualizar bitácora
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+                        </a>
                     </div>
                 </div>
-                <div class="card-details">
-                    <h2>Ajustes eléctricos completo</h2>
-                    <p class="info-line"><strong>Placa:</strong> P258-654</p>
-                    <p class="info-line"><strong>Estudiante Asignado:</strong> Manuel Pérez</p>
-                    <p class="info-line"><strong>Modulo:</strong> Sistemas Electricos</p>
-                    <div class="status en-proceso">
-                        En proceso
+                
+                <div class="job-card">
+                    <div class="card-image">
+                        <img src="imgs/mercedes.jpg" alt="Volvo Gris">
+                        <div class="image-overlay">
+                            <p class="car-model">Volvo – XC40</p>
+                            <p class="owner-name">José E.</p>
+                        </div>
                     </div>
-                    <a href="car-update.html" class="logbook-link">
-                        Actualizar bitácora
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
-                    </a>
+                    <div class="card-details">
+                        <h2>Mantenimiento de Frenos</h2>
+                        <p class="info-line"><strong>Placa:</strong> P258-654</p>
+                        <p class="info-line"><strong>Estudiante Asignado:</strong> Manuel Pérez</p>
+                        <p class="info-line"><strong>Modulo:</strong> Sistema de Frenos</p>
+                        <div class="status rechazado">
+                            Rechazado
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                        </div>
+                        <a href="#" class="logbook-link">
+                            Ver bitácora
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <div class="job-card">
-                <div class="card-image">
-                    <img src="imgs/mercedes.jpg" alt="Volvo Gris">
-                    <div class="image-overlay">
-                        <p class="car-model">Volvo – XC40</p>
-                        <p class="owner-name">José E.</p>
-                    </div>
-                </div>
-                <div class="card-details">
-                    <h2>Mantenimiento de Frenos</h2>
-                    <p class="info-line"><strong>Placa:</strong> P258-654</p>
-                    <p class="info-line"><strong>Estudiante Asignado:</strong> Manuel Pérez</p>
-                    <p class="info-line"><strong>Modulo:</strong> Sistema de Frenos</p>
-                    <div class="status rechazado">
-                        Rechazado
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-                    </div>
-                    <a href="#" class="logbook-link">
-                        Ver bitácora
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 
 </body>

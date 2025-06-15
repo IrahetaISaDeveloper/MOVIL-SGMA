@@ -22,31 +22,43 @@
       href="imgs/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="imgs/favicon/site.webmanifest" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/auth-seguimiento.css" />
   </head>
 
   <body>
-    <main class="full-screen-container">
-      <div class="content-wrapper">
-        <img src="imgs/logo rical.png" alt="Logo Ricaldone" class="logo" />
-        <span class="main-title">Sistema de Gestión de Vehículos</span>
-        <p class="main-content">
-          Ingresa tu número de placa, tarjeta de circulación o tu DUI.
-        </p>
-        <div class="input-form">
-          <input
-            id="placa"
-            name="placa"
-            placeholder="P000-000"
-            type="text"
-            aria-label="Número de placa, tarjeta de circulación o DUI"
-          />
-          <button type="button" class="action-button" id="verSeguimientoBtn">
-            Ver seguimiento
-          </button>
+    <div class="full-screen-app-container">
+      <header class="auth-header">
+        <a href="index.html" class="back-button">
+          <i class="fas fa-arrow-left"></i> Volver
+        </a>
+        </header>
+
+      <main class="auth-main-content">
+        <div class="content-wrapper">
+          <img src="imgs/logo rical.png" alt="Logo Ricaldone" class="logo" />
+          <span class="main-title">Sistema de Gestión de Vehículos</span>
+          <p class="main-content">
+            Ingresa tu número de placa, tarjeta de circulación o tu DUI.
+          </p>
+          <div class="input-form">
+            <input
+              id="placa"
+              name="placa"
+              placeholder="P000-000"
+              type="text"
+              aria-label="Número de placa, tarjeta de circulación o DUI"
+            />
+            <button type="button" class="action-button" id="verSeguimientoBtn">
+              Ver seguimiento
+            </button>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
     <script src="js/auth-seguimiento.js"></script>
   </body>
 </html>
