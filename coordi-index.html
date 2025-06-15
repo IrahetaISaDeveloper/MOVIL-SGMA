@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SGMA</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="imgs/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="imgs/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/coordi-index.css" />
+</head>
+<body>
+    <nav class="navbar-mobile">
+        <div class="nav-left">
+            <img src="imgs/logo-ult-nav.png" alt="logo-nav" class="logo-nav" />
+        </div>
+        <button class="hamburger" aria-label="Abrir menú de navegación">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <ul class="nav-right">
+            <li class="dropdown">
+                <a href="#seccion-cursos">Cursos</a>
+                <div class="dropdown-content">
+                    <a href="pending-registers.html">1er año</a>
+                    <a href="pending-registers.html">2do año</a>
+                    <a href="pending-registers.html">3er año</a>
+                </div>
+            </li>
+            <li><a href="#modulos">Módulos</a></li>
+            <li>
+                <a href="login.html" class="btn">Cerrar Sesión</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="infoCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="imgs/banner-4-mejorado.png" class="d-block w-100" alt="First slide" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5></h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="imgs/banner-2.png" class="d-block w-100" alt="Second slide" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5></h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="imgs/banner-3.png" class="d-block w-100" alt="Third slide" />
+                <div class="carousel-caption d-none d-md-block">
+                    <h5></h5>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#infoCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#infoCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+
+    <main>
+        <div class="registros-en-curso-seccion" id="modulos">
+            <div class="registros-titulo">
+                <h2>Módulos</h2>
+            </div>
+            <div class="registros-filtros">
+                <button class="filtro-año activo" data-año="1">1er Año</button>
+                <button class="filtro-año" data-año="2">2do Año</button>
+                <button class="filtro-año" data-año="3">3er Año</button>
+            </div>
+            <div class="registros-contenedor">
+                <!--Tarjetas modulos 1do año-->
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/motor-prevent.png" alt="Prevencion del Motor" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.1</h3>
+                        <p>Mantenimiento preventivo del Motor y sus sistemas auxiliares</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/brake-prevent.png" alt="Prevencion de Frenos" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.2</h3>
+                        <p>Mantenimiento preventivo de los sistemas de frenos</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/suspension-prevent.png" alt="Prevencion de suspension y dirreccion" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.3</h3>
+                        <p>Mantenimiento preventivo del sistema de suspensión y dirección</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/electric-prevent.png" alt="Prevencion de sistema electrico" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.4</h3>
+                        <p>Mantenimiento preventivo del sistema electrico del automovil</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/transmision-prevent.png" alt="Prevencion de transmisión de fuerza" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.5</h3>
+                        <p>Mantenimiento preventivo del sistema de transmisión de fuerza</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/manual-prevent.png" alt="Interpretación de Manuales en ingles" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.6</h3>
+                        <p>Interpretación de manuales en inglés del mantenimiento preventivo del automóvil</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/emprendedurismo-colaborativo.png" alt="Emprendedurismo colaborativo" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.7</h3>
+                        <p>Emprendedurismo colaborativo</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="1">
+                    <img src="imgs/modulos/proyect-technologic.png" alt="Proyecto tecnológico mantenimiento automotriz" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 1.8</h3>
+                        <p>Proyecto tecnológico sobre mantenimiento automotriz</p>
+                        <p>Docente: Xavier Alexander Batres Alfaro</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                
+                <!--Tarjetas modulos 2do año-->
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/security.png" alt="Prevencion de sistemas de comfort y seguridad" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.1</h3>
+                        <p>Mantenimiento preventivo de los Sistemas de Comfort y seguridad del automóvil</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/combustion-motor.png" alt="Reacondicionamiento de motor de combustión interna" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.2</h3>
+                        <p>Reacondicionamiento del  motor de combustión interna</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/reparation-brakes.png" alt="Reparación frenos" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.3</h3>
+                        <p>Reparación de los sistemas de frenos</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/suspension-reparation.png" alt="Reparación suspension y dirección" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.4</h3>
+                        <p>Reparación de los sistemas de suspensión y dirección del automóvil</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/transmition-repa.png" alt="Reparación de transmisión Mecánica" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.5</h3>
+                        <p>Reparación de los sistemas de transmisión Mecánica</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/manual-prevent.png" alt="Interpretación de manueales en ingles" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.6</h3>
+                        <p>Interpretación de manuales en inglés de procedimientos de reparación del automóvil</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/diseño-planes.png" alt="Diseño de planes de negocio" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.7</h3>
+                        <p>Diseño de planes de negocio en Asociatividad Cooperativa</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="2">
+                    <img src="imgs/modulos/innocacion.png" alt="Proyecto de innovación" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 2.8</h3>
+                        <p>Proyecto tecnológico para la innovación de los sistemas automotrices</p>
+                        <p>Docente: Alexis Alberto Gamez Vasquez.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Tarjetas modulo 3er año-->
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/electric-repair.png" alt="Reparación de sistemas electricos" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.1</h3>
+                        <p>Reparación de los Sistemas Eléctrico y electrónico del automóvil</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/automatic-transmision.png" alt="Reparación de sistemas de transmisión automatica" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.2</h3>
+                        <p>Reparación de los Sistemas de transmisión automática</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/repair-security.png" alt="Reparación de los sistemas de comfort y seguridad" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.3</h3>
+                        <p>Reparación de los sistemas de comfort y seguridad del automóvil</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/vehicle-diagnostic.png" alt="Diagnóstico de vehiculos" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.4</h3>
+                        <p>Diagnóstico de los sistemas del automóvil</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/gestion-proceso.png" alt="Gestión de procesos" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.5</h3>
+                        <p>Gestión del proceso de recepción, reparación y entrega de vehículo</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/manual-prevent.png" alt="Interpretación de manuales en ingles" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.6</h3>
+                        <p>Interpretación de manuales en inglés de diagnóstico de fallas en el automóvil</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/microempresa.png" alt="microempresa" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.7</h3>
+                        <p>Puesta en marcha de la microempresa Asociativa Cooperativa</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="registro-tarjeta" data-año="3">
+                    <img src="imgs/modulos/electronic-proyect.png" alt="Proyecto electrico" />
+                    <div class="tarjeta-info">
+                        <h3>BTVMA 3.8</h3>
+                        <p>Proyecto tecnológico para la innovación de los sistemas eléctrico, electrónico y de seguridad y confort</p>
+                        <p>Docente: Jose Eduardo Escalante Escobar.</p>
+                        <div class="tarjeta-footer">
+                            <span class="tiempo-restante"></span>
+                            <a href="#" class="ver-bitacora">Ver registros
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.146-3.147a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5a.5.5 0 0 1-.5-.5z" />
+                                </svg></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="registros-botones-navegacion">
+                <button class="boton-navegacion prev-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-chevron-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                </button>
+                <button class="boton-navegacion next-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-chevron-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/coordi-index.js"></script>
+</body>
+</html>
