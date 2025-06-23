@@ -13,28 +13,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Cerrar el menú si se hace clic fuera de él en dispositivos móviles
     document.addEventListener('click', function(event) {
-        const isClickInsideNav = navRight.contains(event.target) || hamburger.contains(event.target);
+        // Incluir los dropdowns en la comprobación para que no se cierre el menú al hacer clic en ellos
+        const isClickInsideNav = navRight.contains(event.target) || 
+                               hamburger.contains(event.target) ||
+                               Array.from(dropdowns).some(dropdown => dropdown.contains(event.target));
+
         if (!isClickInsideNav && navRight.classList.contains('active')) {
             navRight.classList.remove('active');
             hamburger.classList.remove('open');
+            // Opcional: Cerrar cualquier dropdown abierto cuando se cierra el menú principal
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
         }
     });
 
     // Manejar dropdowns en móvil
     dropdowns.forEach(dropdown => {
-        const dropdownLink = dropdown.querySelector('a[href="#seccion-cursos"]'); // El link principal del dropdown
+        // Seleccionamos el enlace que abre el dropdown, por ejemplo, el que tiene el texto "Cursos"
+        const dropdownLink = dropdown.querySelector('a[href="#seccion-cursos"]'); 
+        
         if (dropdownLink) {
             dropdownLink.addEventListener('click', function(e) {
-                // Solo prevenir el default si el menú móvil está activo
+                // Solo prevenir el default y manejar el dropdown si el menú móvil está activo
+                // y estamos en una pantalla pequeña (considerado como móvil)
                 if (window.innerWidth <= 768 && navRight.classList.contains('active')) {
                     e.preventDefault(); // Evita que se desplace a la sección inmediatamente
+
+                    // Cierra otros dropdowns si están abiertos (opcional, para solo tener uno abierto a la vez)
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+
                     dropdown.classList.toggle('active'); // Muestra/oculta el dropdown
                 }
             });
         }
     });
 
-    // Filtros en los registros pendientes
+    // Filtros en los registros pendientes (sin cambios, ya que no afectan al menú)
     const botonesFiltro = document.querySelectorAll('.filtro-año');
     const tarjetasRegistro = document.querySelectorAll('.registro-tarjeta');
 
@@ -64,22 +83,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Animacion clic nav
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+            // No prevenimos el default aquí si el enlace es parte de un dropdown y solo estamos mostrando/ocultando el dropdown.
+            // La lógica para prevenir el default ya está en el manejador del dropdownLink.
+            
+            // Si el enlace no es un dropdown principal (ej. "Cursos") y no estamos en un dropdown,
+            // o si es un enlace *dentro* de un dropdown que sí va a una sección.
+            const parentDropdown = this.closest('.dropdown');
+            const isDropdownToggler = this.getAttribute('href') === '#seccion-cursos' && parentDropdown;
 
-            // Cerrar el menú móvil si está abierto
-            if (navRight.classList.contains('active')) {
-                navRight.classList.remove('active');
-                hamburger.classList.remove('open');
+            if (!isDropdownToggler) { // Si no es el enlace principal del dropdown "Cursos"
+                e.preventDefault(); // Previene el comportamiento por defecto de desplazamiento
+
+                // Cerrar el menú móvil si está abierto
+                if (navRight.classList.contains('active')) {
+                    navRight.classList.remove('active');
+                    hamburger.classList.remove('open');
+                }
+
+                // Desplazamiento suave
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             }
-
-            // Desplazamiento suave
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
         });
     });
+});
 
-    /*
+    /* PASAR ESTE CODIGO DENTRO DE LAS ULTIMAS LLAVES */
+ /*
     // --- CÓDIGO PARA MOSTRAR EL NOMBRE DE USUARIO EN EL NAVBAR ---
     // (Descomenta y ajusta si necesitas esta funcionalidad)
     // 1. Intentar obtener el nombre de usuario guardado en localStorage.
@@ -94,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
         userNameNavElement.textContent = `Ing. ${savedUserName}`; // Añadimos "Ing." como en tu imagen
     }
     */
-});
 
 // Nota sobre el carrusel: Tu código HTML ya incluye el carrusel de Bootstrap,
 // lo cual es ideal para responsividad. El JS original de tu carrusel

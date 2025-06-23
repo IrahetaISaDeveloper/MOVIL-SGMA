@@ -370,7 +370,7 @@ nav a:hover {
 
 .registro-tarjeta {
     /* **NUEVOS ESTILOS PARA LA TARJETA DE REGISTRO** */
-    background-color: #3a3a3a; /* Fondo para la tarjeta */
+    background-color: #ffffff; /* Fondo para la tarjeta */
     border: 1px solid #4a4a4a; /* Borde sutil */
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
@@ -395,13 +395,14 @@ nav a:hover {
     display: block; /* Para centrar con margin auto si no hay flex parent */
     margin: 0 auto 15px auto; /* Centra y añade margen inferior */
     /* Puedes añadir más estilos a las imágenes de estas tarjetas si tienen una clase específica, ej: .registro-tarjeta .imagen-registro */
-    border-radius: 5px; /* Bordes ligeros para las imágenes dentro de la tarjeta */
-    border: 1px solid #555; /* Borde sutil para las imágenes */
-    background-color: white;
+    background-color: #ffffff;
 }
 
 
 .tarjeta-info {
+    border: 3px solid #000000; /* Borde sutil */
+    border-radius: 15px; /* Bordes redondeados */
+    color: #000000;
     padding: 10px;
     width: 100%; /* Ocupa el ancho completo dentro de la tarjeta */
     box-sizing: border-box; /* Incluye padding en el ancho */
