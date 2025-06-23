@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Vehículo y Servicio</title>
+    <!-- Link to your combined stylesheet -->
+    <link rel="stylesheet" href="css/registro-auto.css">
+    <!-- Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Sección: Datos del vehículo -->
+        <section id="datos-vehiculo" class="section">
+            <div class="header-with-back">
+                <!-- Changed to Font Awesome icon and increased size -->
+                <a href="estudiante.html" class="back-button" aria-label="Volver">
+                    <i class="fas fa-arrow-left fa-2x"></i> 
+                </a>
+                <h1 class="section-title">Datos del vehículo</h1>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="placa">Placa</label>
+                    <input type="text" id="placa" placeholder="N° de placa">
+                    <small>Formato: P123-456</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="poliza">Póliza</label>
+                    <div class="input-with-checkbox">
+                        <input type="text" id="poliza" placeholder="N° de póliza">
+                        <input type="checkbox" id="poliza-checkbox">
+                    </div>
+                    <small>Formato: P123-456</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="marca">Marca</label>
+                    <input type="text" id="marca" placeholder="Nombre">
+                    <small>Ej: Mazda</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="modelo">Modelo</label>
+                    <input type="text" id="modelo" placeholder="Modelo">
+                    <small>Ej: B2900</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <div class="select-wrapper">
+                        <select id="tipo">
+                            <option value="sedan">Sedan</option>
+                            <option value="suv">SUV</option>
+                            <option value="camioneta">Camioneta</option>
+                            <option value="moto">Moto</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="text" id="color" placeholder="Color">
+                    <small>Ej: Blanco</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="tarjetaCirculacion">Tarjeta de circulación</label>
+                    <input type="text" id="tarjetaCirculacion" placeholder="##">
+                    <small>Formato: 0/12345678</small>
+                </div>
+            </form>
+        </section>
+
+        <!-- Separador Visual -->
+        <hr class="section-separator">
+
+        <!-- Sección: Detalles orden de trabajo -->
+        <section id="detalles-orden" class="section">
+            <h1 class="section-title">Detalles orden de trabajo</h1>
+
+            <form>
+                <div class="form-group">
+                    <label>Nivel de atención:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-container">1er Año
+                            <input type="checkbox" name="nivelAtencionRadio" value="1er_anio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">2do Año
+                            <input type="checkbox" name="nivelAtencionRadio" value="2do_anio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">3er Año
+                            <input type="checkbox" name="nivelAtencionRadio" value="3er_anio">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="instructorResponsable">Instructor responsable</label>
+                    <input type="text" id="instructorResponsable" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="estudianteAsignado">Estudiante asignado</label>
+                    <input type="text" id="estudianteAsignado" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="carnet">Carnet</label>
+                    <input type="text" id="carnet" placeholder="N° de carnet">
+                    <small>Ejemplo: 20260669</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="operacionesEfectuar1">Operaciones a efectuar:</label>
+                    <div class="select-wrapper">
+                        <select id="operacionesEfectuar1">
+                            <option value="">Escribe</option>
+                            <option value="operacion1">Operación 1</option>
+                            <option value="operacion2">Operación 2</option>
+                            <option value="operacion3">Operación 3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="moduloRespuesta">Modulo al que da respuesta la practica:</label>
+                    <div class="select-wrapper">
+                        <select id="moduloRespuesta">
+                            <option value="">Escribe</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Operaciones a efectuar:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-container">Preventivo
+                            <input type="checkbox" name="tipoOperacion" value="preventivo">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">Correctivo
+                            <input type="checkbox" name="tipoOperacion" value="correctivo">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tiempoEstimado">Tiempo estimado del proceso:</label>
+                    <input type="text" id="tiempoEstimado" placeholder="HH/MM/SS">
+                </div>
+
+                <div class="form-group time-inputs-row">
+                    <div class="time-input-group">
+                        <label for="horaIngreso">Hora de ingreso</label>
+                        <input type="text" id="horaIngreso" placeholder="HH/MM/SS">
+                    </div>
+                    <div class="time-input-group">
+                        <label for="horaSalida">Hora de salida</label>
+                        <input type="text" id="horaSalida" placeholder="HH/MM/SS">
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Separador Visual -->
+        <hr class="section-separator">
+
+        <!-- Sección: Términos y Condiciones Del Servicio -->
+        <section id="terminos-condiciones" class="section">
+            <h1 class="section-title">Términos y Condiciones Del Servicio</h1>
+
+            <div class="terms-content">
+                <p>Las actividades y servicios del taller de Mantenimiento Automotriz están orientadas a la formación y prácticas técnicas de los estudiantes en los diferentes niveles académicos de la especialidad. Por tal motivo se establecen los siguientes términos y condiciones a considerar al momento de solicitar un servicio para su vehículo:</p>
+
+                <p>1. La autorización de órdenes de trabajo queda bajo criterio del docente asignado a cada nivel formativo, considerando que dicha solicitud debe ser afín a los módulos formativos en proceso.</p>
+
+                <p>2. Únicamente serán autorizadas órdenes de trabajo menores (máximo 2 horas) y medianas (máximo 8 horas).</p>
+
+                <p>3. Al finalizar el proceso de Mantenimiento y reparación respectivo, el vehículo debe ser retirado del taller de forma inmediata. Por ningún motivo se permite la permanencia de éste después de efectuado el proceso.</p>
+
+                <p>4. Es terminantemente prohibida la permanencia de vehículos por un periodo mayor jornada formativa. Exceptuando proyectos de exposición y módulos que conllevan procesos de trabajo complejos.</p>
+                <p>5. La institución no realiza cobros por servicios de reparación mantenimiento, por lo cual no se permite realizar pagos a estudiantes ni instructores en concepto de servicios o compra de materiales y repuestos.</p>
+
+                <p>6. Es obligación del propietario del vehículo proporcionar el material y repuestos necesarios para la ejecución del proceso a realizar en su vehículo según diagnóstico.</p>
+
+                <p>7. Por tratarse de un proceso de mantenimiento y reparación con fines formativos para los estudiantes, la institución no responderá de ninguna consecuencia y no se hace responsable por daños, golpes, pérdidas o fallas en el vehículo en el ingreso al taller, durante y después de efectuado el proceso en el vehículo.</p>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="nombrePropietario">Nombre del propietario del Vehículo</label>
+                    <input type="text" id="nombrePropietario" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-container-terms">He leído y acepto los términos y condiciones del servicio.
+                        <input type="checkbox" id="acceptTerms">
+                        <span class="checkmark-terms"></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="dui">DUI</label>
+                    <input type="text" id="dui" placeholder="N° de DUI">
+                </div>
+
+                <div class="button-group">
+                    <!-- Initially disabled buttons -->
+                    <button type="submit" class="btn primary-btn" id="firmarBtn" disabled>Firmar</button>
+                    <button type="submit" class="btn secondary-btn" id="enviarSolicitudBtn" disabled>Enviar Solicitud</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // DOMContentLoaded ensures the script runs after the entire HTML is parsed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to the elements
+            const polizaCheckbox = document.getElementById('poliza-checkbox');
+            const polizaInput = document.getElementById('poliza');
+            const placaInput = document.getElementById('placa');
+            
+            // Get references to the "Nivel de atención" checkboxes
+            const nivelAtencionCheckboxes = document.querySelectorAll('input[name="nivelAtencionRadio"]');
+
+            // Get reference to the "Modulo al que da respuesta la practica" select
+            const moduloRespuestaSelect = document.getElementById('moduloRespuesta');
+
+            // Get references to the terms and condition elements
+            const acceptTermsCheckbox = document.getElementById('acceptTerms');
+            const firmarBtn = document.getElementById('firmarBtn');
+            const enviarSolicitudBtn = document.getElementById('enviarSolicitudBtn');
+
+            // Define modules for each year
+            const modulesByYear = {
+                '1er_anio': [
+                    'Mantenimiento preventivo del Motor y sus sistemas auxiliares',
+                    'Mantenimiento preventivo de los sistemas de frenos',
+                    'Mantenimiento preventivo del sistema de suspensión y dirección',
+                    'Mantenimiento preventivo del sistema electrico del automovil',
+                    'Mantenimiento preventivo del sistema de transmisión de fuerza',
+                    'Interpretación de manuales en inglés del mantenimiento preventivo del automóvil',
+                    'Proyecto tecnológico sobre mantenimiento automotriz'
+                ],
+                '2do_anio': [
+                    'Mantenimiento preventivo de los Sistemas de Confort y seguridad del automóvil',
+                    'Reacondicionamiento del motor de combustión interna',
+                    'Reparación de los sistemas de frenos',
+                    'Reparación de los sistemas de suspensión y dirección del automóvil',
+                    'Interpretación de manuales en inglés de procedimientos de reparación del automóvil',
+                    'Proyecto tecnológico para la innovación de los sistemas automotrices'
+                ],
+                '3er_anio': [
+                    'Reparación de los Sistemas Eléctrico y electrónico del automóvil',
+                    'Reparación de los Sistemas de transmisión automática',
+                    'Reparación de los sistemas de confort y seguridad del automóvil',
+                    'Diagnóstico de los sistemas del automóvil',
+                    'Gestión del proceso de recepción, reparación y entrega de vehículo',
+                    'Interpretación de manuales en inglés de diagnóstico de fallas en el automóvil',
+                    'Proyecto tecnológico para la innovación de los sistemas eléctrico, electrónico y de seguridad y confort'
+                ]
+            };
+
+            // Function to update the input states based on the "Póliza" checkbox
+            function updatePolizaAndPlacaStates() {
+                if (polizaCheckbox.checked) {
+                    // If checkbox is checked:
+                    // Enable poliza input
+                    polizaInput.disabled = false;
+                    polizaInput.style.backgroundColor = '#3a3a3a'; // Revert to original background if needed
+                    polizaInput.style.color = '#e0e0e0';
+                    // Disable placa input
+                    placaInput.disabled = true;
+                    placaInput.value = ''; // Clear placa input when disabled
+                    placaInput.style.backgroundColor = '#555555'; // Visually indicate disabled state
+                    placaInput.style.color = '#aaaaaa'; // Dim text color
+                } else {
+                    // If checkbox is unchecked:
+                    // Disable poliza input
+                    polizaInput.disabled = true;
+                    polizaInput.value = ''; // Clear poliza input when disabled
+                    polizaInput.style.backgroundColor = '#555555'; // Visually indicate disabled state
+                    polizaInput.style.color = '#aaaaaa'; // Dim text color
+                    // Enable placa input
+                    placaInput.disabled = false;
+                    placaInput.style.backgroundColor = '#3a3a3a'; // Revert to original background if needed
+                    placaInput.style.color = '#e0e0e0';
+                }
+            }
+
+            // Function to handle "Nivel de atención" checkbox selection and populate modules
+            function handleNivelAtencionCheckbox(event) {
+                let selectedYear = null;
+
+                // Uncheck all other checkboxes in the same group
+                nivelAtencionCheckboxes.forEach(checkbox => {
+                    if (checkbox !== event.target) {
+                        checkbox.checked = false;
+                    } else {
+                        // If this checkbox is checked, get its value
+                        if (checkbox.checked) {
+                            selectedYear = checkbox.value;
+                        }
+                    }
+                });
+
+                // Clear current options in the moduloRespuesta select
+                moduloRespuestaSelect.innerHTML = '<option value="">Escribe</option>';
+
+                // Populate modules based on the selected year
+                if (selectedYear && modulesByYear[selectedYear]) {
+                    modulesByYear[selectedYear].forEach(moduleName => {
+                        const option = document.createElement('option');
+                        option.value = moduleName; // Use module name as value
+                        option.textContent = moduleName;
+                        moduloRespuestaSelect.appendChild(option);
+                    });
+                }
+            }
+
+            // Function to update the state of "Firmar" and "Enviar Solicitud" buttons
+            function updateButtonStates() {
+                if (acceptTermsCheckbox.checked) {
+                    firmarBtn.disabled = false; // Enable "Firmar"
+                    // Reset "Enviar Solicitud" to disabled when terms are just accepted,
+                    // as "Firmar" needs to be clicked first.
+                    enviarSolicitudBtn.disabled = true; 
+                    // Optional: Reset Firmar button appearance if it was previously clicked
+                    firmarBtn.style.backgroundColor = '#881F1E';
+                    firmarBtn.style.cursor = 'pointer';
+                } else {
+                    firmarBtn.disabled = true; // Disable "Firmar"
+                    enviarSolicitudBtn.disabled = true; // Disable "Enviar Solicitud"
+                }
+            }
+
+            // Event listener for the "Firmar" button click
+            firmarBtn.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent form submission
+                if (!firmarBtn.disabled) { // Only proceed if the button is enabled
+                    firmarBtn.disabled = true; // Disable "Firmar" after click
+                    firmarBtn.style.backgroundColor = '#555555'; // Visually indicate disabled/clicked state
+                    firmarBtn.style.cursor = 'not-allowed';
+                    enviarSolicitudBtn.disabled = false; // Enable "Enviar Solicitud"
+                }
+            });
+
+            // Add event listeners
+            polizaCheckbox.addEventListener('change', updatePolizaAndPlacaStates);
+            nivelAtencionCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', handleNivelAtencionCheckbox);
+            });
+            acceptTermsCheckbox.addEventListener('change', updateButtonStates);
+
+            // Set the initial states when the page loads
+            updatePolizaAndPlacaStates();
+            updateButtonStates(); // Set initial state for the final buttons
+            
+            // Initially clear and populate modules based on no selection (or a default if you want one)
+            moduloRespuestaSelect.innerHTML = '<option value="">Escribe</option>';
+        });
+    </script>
+
+</body>
+</html>
