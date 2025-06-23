@@ -1,0 +1,689 @@
+/* --- CSS VARIABLES (FOR THEME AND CONSISTENCY) --- */
+:root {
+    --bg-app: #121212; /* Main application background */
+    --bg-header: #202020; /* Header background */
+    --bg-sidebar: #2D2D2D; /* Sidebar and menu background */
+    --bg-main-content: #1E1E1E; /* Main content area background */
+    --card-bg: #2D2D2D; /* Card and section background */
+
+    --text-light: #FFFFFF; /* Primary light text */
+    --text-secondary: #B0B0B0; /* Secondary text, labels */
+    --text-strong: #E0E0E0; /* Stronger text, titles */
+
+    --accent-blue: #42A5F5; /* Blue for links, focus states */
+    --accent-green: #66BB6A; /* Green for success, accept buttons */
+    --accent-red: #EF5350; /* Red for danger, reject buttons */
+
+    --border-color-dark: #3A3A3A; /* Dark border color */
+    --border-color-light: #555; /* Lighter border for inputs */
+
+    --border-radius-main: 20px; /* Main container and sidebar menu */
+    --border-radius-card: 16px; /* Cards and sections */
+    --border-radius-input: 10px; /* Input fields */
+    --border-radius-button: 30px; /* Pill-shaped buttons */
+    --border-radius-small: 8px; /* Smaller elements like checkboxes */
+
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 20px;
+    --spacing-xl: 30px;
+    --spacing-xxl: 40px;
+}
+
+/* --- GENERAL & BASE STYLES (MOBILE-FIRST) --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Ensures full viewport height */
+    display: flex;
+    flex-direction: column; /* Stacks system-dashboard vertically */
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-light);
+    box-sizing: border-box; /* Includes padding/border in element's total width/height */
+    -webkit-font-smoothing: antialiased; /* Font smoothing for better appearance */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.system-dashboard {
+    display: flex;
+    flex-direction: column; /* Stacks header, then main-layout */
+    width: 100%;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8em; /* Responsive font size for mobile */
+    margin-bottom: var(--spacing-m);
+    color: var(--text-strong);
+}
+
+h2 {
+    font-size: 1.2em; /* Smaller titles for sections */
+    font-weight: 500;
+    margin: 0 0 var(--spacing-m) 0;
+    color: var(--text-light);
+}
+
+p {
+    margin: 0;
+}
+
+/* --- DASHBOARD HEADER --- */
+.dashboard-header {
+    background-color: var(--bg-header);
+    color: var(--text-light);
+    padding: var(--spacing-m) var(--spacing-l);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    position: sticky; /* Keeps header at top on scroll */
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-m);
+}
+
+.menu-icon, .fa-bell, .fa-user-circle {
+    font-size: 1.4em;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.menu-icon:hover, .fa-bell:hover, .fa-user-circle:hover {
+    color: var(--text-light);
+}
+
+.header-left span {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* --- OVERLAY MENU (MOBILE SIDEBAR) --- */
+.overlay-menu {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Hidden by default */
+    width: 280px;
+    height: 100%;
+    background-color: var(--bg-sidebar);
+    color: var(--text-light);
+    padding: var(--spacing-l);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease-in-out;
+    z-index: 1100; /* Higher than header */
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: var(--border-radius-main); /* Rounded corners */
+    border-bottom-right-radius: var(--border-radius-main);
+}
+
+.overlay-menu.active { /* Class added by JavaScript to show menu */
+    left: 0;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-m);
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+.menu-header h3 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.close-menu {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.close-menu:hover {
+    color: var(--accent-red);
+}
+
+.overlay-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.overlay-menu ul li a {
+    display: block;
+    padding: var(--spacing-s) var(--spacing-m);
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    border-radius: var(--border-radius-small);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.overlay-menu ul li a:hover {
+    background-color: #3A3A3A;
+    color: var(--accent-blue);
+}
+
+/* --- MAIN LAYOUT (SIDEBAR + MAIN CONTENT) --- */
+.main-layout {
+    flex-grow: 1; /* Occupies remaining height */
+    display: flex; /* Stacks sidebar and main-content vertically by default */
+    flex-direction: column;
+    gap: var(--spacing-xl); /* Space between sidebar and main-content on mobile */
+    padding: var(--spacing-l); /* General padding for content area */
+    background-color: var(--bg-main-content);
+    box-sizing: border-box;
+}
+
+/* --- SIDEBAR (PENDING RECORDS LIST) --- */
+.sidebar {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* No fixed width on mobile, takes full width */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sidebar-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: var(--spacing-m);
+    color: var(--text-strong);
+    padding-bottom: var(--spacing-s);
+    border-bottom: 1px solid var(--border-color-dark);
+    text-align: center; /* Center title on mobile */
+}
+
+.record-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.record-item {
+    display: flex;
+    align-items: center;
+    background-color: #3A3A3A;
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: var(--border-radius-small);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.record-item:hover {
+    background-color: #4A4A4A;
+}
+
+.icon-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    margin-right: var(--spacing-m);
+    color: white;
+    font-size: 1.2em;
+}
+
+.record-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-name {
+    font-weight: 500;
+    font-size: 1em;
+    color: var(--text-light);
+}
+
+.service-description {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+}
+
+.more-options {
+    font-size: 1.1em;
+    color: var(--text-secondary);
+    padding: var(--spacing-xs);
+    cursor: pointer;
+}
+
+/* --- MAIN CONTENT AREA --- */
+.main-content {
+    display: flex;
+    flex-direction: column; /* Stacks cards vertically on mobile */
+    gap: var(--spacing-xl); /* Space between cards */
+    flex-grow: 1;
+    /* On mobile, this will naturally stack after the sidebar */
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card h2 {
+    margin-bottom: var(--spacing-l);
+    border-bottom: 1px solid var(--border-color-dark);
+    padding-bottom: var(--spacing-s);
+    text-align: center; /* Center section titles on mobile */
+}
+
+/* --- FORM GROUP STYLING (COMMON) --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-m);
+}
+
+.form-group label {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+}
+
+input[type="text"],
+select {
+    width: 100%; /* Full width for inputs */
+    padding: var(--spacing-s) var(--spacing-m);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius-input);
+    background-color: #3A3A3A;
+    color: var(--text-light);
+    font-size: 1em;
+    box-sizing: border-box;
+    -webkit-appearance: none; /* Remove default styling for selects */
+    -moz-appearance: none;
+    appearance: none;
+    outline: none; /* Remove outline on focus */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.3);
+}
+
+small {
+    display: block;
+    margin-top: var(--spacing-xs);
+    color: #999;
+    font-size: 0.8em;
+}
+
+/* Input with Checkbox (for Poliza) */
+.input-with-checkbox {
+    display: flex;
+    align-items: center;
+    background-color: #3A3A3A;
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius-input);
+    overflow: hidden;
+}
+.input-with-checkbox input[type="text"] {
+    border: none; /* Remove individual border */
+    background-color: transparent; /* Make background transparent */
+    padding-right: var(--spacing-s); /* Add some padding if checkbox is right next to it */
+}
+.input-with-checkbox input[type="checkbox"] {
+    margin-left: auto; /* Push checkbox to the right */
+    margin-right: var(--spacing-s);
+    flex-shrink: 0;
+}
+
+
+/* Custom Checkbox Styling */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on small screens */
+    gap: var(--spacing-m);
+    margin-top: var(--spacing-s);
+}
+
+.checkbox-container, .checkbox-container-terms {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 30px; /* Space for custom checkbox */
+    cursor: pointer;
+    font-size: 1em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--text-light);
+}
+
+.checkbox-container input[type="checkbox"],
+.checkbox-container-terms input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark, .checkmark-terms {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: #444;
+    border: 1px solid #666;
+    border-radius: var(--border-radius-small);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.checkbox-container:hover input ~ .checkmark,
+.checkbox-container-terms:hover input ~ .checkmark-terms {
+    background-color: #555;
+}
+
+.checkbox-container input:checked ~ .checkmark,
+.checkbox-container-terms input:checked ~ .checkmark-terms {
+    background-color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+
+.checkmark:after, .checkmark-terms:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after,
+.checkbox-container-terms input:checked ~ .checkmark-terms:after {
+    display: block;
+}
+
+.checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.checkmark-terms:after {
+    left: 8px;
+    top: 4px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Select Wrapper (for custom dropdown arrow) */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-wrapper select {
+    padding-right: var(--spacing-xl); /* Space for arrow */
+}
+
+.select-wrapper::after {
+    content: '▼';
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    position: absolute;
+    right: var(--spacing-m);
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Allows clicks to pass through to select */
+}
+
+/* Time Input Row */
+.time-inputs-row {
+    display: flex;
+    flex-direction: column; /* Stacks inputs vertically on mobile */
+    gap: var(--spacing-m);
+}
+
+.time-input-group {
+    flex: 1;
+}
+
+.time-input-group input[type="text"] {
+    width: 100%;
+}
+
+/* Vehicle Data Section */
+.car-photo {
+    width: 100%;
+    max-width: 400px; /* Limits size on larger screens */
+    height: auto;
+    display: block;
+    margin-top: var(--spacing-m);
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--border-color-dark);
+    object-fit: cover; /* Ensures image fits without distortion */
+}
+
+/* Terms and Conditions Section */
+.terms-content {
+    background-color: #3A3A3A;
+    padding: var(--spacing-m);
+    border-radius: var(--border-radius-small);
+    margin-bottom: var(--spacing-l);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95em;
+    max-height: 200px; /* Limits height for scrolling */
+    overflow-y: auto;
+    border: 1px solid var(--border-color-dark);
+}
+
+.terms-content p {
+    margin-bottom: var(--spacing-s);
+}
+
+/* Button Group (Accept/Reject) */
+.button-group {
+    display: flex;
+    flex-direction: column; /* Stacks buttons vertically on mobile */
+    gap: var(--spacing-m);
+    margin-top: var(--spacing-xl);
+}
+
+.btn {
+    padding: var(--spacing-m) var(--spacing-xl);
+    border: none;
+    border-radius: var(--border-radius-button);
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Full width buttons */
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none; /* For anchor buttons */
+    color: white; /* Default color for all buttons */
+}
+
+.primary-btn {
+    background-color: var(--accent-green);
+}
+
+.primary-btn:hover {
+    background-color: #5cb85c;
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background-color: var(--accent-red);
+}
+
+.secondary-btn:hover {
+    background-color: #e0443c;
+    transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS (MEDIA QUERIES) --- */
+
+/* For Tablets (min-width: 768px) */
+@media (min-width: 768px) {
+    .dashboard-header {
+        padding: var(--spacing-l) var(--spacing-xxl);
+        font-size: 1.3em;
+    }
+
+    .main-layout {
+        display: grid; /* Changes to a grid layout */
+        grid-template-columns: 280px 1fr; /* Sidebar fixed width, main content takes rest */
+        padding: 0; /* Remove main-layout padding, sections will have their own */
+        gap: 0; /* Remove gap between sidebar and main-content, grid handles it */
+    }
+
+    /* Hide overlay menu on desktop */
+    .overlay-menu {
+        display: none;
+    }
+
+    /* Sidebar becomes a fixed column */
+    .sidebar {
+        width: 100%; /* Occupies its grid column */
+        height: 100%; /* Stretches to full height */
+        border-right: 1px solid var(--border-color-dark);
+        border-radius: 0; /* Remove border-radius on the side where it connects to main content */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        position: sticky; /* Keep sidebar visible on scroll */
+        top: 0; /* Align with header */
+        align-self: start; /* Prevents sidebar from stretching if main content is short */
+        overflow-y: auto; /* Enable scroll for sidebar content */
+        max-height: calc(100vh - 70px); /* Adjust based on header height */
+    }
+
+    .sidebar-title {
+        text-align: left; /* Align title left on desktop */
+        margin: var(--spacing-l) var(--spacing-xl) var(--spacing-m);
+    }
+
+    .record-item {
+        padding: var(--spacing-m) var(--spacing-xl);
+    }
+
+    /* Main content area */
+    .main-content {
+        padding: var(--spacing-xl);
+        background-color: var(--bg-main-content);
+        display: grid; /* Inner grid for sections */
+        grid-template-columns: 1fr; /* Default 1 column */
+        gap: var(--spacing-xl);
+        overflow-y: auto; /* Enable scroll for main content if needed */
+    }
+
+    .card {
+        padding: var(--spacing-xl);
+        border-radius: var(--border-radius-card);
+    }
+
+    .card h2 {
+        text-align: left; /* Align card titles left on desktop */
+    }
+
+    /* Form groups */
+    .time-inputs-row {
+        flex-direction: row; /* Side-by-side inputs */
+        gap: var(--spacing-xl);
+    }
+
+    /* Button group */
+    .button-group {
+        flex-direction: row; /* Side-by-side buttons */
+        gap: var(--spacing-xl);
+    }
+
+    .btn {
+        max-width: 250px; /* Limit button width */
+    }
+}
+
+/* For Larger Desktops (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 300px 1fr; /* Slightly wider sidebar */
+    }
+
+    .main-content {
+        /* Example: Two columns for vehicle data and work order details, terms full width */
+        grid-template-columns: 1fr 1fr;
+        /* Place sections manually if needed */
+        /* grid-template-areas:
+            "vehicle order"
+            "terms terms"; */
+    }
+
+    .vehicle-data-section {
+        /* grid-area: vehicle; */
+    }
+    .work-order-details-section {
+        /* grid-area: order; */
+    }
+    .terms-conditions-section {
+        grid-column: 1 / -1; /* Spans all columns */
+        /* grid-area: terms; */
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+}
+
+/* Further adjustments for very large screens if necessary */
+@media (min-width: 1440px) {
+    .main-layout {
+        max-width: 1600px; /* Limit max width for very large screens */
+        margin: 0 auto; /* Center the entire dashboard */
+        border-radius: var(--border-radius-main); /* Apply border-radius to the whole layout */
+        overflow: hidden; /* Ensure content respects the main border-radius */
+    }
+    .sidebar {
+        border-top-left-radius: var(--border-radius-main);
+        border-bottom-left-radius: var(--border-radius-main);
+    }
+    .main-content {
+        border-top-right-radius: var(--border-radius-main);
+        border-bottom-right-radius: var(--border-radius-main);
+    }
+}

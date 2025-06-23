@@ -1,0 +1,333 @@
+/* --- VARIABLES CSS --- */
+:root {
+    --bg-app: #121212; /* Fondo de la aplicación */
+    --bg-container: #1E1E1E; /* Fondo del contenedor principal */
+    --card-bg: #2D2D2D; /* Fondo de tarjetas/elementos */
+    --text-light: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-strong: #E0E0E0;
+    --accent-blue: #42A5F5; /* Azul para enlaces */
+    --button-primary: #66BB6A; /* Verde para botón principal (Asignar) */
+    --border-radius-main: 20px;
+    --border-radius-card: 16px;
+    --border-radius-input: 10px;
+    --border-radius-button: 30px; /* Bordes de píldora para botones */
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 20px;
+    --spacing-xl: 30px;
+}
+
+/* --- ESTILOS GENERALES Y DE BASE (MOBILE-FIRST) --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la vista */
+    display: flex; /* Para centrar el main-container verticalmente si es necesario */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: flex-start; /* Alinea el contenido arriba */
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-light);
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.main-container {
+    background-color: var(--bg-container);
+    width: 100%; /* Ocupa todo el ancho en móviles */
+    max-width: 550px; /* Ancho máximo para el contenedor principal */
+    min-height: calc(100vh - (var(--spacing-l) * 2)); /* Ajusta la altura para ocupar la pantalla con padding */
+    padding: var(--spacing-l); /* Padding interior para móviles */
+    box-sizing: border-box;
+    display: flex; /* Flexbox para apilar secciones */
+    flex-direction: column;
+    gap: var(--spacing-xl); /* Espacio entre secciones */
+    border-radius: var(--border-radius-main); /* Bordes redondeados para el contenedor principal */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra principal */
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8em; /* Tamaño de título para móvil */
+    margin-bottom: var(--spacing-m);
+    color: var(--text-strong);
+}
+
+h2 {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin: 0 0 var(--spacing-m) 0;
+    color: var(--text-light);
+}
+
+p {
+    margin: 0;
+}
+
+/* --- TARJETA DE RESUMEN (summary-card) --- */
+.summary-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    display: flex;
+    flex-direction: column; /* Apilado por defecto en móviles */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+    width: 100%;
+    height: 180px; /* Altura fija para la imagen en móvil */
+    flex-shrink: 0; /* Evita que la imagen se encoja */
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: var(--border-radius-card); /* Redondeado solo arriba */
+    border-top-right-radius: var(--border-radius-card);
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* .image-overlay no está en tu HTML para esta página, pero si lo necesitaras, lo pondrías aquí */
+
+.card-details {
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: var(--spacing-s);
+}
+
+.info-line {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.info-line strong {
+    color: var(--text-strong);
+}
+
+.contact-link {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+    margin-top: auto; /* Empuja el enlace al fondo */
+    align-self: flex-start;
+    padding: var(--spacing-xs) 0;
+    transition: color 0.2s ease;
+}
+
+.contact-link:hover {
+    color: #64B5F6;
+}
+
+.contact-link svg {
+    width: 18px; /* Tamaño del icono */
+    height: 18px; /* Tamaño del icono */
+    fill: currentColor; /* Usa el color del texto del enlace */
+}
+
+/* --- SECCIÓN DE ASIGNAR TRABAJO (assign-job-section) --- */
+.assign-job-section {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m); /* Espacio entre grupos de formulario */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.form-group label {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.form-group input[type="text"] {
+    background-color: #3D3D3D;
+    border: 1px solid #555;
+    border-radius: var(--border-radius-input);
+    padding: var(--spacing-s) var(--spacing-m);
+    color: var(--text-light);
+    font-size: 1em;
+    outline: none; /* Elimina el borde de enfoque por defecto */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.3); /* Sombra azul al enfocar */
+}
+
+/* --- ESTILO PERSONALIZADO PARA CHECKBOX --- */
+.checkbox-group {
+    flex-direction: row; /* La etiqueta y el checkbox en la misma fila */
+    align-items: center;
+    gap: var(--spacing-s);
+    cursor: pointer; /* Indica que todo el grupo es clickeable */
+}
+
+.checkbox-group label {
+    margin-bottom: 0; /* No hay margen inferior para la etiqueta en este diseño */
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px; /* Tamaño del checkbox */
+    height: 22px;
+    background-color: #333;
+    border: 2px solid #555;
+    border-radius: 5px; /* Bordes redondeados del checkbox */
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--button-primary); /* Verde para marcado */
+    border-color: var(--button-primary);
+}
+
+input[type="checkbox"]:checked::before {
+    content: '✔';
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* --- BOTÓN ASIGNAR TRABAJO --- */
+.assign-button {
+    width: 100%;
+    padding: var(--spacing-m) var(--spacing-l);
+    border: none;
+    border-radius: var(--border-radius-button);
+    font-size: 1.1em;
+    font-weight: 700;
+    color: white;
+    background-color: var(--button-primary); /* Verde para el botón de acción */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: var(--spacing-m); /* Espacio extra encima del botón */
+}
+
+.assign-button:hover {
+    background-color: #5cb85c; /* Verde ligeramente más claro al pasar el ratón */
+    transform: translateY(-2px);
+}
+
+/* --- MEDIA QUERIES PARA ADAPTACIÓN A PANTALLAS MÁS GRANDES --- */
+
+/* Tabletas (generalmente 600px y más) */
+@media (min-width: 600px) {
+    .main-container {
+        padding: var(--spacing-xl); /* Más padding en tablets */
+        max-width: 650px; /* Permite un poco más de ancho */
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    .summary-card {
+        flex-direction: row; /* Imagen y detalles lado a lado en tablets */
+        height: 200px; /* Altura fija para la tarjeta */
+    }
+
+    .card-image {
+        width: 250px; /* Ancho de la imagen en layout horizontal */
+        height: 100%; /* Ocupa toda la altura de la tarjeta */
+        border-top-right-radius: 0; /* Anula redondez superior derecha */
+        border-bottom-left-radius: var(--border-radius-card); /* Redondea inferior izquierda */
+    }
+
+    .card-details {
+        padding: var(--spacing-xl);
+        justify-content: space-between;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    .form-group label {
+        font-size: 1em;
+    }
+
+    .form-group input[type="text"] {
+        padding: var(--spacing-m);
+        font-size: 1.05em;
+    }
+
+    .assign-button {
+        padding: var(--spacing-l) var(--spacing-xl);
+        font-size: 1.2em;
+    }
+}
+
+/* Escritorios (generalmente 900px y más) */
+@media (min-width: 900px) {
+    .main-container {
+        max-width: 800px; /* Permite un ancho aún mayor */
+        flex-direction: row; /* Las secciones se ponen lado a lado */
+        align-items: flex-start; /* Alinea los elementos al inicio */
+        /* Eliminamos el gap y lo manejamos con márgenes si es necesario, o un grid */
+        display: grid;
+        grid-template-columns: 1fr 1.2fr; /* Columna para summary, columna para formulario */
+        grid-template-rows: auto 1fr; /* Fila para título, fila para contenido */
+        gap: var(--spacing-xl);
+    }
+
+    h1 {
+        grid-column: 1 / -1; /* Ocupa ambas columnas */
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .summary-card {
+        grid-column: 1 / 2; /* Primera columna */
+        flex-direction: column; /* Vuelve a apilar imagen y detalles para ocupar el espacio vertical */
+        height: auto; /* Altura automática */
+    }
+
+    .card-image {
+        width: 100%; /* Ocupa todo el ancho de la columna */
+        height: 220px; /* Altura de la imagen en esta vista */
+        border-top-left-radius: var(--border-radius-card); /* Vuelve a redondear arriba */
+        border-top-right-radius: var(--border-radius-card);
+        border-bottom-left-radius: 0; /* Asegura que la parte inferior no esté redondeada */
+    }
+
+    .assign-job-section {
+        grid-column: 2 / 3; /* Segunda columna */
+        margin-top: var(--spacing-xs); /* Pequeño ajuste para alinear con el título de la card */
+    }
+
+    .assign-button {
+        max-width: 300px; /* Limita el ancho del botón en desktop */
+        align-self: center; /* Centra el botón en la sección */
+    }
+}
