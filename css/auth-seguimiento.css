@@ -1,230 +1,236 @@
 :root {
-  --dark-background: rgba(40, 40, 40, 1);
-  --text-light: rgba(255, 255, 255, 1);
-  --yellow-text: rgba(255, 204, 0, 1);
-  --input-bg: #f9f9f9;
-  --input-border: #ccc;
-  --button-red: rgba(197, 26, 29, 1);
-  --button-hover-red: rgba(135, 31, 31, 1);
-  /* Nuevas variables para el botón de volver */
-  --back-button-bg: #444; /* Un gris oscuro para el fondo del botón */
-  --back-button-hover: #555; /* Un gris ligeramente más claro al pasar el ratón */
+  /* Variables CSS: Definiciones de colores y propiedades reutilizables para mantener la consistencia. */
+  --dark-background: rgba(40, 40, 40, 1); /* Color de fondo oscuro principal. */
+  --text-light: rgba(255, 255, 255, 1); /* Color de texto claro. */
+  --yellow-text: rgba(255, 204, 0, 1); /* Color de texto amarillo para destacar información. */
+  --input-bg: #f9f9f9; /* Fondo claro para los campos de entrada. */
+  --input-border: #ccc; /* Borde para los campos de entrada. */
+  --button-red: rgba(197, 26, 29, 1); /* Color principal de los botones de acción. */
+  --button-hover-red: rgba(135, 31, 31, 1); /* Color del botón al pasar el ratón. */
+  --back-button-bg: #444; /* Fondo del botón "Volver". */
+  --back-button-hover: #555; /* Fondo del botón "Volver" al pasar el ratón. */
 }
 
+/* Reset de estilos del navegador y estilos generales del cuerpo. */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Helvetica, sans-serif;
+  box-sizing: border-box; /* Incluye padding y borde en el ancho/alto total del elemento. */
+  margin: 0; /* Elimina márgenes predeterminados. */
+  padding: 0; /* Elimina rellenos predeterminados. */
+  font-family: Helvetica, sans-serif; /* Establece la fuente principal. */
 }
 
 body {
-  background-color: var(--dark-background);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow: hidden;
-  position: relative;
+  background-color: var(--dark-background); /* Aplica el color de fondo oscuro. */
+  display: flex; /* Habilita Flexbox para centrar el contenido. */
+  justify-content: center; /* Centra el contenido horizontalmente. */
+  align-items: center; /* Centra el contenido verticalmente. */
+  min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana. */
+  overflow: hidden; /* Evita barras de desplazamiento no deseadas. */
+  position: relative; /* Necesario para posicionar el fondo de forma absoluta. */
 }
 
+/* Pseudo-elemento para una imagen de fondo sutil. */
 body::before {
-  content: "";
-  position: absolute;
+  content: ""; /* Es necesario para que el pseudo-elemento se muestre. */
+  position: absolute; /* Posiciona el elemento de forma absoluta con respecto al body. */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("backround-2-flat.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.2;
-  z-index: -1;
+  background-image: url("backround-2-flat.png"); /* Ruta de la imagen de fondo. */
+  background-repeat: no-repeat; /* La imagen no se repite. */
+  background-size: cover; /* La imagen cubre todo el espacio. */
+  background-position: center; /* Centra la imagen. */
+  opacity: 0.2; /* Hace la imagen semitransparente. */
+  z-index: -1; /* Envía la imagen detrás del contenido principal. */
 }
 
-/* Cambiamos .full-screen-container por .full-screen-app-container */
-.full-screen-app-container {
-  background-color: var(--dark-background);
-  width: 100%;
-  max-width: 500px;
-  height: 100vh; /* Ocupa el 100% del alto de la ventana */
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column; /* Apila la cabecera y el contenido verticalmente */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+/* Contenedor principal de la aplicación, simula la pantalla de una app. */
+.contenedor-app {
+  background-color: var(--dark-background); /* Fondo oscuro. */
+  width: 100%; /* Ocupa todo el ancho disponible. */
+  max-width: 500px; /* Ancho máximo en pantallas grandes. */
+  height: 100vh; /* Ocupa toda la altura de la ventana. */
+  border-radius: 20px; /* Esquinas redondeadas para un aspecto de app. */
+  overflow: hidden; /* Asegura que el contenido respete las esquinas redondeadas. */
+  display: flex; /* Habilita Flexbox. */
+  flex-direction: column; /* Apila los elementos internos (cabecera, contenido) verticalmente. */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad. */
 
+  /* Compatibilidad para asegurar la altura completa en navegadores móviles (iOS Safari). */
   min-height: -webkit-fill-available;
   min-height: 100vh;
 }
 
-/* On smaller screens, remove max-width and let it fill */
+/* Media Query: Ajustes para pantallas con un ancho máximo de 500px (móviles). */
 @media (max-width: 500px) {
-  .full-screen-app-container {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    /* padding: 20px 15px; */ /* Quita el padding de aquí para que solo lo tenga el contenido */
+  .contenedor-app {
+    width: 100vw; /* Ocupa el 100% del ancho del viewport. */
+    height: 100vh; /* Ocupa el 100% de la altura del viewport. */
+    border-radius: 0; /* Elimina las esquinas redondeadas para ocupar toda la pantalla. */
   }
 }
 
-/* --- ESTILOS DE LA CABECERA (NUEVOS) --- */
-.auth-header {
-  background-color: var(--dark-background); /* Fondo similar al body */
-  padding: 1em 1.5em; /* Espaciado */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Alinea el botón a la izquierda */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
-  flex-shrink: 0; /* Evita que la cabecera se encoja */
+/* Estilos de la cabecera de autenticación. */
+.encabezado-autenticacion {
+  background-color: var(--dark-background); /* Fondo similar al body. */
+  padding: 1em 1.5em; /* Espaciado interno. */
+  display: flex; /* Habilita Flexbox. */
+  align-items: center; /* Centra verticalmente el botón. */
+  justify-content: flex-start; /* Alinea el botón a la izquierda. */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil en la parte inferior. */
+  flex-shrink: 0; /* Evita que la cabecera se encoja. */
 }
 
-.auth-header h1 {
-  margin: 0;
-  font-size: 1.3em;
-  color: var(--text-light);
-  flex-grow: 1; /* Permite que el título ocupe el espacio restante */
-  text-align: center; /* Centra el título si lo habilitas */
+/* Estilos del botón de regresar. */
+.boton-regresar {
+  color: var(--text-light); /* Color de texto claro. */
+  text-decoration: none; /* Elimina el subrayado del enlace. */
+  padding: 0.6em 1em; /* Relleno interno. */
+  background-color: var(--back-button-bg); /* Fondo del botón. */
+  border-radius: 8px; /* Bordes redondeados. */
+  font-size: 0.85em; /* Tamaño de fuente. */
+  transition: background-color 0.2s ease; /* Transición suave del color de fondo. */
+  display: flex; /* Habilita Flexbox para alinear el icono y el texto. */
+  align-items: center; /* Centra el icono y el texto verticalmente. */
+  gap: 0.5em; /* Espacio entre el icono y el texto. */
+  flex-shrink: 0; /* Evita que el botón se encoja. */
 }
 
-.back-button {
-  color: var(--text-light);
-  text-decoration: none;
-  padding: 0.6em 1em;
-  background-color: var(--back-button-bg);
-  border-radius: 8px;
-  font-size: 0.85em;
-  transition: background-color 0.2s ease;
-  display: flex; /* Para alinear el icono y el texto */
-  align-items: center;
-  gap: 0.5em; /* Espacio entre el icono y el texto */
-  flex-shrink: 0; /* Evita que el botón se encoja */
+/* Estilo del botón de regresar al pasar el ratón. */
+.boton-regresar:hover {
+  background-color: var(--back-button-hover); /* Fondo ligeramente más claro. */
 }
 
-.back-button:hover {
-  background-color: var(--back-button-hover);
+/* Estilos para el icono dentro del botón de regresar. */
+.boton-regresar i {
+  font-size: 1em; /* Tamaño del icono. */
 }
 
-.back-button i {
-  font-size: 1em;
+/* Estilos del contenido principal de autenticación. */
+.contenido-principal-autenticacion {
+  flex-grow: 1; /* Permite que esta sección ocupe el espacio vertical restante. */
+  overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido es demasiado largo. */
+  -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS. */
+  display: flex; /* Habilita Flexbox. */
+  flex-direction: column; /* Apila los elementos internos verticalmente. */
+  justify-content: center; /* Centra el contenido verticalmente. */
+  align-items: center; /* Centra el contenido horizontalmente. */
+  padding: 30px 20px; /* Relleno interno. */
+  text-align: center; /* Centra el texto. */
 }
 
-/* --- ESTILOS DEL CONTENIDO PRINCIPAL (AJUSTADOS) --- */
-.auth-main-content {
-  flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
-  overflow-y: auto; /* Permite desplazamiento si el contenido es demasiado largo */
-  -webkit-overflow-scrolling: touch; /* Desplazamiento suave en iOS */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra el contenido verticalmente */
-  align-items: center;
-  padding: 30px 20px; /* Padding para el contenido principal */
-  text-align: center;
+/* Envoltorio para organizar el contenido (logo, títulos, formulario) */
+.envoltorio-contenido {
+  display: flex; /* Habilita Flexbox. */
+  flex-direction: column; /* Apila los elementos internos verticalmente. */
+  align-items: center; /* Centra los elementos horizontalmente. */
+  justify-content: center; /* Centra los elementos verticalmente. */
+  width: 100%; /* Ocupa todo el ancho disponible. */
+  max-width: 350px; /* Ancho máximo para este envoltorio. */
+  gap: 25px; /* Espacio entre los elementos hijos. */
 }
 
-/* El resto de tus estilos para .content-wrapper, .logo, .main-title, etc.,
-   quedan igual y ahora aplicarán dentro de .auth-main-content */
-.content-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 350px;
-  gap: 25px;
+/* Estilos del logo de la empresa. */
+.logo-empresa {
+  width: 180px; /* Ancho fijo. */
+  max-width: 80%; /* Asegura que no sea más grande que el 80% del contenedor. */
+  height: auto; /* Mantiene la proporción de la imagen. */
 }
 
-.logo {
-  width: 180px;
-  max-width: 80%;
-  height: auto;
+/* Estilos del título principal del sistema. */
+.titulo-principal {
+  font-size: 2rem; /* Tamaño de fuente grande. */
+  font-weight: 900; /* Grosor de fuente muy bold. */
+  color: var(--text-light); /* Color de texto claro. */
+  line-height: 1.2; /* Espaciado entre líneas. */
 }
 
-.main-title {
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--text-light);
-  line-height: 1.2;
+/* Estilos de la descripción principal. */
+.descripcion-principal {
+  font-size: 1.1rem; /* Tamaño de fuente. */
+  line-height: 1.5; /* Espaciado entre líneas. */
+  color: var(--yellow-text); /* Color amarillo para destacar. */
+  padding: 0 10px; /* Relleno horizontal. */
 }
 
-.main-content {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: var(--yellow-text);
-  padding: 0 10px;
+/* Estilos del formulario de entrada (input y botón). */
+.formulario-entrada {
+  display: flex; /* Habilita Flexbox. */
+  flex-direction: column; /* Apila el input y el botón verticalmente. */
+  gap: 20px; /* Espacio entre el input y el botón. */
+  width: 100%; /* Ocupa todo el ancho disponible. */
 }
 
-.input-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
+/* Estilos para el campo de entrada (input). */
+.formulario-entrada input {
+  outline: none; /* Elimina el contorno al enfocar. */
+  background: var(--input-bg); /* Fondo claro. */
+  box-shadow: transparent 0px 0px 0px 1px inset; /* Sombra interna sutil. */
+  padding: 15px 20px; /* Relleno interno. */
+  border-radius: 12px; /* Bordes redondeados. */
+  border: 1px solid var(--input-border); /* Borde. */
+  color: var(--dark-background); /* Color de texto oscuro. */
+  font-size: 1.1rem; /* Tamaño de fuente. */
+  width: 100%; /* Ocupa todo el ancho. */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves al enfocar. */
 }
 
-.input-form input {
-  outline: none;
-  background: var(--input-bg);
-  box-shadow: transparent 0px 0px 0px 1px inset;
-  padding: 15px 20px;
-  border-radius: 12px;
-  border: 1px solid var(--input-border);
-  color: var(--dark-background);
-  font-size: 1.1rem;
-  width: 100%;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* Estilos para el campo de entrada al enfocar. */
+.formulario-entrada input:focus {
+  border-color: var(--button-red); /* Cambia el color del borde. */
+  box-shadow: 0 0 0 2px rgba(197, 26, 29, 0.3); /* Agrega una sombra al enfocar. */
 }
 
-.input-form input:focus {
-  border-color: var(--button-red);
-  box-shadow: 0 0 0 2px rgba(197, 26, 29, 0.3);
+/* Estilos del botón de acción. */
+.boton-accion {
+  border: none; /* Sin borde. */
+  background: var(--button-red); /* Fondo rojo. */
+  color: var(--text-light); /* Color de texto claro. */
+  padding: 18px 25px; /* Relleno interno. */
+  border-radius: 14px; /* Bordes redondeados. */
+  font-weight: bold; /* Texto en negrita. */
+  font-size: 1.2rem; /* Tamaño de fuente. */
+  cursor: pointer; /* Cambia el cursor a una mano. */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves. */
+  width: 100%; /* Ocupa todo el ancho. */
 }
 
-.action-button {
-  border: none;
-  background: var(--button-red);
-  color: var(--text-light);
-  padding: 18px 25px;
-  border-radius: 14px;
-  font-weight: bold;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  width: 100%;
+/* Estilo del botón de acción al pasar el ratón. */
+.boton-accion:hover {
+  background-color: var(--button-hover-red); /* Fondo rojo más oscuro. */
+  transform: translateY(-2px); /* Se mueve ligeramente hacia arriba. */
 }
 
-.action-button:hover {
-  background-color: var(--button-hover-red);
-  transform: translateY(-2px);
+/* Estilo del botón de acción al ser presionado. */
+.boton-accion:active {
+  transform: translateY(0); /* Vuelve a su posición original. */
 }
 
-.action-button:active {
-  transform: translateY(0);
-}
-
-/* Media Queries para una mejor respuesta */
+/* Media Query: Ajustes para pantallas con un ancho máximo de 375px (móviles muy pequeños). */
 @media (max-width: 375px) {
-  .main-title {
-    font-size: 1.8rem;
+  .titulo-principal {
+    font-size: 1.8rem; /* Reduce el tamaño del título principal. */
   }
-  .main-content {
-    font-size: 1rem;
+  .descripcion-principal {
+    font-size: 1rem; /* Reduce el tamaño de la descripción. */
   }
-  .input-form input {
-    padding: 12px 15px;
-    font-size: 1rem;
+  .formulario-entrada input {
+    padding: 12px 15px; /* Reduce el relleno del input. */
+    font-size: 1rem; /* Reduce el tamaño de fuente del input. */
   }
-  .action-button {
-    padding: 15px 20px;
-    font-size: 1.1rem;
+  .boton-accion {
+    padding: 15px 20px; /* Reduce el relleno del botón. */
+    font-size: 1.1rem; /* Reduce el tamaño de fuente del botón. */
   }
-  .logo {
-    width: 150px;
+  .logo-empresa {
+    width: 150px; /* Reduce el tamaño del logo. */
   }
 }
 
+/* Media Query: Ajustes para pantallas con un ancho mínimo de 501px. */
 @media (min-width: 501px) {
-  .full-screen-app-container {
-    border-radius: 20px;
+  .contenedor-app {
+    border-radius: 20px; /* Asegura bordes redondeados en pantallas más grandes. */
   }
 }

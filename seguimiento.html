@@ -9,78 +9,78 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-  </head>
+    </head>
   <body>
-    <div class="full-screen-app-container">
-      <header class="tracker-header">
-        <a href="auth-seguimiento.html" class="back-button">
+    <div class="contenedor-aplicacion">
+      <header class="encabezado-seguimiento">
+        <a href="auth-seguimiento.html" class="boton-volver">
           <i class="fas fa-arrow-left"></i> Volver
         </a>
         <h1>Seguimiento del Vehículo</h1>
       </header>
 
-      <main class="tracker-main-content">
-        <div class="vehicle-info-card">
-          <div class="card-header">
-            <span class="record-number"
+      <main class="contenido-principal-seguimiento">
+        <div class="tarjeta-info-vehiculo">
+          <div class="encabezado-tarjeta">
+            <span class="numero-registro"
               >Registro número: <span id="recordNumber">N/A</span></span
             >
           </div>
-          <div class="vehicle-details-container">
-            <div class="vehicle-image-wrapper">
-              <img src="imgs/audi.jpg" alt="Vehicle Image" id="vehicleImage" />
+          <div class="detalles-vehiculo-contenedor">
+            <div class="imagen-vehiculo-envoltorio">
+              <img src="imgs/audi.jpg" alt="Imagen del Vehículo" id="vehicleImage" />
             </div>
-            <div class="vehicle-info-text">
+            <div class="info-vehiculo-texto">
               <h2 id="infoModelo">Cargando...</h2>
-              <p class="adjustment-status" id="adjustmentStatus">
+              <p class="estado-ajuste" id="adjustmentStatus">
                 Estado del ajuste: Cargando...
               </p>
               <p>Placa: <span id="infoPlaca">Cargando...</span></p>
               <p>Estudiante Asignado: <span id="assignedStudent">Cargando...</span></p>
               <p>Módulo: <span id="assignedModule">Cargando...</span></p>
-              <div class="contact-info">
+              <div class="info-contacto">
                 <span id="contactName">Cargando...</span>
-                <a href="#" class="contact-button">Contactar</a>
+                <a href="#" class="boton-contacto">Contactar</a>
               </div>
             </div>
           </div>
 
-          <div class="progress-section">
-            <div class="progress-bar-container">
-              <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+          <div class="seccion-progreso">
+            <div class="contenedor-barra-progreso">
+              <div class="barra-progreso" id="progressBar" style="width: 0%"></div>
               <span id="progressPercentage">0%</span>
             </div>
-            <div class="progress-time-info">
+            <div class="info-tiempo-progreso">
               <span id="remainingTime">Cargando...</span>
               <span id="totalTime">Cargando...</span>
             </div>
           </div>
 
-          <div class="repair-tasks-grid" id="repairTasksGrid">
-            <div class="task-item">
+          <div class="cuadricula-tareas-reparacion" id="repairTasksGrid">
+            <div class="elemento-tarea">
               <i class="fas fa-lightbulb"></i>
               <span>Conexión y reparación de luces</span>
             </div>
-            <div class="task-item">
+            <div class="elemento-tarea">
               <i class="fas fa-car-door"></i>
               <span>Reparación de puertas y ventanas</span>
             </div>
-            <div class="task-item">
+            <div class="elemento-tarea">
               <i class="fas fa-wind"></i>
               <span>Reparación de Parabrisas</span>
             </div>
-            <div class="task-item">
+            <div class="elemento-tarea">
               <i class="fas fa-car-crash"></i>
               <span>Cambio de Airbag</span>
             </div>
-            <div class="task-item">
+            <div class="elemento-tarea">
               <i class="fas fa-eye"></i>
               <span>Reparación de espejo</span>
             </div>
           </div>
         </div>
 
-        <div class="updates-section">
+        <div class="seccion-actualizaciones">
           <h2>Actualizaciones Recientes</h2>
           <ul id="updatesList">
             <li>Cargando actualizaciones...</li>
@@ -94,5 +94,5 @@
     </div>
 
     <script src="js/seguimiento.js"></script>
-  </body>
+    </body>
 </html>

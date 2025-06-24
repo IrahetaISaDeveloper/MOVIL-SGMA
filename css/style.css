@@ -1,186 +1,182 @@
 :root {
-    --primary-red: #A32F2A;
-    --secondary-gray: #4A4A4A;
-    --light-gray: #D9D9D9;
-    --text-color-light: #FFFFFF;
-    --text-color-dark: #333333;
-    --link-color: #FBB03B; /* Or a similar orange/gold from the logo */
-    --background-color: #333333; /* Dark background matching the image */
+    --primary-red: #A32F2A; /* Color rojo principal, usado en botones primarios */
+    --secondary-gray: #4A4A4A; /* Gris secundario */
+    --light-gray: #D9D9D9; /* Gris claro, usado para el fondo de los campos input */
+    --text-color-light: #FFFFFF; /* Color de texto blanco, para textos */
+    --text-color-dark: #333333; /* Color de texto oscuro, para textos sobre fondos blancos */
+    --link-color: #FBB03B; /* Color naranja del logo para enlaces */
+    --background-color: #333333; /* Color de fondo oscuro para el body */
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif; /* Or a font similar to the image */
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: sans-serif; 
 }
 
 body {
-    background-color: var(--background-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Full viewport height */
-    padding: 20px; /* Some padding around the container */
+    background-color: var(--background-color); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    padding: 20px; 
 }
 
-.login-container {
-    background-color: transparent; /* Darker gray for the container */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%; /* Responsive width */
-    max-width: 500px; /* Max width for larger screens */
+.contenedor-inicio-sesion {
+    background-color: transparent; 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%; 
+    max-width: 500px; 
 }
 
-.title {
-    color: var(--text-color-light);
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-    align-items: center; /* Aligns "Inicio de Sesión" to the left */
+.titulo-pagina {
+    color: var(--text-color-light); 
+    font-size: 1.8rem; 
+    margin-bottom: 30px; 
 }
 
-.logo-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 30px;
+.cabecera-login {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    margin-bottom: 30px; 
 }
 
 .logo {
-    width: 120px; /* Adjust size as needed */
-    height: auto;
-    margin-bottom: 15px;
+    width: 120px; 
+    height: auto; 
+    margin-bottom: 15px; 
 }
 
-.system-title {
-    color: var(--text-color-light);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    line-height: 1.2;
+.nombre-sistema {
+    color: var(--text-color-light); 
+    font-size: 1.5rem; 
+    margin-bottom: 10px; 
+    line-height: 1.2; 
 }
 
-.subtitle {
-    color: var(--link-color); /* Matches the orange/gold color in the image */
-    font-size: 0.9rem;
+.descripcion-formulario {
+    color: var(--link-color); 
+    font-size: 0.9rem; 
 }
 
-.form-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.seccion-formulario {
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 }
 
-.input-group {
-    width: 100%;
-    margin-bottom: 20px;
-    text-align: left; /* Align label to the left */
+.grupo-campo {
+    width: 100%; 
+    margin-bottom: 20px; 
+    text-align: left; 
 }
 
-.input-group label {
-    display: block;
-    color: var(--text-color-light);
-    font-size: 0.9rem;
-    margin-bottom: 5px;
+.grupo-campo label {
+    display: block; 
+    color: var(--text-color-light); 
+    font-size: 0.9rem; 
+    margin-bottom: 5px; 
 }
 
-.input-group input {
-    width: 100%;
-    padding: 12px 15px;
-    background-color: var(--light-gray);
-    border: none;
-    border-radius: 5px;
-    color: var(--text-color-dark);
-    font-size: 1rem;
-    outline: none; /* Remove focus outline */
+.grupo-campo input {
+    width: 100%; 
+    padding: 12px 15px; 
+    background-color: var(--light-gray); 
+    border: none; 
+    border-radius: 5px; 
+    color: var(--text-color-dark); 
+    font-size: 1rem; 
+    outline: none; 
 }
 
-.input-group input::placeholder {
-    color: #888;
+.grupo-campo input::placeholder {
+    color: #888; 
 }
 
-.forgot-password {
-    color: var(--link-color);
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin-bottom: 30px;
-    align-self: center; /* Center the link */
+.enlace-recuperar-contrasena {
+    color: var(--link-color); 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    margin-bottom: 30px; 
+    align-self: center; 
 }
 
-.btn {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 25px; /* More rounded buttons */
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 15px;
+.boton-base {
+    width: 100%; 
+    padding: 15px; 
+    border: none; 
+    border-radius: 25px; 
+    font-size: 1.1rem; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    margin-bottom: 15px; 
 }
 
-.primary-btn {
-    background-color: var(--primary-red);
-    color: var(--text-color-light);
+.boton-principal {
+    background-color: var(--primary-red); 
+    color: var(--text-color-light); 
 }
 
-.primary-btn:hover {
-    background-color: #8a2a26;
+.boton-principal:hover {
+    background-color: #8a2a26; 
 }
 
-.secondary-btn {
-    background-color: transparent;
-    color: var(--text-color-light);
-    border: 1px solid var(--text-color-light); /* White border */
+.boton-secundario {
+    background-color: transparent; 
+    color: var(--text-color-light); 
+    border: 1px solid var(--text-color-light); 
 }
 
-.secondary-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.boton-secundario:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
 }
 
-/* --- Nuevos estilos para el mensaje de registro --- */
-.signup-prompt {
-    color: var(--text-color-light);
-    font-size: 0.9rem;
-    margin-top: 15px; /* Espacio superior para separarlo de los botones */
-    text-align: center;
+.texto-registro {
+    color: var(--text-color-light); 
+    font-size: 0.9rem; 
+    margin-top: 15px; 
+    text-align: center; 
 }
 
-.signup-link {
-    color: var(--link-color); /* Usar el color naranja/oro para el enlace */
-    text-decoration: none;
-    font-weight: bold; /* Hacer el enlace un poco más notorio */
-    transition: color 0.3s ease;
+.enlace-registro {
+    color: var(--link-color); 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: color 0.3s ease; 
 }
 
-.signup-link:hover {
-    color: #e09b2e; /* Un tono ligeramente más oscuro al pasar el ratón */
+.enlace-registro:hover {
+    color: #e09b2e; 
 }
 
-
-/* Media Queries for finer adjustments */
 @media (max-width: 320px) {
-    .login-container {
-        padding: 15px;
+    .contenedor-inicio-sesion {
+        padding: 15px; 
     }
 
-    .title {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
+    .titulo-pagina {
+        font-size: 1.5rem; 
+        margin-bottom: 20px; 
     }
 
-    .system-title {
-        font-size: 1.3rem;
+    .nombre-sistema {
+        font-size: 1.3rem; 
     }
 
-    .btn {
-        font-size: 1rem;
-        padding: 12px;
+    .boton-base {
+        font-size: 1rem; 
+        padding: 12px; 
     }
 
-    .signup-prompt {
-        font-size: 0.85rem; /* Ajustar tamaño de fuente en pantallas pequeñas */
+    .texto-registro {
+        font-size: 0.85rem; 
     }
 }

@@ -7,32 +7,28 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="login-container">
-        
-        <h1 class="title">Inicio de Sesión</h1>
-
-        <div class="logo-section">
-            <img src="imgs/logo rical.png" alt="Logo de la Universidad de El Salvador" class="logo">
-            <h2 class="system-title">Sistema de Gestión <br> Mantenimiento Automotriz</h2>
-            <p class="subtitle">Ingresa tus credenciales para acceder al sistema</p>
+    <div class="contenedor-inicio-sesion">
+        <h1 class="titulo-pagina">Inicio de Sesión</h1>
+        <div class="cabecera-login">
+            <img src="imgs/logo rical.png" alt="Logo del Rical" class="logo">
+            <h2 class="nombre-sistema">Sistema de Gestión <br> Mantenimiento Automotriz</h2>
+            <p class="descripcion-formulario">Ingresa tus credenciales para acceder al sistema</p>
         </div>
 
-        <div class="form-section">
-            <div class="input-group">
+        <div class="seccion-formulario">
+            <div class="grupo-campo">
                 <label for="username-input">Usuario:</label>
                 <input type="text" id="username-input" placeholder="Ingresa tu usuario">
             </div>
-            <div class="input-group">
+            <div class="grupo-campo">
                 <label for="password-input">Contraseña:</label>
                 <input type="password" id="password-input" placeholder="Ingresa tu contraseña">
             </div>
-            <a href="#" class="forgot-password">¿Olvidó la contraseña?</a>
-
-            <button id="login-btn" class="btn primary-btn">Iniciar Sesión</button>
-            <button id="vehicle-tracking-btn" class="btn secondary-btn">seguimiento de vehículo</button>
-
-            <p class="signup-prompt">
-                ¿No tienes cuenta? <a href="registro-user.html" class="signup-link">Crea una</a>
+            <a href="#" class="enlace-recuperar-contrasena">¿Olvidó la contraseña?</a>
+            <button id="login-btn" class="boton-base boton-principal">Iniciar Sesión</button>
+            <button id="vehicle-tracking-btn" class="boton-base boton-secundario">Seguimiento de Vehículo</button>
+            <p class="texto-registro">
+                ¿No tienes cuenta? <a href="registro-user.html" class="enlace-registro">Crea una</a>
             </p>
         </div>
     </div>

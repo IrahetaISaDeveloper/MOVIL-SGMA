@@ -1,318 +1,334 @@
-/* Variables CSS */
+/* Variables CSS: Definiciones de colores, tamaños de fuente y espaciados para facilitar la consistencia y el mantenimiento. */
 :root {
-    --primary-red: #A32F2A;
-    --secondary-gray: #4A4A4A;
-    --light-gray: #D9D9D9;
-    --text-color-light: #FFFFFF;
-    --text-color-dark: #333333;
-    --link-color: #FBB03B;
-    --background-color: #333333;
-    --header-bg: #3a3a3a;
-    --back-button-bg: #444;
-    --back-button-hover: #555;
-    --error-red: #EF5350;
+    --primary-red: #A32F2A; /* Color principal para botones y elementos destacados. */
+    --secondary-gray: #4A4A4A; /* Gris secundario (no usado directamente en HTML/CSS, pero podría serlo). */
+    --light-gray: #D9D9D9; /* Gris claro, usado para fondos de campos de entrada y selector. */
+    --text-color-light: #FFFFFF; /* Color de texto claro para fondos oscuros. */
+    --text-color-dark: #333333; /* Color de texto oscuro para fondos claros. */
+    --link-color: #FBB03B; /* Color naranja/dorado para enlaces (no aplicado en este HTML). */
+    --background-color: #333333; /* Color de fondo general de la aplicación. */
+    --header-bg: #3a3a3a; /* Fondo para la cabecera. */
+    --back-button-bg: #444; /* Fondo del botón "Volver". */
+    --back-button-hover: #555; /* Fondo del botón "Volver" al pasar el ratón. */
+    --error-red: #EF5350; /* Color rojo para mensajes de error. */
 
-    --base-font-size: 1.05rem;
-    --input-padding-y: 14px; /* Padding vertical para inputs/selects */
-    --input-padding-x: 18px; /* Padding horizontal para inputs/selects */
-    --button-padding: 18px;
-    --gap-spacing: 22px;
+    --base-font-size: 1.05rem; /* Tamaño de fuente base para texto general. */
+    --input-padding-y: 14px; /* Relleno vertical para campos de entrada. */
+    --input-padding-x: 18px; /* Relleno horizontal para campos de entrada. */
+    --button-padding: 18px; /* Relleno para botones. */
+    --gap-spacing: 22px; /* Espaciado entre elementos de formulario. */
 }
 
-/* Reset y estilos generales de body */
+/* Reset de estilos del navegador y estilos generales del cuerpo. */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box; /* Incluye padding y border en el ancho/alto total. */
+    margin: 0; /* Elimina márgenes predeterminados. */
+    padding: 0; /* Elimina rellenos predeterminados. */
+    font-family: 'Roboto', sans-serif; /* Establece la fuente principal. */
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--text-color-light);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+    background-color: var(--background-color); /* Aplica el color de fondo definido. */
+    color: var(--text-color-light); /* Aplica el color de texto claro por defecto. */
+    height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana. */
+    display: flex; /* Habilita Flexbox para centrar el contenido. */
+    justify-content: center; /* Centra el contenido horizontalmente. */
+    align-items: center; /* Centra el contenido verticalmente. */
+    padding: 0; /* Elimina el padding del cuerpo. */
 }
 
-/* Contenedor principal de la app */
-.full-screen-app-container {
-    background-color: var(--background-color);
-    width: 100%;
-    max-width: 480px;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+/* Estilos para el contenedor principal de la aplicación (simula la pantalla). */
+.contenedor-aplicacion {
+    background-color: var(--background-color); /* Fondo oscuro para el contenedor de la app. */
+    width: 100%; /* Ocupa todo el ancho disponible. */
+    max-width: 480px; /* Ancho máximo en pantallas grandes. */
+    height: 100vh; /* Ocupa toda la altura de la ventana. */
+    overflow: hidden; /* Asegura que el contenido no se salga de los límites. */
+    display: flex; /* Habilita Flexbox. */
+    flex-direction: column; /* Organiza los elementos hijos en una columna. */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad. */
+    /* Compatibilidad para alturas completas en navegadores móviles. */
     min-height: -webkit-fill-available;
     min-height: 100vh;
 }
 
-/* Estilos de la cabecera */
-.app-header {
-    background-color: var(--header-bg);
-    padding: 1.2em 1.5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
+/* Estilos para la cabecera de la aplicación. */
+.encabezado-app {
+    background-color: var(--header-bg); /* Color de fondo de la cabecera. */
+    padding: 1.2em 1.5em; /* Relleno interno. */
+    display: flex; /* Habilita Flexbox para alinear los elementos. */
+    align-items: center; /* Centra los elementos verticalmente. */
+    justify-content: space-between; /* Espacia el botón y el título. */
+    flex-shrink: 0; /* Evita que la cabecera se encoja. */
 }
 
-.header-title {
-    font-size: 1.45rem;
-    margin: 0;
-    color: var(--text-color-light);
-    flex-grow: 1;
-    text-align: center;
-    margin-left: -70px;
+/* Estilos para el título dentro de la cabecera. */
+.titulo-encabezado {
+    font-size: 1.45rem; /* Tamaño de fuente. */
+    margin: 0; /* Elimina márgenes predeterminados. */
+    color: var(--text-color-light); /* Color de texto claro. */
+    flex-grow: 1; /* Permite que el título ocupe el espacio restante. */
+    text-align: center; /* Centra el texto del título. */
+    margin-left: -70px; /* Ajuste para centrarlo visualmente debido al botón de "Volver". */
 }
 
-.back-button {
-    color: var(--text-color-light);
-    text-decoration: none;
-    padding: 0.7em 1.2em;
-    background-color: var(--back-button-bg);
-    border-radius: 10px;
-    font-size: 0.95em;
-    transition: background-color 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.6em;
-    flex-shrink: 0;
-    z-index: 10;
+/* Estilos para el botón de regresar. */
+.boton-regresar {
+    color: var(--text-color-light); /* Color de texto claro. */
+    text-decoration: none; /* Elimina el subrayado del enlace. */
+    padding: 0.7em 1.2em; /* Relleno interno. */
+    background-color: var(--back-button-bg); /* Fondo del botón. */
+    border-radius: 10px; /* Bordes redondeados. */
+    font-size: 0.95em; /* Tamaño de fuente. */
+    transition: background-color 0.2s ease; /* Transición suave al pasar el ratón. */
+    display: flex; /* Habilita Flexbox para alinear el icono y el texto. */
+    align-items: center; /* Centra el icono y el texto verticalmente. */
+    gap: 0.6em; /* Espacio entre el icono y el texto. */
+    flex-shrink: 0; /* Evita que el botón se encoja. */
+    z-index: 10; /* Asegura que esté por encima de otros elementos si hay superposiciones. */
 }
 
-.back-button:hover {
-    background-color: var(--back-button-hover);
+/* Estilo para el botón de regresar al pasar el ratón. */
+.boton-regresar:hover {
+    background-color: var(--back-button-hover); /* Fondo ligeramente más oscuro. */
 }
 
-.back-button i {
-    font-size: 1.1em;
+/* Estilos para el icono dentro del botón de regresar. */
+.boton-regresar i {
+    font-size: 1.1em; /* Tamaño del icono. */
 }
 
-/* Contenido principal del registro */
-.registro-main-content {
-    flex-grow: 1;
-    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede la altura */
-    -webkit-overflow-scrolling: touch;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
+/* Estilos para la sección principal del contenido de registro. */
+.contenido-principal-registro {
+    flex-grow: 1; /* Permite que esta sección ocupe el espacio vertical restante. */
+    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido es muy largo. */
+    -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en dispositivos iOS. */
+    display: flex; /* Habilita Flexbox. */
+    flex-direction: column; /* Organiza los elementos en una columna. */
+    align-items: center; /* Centra los elementos horizontalmente. */
+    padding: 30px; /* Relleno interno. */
 }
 
-.registro-main-content .subtitle {
-    color: var(--text-color-light);
-    font-size: var(--base-font-size);
-    margin-bottom: 35px;
-    text-align: center;
+/* Estilos para el subtítulo dentro del contenido de registro. */
+.contenido-principal-registro .subtitulo-formulario {
+    color: var(--text-color-light); /* Color de texto claro. */
+    font-size: var(--base-font-size); /* Tamaño de fuente base. */
+    margin-bottom: 35px; /* Margen inferior. */
+    text-align: center; /* Centra el texto. */
 }
 
-.registro-form {
-    width: 100%;
-    max-width: 380px;
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-spacing);
+/* Estilos para el formulario de registro. */
+.formulario-registro {
+    width: 100%; /* Ocupa todo el ancho disponible. */
+    max-width: 380px; /* Ancho máximo del formulario. */
+    display: flex; /* Habilita Flexbox. */
+    flex-direction: column; /* Organiza los campos en una columna. */
+    gap: var(--gap-spacing); /* Espacio entre los grupos de entrada. */
 }
 
-.input-group {
-    width: 100%;
-    text-align: left;
+/* Estilos para cada grupo de entrada (label + input). */
+.grupo-entrada {
+    width: 100%; /* Ocupa todo el ancho de su contenedor. */
+    text-align: left; /* Alinea el texto a la izquierda. */
 }
 
-.input-group label {
-    display: block;
-    color: var(--text-color-light);
-    font-size: var(--base-font-size);
-    margin-bottom: 8px;
-    font-weight: 500;
+/* Estilos para las etiquetas de los campos de entrada. */
+.grupo-entrada label {
+    display: block; /* Hace que la etiqueta ocupe su propia línea. */
+    color: var(--text-color-light); /* Color de texto claro. */
+    font-size: var(--base-font-size); /* Tamaño de fuente base. */
+    margin-bottom: 8px; /* Margen inferior. */
+    font-weight: 500; /* Grosor de la fuente. */
 }
 
-.input-group input { /* Solo para inputs de texto/email/password */
-    width: 100%;
-    padding: var(--input-padding-y) var(--input-padding-x);
-    background-color: var(--light-gray);
-    border: none;
-    border-radius: 8px;
-    color: var(--text-color-dark);
-    font-size: var(--base-font-size);
-    outline: none;
+/* Estilos para los campos de entrada de texto, email y contraseña. */
+.grupo-entrada input { 
+    width: 100%; /* Ocupa todo el ancho disponible. */
+    padding: var(--input-padding-y) var(--input-padding-x); /* Relleno interno. */
+    background-color: var(--light-gray); /* Fondo gris claro. */
+    border: none; /* Sin borde. */
+    border-radius: 8px; /* Bordes redondeados. */
+    color: var(--text-color-dark); /* Color de texto oscuro. */
+    font-size: var(--base-font-size); /* Tamaño de fuente base. */
+    outline: none; /* Elimina el contorno al enfocar. */
 }
 
-.input-group input::placeholder {
-    color: #888;
+/* Estilos para el texto de marcador de posición en los campos de entrada. */
+.grupo-entrada input::placeholder {
+    color: #888; /* Color gris del placeholder. */
 }
 
-/* Estilos para el mensaje de error del correo */
-.error-message {
-    color: var(--error-red);
-    font-size: 0.95rem;
-    margin-top: 6px;
-    min-height: 1.2em;
+/* Estilos para mensajes de error. */
+.mensaje-error {
+    color: var(--error-red); /* Color rojo para errores. */
+    font-size: 0.95rem; /* Tamaño de fuente. */
+    margin-top: 6px; /* Margen superior. */
+    min-height: 1.2em; /* Asegura una altura mínima para evitar saltos de diseño. */
 }
 
-/* Estilos de botones */
-.btn {
-    width: 100%;
-    padding: var(--button-padding);
-    border: none;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
+/* Estilos base para todos los botones. */
+.boton-base {
+    width: 100%; /* Ocupa todo el ancho disponible. */
+    padding: var(--button-padding); /* Relleno interno. */
+    border: none; /* Sin borde. */
+    border-radius: 30px; /* Bordes muy redondeados. */
+    font-size: 1.2rem; /* Tamaño de fuente. */
+    cursor: pointer; /* Cambia el cursor a una mano. */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo. */
+    margin-top: 15px; /* Margen superior. */
 }
 
-.primary-btn {
-    background-color: var(--primary-red);
-    color: var(--text-color-light);
+/* Estilos para el botón principal (Registrarse). */
+.boton-principal {
+    background-color: var(--primary-red); /* Fondo rojo principal. */
+    color: var(--text-color-light); /* Color de texto claro. */
 }
 
-.primary-btn:hover {
-    background-color: #8a2a26;
+/* Estilo para el botón principal al pasar el ratón. */
+.boton-principal:hover {
+    background-color: #8a2a26; /* Tono de rojo más oscuro. */
 }
 
 /*
    ========================================================================
-   NUEVOS ESTILOS PARA EL COMBOBOX PERSONALIZADO
+   ESTILOS PARA EL SELECTOR (COMBOBOX) PERSONALIZADO
    ========================================================================
 */
-.custom-select-wrapper {
-    position: relative; /* Es importante para posicionar el dropdown absoluto */
-    width: 100%;
+.contenedor-selector-personalizado {
+    position: relative; /* Es importante para posicionar el dropdown absoluto. */
+    width: 100%; /* Ocupa todo el ancho disponible. */
 }
 
-.custom-select-trigger {
-    width: 100%;
-    padding: var(--input-padding-y) var(--input-padding-x); /* Usa los paddings de input */
-    background-color: var(--light-gray);
-    border: none;
-    border-radius: 8px;
-    color: var(--text-color-dark);
-    font-size: var(--base-font-size);
-    outline: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none; /* Evita que el texto del trigger se seleccione */
+.gatillo-selector-personalizado {
+    width: 100%; /* Ocupa todo el ancho. */
+    padding: var(--input-padding-y) var(--input-padding-x); /* Usa los rellenos de los campos de entrada. */
+    background-color: var(--light-gray); /* Fondo gris claro. */
+    border: none; /* Sin borde. */
+    border-radius: 8px; /* Bordes redondeados. */
+    color: var(--text-color-dark); /* Color de texto oscuro. */
+    font-size: var(--base-font-size); /* Tamaño de fuente base. */
+    outline: none; /* Elimina el contorno al enfocar. */
+    cursor: pointer; /* Cambia el cursor a una mano. */
+    display: flex; /* Habilita Flexbox. */
+    justify-content: space-between; /* Espacia el texto y la flecha. */
+    align-items: center; /* Centra los elementos verticalmente. */
+    user-select: none; /* Evita que el texto del gatillo se seleccione. */
 }
 
-.custom-select-trigger span {
-    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible */
+.gatillo-selector-personalizado span {
+    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible. */
 }
 
-.custom-select-trigger .select-arrow {
-    transition: transform 0.2s ease;
-    margin-left: 10px;
-    color: var(--text-color-dark);
+.gatillo-selector-personalizado .flecha-selector {
+    transition: transform 0.2s ease; /* Transición suave para la rotación de la flecha. */
+    margin-left: 10px; /* Margen izquierdo. */
+    color: var(--text-color-dark); /* Color de la flecha. */
 }
 
-.custom-select-trigger.active .select-arrow {
-    transform: rotate(180deg); /* Rota la flecha cuando el dropdown está abierto */
+/* Rota la flecha cuando el selector está activo (abierto). */
+.gatillo-selector-personalizado.active .flecha-selector {
+    transform: rotate(180deg); 
 }
 
-.custom-options {
-    position: absolute;
-    top: calc(100% + 5px); /* Posiciona 5px debajo del trigger */
-    left: 0;
-    right: 0;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
-    background-color: var(--light-gray);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow-y: auto; /* ¡CLAVE! Habilita el desplazamiento si las opciones son muchas */
-    max-height: 180px; /* Define una altura máxima antes de que aparezca el scroll */
-    display: none; /* Oculto por defecto */
-    padding: 5px 0; /* Padding interno para las opciones */
+.opciones-personalizadas {
+    position: absolute; /* Posicionamiento absoluto para el desplegable. */
+    top: calc(100% + 5px); /* Posiciona 5px debajo del gatillo. */
+    left: 0; /* Alinea a la izquierda. */
+    right: 0; /* Alinea a la derecha (ocupa todo el ancho del contenedor). */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos. */
+    background-color: var(--light-gray); /* Fondo de las opciones. */
+    border-radius: 8px; /* Bordes redondeados. */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra. */
+    overflow-y: auto; /* Habilita el desplazamiento vertical si hay muchas opciones. */
+    max-height: 180px; /* Altura máxima antes de que aparezca el scroll. */
+    display: none; /* Oculto por defecto. */
+    padding: 5px 0; /* Relleno interno. */
 }
 
-.custom-options.open {
-    display: block; /* Muestra el dropdown cuando la clase 'open' está activa */
+/* Muestra las opciones cuando la clase 'open' está activa. */
+.opciones-personalizadas.open {
+    display: block; 
 }
 
-.custom-option {
-    padding: 12px var(--input-padding-x); /* Padding para cada opción individual */
-    cursor: pointer;
-    font-size: var(--base-font-size);
-    color: var(--text-color-dark);
-    transition: background-color 0.2s ease, color 0.2s ease;
+/* Estilos para cada opción individual del selector. */
+.opcion-personalizada {
+    padding: 12px var(--input-padding-x); /* Relleno interno. */
+    cursor: pointer; /* Cambia el cursor a una mano. */
+    font-size: var(--base-font-size); /* Tamaño de fuente. */
+    color: var(--text-color-dark); /* Color de texto oscuro. */
+    transition: background-color 0.2s ease, color 0.2s ease; /* Transiciones suaves. */
 }
 
-.custom-option:hover,
-.custom-option.selected {
-    background-color: var(--primary-red);
-    color: var(--text-color-light);
+/* Estilos para la opción al pasar el ratón o cuando está seleccionada. */
+.opcion-personalizada:hover,
+.opcion-personalizada.selected {
+    background-color: var(--primary-red); /* Fondo rojo principal. */
+    color: var(--text-color-light); /* Color de texto claro. */
 }
 
 /*
    ========================================================================
-   MEDIA QUERIES - Ajustes para pantallas pequeñas y alturas reducidas
-   (Estos ya incluyen ajustes para el nuevo combobox)
+   MEDIA QUERIES - Ajustes responsivos para diferentes tamaños de pantalla
    ========================================================================
 */
 
 /* Ajustes para pantallas con un ancho máximo de 380px (móviles pequeños) */
 @media (max-width: 380px) {
-    .registro-main-content {
-        padding: 20px;
+    .contenido-principal-registro {
+        padding: 20px; /* Reduce el relleno. */
     }
-    .registro-form {
-        gap: 15px;
+    .formulario-registro {
+        gap: 15px; /* Reduce el espacio entre campos. */
     }
-    .input-group input,
-    .custom-select-trigger, /* Asegurar que el trigger del combobox se ajuste */
-    .custom-option { /* Asegurar que las opciones se ajusten */
-        font-size: 0.95rem;
-        padding: 12px 15px;
+    .grupo-entrada input,
+    .gatillo-selector-personalizado, /* Ajuste para el gatillo del selector. */
+    .opcion-personalizada { /* Ajuste para las opciones del selector. */
+        font-size: 0.95rem; /* Reduce el tamaño de fuente. */
+        padding: 12px 15px; /* Reduce el relleno. */
     }
-    .btn {
-        font-size: 1.1rem;
-        padding: 15px;
+    .boton-base {
+        font-size: 1.1rem; /* Reduce el tamaño de fuente del botón. */
+        padding: 15px; /* Reduce el relleno del botón. */
     }
-    .header-title {
-        font-size: 1.3rem;
+    .titulo-encabezado {
+        font-size: 1.3rem; /* Reduce el tamaño del título de la cabecera. */
     }
-    .back-button {
-        font-size: 0.9em;
-        padding: 0.6em 1em;
+    .boton-regresar {
+        font-size: 0.9em; /* Reduce el tamaño de fuente del botón "Volver". */
+        padding: 0.6em 1em; /* Reduce el relleno del botón. */
     }
-    .registro-main-content .subtitle {
-        margin-bottom: 25px;
+    .contenido-principal-registro .subtitulo-formulario {
+        margin-bottom: 25px; /* Reduce el margen inferior del subtítulo. */
     }
 }
 
-/* NUEVA MEDIA QUERY: Ajustes específicos para pantallas con poca ALTURA (móviles cortos) */
+/* Ajustes específicos para pantallas con poca ALTURA (móviles cortos) */
 @media (max-height: 600px) {
-    .registro-main-content {
-        padding-top: 15px;
-        padding-bottom: 15px;
+    .contenido-principal-registro {
+        padding-top: 15px; /* Reduce el relleno superior. */
+        padding-bottom: 15px; /* Reduce el relleno inferior. */
     }
-    .registro-form {
-        gap: 10px;
+    .formulario-registro {
+        gap: 10px; /* Reduce el espacio entre campos. */
     }
-    .input-group label {
-        margin-bottom: 4px;
+    .grupo-entrada label {
+        margin-bottom: 4px; /* Reduce el margen inferior de las etiquetas. */
     }
-    .input-group input,
-    .custom-select-trigger, /* Asegurar que el trigger del combobox se ajuste */
-    .custom-option { /* Asegurar que las opciones se ajusten */
-        padding: 10px 12px;
-        font-size: 0.9rem;
+    .grupo-entrada input,
+    .gatillo-selector-personalizado, /* Ajuste para el gatillo del selector. */
+    .opcion-personalizada { /* Ajuste para las opciones del selector. */
+        padding: 10px 12px; /* Reduce el relleno. */
+        font-size: 0.9rem; /* Reduce el tamaño de fuente. */
     }
-    .btn {
-        margin-top: 10px;
-        padding: 12px;
-        font-size: 1rem;
+    .boton-base {
+        margin-top: 10px; /* Reduce el margen superior del botón. */
+        padding: 12px; /* Reduce el relleno del botón. */
+        font-size: 1rem; /* Reduce el tamaño de fuente del botón. */
     }
-    .registro-main-content .subtitle {
-        margin-bottom: 15px;
+    .contenido-principal-registro .subtitulo-formulario {
+        margin-bottom: 15px; /* Reduce el margen inferior del subtítulo. */
     }
-    .custom-options {
-        max-height: 120px; /* Reducir aún más la altura máxima del dropdown para pantallas muy cortas */
+    .opciones-personalizadas {
+        max-height: 120px; /* Reduce la altura máxima del desplegable para pantallas muy cortas. */
     }
 }

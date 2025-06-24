@@ -1,106 +1,115 @@
-// Funcionalidad del menú de hamburguesa
+// Espera a que todo el contenido del DOM (Document Object Model) esté completamente cargado.
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navRight = document.querySelector('.nav-right');
-    const dropdowns = document.querySelectorAll('.dropdown');
+    // Obtiene referencias a los elementos del menú de navegación.
+    const hamburger = document.querySelector('.menu-hamburguesa'); // El botón de hamburguesa.
+    const navRight = document.querySelector('.navegacion-derecha'); // La lista de enlaces de navegación.
+    const dropdowns = document.querySelectorAll('.menu-desplegable'); // Todos los elementos con submenús.
 
+    // Si el botón de hamburguesa y la navegación derecha existen, añade el evento de clic.
     if (hamburger && navRight) {
         hamburger.addEventListener('click', function() {
+            // Alterna la clase 'active' en la navegación derecha para mostrar/ocultar el menú lateral.
             navRight.classList.toggle('active');
+            // Alterna la clase 'open' en el botón de hamburguesa para su animación (convertir a 'X').
             hamburger.classList.toggle('open');
         });
     }
 
-    // Cerrar el menú si se hace clic fuera de él en dispositivos móviles
+    // Cierra el menú móvil si se hace clic fuera de él.
     document.addEventListener('click', function(event) {
-        // Incluir los dropdowns en la comprobación para que no se cierre el menú al hacer clic en ellos
+        // Comprueba si el clic ocurrió dentro del menú de navegación, el botón de hamburguesa,
+        // o dentro de alguno de los submenús desplegables.
         const isClickInsideNav = navRight.contains(event.target) || 
                                hamburger.contains(event.target) ||
                                Array.from(dropdowns).some(dropdown => dropdown.contains(event.target));
 
+        // Si el clic no fue dentro de las áreas del menú y el menú móvil está activo, ciérralo.
         if (!isClickInsideNav && navRight.classList.contains('active')) {
-            navRight.classList.remove('active');
-            hamburger.classList.remove('open');
-            // Opcional: Cerrar cualquier dropdown abierto cuando se cierra el menú principal
+            navRight.classList.remove('active'); // Oculta el menú lateral.
+            hamburger.classList.remove('open'); // Restaura el icono de hamburguesa.
+            // Opcional: Cierra cualquier submenú desplegable que pueda estar abierto.
             dropdowns.forEach(dropdown => {
                 dropdown.classList.remove('active');
             });
         }
     });
 
-    // Manejar dropdowns en móvil
+    // Maneja los submenús desplegables en modo móvil.
     dropdowns.forEach(dropdown => {
-        // Seleccionamos el enlace que abre el dropdown, por ejemplo, el que tiene el texto "Cursos"
-        const dropdownLink = dropdown.querySelector('a[href="#seccion-cursos"]'); 
+        // Selecciona el enlace dentro del submenú que se supone que abre/cierra el submenú.
+        // En este caso, el enlace a "#seccion-modulos".
+        const dropdownLink = dropdown.querySelector('a[href="#seccion-modulos"]'); 
         
         if (dropdownLink) {
             dropdownLink.addEventListener('click', function(e) {
-                // Solo prevenir el default y manejar el dropdown si el menú móvil está activo
-                // y estamos en una pantalla pequeña (considerado como móvil)
+                // Solo previene el comportamiento por defecto (desplazamiento a la sección)
+                // y maneja el submenú si el menú móvil está activo y la pantalla es pequeña.
                 if (window.innerWidth <= 768 && navRight.classList.contains('active')) {
-                    e.preventDefault(); // Evita que se desplace a la sección inmediatamente
+                    e.preventDefault(); // Evita el desplazamiento inmediato.
 
-                    // Cierra otros dropdowns si están abiertos (opcional, para solo tener uno abierto a la vez)
+                    // Cierra otros submenús si están abiertos (para tener solo uno abierto a la vez).
                     dropdowns.forEach(otherDropdown => {
                         if (otherDropdown !== dropdown) {
                             otherDropdown.classList.remove('active');
                         }
                     });
 
-                    dropdown.classList.toggle('active'); // Muestra/oculta el dropdown
+                    // Alterna la clase 'active' en el submenú para mostrarlo/ocultarlo.
+                    dropdown.classList.toggle('active'); 
                 }
             });
         }
     });
 
-    // Filtros en los registros pendientes (sin cambios, ya que no afectan al menú)
-    const botonesFiltro = document.querySelectorAll('.filtro-año');
-    const tarjetasRegistro = document.querySelectorAll('.registro-tarjeta');
+    // Lógica para los filtros de año en la sección de módulos.
+    const botonesFiltro = document.querySelectorAll('.boton-filtro-año'); // Botones de filtro de año.
+    const tarjetasModulo = document.querySelectorAll('.tarjeta-modulo'); // Todas las tarjetas de módulos.
 
     botonesFiltro.forEach(boton => {
         boton.addEventListener('click', function() {
+            // Obtiene el año seleccionado del atributo 'data-año' del botón.
             const añoSeleccionado = this.getAttribute('data-año');
 
+            // Remueve la clase 'activo' de todos los botones de filtro y la añade al botón clicado.
             botonesFiltro.forEach(btn => btn.classList.remove('activo'));
             this.classList.add('activo');
 
-            tarjetasRegistro.forEach(tarjeta => {
+            // Recorre todas las tarjetas de módulo.
+            tarjetasModulo.forEach(tarjeta => {
+                // Si el atributo 'data-año' de la tarjeta coincide con el año seleccionado, la muestra.
                 if (tarjeta.getAttribute('data-año') === añoSeleccionado) {
-                    tarjeta.style.display = 'flex'; // Cambiado a flex para un mejor control del layout en móviles
+                    tarjeta.style.display = 'flex'; // Muestra la tarjeta usando flex para un mejor layout.
                 } else {
-                    tarjeta.style.display = 'none';
+                    tarjeta.style.display = 'none'; // Oculta la tarjeta.
                 }
             });
         });
     });
 
-    // Asegurarse de que el primer botón esté activo y las tarjetas del primer año se muestren inicialmente
-    const primerBoton = document.querySelector('.filtro-año[data-año="1"]');
+    // Asegura que el primer botón de filtro esté activo y las tarjetas correspondientes se muestren al cargar la página.
+    const primerBoton = document.querySelector('.boton-filtro-año[data-año="1"]');
     if (primerBoton) {
-        primerBoton.click(); // Simula un clic para activar el primer filtro al cargar
+        primerBoton.click(); // Simula un clic en el primer botón para activar el filtro inicial.
     }
 
-    // Animacion clic nav
+    // Animación de desplazamiento suave al hacer clic en enlaces de anclaje de la barra de navegación.
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            // No prevenimos el default aquí si el enlace es parte de un dropdown y solo estamos mostrando/ocultando el dropdown.
-            // La lógica para prevenir el default ya está en el manejador del dropdownLink.
-            
-            // Si el enlace no es un dropdown principal (ej. "Cursos") y no estamos en un dropdown,
-            // o si es un enlace *dentro* de un dropdown que sí va a una sección.
-            const parentDropdown = this.closest('.dropdown');
-            const isDropdownToggler = this.getAttribute('href') === '#seccion-cursos' && parentDropdown;
+            // Identifica si el enlace es el "gatillo" de un submenú desplegable.
+            const parentDropdown = this.closest('.menu-desplegable');
+            const isDropdownToggler = this.getAttribute('href') === '#seccion-modulos' && parentDropdown;
 
-            if (!isDropdownToggler) { // Si no es el enlace principal del dropdown "Cursos"
-                e.preventDefault(); // Previene el comportamiento por defecto de desplazamiento
+            // Si no es el enlace principal de un submenú (es decir, es un enlace a una sección).
+            if (!isDropdownToggler) {
+                e.preventDefault(); // Previene el comportamiento por defecto de desplazamiento instantáneo.
 
-                // Cerrar el menú móvil si está abierto
+                // Cierra el menú móvil si está abierto.
                 if (navRight.classList.contains('active')) {
                     navRight.classList.remove('active');
                     hamburger.classList.remove('open');
                 }
 
-                // Desplazamiento suave
+                // Realiza un desplazamiento suave a la sección correspondiente.
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -108,28 +117,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-    /* PASAR ESTE CODIGO DENTRO DE LAS ULTIMAS LLAVES */
- /*
-    // --- CÓDIGO PARA MOSTRAR EL NOMBRE DE USUARIO EN EL NAVBAR ---
-    // (Descomenta y ajusta si necesitas esta funcionalidad)
-    // 1. Intentar obtener el nombre de usuario guardado en localStorage.
-    const savedUserName = localStorage.getItem('userNameToDisplay');
-
-    // 2. Encontrar el elemento del navbar donde queremos mostrar el nombre.
-    const userNameNavElement = document.getElementById('nombre-usuario-nav');
-
-    // 3. Si encontramos el nombre de usuario guardado y el elemento en el navbar...
-    if (savedUserName && userNameNavElement) {
-        // ...entonces mostramos el nombre.
-        userNameNavElement.textContent = `Ing. ${savedUserName}`; // Añadimos "Ing." como en tu imagen
-    }
-    */
-
-// Nota sobre el carrusel: Tu código HTML ya incluye el carrusel de Bootstrap,
-// lo cual es ideal para responsividad. El JS original de tu carrusel
-// personalizado (carouselContainer, carouselSlides, etc.) es redundante
-// si usas el de Bootstrap. He dejado solo los scripts de Bootstrap en el HTML
-// para el carrusel y he eliminado tu JS custom para el mismo en este archivo.
-// Si deseas usar un carrusel 100% custom, tendrías que adaptar su lógica para
-// ser responsiva o simplemente usar el de Bootstrap que ya lo es.

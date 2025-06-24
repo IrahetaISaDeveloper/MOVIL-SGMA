@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gradoCustomTrigger = document.getElementById('grado-custom-trigger');
     const selectedGradoText = document.getElementById('selected-grado-text');
     const gradoCustomOptions = document.getElementById('grado-custom-options');
-    const gradoNativeSelect = document.getElementById('grado'); // El SELECT nativo oculto
+    const gradoNativeSelect = document.getElementById('grado'); //ID
 
     // Lógica para abrir/cerrar el combobox personalizado
     gradoCustomTrigger.addEventListener('click', (event) => {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Lógica para manejar la selección de una opción
-    gradoCustomOptions.querySelectorAll('.custom-option').forEach(option => {
+    gradoCustomOptions.querySelectorAll('.opcion-personalizada').forEach(option => { 
         option.addEventListener('click', function() {
             const value = this.dataset.value;
             const text = this.textContent;
@@ -37,14 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
             gradoNativeSelect.value = value;
 
             // Eliminar la clase 'selected' de todas las opciones y añadirla a la seleccionada
-            gradoCustomOptions.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+            gradoCustomOptions.querySelectorAll('.opcion-personalizada').forEach(opt => opt.classList.remove('selected')); // NOTA: Aquí también se actualizó el selector
             this.classList.add('selected');
 
             // Cerrar el combobox
             gradoCustomOptions.classList.remove('open');
             gradoCustomTrigger.classList.remove('active');
 
-            // Opcional: Disparar un evento 'change' en el select nativo si hay lógica dependiente de ello
             const event = new Event('change');
             gradoNativeSelect.dispatchEvent(event);
         });
@@ -54,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Esto asegura que si el select nativo tiene un valor pre-seleccionado, se muestre
     // correctamente en el combobox personalizado al cargar la página.
     if (gradoNativeSelect.value) {
-        const selectedOption = gradoCustomOptions.querySelector(`.custom-option[data-value="${gradoNativeSelect.value}"]`);
+        const selectedOption = gradoCustomOptions.querySelector(`.opcion-personalizada[data-value="${gradoNativeSelect.value}"]`); 
         if (selectedOption) {
             selectedGradoText.textContent = selectedOption.textContent;
             selectedOption.classList.add('selected');
@@ -64,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedGradoText.textContent = gradoNativeSelect.querySelector('option[value=""]').textContent;
     }
 
-    // --- Lógica de validación del formulario (se mantiene igual) ---
+   
     registroForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Evita que el formulario se envíe por defecto
 
@@ -83,8 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nombres = document.getElementById('nombres').value;
         const apellidos = document.getElementById('apellidos').value;
         const password = document.getElementById('password').value;
-        const grado = gradoNativeSelect.value; // ¡Importante! Usar el valor del select nativo oculto
-
+        const grado = gradoNativeSelect.value; 
         // Validaciones básicas adicionales
         if (password.length < 6) {
             alert('La contraseña debe tener al menos 6 caracteres.');
@@ -105,10 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Datos listos para enviar:', datosRegistro);
 
-        // --- Simulación de conexión a la API (descomentar cuando tengas tu API) ---
         /*
         try {
-            const response = await fetch('URL_DE_TU_API_DE_REGISTRO', {
+            const response = await fetch('URL_API', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -132,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         */
 
-        // --- Si no tienes API, puedes poner una alerta o redirección aquí para probar la UI ---
         alert('Cuenta creada con exito');
     });
 });
