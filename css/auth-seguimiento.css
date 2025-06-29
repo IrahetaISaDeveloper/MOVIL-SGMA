@@ -17,7 +17,7 @@
   box-sizing: border-box; /* Incluye el padding y el borde en el ancho/alto total del elemento, lo que facilita el diseño responsivo. */
   margin: 0; /* Elimina los márgenes predeterminados que los navegadores suelen añadir. */
   padding: 0; /* Elimina el relleno predeterminado. */
-  font-family: Helvetica, sans-serif; /* Establece la fuente principal para todo el texto. */
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Estilos para el cuerpo de la página (<body>). */

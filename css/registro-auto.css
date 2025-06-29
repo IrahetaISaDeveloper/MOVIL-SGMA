@@ -1,6 +1,6 @@
 /* General Body and Container Styles */
 body {
-    font-family: 'Inter', sans-serif; /* Using Inter font */
+    font-family: 'Roboto', sans-serif;
     background-color: #1a1a1a; /* Dark background */
     color: #e0e0e0; /* Light text color */
     display: flex;

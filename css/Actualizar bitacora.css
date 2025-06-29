@@ -30,7 +30,7 @@ html, body {
     display: flex; /* Para centrar el contenedor principal */
     justify-content: center; /* Centra horizontalmente */
     align-items: flex-start; /* Alinea el contenido arriba por defecto */
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: var(--bg-app);
     color: var(--text-light);
     box-sizing: border-box; /* Incluye padding y border en el tamaño total */

@@ -30,7 +30,7 @@
                     <a href="pending-registers.html">3er año</a>
                 </div>
             </li>
-            <li><a href="#modulos">Módulos</a></li>
+            <li><a href="#seccion-modulos">Módulos</a></li>
             <li>
                 <a href="login.html" class="btn">Cerrar Sesión</a>
             </li>
@@ -38,6 +38,11 @@
     </nav>
 
     <div id="infoCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#infoCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#infoCarousel" data-slide-to="1"></li>
+            <li data-target="#infoCarousel" data-slide-to="2"></li>
+        </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="imgs/banner-4-mejorado.png" class="d-block w-100" alt="First slide" />
@@ -72,7 +77,9 @@
     </div>
 
     <main>
-        <div class="registros-en-curso-seccion" id="modulos">
+        <div id="seccion-cursos"></div>
+
+        <div class="registros-en-curso-seccion" id="seccion-modulos">
             <div class="registros-titulo">
                 <h2>Módulos</h2>
             </div>
@@ -82,8 +89,7 @@
                 <button class="filtro-año" data-año="3">3er Año</button>
             </div>
             <div class="registros-contenedor">
-                <!--Tarjetas modulos 1do año-->
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/prevent-motor.png" alt="Prevencion del Motor" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.1</h3>
@@ -101,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/brake-prevent.png" alt="Prevencion de Frenos" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.2</h3>
@@ -119,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/suspension-prevent.png" alt="Prevencion de suspension y dirreccion" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.3</h3>
@@ -137,7 +143,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/electric-prevent.png" alt="Prevencion de sistema electrico" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.4</h3>
@@ -155,7 +161,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/transmision-prevent.png" alt="Prevencion de transmisión de fuerza" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.5</h3>
@@ -173,7 +179,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/manual-prevent.png" alt="Interpretación de Manuales en ingles" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.6</h3>
@@ -191,7 +197,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/emprendedurismo-colaborativo.png" alt="Emprendedurismo colaborativo" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.7</h3>
@@ -209,7 +215,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="1">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="1">
                     <img src="imgs/modulos/proyect-technologic.png" alt="Proyecto tecnológico mantenimiento automotriz" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 1.8</h3>
@@ -227,11 +233,8 @@
                     </div>
                 </div>
 
-                
 
-                
-                <!--Tarjetas modulos 2do año-->
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/security.png" alt="Prevencion de sistemas de comfort y seguridad" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.1</h3>
@@ -249,11 +252,11 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/combustion-motor.png" alt="Reacondicionamiento de motor de combustión interna" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.2</h3>
-                        <p>Reacondicionamiento del  motor de combustión interna</p>
+                        <p>Reacondicionamiento del motor de combustión interna</p>
                         <p>Docente: Alexis Alberto Gamez Vasquez.</p>
                         <div class="tarjeta-footer">
                             <span class="tiempo-restante"></span>
@@ -267,7 +270,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/reparation-brakes.png" alt="Reparación frenos" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.3</h3>
@@ -285,7 +288,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/suspension-reparation.png" alt="Reparación suspension y dirección" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.4</h3>
@@ -303,7 +306,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/transmition-repa.png" alt="Reparación de transmisión Mecánica" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.5</h3>
@@ -321,7 +324,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/manual-prevent.png" alt="Interpretación de manueales en ingles" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.6</h3>
@@ -339,7 +342,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/diseño-planes.png" alt="Diseño de planes de negocio" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.7</h3>
@@ -357,7 +360,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="2">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="2">
                     <img src="imgs/modulos/innocacion.png" alt="Proyecto de innovación" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 2.8</h3>
@@ -375,8 +378,7 @@
                     </div>
                 </div>
 
-                <!--Tarjetas modulo 3er año-->
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/electric-repair.png" alt="Reparación de sistemas electricos" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.1</h3>
@@ -394,7 +396,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/automatic-transmision.png" alt="Reparación de sistemas de transmisión automatica" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.2</h3>
@@ -412,7 +414,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/repair-security.png" alt="Reparación de los sistemas de comfort y seguridad" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.3</h3>
@@ -430,7 +432,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/vehicle-diagnostic.png" alt="Diagnóstico de vehiculos" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.4</h3>
@@ -448,7 +450,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/gestion-proceso.png" alt="Gestión de procesos" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.5</h3>
@@ -466,7 +468,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/manual-prevent.png" alt="Interpretación de manuales en ingles" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.6</h3>
@@ -484,7 +486,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/microempresa.png" alt="microempresa" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.7</h3>
@@ -502,7 +504,7 @@
                     </div>
                 </div>
 
-                <div class="registro-tarjeta" data-año="3">
+                <div class="registro-tarjeta tarjeta-modulo" data-año="3">
                     <img src="imgs/modulos/electronic-proyect.png" alt="Proyecto electrico" />
                     <div class="tarjeta-info">
                         <h3>BTVMA 3.8</h3>
@@ -542,7 +544,7 @@
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/coordi-index.js"></script>
 </body>

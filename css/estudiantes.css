@@ -19,7 +19,7 @@
 }
 
 body {
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: var(--app-bg);
   color: var(--text-light);
   height: 100vh;
