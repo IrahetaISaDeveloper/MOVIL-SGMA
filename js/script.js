@@ -28,8 +28,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     const foundUser = users.find(user => user.email === email && user.password === password);
 
                     if (foundUser) {
-
+                        // Guardar el nombre completo en localStorage
                         localStorage.setItem('loggedInUserName', foundUser.fullName);
+
+                        // Guardar la foto de perfil en localStorage si existe, o eliminarla si no
+                        if (foundUser.fotoPerfil) { // Asume que la propiedad es 'fotoPerfil'
+                            localStorage.setItem('loggedInUserPhoto', foundUser.fotoPerfil);
+                        } else {
+                            localStorage.removeItem('loggedInUserPhoto'); // Limpia si no hay foto
+                        }
+
                         // 3. Obtener los roles de la API
                         const rolesResponse = await fetch('https://685b5bb389952852c2d94520.mockapi.io/tbRoles');
                         if (!rolesResponse.ok) {

@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const gradoCustomOptions = document.getElementById('grado-custom-options');
     const gradoNativeSelect = document.getElementById('grado'); //ID
 
+    // --- Elementos para la foto de perfil ---
+    const fotoPerfilInput = document.getElementById('fotoPerfil');
+    const previewFoto = document.getElementById('previewFoto');
+    const fotoPerfilUrlInput = document.getElementById('fotoPerfilUrl'); // Campo oculto
+
     // Lógica para abrir/cerrar el combobox personalizado
     gradoCustomTrigger.addEventListener('click', (event) => {
         event.stopPropagation(); // Evita que el clic se propague al document y cierre inmediatamente
@@ -61,6 +66,21 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedGradoText.textContent = gradoNativeSelect.querySelector('option[value=""]').textContent;
     }
 
+    // Lógica para previsualizar la imagen seleccionada
+    fotoPerfilInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewFoto.src = e.target.result;
+                previewFoto.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewFoto.src = '#';
+            previewFoto.style.display = 'none';
+        }
+    });
 
     registroForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Evita que el formulario se envíe por defecto
@@ -80,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nombres = document.getElementById('nombres').value.trim();
         const apellidos = document.getElementById('apellidos').value.trim();
         const password = document.getElementById('password').value.trim();
-        const grado = gradoNativeSelect.value.trim(); // Asegúrate de que este ID tenga un valor válido, o ajusta la lógica si no es necesario para la API de usuarios.
+        const grado = gradoNativeSelect.value.trim(); // Mantener para el campo 'grado' si es necesario para MockAPI.io
 
         // Validaciones básicas adicionales
         if (!nombres || !apellidos || !password || !grado) {
@@ -92,18 +112,52 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('La contraseña debe tener al menos 6 caracteres.');
             return;
         }
-        if (grado === '') {
-            alert('Por favor, selecciona tu año de estudio.');
-            return;
+
+        let imageUrl = ''; // Variable para almacenar la URL de la imagen
+
+        // Lógica para subir la imagen de perfil si se seleccionó una
+        if (fotoPerfilInput.files.length > 0) {
+            const fotoFile = fotoPerfilInput.files[0];
+            const formData = new FormData();
+            formData.append('image', fotoFile); // 'image' es el nombre del campo que tu API espera
+
+            try {
+                // Sube la imagen a la API de imágenes (ImgBB)
+                const imgApiUrl = 'https://api.imgbb.com/1/upload?expiration=600&key=eaf6049b5324954d994475cb0c0a6156'; // Ejemplo
+
+                const imgResponse = await fetch(imgApiUrl, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (imgResponse.ok) {
+                    const imgResult = await imgResponse.json();
+                    console.log('Imagen subida exitosamente a ImgBB:', imgResult);
+                    imageUrl = imgResult.data.url; // Asume que ImgBB devuelve la URL en imgResult.data.url
+                    fotoPerfilUrlInput.value = imageUrl; // Guarda la URL en el campo oculto
+                } else {
+                    const errorData = await imgResponse.json();
+                    console.error('Error al subir la imagen a ImgBB:', errorData);
+                    alert('Error al subir la imagen de perfil: ' + (errorData.message || 'Ocurrió un problema.'));
+                    return; // Detiene el registro si la imagen no se sube
+                }
+            } catch (error) {
+                console.error('Error de red o del servidor al subir la imagen a ImgBB:', error);
+                alert('Ocurrió un error inesperado al subir la imagen. Inténtalo de nuevo.');
+                return;
+            }
         }
 
-        // Mapea los datos del formulario a la estructura de la API tbUsers
+        // Si la imagen se subió o no se seleccionó ninguna, procede con el registro del usuario
         const nuevoUsuario = {
             email: correo,
             password: password,
             fullName: `${nombres} ${apellidos}`, // Combina nombres y apellidos
-            tbRoleId: "3" // Asumimos que el registro es para un estudiante (roleId "3")
-            // El 'id' será generado automáticamente por MockAPI.io al hacer POST
+            tbRoleId: "3", // Asigna el rol "3" (Estudiante) por defecto
+            fotoPerfil: imageUrl // Incluye la URL de la imagen de perfil
+            // Puedes mantener 'grado: grado' si tu API lo necesita además de los campos del login
+            // Si 'grado' no es relevante para el login o tbUsers, puedes eliminarlo de aquí.
+            // grado: grado // Si necesitas enviar el grado, descomenta esta línea
         };
 
         console.log('Datos listos para enviar a la API:', nuevoUsuario);

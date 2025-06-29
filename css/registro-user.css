@@ -186,119 +186,155 @@ body {
 
 /* Estilo para el botón principal al pasar el ratón. */
 .boton-principal:hover {
-    background-color: #8a2a26; /* Tono de rojo más oscuro. */
+    background-color: #8a2a26; /* Un rojo un poco más oscuro al pasar el ratón. */
 }
 
-/*
-   ========================================================================
-   ESTILOS PARA EL SELECTOR (COMBOBOX) PERSONALIZADO
-   ========================================================================
-*/
-.contenedor-selector-personalizado {
-    position: relative; /* Es importante para posicionar el dropdown absoluto. */
-    width: 100%; /* Ocupa todo el ancho disponible. */
+/* Estilos para el selector personalizado (combobox). */
+.selector-personalizado {
+    position: relative; /* Para posicionar las opciones. */
+    width: 100%;
 }
 
+/* Estilos para el gatillo del selector personalizado (el elemento visible). */
 .gatillo-selector-personalizado {
-    width: 100%; /* Ocupa todo el ancho. */
-    padding: var(--input-padding-y) var(--input-padding-x); /* Usa los rellenos de los campos de entrada. */
-    background-color: var(--light-gray); /* Fondo gris claro. */
-    border: none; /* Sin borde. */
-    border-radius: 8px; /* Bordes redondeados. */
-    color: var(--text-color-dark); /* Color de texto oscuro. */
-    font-size: var(--base-font-size); /* Tamaño de fuente base. */
-    outline: none; /* Elimina el contorno al enfocar. */
-    cursor: pointer; /* Cambia el cursor a una mano. */
-    display: flex; /* Habilita Flexbox. */
-    justify-content: space-between; /* Espacia el texto y la flecha. */
-    align-items: center; /* Centra los elementos verticalmente. */
-    user-select: none; /* Evita que el texto del gatillo se seleccione. */
+    width: 100%;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    color: var(--text-color-dark);
+    font-size: var(--base-font-size);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.gatillo-selector-personalizado span {
-    flex-grow: 1; /* Permite que el texto ocupe el espacio disponible. */
+/* Estilo del gatillo cuando está activo/abierto. */
+.gatillo-selector-personalizado.active {
+    box-shadow: 0 0 0 3px rgba(163, 47, 42, 0.5); /* Sombra de enfoque similar al color principal. */
 }
 
-.gatillo-selector-personalizado .flecha-selector {
-    transition: transform 0.2s ease; /* Transición suave para la rotación de la flecha. */
-    margin-left: 10px; /* Margen izquierdo. */
-    color: var(--text-color-dark); /* Color de la flecha. */
+/* Estilos para el icono de flecha en el selector personalizado. */
+.gatillo-selector-personalizado .icono-flecha {
+    transition: transform 0.3s ease;
 }
 
-/* Rota la flecha cuando el selector está activo (abierto). */
-.gatillo-selector-personalizado.active .flecha-selector {
-    transform: rotate(180deg); 
+/* Rotar el icono de flecha cuando el selector está abierto. */
+.gatillo-selector-personalizado.active .icono-flecha {
+    transform: rotate(180deg);
 }
 
+/* Estilos para el contenedor de opciones del selector personalizado. */
 .opciones-personalizadas {
-    position: absolute; /* Posicionamiento absoluto para el desplegable. */
-    top: calc(100% + 5px); /* Posiciona 5px debajo del gatillo. */
-    left: 0; /* Alinea a la izquierda. */
-    right: 0; /* Alinea a la derecha (ocupa todo el ancho del contenedor). */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos. */
-    background-color: var(--light-gray); /* Fondo de las opciones. */
-    border-radius: 8px; /* Bordes redondeados. */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra. */
-    overflow-y: auto; /* Habilita el desplazamiento vertical si hay muchas opciones. */
-    max-height: 180px; /* Altura máxima antes de que aparezca el scroll. */
-    display: none; /* Oculto por defecto. */
-    padding: 5px 0; /* Relleno interno. */
+    position: absolute;
+    top: 100%; /* Debajo del gatillo. */
+    left: 0;
+    right: 0;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 0; /* Ocultar por defecto. */
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+    z-index: 100; /* Asegura que esté por encima de otros elementos. */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Muestra las opciones cuando la clase 'open' está activa. */
+/* Mostrar opciones cuando el selector está abierto. */
 .opciones-personalizadas.open {
-    display: block; 
+    max-height: 200px; /* Altura máxima para permitir el scroll si hay muchas opciones. */
+    opacity: 1;
+    visibility: visible;
 }
 
-/* Estilos para cada opción individual del selector. */
+/* Estilos para cada opción individual dentro del selector. */
 .opcion-personalizada {
-    padding: 12px var(--input-padding-x); /* Relleno interno. */
-    cursor: pointer; /* Cambia el cursor a una mano. */
-    font-size: var(--base-font-size); /* Tamaño de fuente. */
-    color: var(--text-color-dark); /* Color de texto oscuro. */
-    transition: background-color 0.2s ease, color 0.2s ease; /* Transiciones suaves. */
+    padding: 12px 18px;
+    color: var(--text-color-dark);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-/* Estilos para la opción al pasar el ratón o cuando está seleccionada. */
-.opcion-personalizada:hover,
+/* Estilo de la opción al pasar el ratón. */
+.opcion-personalizada:hover {
+    background-color: #c0c0c0; /* Gris ligeramente más oscuro. */
+}
+
+/* Estilo de la opción seleccionada. */
 .opcion-personalizada.selected {
-    background-color: var(--primary-red); /* Fondo rojo principal. */
-    color: var(--text-color-light); /* Color de texto claro. */
+    background-color: #b0b0b0; /* Un gris aún más oscuro para la seleccionada. */
+    font-weight: bold;
 }
 
-/*
-   ========================================================================
-   MEDIA QUERIES - Ajustes responsivos para diferentes tamaños de pantalla
-   ========================================================================
-*/
+/* Estilos para el contenedor de la foto de perfil */
+.controles-foto-perfil {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
-/* Ajustes para pantallas con un ancho máximo de 380px (móviles pequeños) */
-@media (max-width: 380px) {
-    .contenido-principal-registro {
-        padding: 20px; /* Reduce el relleno. */
-    }
-    .formulario-registro {
-        gap: 15px; /* Reduce el espacio entre campos. */
-    }
-    .grupo-entrada input,
-    .gatillo-selector-personalizado, /* Ajuste para el gatillo del selector. */
-    .opcion-personalizada { /* Ajuste para las opciones del selector. */
-        font-size: 0.95rem; /* Reduce el tamaño de fuente. */
-        padding: 12px 15px; /* Reduce el relleno. */
-    }
-    .boton-base {
-        font-size: 1.1rem; /* Reduce el tamaño de fuente del botón. */
-        padding: 15px; /* Reduce el relleno del botón. */
+.controles-foto-perfil input[type="file"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    background-color: var(--light-gray);
+    color: var(--text-color-dark);
+}
+
+.preview-foto-perfil {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.preview-foto-perfil img {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%; /* Para hacer la imagen circular */
+    object-fit: cover; /* Para asegurar que la imagen cubra el área sin distorsionarse */
+    border: 3px solid var(--primary-red);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Media Queries para responsividad */
+@media (max-width: 400px) {
+    .encabezado-app {
+        padding: 1em 1em;
     }
     .titulo-encabezado {
-        font-size: 1.3rem; /* Reduce el tamaño del título de la cabecera. */
+        font-size: 1.3rem;
+        margin-left: -50px;
     }
     .boton-regresar {
-        font-size: 0.9em; /* Reduce el tamaño de fuente del botón "Volver". */
-        padding: 0.6em 1em; /* Reduce el relleno del botón. */
+        padding: 0.6em 1em;
+        font-size: 0.9em;
+    }
+    .contenido-principal-registro {
+        padding: 20px;
+    }
+    .formulario-registro {
+        gap: 18px;
+    }
+    .grupo-entrada label {
+        font-size: 0.95rem;
+    }
+    .grupo-entrada input,
+    .gatillo-selector-personalizado,
+    .opcion-personalizada {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+    .boton-base {
+        padding: 15px;
+        font-size: 1.1rem;
+        margin-top: 10px;
     }
     .contenido-principal-registro .subtitulo-formulario {
-        margin-bottom: 25px; /* Reduce el margen inferior del subtítulo. */
+        margin-bottom: 25px;
     }
 }
 
@@ -324,11 +360,5 @@ body {
         margin-top: 10px; /* Reduce el margen superior del botón. */
         padding: 12px; /* Reduce el relleno del botón. */
         font-size: 1rem; /* Reduce el tamaño de fuente del botón. */
-    }
-    .contenido-principal-registro .subtitulo-formulario {
-        margin-bottom: 15px; /* Reduce el margen inferior del subtítulo. */
-    }
-    .opciones-personalizadas {
-        max-height: 120px; /* Reduce la altura máxima del desplegable para pantallas muy cortas. */
     }
 }
