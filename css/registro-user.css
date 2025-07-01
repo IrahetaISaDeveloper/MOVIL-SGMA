@@ -11,7 +11,10 @@
     --back-button-bg: #444; /* Fondo del botón "Volver". */
     --back-button-hover: #555; /* Fondo del botón "Volver" al pasar el ratón. */
     --error-red: #EF5350; /* Color rojo para mensajes de error. */
-
+    --font-size-title: 29px;
+    --font-size-subtitle: 24px;
+    --font-size-text: 14px;
+    --font-size-button: 18px;
     --base-font-size: 1.05rem; /* Tamaño de fuente base para texto general. */
     --input-padding-y: 14px; /* Relleno vertical para campos de entrada. */
     --input-padding-x: 18px; /* Relleno horizontal para campos de entrada. */
@@ -55,7 +58,7 @@ body {
 /* Estilos para la cabecera de la aplicación. */
 .encabezado-app {
     background-color: var(--header-bg); /* Color de fondo de la cabecera. */
-    padding: 1.2em 1.5em; /* Relleno interno. */
+    padding: 1.2em 1.2em; /* Relleno interno. */
     display: flex; /* Habilita Flexbox para alinear los elementos. */
     align-items: center; /* Centra los elementos verticalmente. */
     justify-content: space-between; /* Espacia el botón y el título. */
@@ -64,12 +67,12 @@ body {
 
 /* Estilos para el título dentro de la cabecera. */
 .titulo-encabezado {
-    font-size: 1.45rem; /* Tamaño de fuente. */
+    font-size: 1.8rem; /* Tamaño de fuente. */
     margin: 0; /* Elimina márgenes predeterminados. */
     color: var(--text-color-light); /* Color de texto claro. */
     flex-grow: 1; /* Permite que el título ocupe el espacio restante. */
     text-align: center; /* Centra el texto del título. */
-    margin-left: -70px; /* Ajuste para centrarlo visualmente debido al botón de "Volver". */
+    margin-left: -40px; /* Ajuste para centrarlo visualmente debido al botón de "Volver". */
 }
 
 /* Estilos para el botón de regresar. */

@@ -6,6 +6,10 @@
     --text-color-dark: #333333; /* Color de texto oscuro, para textos sobre fondos blancos */
     --link-color: #FBB03B; /* Color naranja del logo para enlaces */
     --background-color: #333333; /* Color de fondo oscuro para el body */
+    --font-size-title: 29px;
+    --font-size-subtitle: 24px;
+    --font-size-text: 14px;
+    --font-size-button: 18px;
 }
 
 * {

@@ -1,6 +1,7 @@
 :root {
   /* Variables CSS: Sirven para definir y reutilizar valores como colores y tamaños en todo el CSS,
      facilitando cambios globales y manteniendo la consistencia del diseño. */
+  --header-bg: #3a3a3a; /* Fondo para la cabecera. */
   --dark-background: rgba(40, 40, 40, 1); /* Color oscuro principal para fondos. */
   --text-light: rgba(255, 255, 255, 1); /* Color de texto claro, para contraste en fondos oscuros. */
   --yellow-text: rgba(255, 204, 0, 1); /* Color de texto amarillo para destacar mensajes o información clave. */
@@ -9,7 +10,9 @@
   --button-red: rgba(197, 26, 29, 1); /* Color rojo principal para botones de acción. */
   --button-hover-red: rgba(135, 31, 31, 1); /* Un tono más oscuro del rojo para el efecto hover de los botones. */
   --back-button-bg: #444; /* Fondo gris oscuro para el botón de "Volver". */
+  --button-padding: 18px; /* Relleno para botones. */
   --back-button-hover: #555; /* Un gris ligeramente más claro para el efecto hover del botón "Volver". */
+  --primary-red: #A32F2A; /* Color principal para botones y elementos destacados. */
 }
 
 /* Selector universal (*): Aplica estos estilos a TODOS los elementos HTML de la página. */
@@ -75,12 +78,11 @@ body::before {
 
 /* Estilos de la cabecera de autenticación. */
 .encabezado-autenticacion {
-  background-color: var(--dark-background); /* Fondo similar al del body. */
-  padding: 1em 1.5em; /* Relleno interno para espaciar el contenido de la cabecera. */
+  background-color: var(--header-bg); /* Fondo similar al del body. */
+  padding: 1.2em 1.2em; /* Relleno interno para espaciar el contenido de la cabecera. */
   display: flex; /* Habilita Flexbox para alinear el botón de "Volver". */
   align-items: center; /* Centra los elementos verticalmente. */
-  justify-content: flex-start; /* Alinea el botón a la izquierda. */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Añade una línea sutil en la parte inferior como separador. */
+  justify-content: space-between; /* Alinea el botón a la izquierda. */
   flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido principal es muy largo. */
 }
 
@@ -88,15 +90,16 @@ body::before {
 .boton-regresar {
   color: var(--text-light); /* Color de texto claro. */
   text-decoration: none; /* Elimina el subrayado predeterminado de los enlaces. */
-  padding: 0.6em 1em; /* Relleno interno del botón. */
+  padding: 0.7em 1.2em; /* Relleno interno del botón. */
   background-color: var(--back-button-bg); /* Aplica el color de fondo gris oscuro definido. */
-  border-radius: 8px; /* Aplica bordes redondeados al botón. */
-  font-size: 0.85em; /* Tamaño de fuente. */
+  border-radius: 10px; /* Aplica bordes redondeados al botón. */
+  font-size: 0.95em; /* Tamaño de fuente. */
   transition: background-color 0.2s ease; /* Suaviza el cambio de color de fondo al pasar el ratón. */
   display: flex; /* Habilita Flexbox para alinear el icono y el texto dentro del botón. */
   align-items: center; /* Centra el icono y el texto verticalmente. */
-  gap: 0.5em; /* Añade espacio entre el icono y el texto. */
+  gap: 0.6em; /* Añade espacio entre el icono y el texto. */
   flex-shrink: 0; /* Evita que el botón se encoja. */
+  z-index: 10; /* Asegura que esté por encima de otros elementos si hay superposiciones. */
 }
 
 /* Estilo del botón de regresar al pasar el ratón por encima. */
@@ -106,7 +109,7 @@ body::before {
 
 /* Estilos para el icono (Font Awesome) dentro del botón de regresar. */
 .boton-regresar i {
-  font-size: 1em; /* Tamaño del icono. */
+  font-size: 1.1em; /* Tamaño del icono. */
 }
 
 /* Estilos del contenido principal de la sección de autenticación. */
@@ -142,8 +145,8 @@ body::before {
 
 /* Estilos del título principal del sistema. */
 .titulo-principal {
-  font-size: 2rem; /* Tamaño de fuente grande para el título. */
-  font-weight: 900; /* Hace el texto muy grueso (bold). */
+  font-size: 1.8rem; /* Tamaño de fuente grande para el título. */
+  font-weight: 600; /* Hace el texto muy grueso (bold). */
   color: var(--text-light); /* Aplica el color de texto claro. */
   line-height: 1.2; /* Espaciado entre líneas. */
 }
@@ -187,11 +190,10 @@ body::before {
 /* Estilos para el botón de acción principal. */
 .boton-accion {
   border: none; /* Elimina el borde del botón. */
-  background: var(--button-red); /* Aplica el color rojo principal al fondo del botón. */
+  background: var(--primary-red); /* Aplica el color rojo principal al fondo del botón. */
   color: var(--text-light); /* Color de texto claro. */
-  padding: 18px 25px; /* Relleno interno para dar tamaño al botón. */
-  border-radius: 14px; /* Aplica bordes redondeados. */
-  font-weight: bold; /* Hace el texto del botón en negrita. */
+  padding: var(--button-padding); /* Relleno interno. */
+  border-radius: 30px; /* Aplica bordes redondeados. */
   font-size: 1.2rem; /* Tamaño de fuente del botón. */
   cursor: pointer; /* Cambia el cursor a una mano al pasar por encima. */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Suaviza las transiciones de color de fondo y transformación. */
@@ -200,7 +202,7 @@ body::before {
 
 /* Estilo del botón de acción al pasar el ratón por encima. */
 .boton-accion:hover {
-  background-color: var(--button-hover-red); /* Cambia el fondo a un rojo más oscuro. */
+  background-color: #8a2a26; /* Un rojo un poco más oscuro al pasar el ratón. */
   transform: translateY(-2px); /* Mueve el botón ligeramente hacia arriba para un efecto interactivo. */
 }
 
