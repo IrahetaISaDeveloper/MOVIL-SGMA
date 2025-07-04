@@ -260,6 +260,40 @@ small {
     flex: 1;
 }
 
+/* Styles for Photo Input and Preview */
+.photo-input {
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.photo-preview-container {
+    margin-top: 15px;
+    text-align: center;
+    border: 1px dashed #666;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 150px; /* Ensure space even if no image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow for large images */
+}
+
+.photo-preview {
+    max-width: 100%;
+    max-height: 200px; /* Limit height of previews */
+    border-radius: 4px;
+    display: block; /* Ensure it takes up space */
+    object-fit: contain; /* Ensure image fits within its container */
+}
+
 /* Terms and Conditions Content Area */
 .terms-content {
     background-color: #3a3a3a;
