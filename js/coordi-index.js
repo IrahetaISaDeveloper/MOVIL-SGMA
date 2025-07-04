@@ -1,115 +1,88 @@
 // Espera a que todo el contenido del DOM (Document Object Model) esté completamente cargado.
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtiene referencias a los elementos del menú de navegación.
-    const hamburger = document.querySelector('.hamburger'); // El botón de hamburguesa.
-    // CORRECCIÓN: Cambiado de '.navegacion-derecha' a '.nav-right' para coincidir con el HTML
-    const navRight = document.querySelector('.nav-right'); // La lista de enlaces de navegación.
-    const dropdowns = document.querySelectorAll('.dropdown'); // Todos los elementos con submenús.
+    // Obtiene todas las anclas de la navegación inferior
+    const navItems = document.querySelectorAll('.bottom-nav .nav-item');
 
-    // Si el botón de hamburguesa y la navegación derecha existen, añade el evento de clic.
-    if (hamburger && navRight) {
-        hamburger.addEventListener('click', function() {
-            // Alterna la clase 'active' en la navegación derecha para mostrar/ocultar el menú lateral.
-            navRight.classList.toggle('active');
-            // Alterna la clase 'open' en el botón de hamburguesa para su animación (convertir a 'X').
-            hamburger.classList.toggle('open');
+    // Función para establecer el elemento de navegación activo
+    function setActiveNavItem() {
+        const currentPath = window.location.pathname.split('/').pop(); // e.g., "coordi-index.html"
+        const currentHash = window.location.hash; // e.g., "#inicio"
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            const itemHref = item.getAttribute('href');
+            const itemTarget = item.getAttribute('data-target'); // For modals
+
+            // Check if it's the current page's main section or a specific page
+            if (currentPath === 'coordi-index.html' && (itemHref === 'coordi-index.html#inicio' || (itemHref === '#inicio' && !currentHash))) {
+                item.classList.add('active');
+            } else if (itemHref && itemHref.includes(currentPath) && currentPath !== 'coordi-index.html') {
+                item.classList.add('active');
+            } else if (itemTarget && $(itemTarget).hasClass('show')) { // Check if the modal is currently open
+                 item.classList.add('active');
+            }
         });
     }
 
-    // Cierra el menú móvil si se hace clic fuera de él.
-    document.addEventListener('click', function(event) {
-        // Comprueba si el clic ocurrió dentro del menú de navegación, el botón de hamburguesa,
-        // o dentro de alguno de los submenús desplegables.
-        const isClickInsideNav = navRight.contains(event.target) ||
-                               hamburger.contains(event.target) ||
-                               Array.from(dropdowns).some(dropdown => dropdown.contains(event.target));
+    // Función para mostrar los datos del perfil del usuario
+    function displayUserProfile() {
+        const profileContentDiv = document.getElementById('profile-content');
+        if (profileContentDiv) {
+            const userName = localStorage.getItem('loggedInUserName');
+            const userPhoto = localStorage.getItem('loggedInUserPhoto');
 
-        // Si el clic no fue dentro de los elementos del menú y el menú está activo, ciérralo.
-        if (!isClickInsideNav && navRight.classList.contains('active')) {
-            navRight.classList.remove('active');
-            hamburger.classList.remove('open');
+            let profileHtml = '';
+            if (userName) {
+                profileHtml += `
+                    <div class="profile-display">
+                        ${userPhoto ? `<img src="${userPhoto}" alt="Foto de Perfil" class="profile-picture">` : `<i class="fas fa-user-circle default-profile-icon"></i>`}
+                        <p class="user-name">${userName}</p>
+                    </div>
+                `;
+            } else {
+                profileHtml = '<p>No se encontraron datos de perfil. Por favor, inicia sesión.</p>';
+            }
+            profileContentDiv.innerHTML = profileHtml;
         }
-    });
-
-    // Manejo del dropdown en móvil
-    document.querySelectorAll('.navbar-mobile .dropdown > a').forEach(dropdownToggler => {
-        dropdownToggler.addEventListener('click', function(e) {
-            // Previene el comportamiento predeterminado del enlace solo si es un enlace de menú móvil.
-            // Para el caso de `#seccion-modulos` u otros, aún debe hacer scroll.
-            // La lógica aquí es más compleja: queremos que el dropdown se abra/cierre
-            // pero que también el enlace #seccion-cursos o #seccion-modulos haga scroll.
-
-            // Comprobamos si el padre es el contenedor de dropdowns y si estamos en una vista móvil
-            const isMobileView = window.innerWidth <= 768; // O el breakpoint que uses en CSS
-
-            if (isMobileView) {
-                // Solo para el dropdown de "Cursos" (o cualquier otro que tenga un submenú real)
-                // y no para enlaces que son solo anclas directas a secciones (como Módulos)
-                // if (this.closest('.dropdown')) { // Esto ya lo sabemos porque estamos iterando sobre .dropdown > a
-                if (this.getAttribute('href') === '#seccion-cursos') { // Asumiendo que 'Cursos' es el único dropdown que no es directamente a una sección.
-                    e.preventDefault(); // Previene la navegación inmediata para permitir el toggle del dropdown.
-                    this.parentElement.classList.toggle('active'); // Activa/desactiva el dropdown
-                }
-            }
-        });
-    });
-
-
-    // Filtro de años para los módulos
-    const botonesFiltro = document.querySelectorAll('.filtro-año');
-    const tarjetasModulo = document.querySelectorAll('.tarjeta-modulo'); // Ya corregido en HTML
-
-    botonesFiltro.forEach(boton => {
-        boton.addEventListener('click', function() {
-            // Elimina la clase 'activo' de todos los botones y añade al clicado
-            botonesFiltro.forEach(b => b.classList.remove('activo'));
-            this.classList.add('activo');
-
-            const añoSeleccionado = this.dataset.año;
-
-            // Muestra/oculta las tarjetas según el año seleccionado
-            tarjetasModulo.forEach(tarjeta => {
-                if (tarjeta.dataset.año === añoSeleccionado) {
-                    tarjeta.style.display = 'flex'; // O 'block', 'grid', dependiendo de tu CSS original
-                } else {
-                    tarjeta.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // Simula un clic en el botón "1er Año" al cargar la página.
-    const primerBoton = document.querySelector('.boton-filtro-año[data-año="1"]');
-    if (primerBoton) {
-        primerBoton.click(); // Simula un clic en el primer botón para activar el filtro inicial.
     }
 
-    // Animación de desplazamiento suave al hacer clic en enlaces de anclaje de la barra de navegación.
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            // Identifica si el enlace es el \"gatillo\" de un submenú desplegable en el *contexto anterior*.
-            // Con el HTML actualizado, el dropdown para "Cursos" ya tiene su propia clase 'dropdown'.
-            // La lógica para #seccion-modulos como un toggler de dropdown ya no es necesaria si solo "Cursos" tiene un submenú.
-            // Si el enlace clicado es el que inicia un dropdown (ej. "Cursos"), y no es un elemento dentro del dropdown.
-            const isDropdownToggler = this.closest('.dropdown') && this.getAttribute('href') === '#seccion-cursos';
+    // Maneja el clic en los elementos de la navegación inferior
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            const itemHref = this.getAttribute('href');
+            const isModalTrigger = this.hasAttribute('data-toggle') && this.getAttribute('data-toggle') === 'modal';
 
-            // Si no es el enlace principal de un submenú (es decir, es un enlace a una sección)
-            // O si es un enlace dentro de un dropdown (e.g. 1er año, 2do año, que van a otra página)
-            // No queremos prevenir el default si va a otra página (pending-registers.html)
-            if (!isDropdownToggler && !this.getAttribute('href').endsWith('.html')) {
-                e.preventDefault(); // Previene el comportamiento por defecto de desplazamiento instantáneo.
-
-                // Cierra el menú móvil si está abierto.
-                if (navRight.classList.contains('active')) {
-                    navRight.classList.remove('active');
-                    hamburger.classList.remove('open');
+            // For #inicio link on the same page
+            if (itemHref.includes('coordi-index.html#inicio') || (itemHref === '#inicio' && !isModalTrigger)) {
+                e.preventDefault(); // Prevent default link behavior
+                const targetSection = document.querySelector('#inicio');
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
                 }
-
-                // Realiza un desplazamiento suave a la sección correspondiente.
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                setActiveNavItem(); // Set active after scroll
+            } else if (!isModalTrigger) {
+                // For direct page links (registros.html, reportes.html, admin.html)
+                // Let the default link behavior happen (navigate to new page)
+                // The setActiveNavItem will run on the new page's DOMContentLoaded
             }
+            // For modal triggers, Bootstrap handles the opening, and the 'show.bs.modal' event handles active state
         });
     });
+
+    // Event listener for when the profile modal is shown
+    $('#perfilModal').on('show.bs.modal', function (e) {
+        displayUserProfile(); // Load profile data when modal is about to be shown
+        setActiveNavItem(); // Set active for profile modal
+    });
+
+    // Event listener for when any modal is hidden
+    $('.modal').on('hidden.bs.modal', function (e) {
+        setActiveNavItem(); // Re-evaluate active item after modal closes
+    });
+
+    // Initial active item setting on page load
+    setActiveNavItem();
+
+    // Re-evaluate active item on hash change (useful for #inicio on coordi-index.html)
+    window.addEventListener('hashchange', setActiveNavItem);
 });

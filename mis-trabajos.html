@@ -6,8 +6,8 @@
     <title>Mis Trabajos</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="CSS/mis-trabajos.css">
-</head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" /> <link rel="stylesheet" href="CSS/mis-trabajos.css">
+    <link rel="stylesheet" href="css/coordi-index.css" /> </head>
 <body>
 
     <div class="full-screen-app-container">
@@ -45,30 +45,55 @@
 
                 <div class="job-card">
                     <div class="card-image">
-                        <img src="imgs/volvo.jpg" alt="Volvo Gris">
+                        <img src="imgs/camion.jpg" alt="Camión">
                         <div class="image-overlay">
-                            <p class="car-model">Volvo – XC40</p>
-                            <p class="owner-name">José E.</p>
+                            <p class="car-model">Hino – FC9J</p>
+                            <p class="owner-name">Maria L.</p>
                         </div>
                     </div>
                     <div class="card-details">
-                        <h2>Ajustes eléctricos completo</h2>
-                        <p class="info-line"><strong>Placa:</strong> P258-654</p>
-                        <p class="info-line"><strong>Estudiante Asignado:</strong> Manuel Pérez</p>
-                        <p class="info-line"><strong>Modulo:</strong> Sistemas Electricos</p>
+                        <h2>Revisión de Sistema de Frenos</h2>
+                        <p class="info-line"><strong>Placa:</strong> C987-123</p>
+                        <p class="info-line"><strong>Estudiante Asignado:</strong> Ana Galdamez</p>
+                        <p class="info-line"><strong>Modulo:</strong> Sistema de Frenos</p>
                         <div class="status en-proceso">
-                            En proceso
+                            En Proceso
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
                         </div>
-                        <a href="Actualizar bitacora.html" class="logbook-link">
-                            Actualizar bitácora
+                        <a href="#" class="logbook-link">
+                            Ver bitácora
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="job-card">
                     <div class="card-image">
-                        <img src="imgs/mercedes.jpg" alt="Volvo Gris">
+                        <img src="imgs/toyota.jpg" alt="Toyota Blanco">
+                        <div class="image-overlay">
+                            <p class="car-model">Toyota – Hilux</p>
+                            <p class="owner-name">Carlos R.</p>
+                        </div>
+                    </div>
+                    <div class="card-details">
+                        <h2>Diagnóstico de Transmisión</h2>
+                        <p class="info-line"><strong>Placa:</strong> P456-789</p>
+                        <p class="info-line"><strong>Estudiante Asignado:</strong> Luis G. </p>
+                        <p class="info-line"><strong>Modulo:</strong> Transmisiones Automáticas y Mecánicas</p>
+                        <div class="status en-proceso">
+                            En Proceso
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                        </div>
+                        <a href="#" class="logbook-link">
+                            Ver bitácora
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4v3z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="card-image">
+                        <img src="imgs/volvo.jpg" alt="Volvo Gris">
                         <div class="image-overlay">
                             <p class="car-model">Volvo – XC40</p>
                             <p class="owner-name">José E.</p>
@@ -93,5 +118,59 @@
         </main>
     </div>
 
-</body>
+    <nav class="bottom-nav">
+        <ul>
+            <li>
+                <a href="estudiante.html#inicio" class="nav-item">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="registro-auto.html" class="nav-item">
+                    <i class="fas fa-clipboard-list nav-icon"></i>
+                    <span>Registros</span>
+                </a>
+            </li>
+            <li>
+                <a href="mis-trabajos.html" class="nav-item active"> <i class="fas fa-chart-bar nav-icon"></i>
+                    <span>Mis Trabajos</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-item" data-toggle="modal" data-target="#perfilModal">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html" class="nav-item">
+                    <i class="fas fa-wrench nav-icon"></i>
+                    <span>Más</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="perfilModalLabel">Tu Perfil</h5>
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="profile-content">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <script src="js/mis-trabajos-nav.js"></script> </body>
 </html>

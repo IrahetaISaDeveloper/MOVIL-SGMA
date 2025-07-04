@@ -9,9 +9,9 @@ body {
     align-items: center; /* Center horizontally */
     min-height: 100vh; /* Full viewport height */
     margin: 0;
-    padding: 0;
     box-sizing: border-box; /* Include padding in element's total width and height */
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    padding-bottom: 80px; /* Asegura espacio para la barra de navegación inferior */
 }
 
 .container {
