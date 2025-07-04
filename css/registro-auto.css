@@ -1,97 +1,139 @@
 /* General Body and Container Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #1a1a1a; /* Dark background */
-    color: #e0e0e0; /* Light text color */
+    background-color: #1a1a1a;
+    /* Dark background */
+    color: #e0e0e0;
+    /* Light text color */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Align to the top */
-    align-items: center; /* Center horizontally */
-    min-height: 100vh; /* Full viewport height */
+    justify-content: flex-start;
+    /* Align to the top */
+    align-items: center;
+    /* Center horizontally */
+    min-height: 100vh;
+    /* Full viewport height */
     margin: 0;
-    box-sizing: border-box; /* Include padding in element's total width and height */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    padding-bottom: 80px; /* Asegura espacio para la barra de navegación inferior */
+    box-sizing: border-box;
+    /* Include padding in element's total width and height */
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
+    padding-bottom: 40px;
+    padding-top: 0px;
+    /* Asegura espacio para la barra de navegación inferior */
 }
 
 .container {
-    background-color: #2c2c2c; /* Slightly lighter dark background for the form container */
-    width: 100%; /* Spans full width */
-    max-width: 768px; /* Max width for tablets/desktops to keep content readable */
-    margin: 20px auto; /* Add margin top/bottom and auto for horizontal centering */
-    padding: 30px 20px; /* Padding for mobile and larger screens */
+    background-color: #2c2c2c;
+    /* Slightly lighter dark background for the form container */
+    width: 100%;
+    /* Spans full width */
+    max-width: 768px;
+    /* Max width for tablets/desktops to keep content readable */
+    margin: 20px auto;
+    /* Add margin top/bottom and auto for horizontal centering */
+    padding: 30px 20px;
+    /* Padding for mobile and larger screens */
     box-sizing: border-box;
-    border-radius: 12px; /* Rounded corners for the main container */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Subtle shadow */
+    border-radius: 12px;
+    /* Rounded corners for the main container */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    /* Subtle shadow */
 }
 
 /* Section specific styles */
 .section {
-    margin-bottom: 40px; /* Space between sections */
+    margin-bottom: 40px;
+    /* Space between sections */
 }
 
 .section:last-child {
-    margin-bottom: 0; /* No margin after the last section */
+    margin-bottom: 0;
+    /* No margin after the last section */
 }
 
 /* Header with back button - FLEX CONTAINER for alignment */
 .header-with-back {
     display: flex;
-    align-items: center; /* Vertically center items */
-    justify-content: center; /* Horizontally center the title */
-    position: relative; /* Essential for positioning the back-button absolutely */
-    margin-bottom: 30px; /* Space below the header */
-    padding-bottom: 15px; /* Consistent with section-title padding-bottom */
-    border-bottom: 1px solid #3a3a3a; /* Consistent with section-title border */
-    min-height: 48px; /* Ensure a minimum height for the header on mobile */
+    align-items: center;
+    /* Vertically center items */
+    justify-content: center;
+    /* Horizontally center the title */
+    position: relative;
+    /* Essential for positioning the back-button absolutely */
+    margin-bottom: 30px;
+    /* Space below the header */
+    padding-bottom: 5px;
+    /* Consistent with section-title padding-bottom */
+    border-bottom: 1px solid #3a3a3a;
+    /* Consistent with section-title border */
+    min-height: 48px;
+    /* Ensure a minimum height for the header on mobile */
 }
 
 /* Back button styling */
 .back-button {
-    color: #e0e0e0; /* Light text color for the icon */
+    color: #e0e0e0;
+    /* Light text color for the icon */
     text-decoration: none;
-    background-color: transparent; /* Transparent background */
+    background-color: transparent;
+    /* Transparent background */
     transition: background-color 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8em; /* Significantly larger icon size for mobile touch */
-    position: absolute; /* Position absolutely within .header-with-back */
-    left: 0; /* Align to the far left */
-    top: 50%; /* Vertically center */
-    transform: translateY(-50%); /* Adjust for perfect vertical centering */
-    padding: 12px; /* Large padding for better touch target */
-    border-radius: 50%; /* Make it circular */
-    line-height: 1; /* Ensures icon is vertically centered correctly */
+    font-size: 1.8em;
+    /* Significantly larger icon size for mobile touch */
+    position: absolute;
+    /* Position absolutely within .header-with-back */
+    left: 0;
+    /* Align to the far left */
+    top: 50%;
+    /* Vertically center */
+    transform: translateY(-50%);
+    /* Adjust for perfect vertical centering */
+    padding: 12px;
+    /* Large padding for better touch target */
+    border-radius: 50%;
+    /* Make it circular */
+    line-height: 1;
+    /* Ensures icon is vertically centered correctly */
 }
 
 .back-button:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Subtle hover effect */
 }
 
 /* Ensure the Font Awesome icon inside the button is styled correctly */
 .back-button i {
-    font-size: 1em; /* Use 1em so it scales with parent .back-button font-size */
+    font-size: 1em;
+    /* Use 1em so it scales with parent .back-button font-size */
 }
 
 /* Section title within the header */
 .section-title {
-    text-align: center; /* Keep text centered within its own space */
+    text-align: center;
+    /* Keep text centered within its own space */
     color: #f0f0f0;
-    margin: 0; /* Remove default margins as it's in a flex container */
-    font-size: 2.2em; /* Larger title for sections */
+    margin: 0;
+    /* Remove default margins as it's in a flex container */
+    font-size: 2.2em;
+    /* Larger title for sections */
     /* Remove padding and border properties that are now handled by .header-with-back */
     padding-top: 0;
     border-bottom: none;
     padding-bottom: 0;
-    flex-grow: 0; /* Prevent title from growing excessively, allowing centering */
+    flex-grow: 0;
+    /* Prevent title from growing excessively, allowing centering */
 }
 
 /* Section separator */
 .section-separator {
     border: none;
     border-top: 1px solid #3a3a3a;
-    margin: 40px 0; /* Space around the separator */
+    margin: 40px 0;
+    /* Space around the separator */
 }
 
 /* Form Group Styles */
@@ -109,15 +151,19 @@ label {
 
 input[type="text"],
 select {
-    width: 100%; /* Full width for inputs/selects within their group */
-    padding: 14px 12px; /* Consistent padding */
+    width: 100%;
+    /* Full width for inputs/selects within their group */
+    padding: 14px 12px;
+    /* Consistent padding */
     border: 1px solid #444;
-    border-radius: 8px; /* Slightly more rounded inputs */
+    border-radius: 8px;
+    /* Slightly more rounded inputs */
     background-color: #3a3a3a;
     color: #e0e0e0;
     font-size: 1.1em;
     box-sizing: border-box;
-    -webkit-appearance: none; /* Remove default select arrow for select elements */
+    -webkit-appearance: none;
+    /* Remove default select arrow for select elements */
     -moz-appearance: none;
     appearance: none;
 }
@@ -149,11 +195,15 @@ small {
 .input-with-checkbox input[type="checkbox"],
 .checkbox-container input[type="checkbox"],
 .checkbox-container-terms input[type="checkbox"] {
-    position: absolute; /* Position it absolutely */
-    opacity: 0; /* Make it completely transparent */
+    position: absolute;
+    /* Position it absolutely */
+    opacity: 0;
+    /* Make it completely transparent */
     cursor: pointer;
-    height: 0; /* Give it no height */
-    width: 0; /* Give it no width */
+    height: 0;
+    /* Give it no height */
+    width: 0;
+    /* Give it no width */
     /* Ensure no default visual space is taken by the native checkbox */
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -169,10 +219,13 @@ small {
     position: absolute;
     top: 0;
     left: 0;
-    height: 24px; /* Adjust size for better touch target */
-    width: 24px; /* Adjust size for better touch target */
+    height: 24px;
+    /* Adjust size for better touch target */
+    width: 24px;
+    /* Adjust size for better touch target */
     background-color: #444;
-    border: 2px solid #666; /* Thicker border for better visibility */
+    border: 2px solid #666;
+    /* Thicker border for better visibility */
     border-radius: 4px;
     transition: background-color 0.2s, border-color 0.2s;
 }
@@ -181,8 +234,9 @@ small {
     background-color: #555;
 }
 
-.checkbox-container input[type="checkbox"]:checked ~ .checkmark {
-    background-color: #4CAF50; /* Green when checked */
+.checkbox-container input[type="checkbox"]:checked~.checkmark {
+    background-color: #4CAF50;
+    /* Green when checked */
     border-color: #4CAF50;
 }
 
@@ -190,8 +244,10 @@ small {
     content: "";
     position: absolute;
     display: none;
-    left: 8px; /* Center checkmark */
-    top: 4px; /* Center checkmark */
+    left: 8px;
+    /* Center checkmark */
+    top: 4px;
+    /* Center checkmark */
     width: 6px;
     height: 12px;
     border: solid white;
@@ -199,7 +255,7 @@ small {
     transform: rotate(45deg);
 }
 
-.checkbox-container input[type="checkbox"]:checked ~ .checkmark:after {
+.checkbox-container input[type="checkbox"]:checked~.checkmark:after {
     display: block;
 }
 
@@ -214,7 +270,8 @@ small {
 .checkbox-container {
     display: block;
     position: relative;
-    padding-left: 35px; /* Space for the custom checkbox */
+    padding-left: 35px;
+    /* Space for the custom checkbox */
     margin-bottom: 10px;
     cursor: pointer;
     font-size: 1em;
@@ -223,8 +280,10 @@ small {
     -ms-user-select: none;
     user-select: none;
     color: #e0e0e0;
-    flex-grow: 1; /* Allow items to grow to fill space */
-    min-width: 120px; /* Minimum width for each checkbox container */
+    flex-grow: 1;
+    /* Allow items to grow to fill space */
+    min-width: 120px;
+    /* Minimum width for each checkbox container */
 }
 
 
@@ -279,19 +338,24 @@ small {
     border: 1px dashed #666;
     border-radius: 8px;
     padding: 10px;
-    min-height: 150px; /* Ensure space even if no image */
+    min-height: 150px;
+    /* Ensure space even if no image */
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* Hide overflow for large images */
+    overflow: hidden;
+    /* Hide overflow for large images */
 }
 
 .photo-preview {
     max-width: 100%;
-    max-height: 200px; /* Limit height of previews */
+    max-height: 200px;
+    /* Limit height of previews */
     border-radius: 4px;
-    display: block; /* Ensure it takes up space */
-    object-fit: contain; /* Ensure image fits within its container */
+    display: block;
+    /* Ensure it takes up space */
+    object-fit: contain;
+    /* Ensure image fits within its container */
 }
 
 /* Terms and Conditions Content Area */
@@ -348,7 +412,7 @@ small {
     background-color: #555;
 }
 
-.checkbox-container-terms input[type="checkbox"]:checked ~ .checkmark-terms {
+.checkbox-container-terms input[type="checkbox"]:checked~.checkmark-terms {
     background-color: #4CAF50;
     border-color: #4CAF50;
 }
@@ -366,54 +430,152 @@ small {
     transform: rotate(45deg);
 }
 
-.checkbox-container-terms input[type="checkbox"]:checked ~ .checkmark-terms:after {
+.checkbox-container-terms input[type="checkbox"]:checked~.checkmark-terms:after {
     display: block;
 }
 
-/* Button Group (only for the last section) */
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 30px;
+/* Menú de navegación inferior (Bottom Nav) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    /* Color de fondo oscuro */
+    border-top: 1px solid #444;
+    /* Borde superior sutil */
+    padding: 5px 0;
+    z-index: 0;
+    /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    /* Sombra superior */
 }
 
-.btn {
-    padding: 15px 25px;
+.bottom-nav ul {
+    display: flex;
+    justify-content: space-around;
+    /* Distribuye los elementos uniformemente */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.bottom-nav li {
+    flex: 1;
+    /* Cada elemento ocupa el mismo espacio */
+    text-align: center;
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    /* Icono arriba, texto abajo */
+    align-items: center;
+    justify-content: center;
+    padding: 0px 0;
+    color: #888;
+    /* Color gris para los iconos y texto inactivos */
+    text-decoration: none;
+    font-size: 0.75em;
+    /* Tamaño de fuente para el texto */
+    font-weight: bold;
+    transition: color 0.3s ease;
+    /* Transición suave para el color */
+}
+
+.bottom-nav .nav-item .nav-icon {
+    /* Font Awesome icons are typically controlled by font-size and color */
+    font-size: 24px;
+    /* Tamaño del icono Font Awesome */
+    margin-bottom: 4px;
+    /* Espacio entre icono y texto */
+    color: #888;
+    /* Color del icono inactivo */
+    transition: color 0.3s ease;
+    /* Transición suave para el color del icono */
+}
+
+.bottom-nav .nav-item.active {
+    color: #A32F2A;
+    /* Color verde brillante para el elemento activo */
+}
+
+.bottom-nav .nav-item.active .nav-icon {
+    color: #A32F2A;
+    /* Color verde brillante para el icono activo */
+}
+
+
+.botones {
+    
+    margin-bottom: 10px;
+    padding: 10px 15px;
     border: none;
     border-radius: 30px;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 700;
-    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
     box-sizing: border-box;
     color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 
-.primary-btn {
     background-color: #881F1E;
 }
 
-.primary-btn:hover {
-    background-color: #a02826;
-    transform: translateY(-2px);
+/* Modal specific styles */
+.modal-content {
+    background-color: #333; /* Dark background for modals */
+    border: 1px solid #444; /* Subtle border */
 }
 
-.secondary-btn {
-    background-color: #881F1E;
+.modal-header {
+    border-bottom: 1px solid #444;
 }
 
-.secondary-btn:hover {
-    background-color: #a02826;
-    transform: translateY(-2px);
+.modal-footer {
+    border-top: 1px solid #444;
+}
+
+.modal-title {
+    color: #f0f0f0; /* Light text for modal titles */
+}
+
+/* Estilos para el contenido del perfil */
+.profile-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espacio entre la imagen/icono y el nombre */
+    margin-top: 20px;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Hacer la imagen circular */
+    object-fit: cover; /* Asegurar que la imagen cubra el área */
+    border: 3px solid #ffffff; /* Borde blanco */
+    box-shadow: 0 0 30px #000000; /* Sombra brillante */
+}
+
+.default-profile-icon {
+    font-size: 120px; /* Tamaño grande para el icono por defecto */
+    color: #A32F2A; /* Color rojo para el icono por defecto */
+}
+
+.user-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
     .container {
-        margin: 10px auto;
+        margin: 0px auto;
         padding: 20px 15px;
         border-radius: 0;
     }
@@ -444,7 +606,8 @@ small {
     }
 
     .header-with-back {
-        padding-top: 10px; /* Adjust padding for smaller screens */
+        padding-top: 10px;
+        /* Adjust padding for smaller screens */
     }
 }
 
@@ -456,6 +619,7 @@ small {
     .button-group {
         flex-direction: row;
     }
+
     .checkbox-container {
         flex-grow: 0;
     }

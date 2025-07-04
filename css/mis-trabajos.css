@@ -40,6 +40,62 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Menú de navegación inferior (Bottom Nav) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Color de fondo oscuro */
+    border-top: 1px solid #444; /* Borde superior sutil */
+    padding: 5px 0;
+    z-index: 0; /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* Sombra superior */
+}
+
+.bottom-nav ul {
+    display: flex;
+    justify-content: space-around; /* Distribuye los elementos uniformemente */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.bottom-nav li {
+    flex: 1; /* Cada elemento ocupa el mismo espacio */
+    text-align: center;
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column; /* Icono arriba, texto abajo */
+    align-items: center;
+    justify-content: center;
+    padding: 0px 0;
+    color: #888; /* Color gris para los iconos y texto inactivos */
+    text-decoration: none;
+    font-size: 0.75em; /* Tamaño de fuente para el texto */
+    font-weight: bold;
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.bottom-nav .nav-item .nav-icon {
+    /* Font Awesome icons are typically controlled by font-size and color */
+    font-size: 24px; /* Tamaño del icono Font Awesome */
+    margin-bottom: 4px; /* Espacio entre icono y texto */
+    color: #888; /* Color del icono inactivo */
+    transition: color 0.3s ease; /* Transición suave para el color del icono */
+}
+
+.bottom-nav .nav-item.active {
+    color: #A32F2A; /* Color verde brillante para el elemento activo */
+}
+
+.bottom-nav .nav-item.active .nav-icon {
+    color: #A32F2A; /* Color verde brillante para el icono activo */
+}
+
 /* Nuevo contenedor principal de la app */
 .full-screen-app-container {
     background-color: var(--bg-dark);
@@ -130,6 +186,7 @@ html, body {
 .jobs-list {
     display: flex;
     flex-direction: column;
+    padding-bottom: 50px;
     gap: var(--spacing-xl);
 }
 
@@ -269,7 +326,53 @@ html, body {
     fill: #308ce0;
 }
 
+/* Modal specific styles */
+.modal-content {
+    background-color: #333; /* Dark background for modals */
+    border: 1px solid #444; /* Subtle border */
+}
 
+.modal-header {
+    border-bottom: 1px solid #444;
+}
+
+.modal-footer {
+    border-top: 1px solid #444;
+}
+
+.modal-title {
+    color: #f0f0f0; /* Light text for modal titles */
+}
+
+/* Estilos para el contenido del perfil */
+.profile-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espacio entre la imagen/icono y el nombre */
+    margin-top: 20px;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Hacer la imagen circular */
+    object-fit: cover; /* Asegurar que la imagen cubra el área */
+    border: 3px solid #ffffff; /* Borde blanco */
+    box-shadow: 0 0 30px #000000; /* Sombra brillante */
+}
+
+.default-profile-icon {
+    font-size: 120px; /* Tamaño grande para el icono por defecto */
+    color: #A32F2A; /* Color rojo para el icono por defecto */
+}
+
+.user-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+}
 /* --- MEDIA QUERIES PARA PANTALLAS MÁS GRANDES (TABLETS Y ESCRITORIOS) --- */
 
 /* Para tabletas en orientación vertical o dispositivos más grandes */
