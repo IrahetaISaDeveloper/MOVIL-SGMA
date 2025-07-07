@@ -445,7 +445,7 @@ small {
     border-top: 1px solid #444;
     /* Borde superior sutil */
     padding: 5px 0;
-    z-index: 0;
+    z-index: 1000;
     /* Asegura que esté por encima de otros elementos */
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
     /* Sombra superior */
@@ -506,6 +506,9 @@ small {
     /* Color verde brillante para el icono activo */
 }
 
+.bottom-nav.hidden {
+    transform: translateY(100%); /* Desliza hacia abajo para ocultar */
+}
 
 .botones {
     

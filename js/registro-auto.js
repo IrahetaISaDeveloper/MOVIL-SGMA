@@ -194,3 +194,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initially clear and populate modules based on no selection (or a default if you want one)
     moduloRespuestaSelect.innerHTML = '<option value="">Escribe</option>';
 });
+
+//Evento para esconder el nav inferior
+document.addEventListener('DOMContentLoaded', () => {
+    const myInput = document.getElementById('myInput');
+    const bottomNav = document.getElementById('bottomNav');
+
+    if (myInput && bottomNav) {
+        // Cuando el input recibe el foco
+        myInput.addEventListener('focus', () => {
+            bottomNav.classList.add('hidden');
+        });
+
+        // Cuando el input pierde el foco
+        myInput.addEventListener('blur', () => {
+            bottomNav.classList.remove('hidden');
+        });
+    } else {
+        console.warn("No se encontró el input o la barra de navegación. Asegúrate de que los IDs sean correctos.");
+    }
+});

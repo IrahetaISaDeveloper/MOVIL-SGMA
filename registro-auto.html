@@ -25,14 +25,14 @@
             <form>
                 <div class="form-group">
                     <label for="placa">Placa</label>
-                    <input type="text" id="placa" placeholder="N° de placa">
+                    <input class="myInput" type="text" id="placa" placeholder="N° de placa">
                     <small>Formato: P123-456</small>
                 </div>
 
                 <div class="form-group">
                     <label for="poliza">Póliza</label>
                     <div class="input-with-checkbox">
-                        <input type="text" id="poliza" placeholder="N° de póliza">
+                        <input class="myInput" type="text" id="poliza" placeholder="N° de póliza">
                         <input type="checkbox" id="poliza-checkbox">
                     </div>
                     <small>Formato: P123-456</small>
@@ -40,13 +40,13 @@
 
                 <div class="form-group">
                     <label for="marca">Marca</label>
-                    <input type="text" id="marca" placeholder="Nombre">
+                    <input class="myInput" type="text" id="marca" placeholder="Nombre">
                     <small>Ej: Mazda</small>
                 </div>
 
                 <div class="form-group">
                     <label for="modelo">Modelo</label>
-                    <input type="text" id="modelo" placeholder="Modelo">
+                    <input class="myInput" type="text" id="modelo" placeholder="Modelo">
                     <small>Ej: B2900</small>
                 </div>
 
@@ -65,13 +65,13 @@
 
                 <div class="form-group">
                     <label for="color">Color</label>
-                    <input type="text" id="color" placeholder="Color">
+                    <input class="myInput" type="text" id="color" placeholder="Color">
                     <small>Ej: Blanco</small>
                 </div>
 
                 <div class="form-group">
                     <label for="tarjetaCirculacion">Tarjeta de circulación</label>
-                    <input type="text" id="tarjetaCirculacion" placeholder="##">
+                    <input class="myInput" type="text" id="tarjetaCirculacion" placeholder="##">
                     <small>Formato: 0/12345678</small>
                 </div>
             </form>
@@ -103,17 +103,17 @@
 
                 <div class="form-group">
                     <label for="instructorResponsable">Instructor responsable</label>
-                    <input type="text" id="instructorResponsable" placeholder="Nombre">
+                    <input class="myInput" type="text" id="instructorResponsable" placeholder="Nombre">
                 </div>
 
                 <div class="form-group">
                     <label for="estudianteAsignado">Estudiante asignado</label>
-                    <input type="text" id="estudianteAsignado" placeholder="Nombre">
+                    <input class="myInput" type="text" id="estudianteAsignado" placeholder="Nombre">
                 </div>
 
                 <div class="form-group">
                     <label for="carnet">Carnet</label>
-                    <input type="text" id="carnet" placeholder="N° de carnet">
+                    <input class="myInput" type="text" id="carnet" placeholder="N° de carnet">
                     <small>Ejemplo: 20260669</small>
                 </div>
 
@@ -142,11 +142,11 @@
                     <label>Operaciones a efectuar:</label>
                     <div class="checkbox-group">
                         <label class="checkbox-container">Preventivo
-                            <input type="checkbox" name="tipoOperacion" value="preventivo">
+                            <input class="myInput" type="checkbox" name="tipoOperacion" value="preventivo">
                             <span class="checkmark"></span>
                         </label>
                         <label class="checkbox-container">Correctivo
-                            <input type="checkbox" name="tipoOperacion" value="correctivo">
+                            <input class="myInput" type="checkbox" name="tipoOperacion" value="correctivo">
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -154,17 +154,17 @@
 
                 <div class="form-group">
                     <label for="tiempoEstimado">Tiempo estimado del proceso:</label>
-                    <input type="text" id="tiempoEstimado" placeholder="HH/MM/SS">
+                    <input class="myInput" type="text" id="tiempoEstimado" placeholder="HH/MM/SS">
                 </div>
 
                 <div class="form-group time-inputs-row">
                     <div class="time-input-group">
                         <label for="horaIngreso">Hora de ingreso</label>
-                        <input type="text" id="horaIngreso" placeholder="HH/MM/SS">
+                        <input class="myInput" type="text" id="horaIngreso" placeholder="HH/MM/SS">
                     </div>
                     <div class="time-input-group">
                         <label for="horaSalida">Hora de salida</label>
-                        <input type="text" id="horaSalida" placeholder="HH/MM/SS">
+                        <input class="myInput" type="text" id="horaSalida" placeholder="HH/MM/SS">
                     </div>
                 </div>
             </form>
@@ -176,7 +176,7 @@
             <h1 class="section-title">Fotos del Vehículo</h1>
             <div class="form-group">
                 <label for="foto1">Foto 1 (Frontal)</label>
-                <input type="file" id="foto1" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto1" accept="image/*" capture="environment" class="photo-input" required>
                 <div class="photo-preview-container">
                     <img id="preview1" class="photo-preview" src="#" alt="Previsualización Foto 1"
                         style="display: none;">
@@ -184,7 +184,7 @@
             </div>
             <div class="form-group">
                 <label for="foto2">Foto 2 (Trasera)</label>
-                <input type="file" id="foto2" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto2" accept="image/*" capture="environment" class="photo-input" required>
                 <div class="photo-preview-container">
                     <img id="preview2" class="photo-preview" src="#" alt="Previsualización Foto 2"
                         style="display: none;">
@@ -192,7 +192,7 @@
             </div>
             <div class="form-group">
                 <label for="foto3">Foto 3 (Lateral Izquierda)</label>
-                <input type="file" id="foto3" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto3" accept="image/*" capture="environment" class="photo-input" required>
                 <div class="photo-preview-container">
                     <img id="preview3" class="photo-preview" src="#" alt="Previsualización Foto 3"
                         style="display: none;">
@@ -200,7 +200,7 @@
             </div>
             <div class="form-group">
                 <label for="foto4">Foto 4 (Lateral Derecha)</label>
-                <input type="file" id="foto4" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto4" accept="image/*" capture="environment" class="photo-input" required>
                 <div class="photo-preview-container">
                     <img id="preview4" class="photo-preview" src="#" alt="Previsualización Foto 4"
                         style="display: none;">
@@ -239,16 +239,16 @@
             <form>
                 <div class="form-group">
                     <label for="nombrePropietario">Nombre del propietario del Vehículo</label>
-                    <input type="text" id="nombrePropietario" placeholder="Nombre">
+                    <input class="myInput" type="text" id="nombrePropietario" placeholder="Nombre">
                 </div>
                 <div class="form-group">
                     <label for="firmaPropietario">Firma</label>
-                    <input type="text" id="firmaPropietario" placeholder="Firma">
+                    <input class="myInput" type="text" id="firmaPropietario" placeholder="Firma">
                 </div>
                 <div class="form-group">
                     <label class="checkbox-container">
                         Acepto los términos y condiciones de servicio del Taller de Mantenimiento Automotriz del ITR.
-                        <input type="checkbox" id="acceptTerms">
+                        <input class="myInput" type="checkbox" id="acceptTerms">
                         <span class="checkmark"></span>
                     </label>
                 </div>
