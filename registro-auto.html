@@ -176,7 +176,8 @@
             <h1 class="section-title">Fotos del Vehículo</h1>
             <div class="form-group">
                 <label for="foto1">Foto 1 (Frontal)</label>
-                <input class="myInput" type="file" id="foto1" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto1" accept="image/*" capture="environment" class="photo-input"
+                    required>
                 <div class="photo-preview-container">
                     <img id="preview1" class="photo-preview" src="#" alt="Previsualización Foto 1"
                         style="display: none;">
@@ -184,7 +185,8 @@
             </div>
             <div class="form-group">
                 <label for="foto2">Foto 2 (Trasera)</label>
-                <input class="myInput" type="file" id="foto2" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto2" accept="image/*" capture="environment" class="photo-input"
+                    required>
                 <div class="photo-preview-container">
                     <img id="preview2" class="photo-preview" src="#" alt="Previsualización Foto 2"
                         style="display: none;">
@@ -192,7 +194,8 @@
             </div>
             <div class="form-group">
                 <label for="foto3">Foto 3 (Lateral Izquierda)</label>
-                <input class="myInput" type="file" id="foto3" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto3" accept="image/*" capture="environment" class="photo-input"
+                    required>
                 <div class="photo-preview-container">
                     <img id="preview3" class="photo-preview" src="#" alt="Previsualización Foto 3"
                         style="display: none;">
@@ -200,7 +203,8 @@
             </div>
             <div class="form-group">
                 <label for="foto4">Foto 4 (Lateral Derecha)</label>
-                <input class="myInput" type="file" id="foto4" accept="image/*" capture="environment" class="photo-input" required>
+                <input class="myInput" type="file" id="foto4" accept="image/*" capture="environment" class="photo-input"
+                    required>
                 <div class="photo-preview-container">
                     <img id="preview4" class="photo-preview" src="#" alt="Previsualización Foto 4"
                         style="display: none;">
@@ -238,13 +242,21 @@
             </div>
             <form>
 
-                <div class="form-group">
-                    <label for="nombrePropietario">Nombre del propietario del Vehículo</label>
-                    <input class="myInput" type="text" id="nombrePropietario" placeholder="Nombre">
-                </div>
-                <div class="form-group">
-                    <label for="firmaPropietario">Firma</label>
-                    <input type="text" id="firmaPropietario" placeholder="Firma">
+                <button type="button" onclick="abrirModal()" class="botones">Firmar</button>
+
+                <!-- Modal -->
+                <div id="modalFirma" class="modal">
+                    <div class="modal-contenido">
+                        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+                        <h2 style="color: rgb(255, 255, 255);">Firma aquí:</h2>
+                        <canvas id="canvas" width="378" height="200" style="border:1px solid #000;"></canvas>
+                        <div class="buttons">
+                            <button type="button" onclick="clearCanvas()" class="botones">Reiniciar Firma</button>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" onclick="enviarFirma()" class="botones">Enviar Firma</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="checkbox-container">
@@ -253,8 +265,8 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button onclick="guardarFirma()" type="button" id="firmar-btn" class="botones" disabled>Firmar</button>
-                <button type="submit" id="enviar-solicitud-btn" class="botones" disabled>Enviar Solicitud</button>
+                
+                <button type="button" id="enviar-solicitud-btn" class="botones" >Enviar Solicitud</button>
             </form>
         </section>
 
@@ -311,11 +323,18 @@
         </div>
     </div>
 
+    <div id="globos-container"></div>
+    <canvas id="confettiCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/registro-auto-nav.js"></script>
     <script src="js/registro-auto.js"></script>
+    <script src="js/registro-auto-firma.js"></script>
 
 
 </body>
