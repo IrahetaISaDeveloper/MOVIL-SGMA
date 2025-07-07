@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const correoError = document.getElementById('correo-error');
 
     // --- Elementos del combobox personalizado ---
+    const gradoCustomContainer = document.querySelector('.grupo-entrada:has(#grado)'); // Contenedor del grupo de entrada del grado
     const gradoCustomTrigger = document.getElementById('grado-custom-trigger');
     const selectedGradoText = document.getElementById('selected-grado-text');
     const gradoCustomOptions = document.getElementById('grado-custom-options');
@@ -82,6 +83,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Nueva lógica para validar el correo y ocultar/mostrar el campo de año
+    correoInput.addEventListener('input', () => {
+        const correo = correoInput.value.trim();
+        const dominioPermitido = '@ricaldone.edu.sv';
+        const patronMaestro = /^[a-zA-Z0-9.]+_[a-zA-Z0-9.]+@ricaldone\.edu\.sv$/; // Patrón para maestros (ej: nombre_apellido@ricaldone.edu.sv)
+
+        correoError.textContent = '';
+        correoError.style.display = 'none';
+
+        if (!correo.endsWith(dominioPermitido)) {
+            correoError.textContent = 'Correo no permitido, por favor utiliza un correo de ' + dominioPermitido;
+            correoError.style.display = 'block';
+            gradoCustomContainer.style.display = 'block'; // Asegurarse de que el campo de grado se muestre si el correo es inválido
+            gradoNativeSelect.required = true;
+            return;
+        }
+
+        if (patronMaestro.test(correo)) {
+            // Es un correo de maestro, ocultar campo de año
+            gradoCustomContainer.style.display = 'none';
+            gradoNativeSelect.removeAttribute('required'); // Ya no es requerido para maestros
+        } else {
+            // Es un correo de alumno, mostrar campo de año
+            gradoCustomContainer.style.display = 'block';
+            gradoNativeSelect.setAttribute('required', 'true');
+        }
+    });
+
+
     registroForm.addEventListener('submit', async (event) => {
         event.preventDefault(); // Evita que el formulario se envíe por defecto
 
@@ -90,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const correo = correoInput.value.trim();
         const dominioPermitido = '@ricaldone.edu.sv';
+        const patronMaestro = /^[a-zA-Z0-9.]+_[a-zA-Z0-9.]+@ricaldone\.edu\.sv$/; // Patrón para maestros
 
         if (!correo.endsWith(dominioPermitido)) {
             correoError.textContent = 'Correo no permitido, por favor utiliza un correo de ' + dominioPermitido;
@@ -100,16 +131,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const nombres = document.getElementById('nombres').value.trim();
         const apellidos = document.getElementById('apellidos').value.trim();
         const password = document.getElementById('password').value.trim();
-        const grado = gradoNativeSelect.value.trim(); // Mantener para el campo 'grado' si es necesario para MockAPI.io
+        
+        let tbRoleId;
+        let grado = ''; // Por defecto vacío, solo se llenará para alumnos
+
+        if (patronMaestro.test(correo)) {
+            tbRoleId = "2"; // Rol de Maestro
+            gradoCustomContainer.style.display = 'none'; // Asegurarse de que esté oculto en el submit
+            gradoNativeSelect.removeAttribute('required');
+        } else {
+            tbRoleId = "3"; // Rol de Alumno
+            grado = gradoNativeSelect.value.trim(); // Obtener el valor del grado solo para alumnos
+            if (!grado) { // Validar si el grado está vacío para alumnos
+                Swal.fire({
+                    icon: "error",
+                    title: "Error de Validación",
+                    text: "Por favor, selecciona tu año."
+                });
+                return;
+            }
+            gradoCustomContainer.style.display = 'block'; // Asegurarse de que esté visible en el submit
+            gradoNativeSelect.setAttribute('required', 'true');
+        }
 
         // Validaciones básicas adicionales
-        if (!nombres || !apellidos || !password || !grado) {
-            alert('Por favor, completa todos los campos.');
+        if (!nombres || !apellidos || !password) {
+            Swal.fire({
+                icon: "error",
+                title: "Error de Validación",
+                text: "Por favor, completa todos los campos."
+            });
             return;
         }
 
         if (password.length < 6) {
-            alert('La contraseña debe tener al menos 6 caracteres.');
+            Swal.fire({
+                icon: "error",
+                title: "Contraseña Inválida",
+                text: "La contraseña debe tener al menos 6 caracteres."
+            });
             return;
         }
 
@@ -138,12 +198,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     const errorData = await imgResponse.json();
                     console.error('Error al subir la imagen a ImgBB:', errorData);
-                    alert('Error al subir la imagen de perfil: ' + (errorData.message || 'Ocurrió un problema.'));
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error al Subir Imagen",
+                        text: 'Error al subir la imagen de perfil: ' + (errorData.message || 'Ocurrió un problema.'),
+                    });
                     return; // Detiene el registro si la imagen no se sube
                 }
             } catch (error) {
                 console.error('Error de red o del servidor al subir la imagen a ImgBB:', error);
-                alert('Ocurrió un error inesperado al subir la imagen. Inténtalo de nuevo.');
+                Swal.fire({
+                    icon: "error",
+                    title: "Error de Conexión",
+                    text: 'Ocurrió un error inesperado al subir la imagen. Inténtalo de nuevo.',
+                });
                 return;
             }
         }
@@ -153,12 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
             email: correo,
             password: password,
             fullName: `${nombres} ${apellidos}`, // Combina nombres y apellidos
-            tbRoleId: "3", // Asigna el rol "3" (Estudiante) por defecto
+            tbRoleId: tbRoleId, // Asigna el rol dinámicamente
             fotoPerfil: imageUrl // Incluye la URL de la imagen de perfil
-            // Puedes mantener 'grado: grado' si tu API lo necesita además de los campos del login
-            // Si 'grado' no es relevante para el login o tbUsers, puedes eliminarlo de aquí.
-            // grado: grado // Si necesitas enviar el grado, descomenta esta línea
         };
+
+        // Solo añade el grado si es un alumno
+        if (tbRoleId === "3") {
+            nuevoUsuario.grado = grado;
+        }
 
         console.log('Datos listos para enviar a la API:', nuevoUsuario);
 
@@ -174,16 +244,34 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) { // Verifica si la respuesta fue exitosa (status 2xx)
                 const result = await response.json();
                 console.log('Registro exitoso:', result);
-                alert('¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.');
-                window.location.href = 'login.html'; // Redirige al usuario a la página de inicio de sesión
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Éxito!",
+                    text: "¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.",
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(() => {
+                    window.location.href = 'login.html'; // Redirige al usuario a la página de inicio de sesión
+                });
             } else {
                 const errorData = await response.json(); // Intenta leer el error de la respuesta
                 console.error('Error en el registro:', errorData);
-                alert('Error al crear la cuenta: ' + (errorData.message || 'Ocurrió un problema. Inténtalo de nuevo.'));
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al Crear Cuenta",
+                    text: 'Error al crear la cuenta: ' + (errorData.message || 'Ocurrió un problema. Inténtalo de nuevo.'),
+                });
             }
         } catch (error) {
             console.error('Error de red o del servidor:', error);
-            alert('Ocurrió un error inesperado al intentar crear la cuenta. Por favor, inténtalo de nuevo más tarde.');
+            Swal.fire({
+                icon: "error",
+                title: "Error de Conexión",
+                text: 'Ocurrió un error inesperado al intentar crear la cuenta. Por favor, inténtalo de nuevo más tarde.',
+            });
         }
     });
+
+    // Disparar el evento 'input' al cargar la página para aplicar la lógica inicial de visibilidad del grado
+    correoInput.dispatchEvent(new Event('input'));
 });
