@@ -237,14 +237,30 @@
                     efectuado el proceso en el vehículo.</p>
             </div>
             <form>
+
                 <div class="form-group">
                     <label for="nombrePropietario">Nombre del propietario del Vehículo</label>
                     <input type="text" id="nombrePropietario" placeholder="Nombre">
                 </div>
-                <div class="form-group">
-                    <label for="firmaPropietario">Firma</label>
-                    <input type="text" id="firmaPropietario" placeholder="Firma">
-                </div>
+
+                <canvas id="firma" width="400" height="200" style="border:1px solid #000;"></canvas>
+                
+                <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+                <script>
+                    const canvas = document.getElementById("firma");
+                    const firmaPad = new SignaturePad(canvas);
+                
+                    function guardarFirma() {
+                        if (firmaPad.isEmpty()) {
+                            alert("Por favor, firme primero.");
+                            return;
+                        }
+                        const dataURL = firmaPad.toDataURL();
+                        console.log("Firma en base64:", dataURL);
+                        // Aquí puedes enviarla al servidor (AJAX/fetch)
+                    }
+                </script>
+
                 <div class="form-group">
                     <label class="checkbox-container">
                         Acepto los términos y condiciones de servicio del Taller de Mantenimiento Automotriz del ITR.
@@ -252,7 +268,7 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button type="button" id="firmar-btn" class="botones" disabled>Firmar</button>
+                <button onclick="guardarFirma()" type="button" id="firmar-btn" class="botones" disabled>Firmar</button>
                 <button type="submit" id="enviar-solicitud-btn" class="botones" disabled>Enviar Solicitud</button>
             </form>
         </section>
