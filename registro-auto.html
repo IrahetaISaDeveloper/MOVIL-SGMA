@@ -237,13 +237,14 @@
                     efectuado el proceso en el vehículo.</p>
             </div>
             <form>
+
                 <div class="form-group">
                     <label for="nombrePropietario">Nombre del propietario del Vehículo</label>
                     <input class="myInput" type="text" id="nombrePropietario" placeholder="Nombre">
                 </div>
                 <div class="form-group">
                     <label for="firmaPropietario">Firma</label>
-                    <input class="myInput" type="text" id="firmaPropietario" placeholder="Firma">
+                    <input type="text" id="firmaPropietario" placeholder="Firma">
                 </div>
                 <div class="form-group">
                     <label class="checkbox-container">
@@ -252,7 +253,7 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <button type="button" id="firmar-btn" class="botones" disabled>Firmar</button>
+                <button onclick="guardarFirma()" type="button" id="firmar-btn" class="botones" disabled>Firmar</button>
                 <button type="submit" id="enviar-solicitud-btn" class="botones" disabled>Enviar Solicitud</button>
             </form>
         </section>
