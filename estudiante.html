@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" /> 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/estudiantes.css" />
 </head>
 <body>
-  <div class="full-screen-app-container">
-    <header class="app-header">
-      <a href="login.html" class="back-button"> <i class="fa-solid fa-right-from-bracket"></i>
-      </a>
-      <h1 class="header-title">Inicio</h1>
-    </header>
+  <header class="app-header">
+    <a href="login.html" class="back-button"> <i class="fa-solid fa-right-from-bracket"></i>
+      <span></span> </a>
+    <h1 class="header-title">Inicio</h1>
+    <div class="header-spacer"></div> </header>
 
+  <div class="full-screen-app-container">
     <main class="estudiantes-main-content">
       <div class="profile-picture-container">
         <img id="user-profile-pic" src="imgs/default-profile.png" alt="Foto de Perfil">
@@ -37,54 +37,58 @@
     </main>
   </div>
 
-    <nav class="bottom-nav">
-        <ul>
-            <li>
-                <a href="estudiante.html#inicio" class="nav-item active"> <i class="fas fa-home nav-icon"></i>
-                    <span>Inicio</span>
-                </a>
-            </li>
-            <li>
-                <a href="registro-auto.html" class="nav-item"> <i class="fas fa-clipboard-list nav-icon"></i>
-                    <span>Registrar</span>
-                </a>
-            </li>
-            <li>
-                <a href="mis-trabajos.html" class="nav-item"> <i class="fas fa-chart-bar nav-icon"></i>
-                    <span>Mis Trabajos</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-item" data-toggle="modal" data-target="#perfilModal">
-                    <i class="fas fa-user nav-icon"></i>
-                    <span>Perfil</span>
-                </a>
-            </li>
-            <li>
-                <a href="admin.html" class="nav-item"> <i class="fas fa-wrench nav-icon"></i>
-                    <span>Más</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+  <nav class="bottom-nav">
+    <ul>
+      <li>
+        <a href="estudiante.html#inicio" class="nav-item active"> <i class="fas fa-home nav-icon"></i>
+          <span>Inicio</span>
+        </a>
+      </li>
+      <li>
+        <a href="registro-auto.html" class="nav-item"> <i class="fas fa-clipboard-list nav-icon"></i>
+          <span>Registrar</span>
+        </a>
+      </li>
+      <li>
+        <a href="mis-trabajos.html" class="nav-item"> <i class="fas fa-chart-bar nav-icon"></i>
+          <span>Mis Trabajos</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-item" data-toggle="modal" data-target="#perfilModal">
+          <i class="fas fa-user nav-icon"></i>
+          <span>Perfil</span>
+        </a>
+      </li>
+      <li>
+        <a href="admin.html" class="nav-item"> <i class="fas fa-wrench nav-icon"></i>
+          <span>Más</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content bg-dark text-light">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="perfilModalLabel">Tu Perfil</h5>
-                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="profile-content">
-                        </div>
-                </div>
-            </div>
+  <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="perfilModalLabel">Tu Perfil</h5>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <div id="profile-content">
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <script src="js/estudiante.js"></script>
-  <script src="js/estudiante-nav.js"></script> </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="js/estudiante.js"></script>
+  <script src="js/estudiante-nav.js"></script>
+</body>
 </html>

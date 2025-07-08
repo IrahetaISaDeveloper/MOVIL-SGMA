@@ -64,11 +64,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (userRole) {
                             switch(userRole.roleName) {
                                 case 'Student':
-                                    window.location.href = 'estudiante.html';
+                                    // Establece la bandera de éxito de inicio de sesión para el toast
+                                    localStorage.setItem('loggedInSuccessfully', 'true'); //
+                                    window.location.href = 'estudiante.html'; //
                                     break;
                                 case 'Instructor':
                                 case 'Coordinator':
-                                    window.location.href = 'coordi-index.html';
+                                    window.location.href = 'coordi-index.html'; //
                                     break;
                                 default:
                                     Swal.fire({
