@@ -34,14 +34,15 @@ body {
 
 .container {
     width: 100%;
-    max-width: 400px; /* Ancho típico de un teléfono */
+    height: 100%;
+    max-width: 430px; /* Ancho típico de un teléfono */
     background-color: #1a1a1a; /* Fondo de la app más oscuro */
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 800px; /* Altura para simular un teléfono */
+    height: 100vh; /* Altura para simular un teléfono */
 }
 
 .header {
@@ -54,7 +55,7 @@ body {
 }
 
 .content {
-    flex-grow: 1;
+    
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -140,13 +141,13 @@ body {
 
 .observations-textarea {
     width: calc(100% - 20px); /* Ajustar el ancho */
-    height: 150px;
+    height: 250px;
     background-color: #1a1a1a;
     border: 1px solid #444;
     border-radius: 5px;
     padding: 10px;
     color: white;
-    font-size: 0.9em;
+    font-size: 0.9em; 
     resize: vertical; /* Permitir redimensionamiento vertical */
 }
 
@@ -181,7 +182,7 @@ body {
     display: flex; /* Para alinear el icono y el texto */
     align-items: center;
     gap: 0.5em; /* Espacio entre el icono y el texto */
-    
+    max-width: 15px;
     z-index: 10; /* Asegura que esté por encima del título si hay superposición */
 }
 
@@ -208,12 +209,12 @@ body {
     transition: background-color 0.2s ease, transform 0.2s ease;
     text-align: center; /* Asegura que el texto esté centrado si no es un bloque completo */
     text-decoration: none; /* Quita subrayado de los enlaces */
+    margin-top: 50px; /* o el valor que necesites */
 }
 
 
 .footer-actions {
-    margin-top: auto;
-    margin-bottom: 5px; /* Empuja los botones al fondo */
+    margin: 10px; /* Empuja los botones al fondo */
     display: flex;
     flex-direction: column; /* Apila los botones en móvil */
     gap: var(--spacing-s);
