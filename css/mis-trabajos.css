@@ -49,7 +49,7 @@ html, body {
     background-color: #333; /* Color de fondo oscuro */
     border-top: 1px solid #444; /* Borde superior sutil */
     padding: 5px 0;
-    z-index: 0; /* Asegura que esté por encima de otros elementos */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* Sombra superior */
 }
 
@@ -102,22 +102,15 @@ html, body {
     width: 100%;
     max-width: 600px; /* Un poco más grande para esta página si es necesario */
     height: 100vh; /* Ocupa el 100% del alto de la vista */
-    border-radius: 20px; /* Bordes redondeados para el "marco de la app" */
+    border-radius: 0; /* Sin bordes redondeados por defecto en móviles pequeños */
     overflow: hidden; /* Muy importante para que el contenido respete los bordes */
     display: flex;
     flex-direction: column; /* Apila la cabecera y el contenido verticalmente */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Sombra para simular una app */
+    box-shadow: none; /* Sin sombra por defecto en móviles pequeños */
 
     /* Para que ocupe el espacio completo en iOS y otros móviles */
     min-height: -webkit-fill-available;
     min-height: 100vh;
-}
-
-/* En pantallas pequeñas, quitar el radio de borde para que ocupe toda la pantalla */
-@media (max-width: 500px) {
-    .full-screen-app-container {
-        border-radius: 0;
-    }
 }
 
 
@@ -139,8 +132,8 @@ html, body {
     color: var(--text-light);
     flex-grow: 1; /* Permite que el título ocupe el espacio restante */
     text-align: center; /* Centra el título */
-    /* Asegúrate de que el título no se solape con el botón */
-    margin-left: -50px; /* Ajusta este valor si el botón es más grande o más pequeño */
+    /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
+    margin-left: -40px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
 }
 
 .back-button {
@@ -174,19 +167,14 @@ html, body {
     padding: var(--spacing-xl); /* Padding interior para el contenido */
     box-sizing: border-box; /* Incluye padding en el tamaño total */
     width: 100%; /* Ocupa todo el ancho disponible */
-    max-width: 550px; /* Limita el ancho máximo para tabletas/escritorios */
+    max-width: 100%; /* Por defecto, ocupa el 100% en móviles */
     margin: 0 auto; /* Centrar horizontalmente dentro del main-content */
 }
-
-
-/* El resto de tus estilos CSS para .jobs-list, .job-card, etc.,
-   permanecen prácticamente iguales, ya que ahora aplican dentro del
-   nuevo .mis-trabajos-main-content */
 
 .jobs-list {
     display: flex;
     flex-direction: column;
-    padding-bottom: 50px;
+    padding-bottom: 50px; /* Espacio para el bottom-nav */
     gap: var(--spacing-xl);
 }
 
@@ -373,96 +361,151 @@ html, body {
     color: #ffffff;
     margin: 0;
 }
-/* --- MEDIA QUERIES PARA PANTALLAS MÁS GRANDES (TABLETS Y ESCRITORIOS) --- */
 
-/* Para tabletas en orientación vertical o dispositivos más grandes */
-@media (min-width: 600px) {
-    /* El padding del main-container original se mueve a .mis-trabajos-main-content */
+
+/* --- MEDIA QUERIES --- */
+
+/* Small Devices (e.g., older iPhones, smaller Android phones) */
+@media (max-width: 374px) {
+    .app-header h1 {
+        font-size: 1.2em;
+        margin-left: -30px; /* Adjust for smaller screens */
+    }
+
+    .back-button {
+        padding: 0.5em 0.8em;
+        font-size: 0.8em;
+    }
+
+    .bottom-nav .nav-item {
+        font-size: 0.7em;
+    }
+
+    .bottom-nav .nav-item .nav-icon {
+        font-size: 20px;
+    }
+
     .mis-trabajos-main-content {
-        padding: var(--spacing-xl) 30px; /* Más padding lateral */
-    }
-
-    /* El h1 se movió a la cabecera, así que estos estilos ya no aplican aquí directamente */
-    /* h1 {
-        font-size: 2.2em;
-        margin-bottom: 40px;
-    } */
-
-    .job-card {
-        flex-direction: row;
-        height: 220px;
-        border-radius: var(--border-radius-card);
-    }
-
-    .card-image {
-        flex-shrink: 0;
-        width: 200px;
-        height: 100%;
-        border-top-left-radius: var(--border-radius-card);
-        border-bottom-left-radius: var(--border-radius-card);
-        border-top-right-radius: 0;
-    }
-
-    .card-details {
-        padding: var(--spacing-xl);
-        justify-content: space-between;
-    }
-
-    h2 {
-        font-size: 1.3em;
-    }
-
-    .info-line {
-        font-size: 0.95em;
-    }
-
-    .status {
-        font-size: 0.9em;
-        margin-top: var(--spacing-m);
-    }
-
-    .logbook-link {
-        font-size: 1em;
-    }
-}
-
-/* Para escritorios pequeños o tabletas en orientación horizontal */
-@media (min-width: 800px) {
-    .full-screen-app-container {
-        max-width: 900px; /* Permite más ancho */
-    }
-    .mis-trabajos-main-content {
-        padding: 40px;
+        padding: var(--spacing-m);
     }
 
     .jobs-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 30px;
-    }
-
-    .job-card {
-        flex-direction: column;
-        height: auto;
+        gap: var(--spacing-l);
     }
 
     .card-image {
-        width: 100%;
-        height: 200px;
-        border-top-left-radius: var(--border-radius-card);
-        border-top-right-radius: var(--border-radius-card);
-        border-bottom-left-radius: 0;
+        height: 160px;
     }
 
-    .card-details {
-        padding: var(--spacing-xl);
-        justify-content: flex-start;
+    .image-overlay {
+        padding: var(--spacing-m);
     }
 }
 
-/* Para escritorios grandes */
-@media (min-width: 1200px) {
+
+/* Medium Devices (e.g., iPhone X, iPhone 15, Samsung S22, Pixel) - Portrait */
+@media (min-width: 375px) and (max-width: 767px) {
     .full-screen-app-container {
-        max-width: 1100px;
+        /* On these devices, still act mostly like a full-screen app */
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .app-header h1 {
+        font-size: 1.4em;
+        /* Keep existing margin-left as it works for general mobile */
+    }
+
+    .mis-trabajos-main-content {
+        padding: var(--spacing-xl);
+    }
+
+    .card-image {
+        height: 200px;
+    }
+}
+
+/* Tablets (e.g., iPad, Samsung Tab) - Portrait and Landscape */
+@media (min-width: 768px) {
+    .full-screen-app-container {
+        max-width: 800px; /* Allow wider container on tablets */
+        height: 90vh; /* Don't take full height, center it */
+        margin: auto auto; /* Center vertically and horizontally */
+        border-radius: 20px; /* Add rounded borders for app-like feel */
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+    }
+
+    .mis-trabajos-main-content {
+        max-width: 850px; /* Limit content width within the container */
+        padding: var(--spacing-xl) 25px; /* Slightly more horizontal padding */
+    }
+
+    .jobs-list {
+        flex-direction: row; /* Display cards in a row if possible (e.g. grid) */
+        flex-wrap: wrap; /* Allow cards to wrap */
+        justify-content: center; /* Center cards in the row */
+        gap: var(--spacing-xl);
+    }
+
+    .job-card {
+        flex: 1 1 calc(50% - var(--spacing-xl)); /* Two cards per row, accounting for gap */
+        max-width: calc(50% - var(--spacing-xl)); /* Ensure max width for two columns */
+        min-width: 300px; /* Prevent cards from becoming too narrow */
+    }
+
+    .card-image {
+        height: 180px; /* Adjust height for tablet cards */
+    }
+
+    .app-header h1 {
+        font-size: 1.6em; /* Larger title for tablets */
+        margin-left: 0; /* No need for negative margin when not fighting for space */
+    }
+
+    .back-button {
+        font-size: 0.9em;
+        padding: 0.7em 1.2em;
+    }
+
+    .bottom-nav {
+        position: fixed; /* No longer fixed to bottom, part of the flow or hidden */
+        border-top: black;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+        padding: 15;
+        width: 100%;
+        /* Potentially hide it or make it part of a footer for larger screens */
+       
+    }
+
+    .full-screen-app-container {
+        /* Add padding-bottom to main content if bottom nav is hidden and content needs space */
+        padding-bottom: 0;
+    }
+}
+
+/* Larger Tablets / Small Laptops (e.g., iPad Pro, small desktop view) */
+@media (min-width: 1024px) {
+    .full-screen-app-container {
+        max-width: 900px; /* Even wider container */
+        height: 85vh; /* Adjust height slightly */
+    }
+
+    .mis-trabajos-main-content {
+        max-width: 850px;
+        padding: var(--spacing-xl) 30px;
+    }
+
+    .job-card {
+        flex: 1 1 calc(33.333% - var(--spacing-xl) * 2 / 3); /* Three cards per row */
+        max-width: calc(33.333% - var(--spacing-xl) * 2 / 3);
+    }
+
+    .card-image {
+        height: 200px;
+    }
+
+    .app-header h1 {
+        font-size: 1.8em;
     }
 }
