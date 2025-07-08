@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Dummy data based on placa for demonstration
   const getVehicleDataByPlaca = (placa) => {
     switch (placa.toUpperCase()) {
-      case "P258-854":
+      case "ABC-123":
         return {
           recordNumber: "20250428",
           modelo: "Volvo - XC40",
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
           vehicleImage: "imgs/volvo.jpg", // Ensure this path is correct
           tasks: [
             { icon: "fas fa-lightbulb", text: "Conexión y reparación de luces" },
-            { icon: "fas fa-car-door", text: "Reparación de puertas y ventanas" },
+            { icon: "fas fa-window-restore", text: "Reparación de puertas y ventanas" },
             { icon: "fas fa-wind", text: "Reparación de Parabrisas" },
             { icon: "fas fa-car-crash", text: "Cambio de Airbag" },
             { icon: "fas fa-eye", text: "Reparación de espejo" },
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "2025-06-14: Ajustes eléctricos completados. Próximo: Inspección general."
           ]
         };
-      case "ABC-123":
+      case "ABC-122":
         return {
           recordNumber: "20231026",
           modelo: "Sedán Genérico",
