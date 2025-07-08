@@ -12,175 +12,355 @@
     --font-size-button: 18px;
 }
 
+/* Base styles for larger screens (desktop first approach, or default) */
 * {
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: 'Roboto', sans-serif; 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-    background-color: var(--background-color); 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    min-height: 100vh; 
-    padding: 20px; 
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .contenedor-inicio-sesion {
-    background-color: transparent; 
-    padding: 20px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    width: 100%; 
-    max-width: 500px; 
+    background-color: transparent;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
 }
 
 .titulo-pagina {
-    color: var(--text-color-light); 
-    font-size: 1.8rem; 
-    margin-bottom: 30px; 
+    color: var(--text-color-light);
+    font-size: 1.8rem; /* Equivalent to 29px if root font-size is 16px */
+    margin-bottom: 30px;
 }
 
 .cabecera-login {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center; 
-    margin-bottom: 30px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .logo {
-    width: 120px; 
-    height: auto; 
-    margin-bottom: 15px; 
+    width: 120px;
+    height: auto;
+    margin-bottom: 15px;
 }
 
 .nombre-sistema {
-    color: var(--text-color-light); 
-    font-size: 1.5rem; 
-    margin-bottom: 10px; 
-    line-height: 1.2; 
+    color: var(--text-color-light);
+    font-size: 1.5rem; /* Equivalent to 24px */
+    margin-bottom: 10px;
+    line-height: 1.2;
 }
 
 .descripcion-formulario {
-    color: var(--link-color); 
-    font-size: 0.9rem; 
+    color: var(--link-color);
+    font-size: 0.9rem; /* Equivalent to 14px */
 }
 
 .seccion-formulario {
-    width: 100%; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .grupo-campo {
-    width: 100%; 
-    margin-bottom: 20px; 
-    text-align: left; 
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .grupo-campo label {
-    display: block; 
-    color: var(--text-color-light); 
-    font-size: 0.9rem; 
-    margin-bottom: 5px; 
+    display: block;
+    color: var(--text-color-light);
+    font-size: 0.9rem; /* Equivalent to 14px */
+    margin-bottom: 5px;
+}
+
+.input-con-icono {
+    position: relative;
+    width: 100%;
 }
 
 .grupo-campo input {
-    width: 100%; 
-    padding: 12px 15px; 
-    background-color: var(--light-gray); 
-    border: none; 
-    border-radius: 5px; 
-    color: var(--text-color-dark); 
-    font-size: 1rem; 
-    outline: none; 
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--light-gray);
+    border: none;
+    border-radius: 5px;
+    color: var(--text-color-dark);
+    font-size: 1rem; /* Equivalent to 16px */
+    outline: none;
+    padding-right: 40px; /* Make space for the icon */
 }
 
 .grupo-campo input::placeholder {
-    color: #888; 
+    color: #888;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-color-dark);
+    font-size: 1rem; /* Ensure icon size scales with input text */
 }
 
 .enlace-recuperar-contrasena {
-    color: var(--link-color); 
-    text-decoration: none; 
-    font-size: 0.9rem; 
-    margin-bottom: 30px; 
-    align-self: center; 
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    align-self: center;
 }
 
 .boton-base {
-    width: 100%; 
-    padding: 15px; 
-    border: none; 
-    border-radius: 25px; 
-    font-size: 1.1rem; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
-    margin-bottom: 15px; 
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem; /* Equivalent to 18px */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
 }
 
 .boton-principal {
-    background-color: var(--primary-red); 
-    color: var(--text-color-light); 
+    background-color: var(--primary-red);
+    color: var(--text-color-light);
 }
 
 .boton-principal:hover {
-    background-color: #8a2a26; 
+    background-color: #8a2a26;
 }
 
 .boton-secundario {
-    background-color: transparent; 
-    color: var(--text-color-light); 
-    border: 1px solid var(--text-color-light); 
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: 1px solid var(--text-color-light);
 }
 
 .boton-secundario:hover {
-    background-color: rgba(255, 255, 255, 0.1); 
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .texto-registro {
-    color: var(--text-color-light); 
-    font-size: 0.9rem; 
-    margin-top: 15px; 
-    text-align: center; 
+    color: var(--text-color-light);
+    font-size: 0.9rem;
+    margin-top: 15px;
+    text-align: center;
 }
 
 .enlace-registro {
-    color: var(--link-color); 
-    text-decoration: none; 
-    font-weight: bold; 
-    transition: color 0.3s ease; 
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .enlace-registro:hover {
-    color: #e09b2e; 
+    color: #e09b2e;
 }
 
-@media (max-width: 320px) {
+/* --- Media Queries for Responsiveness --- */
+
+/* For extra small phones (e.g., iPhone SE, older Androids) */
+@media (max-width: 375px) {
+    body {
+        padding: 10px;
+    }
+
     .contenedor-inicio-sesion {
-        padding: 15px; 
+        padding: 15px;
     }
 
     .titulo-pagina {
-        font-size: 1.5rem; 
-        margin-bottom: 20px; 
+        font-size: 1.6rem; /* Slightly smaller title */
+        margin-bottom: 25px;
+    }
+
+    .logo {
+        width: 100px; /* Smaller logo */
     }
 
     .nombre-sistema {
-        font-size: 1.3rem; 
+        font-size: 1.3rem; /* Smaller system name */
+    }
+
+    .descripcion-formulario,
+    .grupo-campo label,
+    .enlace-recuperar-contrasena,
+    .texto-registro {
+        font-size: 0.85rem; /* Smaller text */
+    }
+
+    .grupo-campo input {
+        padding: 10px 15px; /* Adjust input padding */
+        font-size: 0.95rem;
+    }
+
+    .toggle-password {
+        font-size: 0.95rem; /* Adjust icon size */
+        right: 10px; /* Bring icon closer to the edge */
     }
 
     .boton-base {
-        font-size: 1rem; 
-        padding: 12px; 
+        padding: 12px;
+        font-size: 1rem; /* Smaller buttons */
+    }
+}
+
+/* For small phones (e.g., iPhone X, Samsung S22, typical modern phones) */
+@media (min-width: 376px) and (max-width: 576px) {
+    body {
+        padding: 15px;
     }
 
+    .contenedor-inicio-sesion {
+        padding: 20px;
+    }
+
+    .titulo-pagina {
+        font-size: 1.7rem;
+    }
+
+    .logo {
+        width: 110px;
+    }
+
+    .nombre-sistema {
+        font-size: 1.4rem;
+    }
+
+    .descripcion-formulario,
+    .grupo-campo label,
+    .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 0.85rem; 
+        font-size: 0.875rem;
+    }
+
+    .grupo-campo input {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+
+    .toggle-password {
+        font-size: 1rem;
+        right: 15px;
+    }
+
+    .boton-base {
+        padding: 14px;
+        font-size: 1.05rem;
+    }
+}
+
+/* For small tablets (e.g., iPad Mini, portrait mode) */
+@media (min-width: 577px) and (max-width: 768px) {
+    body {
+        padding: 30px;
+    }
+
+    .contenedor-inicio-sesion {
+        max-width: 450px; /* Slightly narrower for tablets */
+        padding: 25px;
+    }
+
+    .titulo-pagina {
+        font-size: 2rem;
+        margin-bottom: 35px;
+    }
+
+    .logo {
+        width: 130px;
+    }
+
+    .nombre-sistema {
+        font-size: 1.6rem;
+    }
+
+    .descripcion-formulario,
+    .grupo-campo label,
+    .enlace-recuperar-contrasena,
+    .texto-registro {
+        font-size: 0.95rem;
+    }
+
+    .grupo-campo input {
+        padding: 14px 18px;
+        font-size: 1.05rem;
+    }
+
+    .toggle-password {
+        font-size: 1.05rem;
+        right: 18px;
+    }
+
+    .boton-base {
+        padding: 16px;
+        font-size: 1.1rem;
+    }
+}
+
+/* For medium tablets (e.g., iPad, larger Android tablets, portrait/landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        padding: 40px;
+    }
+
+    .contenedor-inicio-sesion {
+        max-width: 550px; /* Wider for larger tablets */
+        padding: 30px;
+    }
+
+    .titulo-pagina {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+
+    .logo {
+        width: 140px;
+    }
+
+    .nombre-sistema {
+        font-size: 1.7rem;
+    }
+
+    .descripcion-formulario,
+    .grupo-campo label,
+    .enlace-recuperar-contrasena,
+    .texto-registro {
+        font-size: 1rem;
+    }
+
+    .grupo-campo input {
+        padding: 15px 20px;
+        font-size: 1.1rem;
+    }
+
+    .toggle-password {
+        font-size: 1.1rem;
+        right: 20px;
+    }
+
+    .boton-base {
+        padding: 18px;
+        font-size: 1.2rem;
     }
 }
