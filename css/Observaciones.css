@@ -147,7 +147,7 @@ body {
     border-radius: 5px;
     padding: 10px;
     color: white;
-    font-size: 0.9em;
+    font-size: 0.9em; 
     resize: vertical; /* Permitir redimensionamiento vertical */
 }
 
