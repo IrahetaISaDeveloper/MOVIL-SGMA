@@ -114,7 +114,7 @@ p {
     position: fixed;
     top: 0;
     left: -300px; /* Hidden by default */
-    width: 280px;
+    width: 180px;
     height: 100%;
     background-color: var(--bg-sidebar);
     color: var(--text-light);
@@ -277,12 +277,13 @@ p {
 .main-content {
     display: flex;
     flex-direction: column; /* Stacks cards vertically on mobile */
-    gap: var(--spacing-xl); /* Space between cards */
+    gap: var(--spacing-xs); /* Space between cards */
     flex-grow: 1;
     /* On mobile, this will naturally stack after the sidebar */
 }
 
 .card {
+    margin-top: 10px;
     background-color: var(--card-bg);
     border-radius: var(--border-radius-card);
     padding: var(--spacing-l);
@@ -485,6 +486,57 @@ small {
     width: 100%;
 }
 
+/*Modal*/
+/* Modal container */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    padding: 40px 20px;
+    box-sizing: var(--border-color-light);
+    overflow: auto;
+  }
+  
+  /* Modal content */
+  .modal-content {
+    background-color: #000000;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  /* Close button */
+  .close-btn {
+    color: #ffffff;
+    position: absolute;
+    top: 2px;
+    right: 16px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: #000;
+  }
+  
+  /* Optional: For the main-content inside modal */
+  .modal .main-content {
+    padding: 0;
+  }
+  
+
 /* Vehicle Data Section */
 .car-photo {
     width: 100%;
@@ -553,6 +605,82 @@ small {
 .secondary-btn:hover {
     background-color: #e0443c;
     transform: translateY(-2px);
+}
+
+/* Modal container (for both modals) */
+/* Estilos para el modal de perfil (clases de Bootstrap simuladas) */
+.classModal {
+    display: none; /* Hidden by default - This should be the only display property here */
+    position: fixed; /* Stay in place */
+    z-index: 1050; /* A high z-index to be on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+    /* REMOVE THE LINE BELOW: display: flex; */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+/* Close button for modals */
+
+ .close { /* Add .close to target the profile modal's close button */
+    color: #ffffff;
+    background-color: #000;
+    position: absolute;
+    top: 15px;
+    right: 16px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 15%;
+}
+
+/* Modal specific styles */
+.modal-content {
+    background-color: #000000; /* Dark background for modals */
+    border: 1px solid #ffffff; /* Subtle border */
+    margin: auto; /* For older browsers/fallback if flex centering fails */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    color: var(--text-light); /* Ensure text is visible in dark modal */
+}
+
+/* Estilos para el contenido del perfil */
+.profile-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Espacio entre la imagen/icono y el nombre */
+    margin-top: 20px;
+}
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Hacer la imagen circular */
+    object-fit: cover; /* Asegurar que la imagen cubra el área */
+    border: 3px solid #ffffff; /* Borde blanco */
+    box-shadow: 0 0 30px #000000; /* Sombra brillante */
+}
+
+.default-profile-icon {
+    font-size: 120px; /* Tamaño grande para el icono por defecto */
+    color: #A32F2A; /* Color rojo para el icono por defecto */
+}
+
+.user-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
 }
 
 /* --- RESPONSIVE ADJUSTMENTS (MEDIA QUERIES) --- */
