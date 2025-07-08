@@ -1,3 +1,26 @@
+:root {
+    --bg-app: #121212; /* Fondo de la aplicación */
+    --bg-container: #1E1E1E; /* Fondo del contenedor principal */
+    --card-bg: #2D2D2D; /* Fondo de tarjetas/elementos */
+    --text-light: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-strong: #E0E0E0;
+    --accent-blue: #42A5F5; /* Azul para enlaces */
+    --accent-green: #6DD53D; /* Verde para completado */
+    --accent-red: #E57373; /* Rojo para atraso/rechazo */
+    --border-radius-main: 20px;
+    --border-radius-card: 16px;
+    --border-radius-button: 30px;
+    --border-radius-small: 10px;
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 20px;
+    --spacing-xl: 30px;
+
+    --back-button-bg: #444; /* Un gris oscuro para el fondo del botón */
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -158,7 +181,7 @@ body {
     display: flex; /* Para alinear el icono y el texto */
     align-items: center;
     gap: 0.5em; /* Espacio entre el icono y el texto */
-    flex-shrink: 0; /* Evita que el botón se encoja */
+    
     z-index: 10; /* Asegura que esté por encima del título si hay superposición */
 }
 
@@ -189,28 +212,14 @@ body {
 
 
 .footer-actions {
-    margin-top: auto; /* Empuja los botones al fondo */
+    margin-top: auto;
+    margin-bottom: 5px; /* Empuja los botones al fondo */
     display: flex;
     flex-direction: column; /* Apila los botones en móvil */
     gap: var(--spacing-s);
     padding-top: var(--spacing-m);
-    border-top: 1px solid #333;
 }
 
-.btn {
-    flex-grow: 1;
-    padding: var(--spacing-m) var(--spacing-l);
-    border: none;
-    border-radius: var(--border-radius-button); /* Bordes muy redondeados para botones */
-    font-size: 1.1em;
-    font-weight: 700;
-    color: white;
-    background-color: #881F1E;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    text-align: center; /* Asegura que el texto esté centrado si no es un bloque completo */
-    text-decoration: none; /* Quita subrayado de los enlaces */
-}
+
 
 

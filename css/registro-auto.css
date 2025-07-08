@@ -1,3 +1,25 @@
+:root {
+    --bg-app: #121212; /* Fondo de la aplicación */
+    --bg-container: #1E1E1E; /* Fondo del contenedor principal */
+    --card-bg: #2D2D2D; /* Fondo de tarjetas/elementos */
+    --text-light: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-strong: #E0E0E0;
+    --accent-blue: #42A5F5; /* Azul para enlaces */
+    --button-primary: #66BB6A; /* Verde para botón principal (Asignar) */
+    --border-radius-main: 20px;
+    --border-radius-card: 16px;
+    --border-radius-input: 10px;
+    --border-radius-button: 30px; /* Bordes de píldora para botones */
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 20px;
+    --spacing-xl: 30px;
+
+    --back-button-bg: #444; /* Un gris oscuro para el fondo del botón */
+}
+
 /* General Body and Container Styles */
 body {
     font-family: 'Roboto', sans-serif;
@@ -21,6 +43,7 @@ body {
     padding-bottom: 40px;
     padding-top: 0px;
     /* Asegura espacio para la barra de navegación inferior */
+
 }
 
 .container {
@@ -41,6 +64,50 @@ body {
     /* Subtle shadow */
 }
 
+.app-header {
+    background-color: var(--header-bg); /* Fondo de la cabecera */
+    padding: 1em 1.5em; /* Espaciado interno */
+    display: flex;
+    align-items: center; /* Alinea verticalmente el botón y el título */
+    justify-content: space-between; /* Espacia el botón a la izquierda y el título al centro */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
+}
+
+.app-header h1 {
+    margin: 0; /* Reinicia el margen del h1 */
+    font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
+    font-weight: 700;
+    color: var(--text-light);
+    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+    text-align: center; /* Centra el título */
+    /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
+    margin-left: -40px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
+}
+
+.back-button {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex; /* Para alinear el icono y el texto */
+    align-items: center;
+    gap: 0.5em; /* Espacio entre el icono y el texto */
+    flex-shrink: 0; /* Evita que el botón se encoja */
+    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
+}
+
+.back-button:hover {
+    background-color: var(--back-button-hover);
+}
+
+.back-button i {
+    font-size: 1em;
+}
+
 /* Section specific styles */
 .section {
     margin-bottom: 40px;
@@ -52,64 +119,6 @@ body {
     /* No margin after the last section */
 }
 
-/* Header with back button - FLEX CONTAINER for alignment */
-.header-with-back {
-    display: flex;
-    align-items: center;
-    /* Vertically center items */
-    justify-content: center;
-    /* Horizontally center the title */
-    position: relative;
-    /* Essential for positioning the back-button absolutely */
-    margin-bottom: 30px;
-    /* Space below the header */
-    padding-bottom: 5px;
-    /* Consistent with section-title padding-bottom */
-    border-bottom: 1px solid #3a3a3a;
-    /* Consistent with section-title border */
-    min-height: 48px;
-    /* Ensure a minimum height for the header on mobile */
-}
-
-/* Back button styling */
-.back-button {
-    color: #e0e0e0;
-    /* Light text color for the icon */
-    text-decoration: none;
-    background-color: transparent;
-    /* Transparent background */
-    transition: background-color 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8em;
-    /* Significantly larger icon size for mobile touch */
-    position: absolute;
-    /* Position absolutely within .header-with-back */
-    left: 0;
-    /* Align to the far left */
-    top: 50%;
-    /* Vertically center */
-    transform: translateY(-50%);
-    /* Adjust for perfect vertical centering */
-    padding: 12px;
-    /* Large padding for better touch target */
-    border-radius: 50%;
-    /* Make it circular */
-    line-height: 1;
-    /* Ensures icon is vertically centered correctly */
-}
-
-.back-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Subtle hover effect */
-}
-
-/* Ensure the Font Awesome icon inside the button is styled correctly */
-.back-button i {
-    font-size: 1em;
-    /* Use 1em so it scales with parent .back-button font-size */
-}
 
 /* Section title within the header */
 .section-title {

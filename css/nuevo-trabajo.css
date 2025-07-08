@@ -17,6 +17,8 @@
     --spacing-m: 15px;
     --spacing-l: 20px;
     --spacing-xl: 30px;
+
+    --back-button-bg: #444; /* Un gris oscuro para el fondo del botón */
 }
 
 /* --- ESTILOS GENERALES Y DE BASE (MOBILE-FIRST) --- */
@@ -48,6 +50,50 @@ html, body {
     gap: var(--spacing-xl); /* Espacio entre secciones */
     border-radius: var(--border-radius-main); /* Bordes redondeados para el contenedor principal */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra principal */
+}
+
+.app-header {
+    background-color: var(--header-bg); /* Fondo de la cabecera */
+    padding: 1em 1.5em; /* Espaciado interno */
+    display: flex;
+    align-items: center; /* Alinea verticalmente el botón y el título */
+    justify-content: space-between; /* Espacia el botón a la izquierda y el título al centro */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
+}
+
+.app-header h1 {
+    margin: 0; /* Reinicia el margen del h1 */
+    font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
+    font-weight: 700;
+    color: var(--text-light);
+    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+    text-align: center; /* Centra el título */
+    /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
+    margin-left: -40px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
+}
+
+.back-button {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex; /* Para alinear el icono y el texto */
+    align-items: center;
+    gap: 0.5em; /* Espacio entre el icono y el texto */
+    flex-shrink: 0; /* Evita que el botón se encoja */
+    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
+}
+
+.back-button:hover {
+    background-color: var(--back-button-hover);
+}
+
+.back-button i {
+    font-size: 1em;
 }
 
 h1 {
