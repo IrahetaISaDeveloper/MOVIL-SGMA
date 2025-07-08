@@ -331,3 +331,31 @@ input[type="checkbox"]:checked::before {
         align-self: center; /* Centra el botón en la sección */
     }
 }
+
+
+
+
+.footer-actions {
+    margin-top: auto; /* Empuja los botones al fondo */
+    display: flex;
+    flex-direction: column; /* Apila los botones en móvil */
+    gap: var(--spacing-s);
+    padding-top: var(--spacing-m);
+    border-top: 1px solid #333;
+}
+
+.btn {
+    flex-grow: 1;
+    padding: var(--spacing-m) var(--spacing-l);
+    border: none;
+    border-radius: var(--border-radius-button); /* Bordes muy redondeados para botones */
+    font-size: 1.1em;
+    font-weight: 700;
+    color: white;
+    background-color: #881F1E;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center; /* Asegura que el texto esté centrado si no es un bloque completo */
+    text-decoration: none; /* Quita subrayado de los enlaces */
+}

@@ -1,0 +1,216 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333; /* Fondo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px; /* Ancho típico de un teléfono */
+    background-color: #1a1a1a; /* Fondo de la app más oscuro */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 800px; /* Altura para simular un teléfono */
+}
+
+.header {
+    background-color: #222;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    border-bottom: 1px solid #444;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 15px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.vehicle-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.vehicle-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.text-details p {
+    margin: 3px 0;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.vehicle-model {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.driver-name {
+    font-size: 0.9em;
+    color: #aaa;
+    margin: 0;
+}
+
+.contact-button {
+    background-color: #007bff; /* Color azul para el botón Contactar */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.contact-button .arrow {
+    font-size: 1.2em;
+}
+
+.observations-card h2 {
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #eee;
+}
+
+.observations-textarea {
+    width: calc(100% - 20px); /* Ajustar el ancho */
+    height: 150px;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 0.9em;
+    resize: vertical; /* Permitir redimensionamiento vertical */
+}
+
+.footer {
+    background-color: #222;
+    padding: 15px;
+    text-align: center;
+    border-top: 1px solid #444;
+}
+
+.send-button {
+    background-color: #dc3545; /* Rojo para el botón Enviar */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.back-button {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex; /* Para alinear el icono y el texto */
+    align-items: center;
+    gap: 0.5em; /* Espacio entre el icono y el texto */
+    flex-shrink: 0; /* Evita que el botón se encoja */
+    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
+}
+
+.back-button:hover {
+    background-color: var(--back-button-hover);
+}
+
+.back-button i {
+    font-size: 1em;
+}
+
+
+.btn {
+    flex-grow: 1;
+    padding: var(--spacing-m) var(--spacing-l);
+    border: none;
+    border-radius: var(--border-radius-button); /* Bordes muy redondeados para botones */
+    font-size: 1.1em;
+    font-weight: 700;
+    color: white;
+    background-color: #881F1E;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center; /* Asegura que el texto esté centrado si no es un bloque completo */
+    text-decoration: none; /* Quita subrayado de los enlaces */
+}
+
+
+.footer-actions {
+    margin-top: auto; /* Empuja los botones al fondo */
+    display: flex;
+    flex-direction: column; /* Apila los botones en móvil */
+    gap: var(--spacing-s);
+    padding-top: var(--spacing-m);
+    border-top: 1px solid #333;
+}
+
+.btn {
+    flex-grow: 1;
+    padding: var(--spacing-m) var(--spacing-l);
+    border: none;
+    border-radius: var(--border-radius-button); /* Bordes muy redondeados para botones */
+    font-size: 1.1em;
+    font-weight: 700;
+    color: white;
+    background-color: #881F1E;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    text-align: center; /* Asegura que el texto esté centrado si no es un bloque completo */
+    text-decoration: none; /* Quita subrayado de los enlaces */
+}
+
+
