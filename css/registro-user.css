@@ -49,7 +49,6 @@ body {
     overflow: hidden; /* Asegura que el contenido no se salga de los límites. */
     display: flex; /* Habilita Flexbox. */
     flex-direction: column; /* Organiza los elementos hijos en una columna. */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidad. */
     /* Compatibilidad para alturas completas en navegadores móviles. */
     min-height: -webkit-fill-available;
     min-height: 100vh;
@@ -145,7 +144,7 @@ body {
 }
 
 /* Estilos para los campos de entrada de texto, email y contraseña. */
-.grupo-entrada input { 
+.grupo-entrada input {
     width: 100%; /* Ocupa todo el ancho disponible. */
     padding: var(--input-padding-y) var(--input-padding-x); /* Relleno interno. */
     background-color: var(--light-gray); /* Fondo gris claro. */
@@ -341,7 +340,7 @@ body {
     }
 }
 
-/* Ajustes específicos para pantallas con poca ALTURA (móviles cortos) */
+
 @media (max-height: 600px) {
     .contenido-principal-registro {
         padding-top: 15px; /* Reduce el relleno superior. */
@@ -363,5 +362,60 @@ body {
         margin-top: 10px; /* Reduce el margen superior del botón. */
         padding: 12px; /* Reduce el relleno del botón. */
         font-size: 1rem; /* Reduce el tamaño de fuente del botón. */
+    }
+}
+
+
+@media (min-width: 768px) {
+    .contenedor-aplicacion {
+        max-width: 1024px; /* Incrementa el ancho máximo para pantallas grandes*/
+        height: auto; /* Permite que la altura se ajuste al contenido, no 100vh*/
+        min-height: 120; /* Asegura una altura mínima para el contenedor de la app*/
+        margin: 40px auto; /* Centra el contenedor con margen automático y da espacio */
+    }
+
+    .encabezado-app {
+        padding: 1.2em 2em; /* Ajusta el padding para la cabecera */
+    }
+
+    .titulo-encabezado {
+        font-size: 2.2rem; /* Tamaño de fuente más grande para el título */
+        margin-left: -60px; /* Ajuste para centrar el título con el botón de regreso */
+    }
+
+    .boton-regresar {
+        padding: 0.8em 1.5em; /* Ajusta el padding del botón de regreso */
+        font-size: 1rem;
+    }
+
+    .contenido-principal-registro {
+        padding: 40px; /* Mayor padding para el contenido principal */
+    }
+
+    .contenido-principal-registro .subtitulo-formulario {
+        font-size: 1.15rem; /* Tamaño de fuente más grande para el subtítulo */
+        margin-bottom: 45px;
+    }
+
+    .formulario-registro {
+        max-width: 600px; /* Permite que el formulario sea más ancho */
+        gap: 25px; /* Mayor espacio entre los campos */
+    }
+
+    .grupo-entrada label {
+        font-size: 1.05rem; /* Tamaño de fuente de las etiquetas */
+    }
+
+    .grupo-entrada input,
+    .gatillo-selector-personalizado,
+    .opcion-personalizada {
+        padding: var(--input-padding-y) var(--input-padding-x); /* Usa las variables predefinidas */
+        font-size: 1.05rem; /* Tamaño de fuente para inputs y selectores */
+    }
+
+    .boton-base {
+        padding: 20px; /* Mayor padding para los botones */
+        font-size: 1.3rem; /* Tamaño de fuente más grande para los botones */
+        margin-top: 25px;
     }
 }
