@@ -1,0 +1,500 @@
+/* At the very top of your admin-users.css file */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+    /* Colores de registro-auto.css */
+    --bg-app: #121212;
+    --bg-container: #1E1E1E;
+    --card-bg: #2D2D2D;
+    --text-light: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-strong: #E0E0E0;
+    --accent-blue: #42A5F5;
+    --button-primary: #66BB6A;
+    --border-radius-main: 20px;
+    --border-radius-card: 16px;
+    --border-radius-input: 10px;
+    --border-radius-button: 30px;
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 20px;
+    --spacing-xl: 30px;
+    --back-button-bg: #444;
+
+    /* Colores específicos de este diseño */
+    --header-bg: #3a3a3a; /* Un gris un poco diferente para la cabecera */
+    --btn-delete-bg: #881F1E; /* Rojo para botones de eliminar */
+    --btn-delete-hover-bg: #A32F2A;
+    --btn-edit-bg: #42A5FF; /* Azul para botones de editar */
+    --btn-edit-hover-bg: #1e88e5;
+}
+
+/* General Body and Container Styles from registro-auto.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* FIX: Prevent horizontal scrolling for the entire body */
+    overflow-x: hidden; /* This is the key */
+    padding-bottom: 40px; /* Space for a potential fixed bottom nav if added later */
+    padding-top: 0px;
+}
+
+.container {
+    background-color: var(--bg-container);
+    width: 100%;
+    max-width: 768px;
+    margin: 20px auto; /* Existing margin */
+    padding: 30px 20px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Header Styles from registro-auto.css */
+.app-header {
+    background-color: var(--header-bg);
+    padding: 1em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    /* FIX: Set width to 100% but also limit its overall size based on the body's flow */
+    width: 100%; /* This is correct when body has overflow-x: hidden */
+    max-width: 768px; /* Ensure it doesn't get too wide on very large screens */
+    margin-bottom: 20px; /* Space below header */
+    border-radius: var(--border-radius-main) var(--border-radius-main) 0 0; /* Rounded top corners */
+}
+
+.app-header h1 {
+    margin: 5px;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text-light);
+    flex-grow: 1;
+    text-align: center;
+    margin-left: -40px; /* Adjustment for visual centering when back-button is present */
+}
+
+.back-button {
+    margin: 5px;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.back-button:hover {
+    background-color: var(--back-button-bg);
+}
+
+/* Section Title */
+h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 2.2em; /* Larger title for sections */
+  color: var(--text-light);
+}
+
+/* Form Styles from registro-auto.css */
+.user-form {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--card-bg); /* Use card background for form */
+  border-radius: var(--border-radius-card);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for form card */
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-secondary); /* Lighter grey for labels */
+    font-size: 1.1em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 14px 12px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius-input);
+    background-color: #3a3a3a; /* Darker background for inputs */
+    color: var(--text-light);
+    font-size: 1.1em;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: #888;
+}
+
+/* Custom Select Arrow */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-wrapper select {
+    padding-right: 35px; /* Make space for custom arrow */
+}
+
+.select-wrapper::after {
+    content: '▼';
+    font-size: 0.8em;
+    color: #ccc;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Photo Input and Preview Styles */
+.photo-input {
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius-input);
+    background-color: #3a3a3a;
+    color: var(--text-light);
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.photo-preview-container {
+    margin-top: 15px;
+    text-align: center;
+    border: 1px dashed #666;
+    border-radius: var(--border-radius-input);
+    padding: 10px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #2a2a2a; /* Slightly lighter than form bg */
+}
+
+.photo-preview {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 4px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Button Styles from registro-auto.css */
+.botones {
+    margin-top: 15px; /* Add some space above buttons */
+    padding: 14px 20px; /* Larger padding for better touch target */
+    border: none;
+    border-radius: var(--border-radius-button); /* Pill shape */
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    background-color: var(--btn-delete-bg); /* Default to a primary action color, e.g., the red from registro-auto */
+}
+
+.botones:hover {
+    background-color: var(--btn-delete-hover-bg);
+    transform: translateY(-2px);
+}
+
+.botones.secondary {
+    background-color: #555; /* A more neutral color for secondary buttons */
+    margin-top: 10px; /* Less margin for consecutive buttons */
+}
+
+.botones.secondary:hover {
+    background-color: #666;
+}
+
+/* Section Separator */
+.section-separator {
+    border: none;
+    border-top: 1px solid #3a3a3a;
+    margin: 40px 0;
+}
+
+/* Table Styles (Adapted from previous and new theme) */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-bg); /* Use card background for table */
+  border-radius: var(--border-radius-card);
+  overflow: hidden; /* Ensures rounded corners apply to content */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+table th,
+table td {
+  padding: 15px; /* Generous padding */
+  vertical-align: middle;
+  border-bottom: 1px solid #3a3a3a; /* Darker border for rows */
+  color: var(--text-light);
+}
+
+table th {
+  background-color: #333; /* Slightly darker header */
+  color: var(--text-strong);
+  text-align: left;
+  font-weight: bold;
+}
+
+table tbody tr:last-child td {
+  border-bottom: none; /* No border for last row */
+}
+
+/* Profile image in table */
+table img.profile-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #555; /* Subtle border */
+}
+
+/* Action buttons in table */
+table button {
+  margin-right: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+table button:first-of-type { /* Edit button */
+    background-color: var(--btn-edit-bg); /* Blue color */
+    color: white;
+}
+
+table button:first-of-type:hover {
+    background-color: var(--btn-edit-hover-bg);
+}
+
+table button:last-of-type { /* Delete button */
+    background-color: var(--btn-delete-bg); /* Red color */
+    color: white;
+}
+
+table button:last-of-type:hover {
+    background-color: var(--btn-delete-hover-bg);
+}
+
+
+/* --- Media Queries (Combined and Adapted) --- */
+
+/* For iPhone X, Samsung S22 (Portrait & Landscape) & general smaller screens - max-width: 800px */
+@media (max-width: 800px) {
+    body{
+        height: 100%;
+    }
+    .app-header {
+        margin-bottom: 0;
+        padding: 0.8em 1em;
+        border-radius: 0; /* No rounded corners for header on small screens */
+        /* FIX: Ensure header is truly full width on small screens if desired */
+        max-width: 100%; /* Override max-width for small screens */
+        width: 100%; /* Explicitly 100% of its parent (body) */
+    }
+    .app-header h1 {
+        font-size: 1.1em;
+        margin-left: -20px; /* Adjust centering for smaller back button */
+    }
+    .back-button {
+        padding: 0.5em 0.8em;
+        font-size: 0.8em;
+    }
+
+    .container {
+        margin: 0 auto; /* Remove top/bottom margin for full bleed */
+        padding: 20px 15px;
+        border-radius: 0; /* No rounded corners for main container on small screens */
+        box-shadow: none; /* Remove shadow */
+        max-width: 100%; /* Ensure container also adapts */
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .user-form {
+        padding: 1rem;
+        border-radius: var(--border-radius-main); /* Keep rounded corners on form card */
+    }
+
+    label {
+        font-size: 1em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+        padding: 12px 10px;
+        font-size: 1em;
+    }
+
+    .botones {
+        padding: 14px 20px;
+        font-size: 1.1em;
+    }
+
+    table th,
+    table td {
+        padding: 10px; /* Reduce table cell padding */
+        font-size: 0.85em; /* Smaller font for table text */
+    }
+
+    table img.profile-thumb {
+        width: 45px; /* Smaller image thumbnails */
+        height: 45px;
+    }
+
+    table button {
+        font-size: 1.6em; /* Smaller button text */
+        margin: 5px;
+        padding: 6px 10px; /* Smaller button padding */
+    }
+}
+
+/* Fine-tune for very small screens (e.g., older phones, or narrow landscape) */
+@media (max-width: 480px) {
+    body{
+        margin-bottom: 0;
+    }
+    .container{
+        margin-bottom: 0;
+    }
+    .app-header{
+        margin-bottom: 0;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    .user-form {
+        padding: 0.8rem;
+    }
+    table th,
+    table td {
+        padding: 8px;
+        font-size: 0.75em;
+    }
+    table img.profile-thumb {
+        width: 40px;
+        height: 40px;
+    }
+    table button {
+        margin: 5px;
+        padding: 5px 8px;
+        font-size: 1.2em;
+    }
+}
+
+/* For Tablets (e.g., Samsung Tab, iPad) - min-width: 769px and max-width: 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body{
+        max-height: 810px;
+        margin-bottom: 0;
+    }
+
+    .container {
+        max-width: 100%; /* Use more of the screen width */
+        padding: 40px 30px;
+        margin: 0 auto; /* Eliminar espacios entre divs */
+        border-radius: 0%;
+    }
+
+    .app-header {
+        max-width: 100%;
+        margin-bottom: 0; /* Eliminar espacio debajo del header */
+        border-radius: 0; /* Eliminar el header redondeado */
+    }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .user-form {
+    padding: 2rem;
+  }
+
+  label {
+      font-size: 1.15em;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+      padding: 16px 14px;
+      font-size: 1.15em;
+  }
+
+  .botones {
+      padding: 16px 25px;
+      font-size: 1.2em;
+  }
+
+  table th,
+  table td {
+    padding: 18px;
+    font-size: 1em;
+  }
+
+  table img.profile-thumb {
+    width: 65px;
+    height: 65px;
+  }
+
+  table button {
+    font-size: 0.95em;
+    margin: 5px;
+    padding: 9px 14px;
+  }
+}
