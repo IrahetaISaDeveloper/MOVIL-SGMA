@@ -33,14 +33,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const itemHref = this.getAttribute('href');
             const isModalTrigger = this.hasAttribute('data-toggle') && this.getAttribute('data-toggle') === 'modal';
 
-            // For #inicio link on the same page
-            if (itemHref.includes('coordi-index.html#inicio') || (itemHref === '#inicio' && !isModalTrigger) || itemHref === 'coordi-index.html') {
-                e.preventDefault(); // Prevent default link behavior
+            // For #inicio link on the same page OR for a full page navigation to coordi-index.html
+            if (itemHref === 'coordi-index.html' || itemHref.includes('coordi-index.html#inicio') || (itemHref === '#inicio' && !isModalTrigger)) {
+                // If the link is for 'coordi-index.html' and we are not already there, navigate.
+                if (window.location.pathname.split('/').pop() !== 'coordi-index.html' || (itemHref.includes('#inicio') && window.location.hash !== '#inicio')) {
+                     window.location.href = itemHref; // Navigate to coordi-index.html
+                }
+                e.preventDefault(); // Prevent default link behavior if we are handling navigation or hash scroll
                 const targetSection = document.querySelector('.content-section'); // Or a specific ID if you add one to the main content
                 if (targetSection) {
                     targetSection.scrollIntoView({ behavior: 'smooth' });
                 }
-                setActiveNavItem(); // Set active after scroll
+                setActiveNavItem(); // Set active after potential scroll/navigation
             } else if (!isModalTrigger) {
                 // For direct page links (1er-año.html, admin.html)
                 // Let the default link behavior happen (navigate to new page)
