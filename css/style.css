@@ -30,7 +30,9 @@ body {
 }
 
 .contenedor-inicio-sesion {
-    background-color: transparent;
+    background: rgba(40, 40, 40, 0.959);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.123); 
     padding: 20px;
     display: flex;
     flex-direction: column;
