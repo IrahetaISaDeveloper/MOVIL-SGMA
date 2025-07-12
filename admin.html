@@ -9,54 +9,64 @@
   <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
-  <header class="app-header">
-    <a href="coordi-index.html" class="back-button"> <i class="fa-solid fa-arrow-left"></i>
+  <header class="encabezado-app">
+    <a href="coordi-index.html" class="boton-volver"> <i class="fa-solid fa-arrow-left"></i>
       <span></span> </a>
-    <h1 class="header-title">Administración</h1>
-    <div class="header-spacer"></div> </header>
+    <h1 class="titulo-encabezado">Administración</h1>
+    <div class="espaciador-encabezado"></div> </header>
 
-  <div class="full-screen-app-container">
-    <main class="admin-main-content">
+  <div class="contenedor-app-pantalla-completa">
+    <main class="contenido-principal-admin">
 
-      <div class="cards-wrapper">
-        <div class="card">
-          <i class="fa-solid fa-users card-i"></i>
-          <a class="btn" href="admin-users.html">Usuarios</a>
-        </div>
+      <div class="lista-configuracion">
+        <a class="elemento-configuracion" href="admin-users.html">
+          <div class="icono-texto-configuracion">
+            <i class="fa-solid fa-users icono-configuracion"></i>
+            <div class="contenido-texto">
+              <span class="titulo-configuracion">Usuarios</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right icono-flecha"></i>
+        </a>
 
-        <div class="card">
-          <i class="fa-solid fa-cubes"></i>
-          <a class="btn" href="admin-modules.html">Modulos</a>
-        </div>
+        <a class="elemento-configuracion" href="admin-modules.html">
+          <div class="icono-texto-configuracion">
+            <i class="fa-solid fa-cubes icono-configuracion"></i>
+            <div class="contenido-texto">
+              <span class="titulo-configuracion">Módulos</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right icono-flecha"></i>
+        </a>
       </div>
     </main>
   </div>
 
-  <nav class="bottom-nav">
+  <nav class="navegacion-inferior">
     <ul>
       <li>
-        <a href="coordi-index.html" class="nav-item"> <i class="fas fa-home nav-icon"></i>
+        <a href="coordi-index.html" class="item-nav"> <i class="fas fa-home icono-nav"></i>
           <span>Inicio</span>
         </a>
       </li>
       <li>
-        <a href="1er-año.html" class="nav-item"> <i class="fas fa-clipboard-list nav-icon"></i>
+        <a href="1er-año.html" class="item-nav"> <i class="fas fa-clipboard-list icono-nav"></i>
           <span>Registros</span>
         </a>
       </li>
       <li>
-        <a href="#" class="nav-item"> <i class="fas fa-chart-bar nav-icon"></i>
+        <a href="#" class="item-nav"> <i class="fas fa-chart-bar icono-nav"></i>
           <span>Reportes</span>
         </a>
       </li>
       <li>
-        <a href="#" class="nav-item" data-toggle="modal" data-target="#perfilModal">
-          <i class="fas fa-user nav-icon"></i>
+        <a href="#" class="item-nav" data-toggle="modal" data-target="#perfilModal">
+          <i class="fas fa-user icono-nav"></i>
           <span>Perfil</span>
         </a>
       </li>
       <li>
-        <a href="admin.html" class="nav-item active"> <i class="fas fa-wrench nav-icon"></i>
+        <a href="admin.html" class="item-nav activo"> <i class="fas fa-wrench icono-nav"></i>
           <span>Más</span>
         </a>
       </li>
