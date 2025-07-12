@@ -94,14 +94,9 @@ async function BorrarUsuario(id) {
     const confirmacion = confirm('¿Eliminar este usuario?');
 
     if (confirmacion) {
-        try {
             await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
             CargarUsuarios();
             alert("El registro fue eliminado.");
-        } catch (error) {
-            console.error('Error al borrar usuario:', error);
-            alert('No se pudo eliminar el usuario.');
-        }
     } else {
         alert("Se canceló la acción.");
     }
