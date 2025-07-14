@@ -25,28 +25,4 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('loggedInUserPhoto');
         });
     }
-
-    // Function to display user profile for the modal
-    function displayUserProfileForModal() {
-        const profileContentDiv = document.getElementById('profile-content');
-        if (profileContentDiv) {
-            let profileHtml = '';
-            if (loggedInUserName) {
-                profileHtml += `
-                    <div class="profile-display">
-                        ${loggedInUserPhoto ? `<img src="${loggedInUserPhoto}" alt="Foto de Perfil" class="profile-picture">` : `<i class="fas fa-user-circle default-profile-icon"></i>`}
-                        <p class="user-name">${loggedInUserName}</p>
-                    </div>
-                `;
-            } else {
-                profileHtml = '<p>No se encontraron datos de perfil. Por favor, inicia sesión.</p>';
-            }
-            profileContentDiv.innerHTML = profileHtml;
-        }
-    }
-
-    // Event listener for when the profile modal is shown (using jQuery for Bootstrap events)
-    $('#perfilModal').on('show.bs.modal', function (e) {
-        displayUserProfileForModal(); // Load profile data when modal is about to be shown
-    });
 });

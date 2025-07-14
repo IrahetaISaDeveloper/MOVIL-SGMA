@@ -1,27 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.bottom-nav .nav-item');
 
-    function displayUserProfileForModal() {
-        const profileContentDiv = document.getElementById('profile-content');
-        if (profileContentDiv) {
-            const userName = localStorage.getItem('loggedInUserName');
-            const userPhoto = localStorage.getItem('loggedInUserPhoto');
-
-            let profileHtml = '';
-            if (userName) {
-                profileHtml += `
-                    <div class="profile-display">
-                        ${userPhoto ? `<img src="${userPhoto}" alt="Foto de Perfil" class="profile-picture">` : `<i class="fas fa-user-circle default-profile-icon"></i>`}
-                        <p class="user-name">${userName}</p>
-                    </div>
-                `;
-            } else {
-                profileHtml = '<p>No se encontraron datos de perfil. Por favor, inicia sesión.</p>';
-            }
-            profileContentDiv.innerHTML = profileHtml;
-        }
-    }
-
     function setActiveNavItem() {
         const currentPath = window.location.pathname.split('/').pop(); // e.g., "registro-auto.html"
         const currentHash = window.location.hash;
@@ -58,17 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             // For modal triggers, Bootstrap handles the opening, and the 'show.bs.modal' event handles active state
         });
-    });
-
-    // Event listener for when the profile modal is shown
-    $('#perfilModal').on('show.bs.modal', function (e) {
-        displayUserProfileForModal(); // Load profile data when modal is about to be shown
-        setActiveNavItem(); // Set active for profile modal
-    });
-
-    // Event listener for when any modal is hidden
-    $('.modal').on('hidden.bs.modal', function (e) {
-        setActiveNavItem(); // Re-evaluate active item after modal closes
     });
 
     // Initial active item setting on page load
