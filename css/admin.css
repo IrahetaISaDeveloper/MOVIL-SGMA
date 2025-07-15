@@ -35,21 +35,7 @@ body {
   flex-direction: column;
 }
 
-.contenedor-app-pantalla-completa {
-  background-color: var(--fondo-app);
-  width: 100%;
-  max-width: 450px;
-  flex-grow: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0 auto;
-  position: relative;
-  padding-bottom: 60px;
-  box-sizing: border-box;
-}
+
 
 @media (max-width: 500px) {
   .contenedor-app-pantalla-completa {
@@ -142,7 +128,7 @@ body {
 .elemento-configuracion {
   background-color: var(--fondo-elemento-configuracion);
   border-radius: var(--radio-borde-elemento-configuracion);
-  padding: 15px 20px;
+  padding: 30px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -161,11 +147,11 @@ body {
 .icono-texto-configuracion {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 35px;
 }
 
 .icono-configuracion {
-  font-size: 24px;
+  font-size: 34px;
   color: var(--color-icono-configuracion);
   width: 30px;
   text-align: center;
@@ -177,7 +163,7 @@ body {
 }
 
 .titulo-configuracion {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--color-titulo-configuracion);
 }

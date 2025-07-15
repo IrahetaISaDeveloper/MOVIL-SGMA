@@ -54,11 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Event listener for when any modal is hidden
-    $('.modal').on('hidden.bs.modal', function (e) {
-        // After any modal closes, re-evaluate active item based on the current URL
-        setActiveNavItem();
-    });
+    
 
     // Initial active item setting on page load
     setActiveNavItem();

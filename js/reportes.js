@@ -61,22 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Event listener for when any modal is shown (opened)
-    $('.modal').on('show.bs.modal', function (e) {
-        // Find the nav item that triggered this modal and set it active
-        const modalTriggerNavItem = document.querySelector(`[data-target="#${this.id}"]`);
-        if (modalTriggerNavItem) {
-            navItems.forEach(item => item.classList.remove('active')); // Remove all active states first
-            modalTriggerNavItem.classList.add('active');
-        }
-    });
-
-    // Event listener for when any modal is hidden
-    $('.modal').on('hidden.bs.modal', function (e) {
-        // After any modal closes, re-evaluate active item based on the current URL
-        setActiveNavItem();
-    });
-
     // Initial active item setting on page load
     setActiveNavItem();
 
