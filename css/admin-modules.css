@@ -1,0 +1,342 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+    /* Colores de registro-auto.css */
+    --bg-app: #121212;
+    --bg-container: #1E1E1E;
+    --card-bg: #2D2D2D;
+    --text-light: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-strong: #E0E0E0;
+    --accent-blue: #42A5F5;
+    --button-primary: #66BB6A;
+    --border-radius-main: 20px;
+    --border-radius-card: 16px;
+    --border-radius-input: 10px;
+    --border-radius-button: 30px;
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 20px;
+    --spacing-xl: 30px;
+
+    /* Colores y variables de admin.css (retained for header, etc.) */
+    --fondo-app: #2b2b2b;
+    --fondo-encabezado: #3a3a3a;
+    --fondo-tarjeta: white; /* No se usa directamente aquí, pero se mantiene */
+    --texto-claro: white;
+    --resaltado-texto: #dcdcdc;
+    --fondo-boton: #8b1c1c; /* Para botones principales en admin.css */
+    --fondo-boton-hover: #a52a2a;
+    --fondo-boton-volver: #444; /* Para el botón de regresar del header */
+    --hover-boton-volver: #555;
+    --alto-encabezado: 60px;
+
+    /* Colores específicos de este diseño (admin-users.css adaptado) */
+    --header-bg: #3a3a3a; /* Un gris un poco diferente para la cabecera */
+    --btn-delete-bg: #881F1E; /* Rojo para botones de eliminar */
+    --btn-delete-hover-bg: #A32F2A;
+    --btn-edit-bg: #42A5FF; /* Azul para botones de editar */
+    --btn-edit-hover-bg: #1e88e5;
+
+    /* Colores para el nuevo footer/navegación (tomados de estudiantes.css) */
+    --bottom-nav-height: 60px; /* Example bottom nav height */
+    --nav-item-color: #888;
+    --nav-item-active-color: #A32F2A; /* Color activo de estudiantes.css */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-container); /* Usamos --bg-app de admin-users.css */
+    color: var(--text-light); /* Usamos --text-light de admin-users.css */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    padding-bottom: var(--bottom-nav-height); /* Space for the fixed bottom navigation */
+    padding-top: 0px;
+
+}
+
+.encabezado-app {
+  background-color: var(--fondo-encabezado);
+  padding: 1em 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 60px;
+}
+
+.titulo-encabezado {
+  font-size: 1.3rem;
+  margin: 0;
+  color: var(--texto-claro);
+  text-align: center;
+}
+
+.espaciador-encabezado {
+  width: 50px;
+}
+
+.boton-volver {
+  color: var(--texto-claro);
+  text-decoration: none;
+  padding: 0.6em 0.8em;
+  background-color: var(--fondo-boton-volver);
+  border-radius: 8px;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  flex-shrink: 0;
+  z-index: 10;
+  width: 45px;
+  justify-content: center;
+}
+
+.boton-volver:hover {
+  background-color: var(--hover-boton-volver);
+}
+
+.boton-volver i {
+  font-size: 1.1em;
+}
+
+/* Contenedor principal para el contenido CRUD (similar a .container de admin-users.css) */
+.contenedor {
+    background-color: var(--bg-container);
+    width: 100%;
+    max-width: 768px;
+    margin: 20px auto;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    flex-grow: 1;
+    /* Permite que el contenedor crezca y ocupe espacio disponible */
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/* Section Title */
+h1 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 2.2em;
+    color: var(--text-light);
+}
+
+/* Form Styles (from admin-users.css) */
+.formulario-modulo {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.grupo-formulario {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-secondary);
+    font-size: 1.1em;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 14px 12px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius-input);
+    background-color: #3a3a3a;
+    color: var(--text-light);
+    font-size: 1.1em;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    resize: vertical;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+    color: #888;
+}
+
+/* Button Styles (from admin-users.css) */
+.botones {
+    margin-top: 15px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: var(--border-radius-button);
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    background-color: var(--button-primary);
+}
+
+.botones:hover {
+    background-color: #5cb85d;
+    transform: translateY(-2px);
+}
+
+.botones.secundario {
+    background-color: #555;
+    margin-top: 10px;
+}
+
+.botones.secundario:hover {
+    background-color: #666;
+}
+
+/* Section Separator */
+.separador-seccion {
+    border: none;
+    border-top: 1px solid #3a3a3a;
+    margin: 40px 0;
+}
+
+/* Table Styles (from admin-users.css) */
+.tabla-responsiva {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+table th,
+table td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #3a3a3a;
+    color: var(--text-light);
+}
+
+table th {
+    background-color: #333;
+    color: var(--text-strong);
+    text-align: left;
+    font-weight: bold;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Action buttons in table */
+table button {
+    margin-right: 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+table button:first-of-type {
+    background-color: var(--btn-edit-bg);
+    color: white;
+}
+
+table button:first-of-type:hover {
+    background-color: var(--btn-edit-hover-bg);
+}
+
+table button:last-of-type {
+    background-color: var(--btn-delete-bg);
+    color: white;
+}
+
+table button:last-of-type:hover {
+    background-color: var(--btn-delete-hover-bg);
+}
+
+
+.navegacion-inferior {
+    height: 57px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    border-top: 1px solid #444;
+    padding: 5px 0;
+    z-index: 100;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.navegacion-inferior ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.navegacion-inferior li {
+    flex: 1;
+    text-align: center;
+}
+
+.navegacion-inferior .item-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 0;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.75em;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navegacion-inferior .item-nav .icono-nav {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.navegacion-inferior .item-nav.activo {
+    color: #A32F2A;
+}
+
+.navegacion-inferior .item-nav.activo .icono-nav {
+    color: #A32F2A;
+}

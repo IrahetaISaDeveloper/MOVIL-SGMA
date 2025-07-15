@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/admin-modules.css">
+</head>
+
+<body>
+    <header class="encabezado-app">
+        <a href="coordi-index.html" class="boton-volver"> <i class="fa-solid fa-arrow-left"></i>
+            <span></span> </a>
+        <h1 class="titulo-encabezado">Administración</h1>
+        <div class="espaciador-encabezado"></div>
+    </header>
+
+    <main class="contenedor">
+        <h1>CRUD de Módulos</h1>
+
+        <form id="formulario-modulo" class="formulario-modulo">
+            <input type="hidden" id="idModulo" />
+            <div class="grupo-formulario">
+                <label for="nombreModulo">Nombre del Módulo:</label>
+                <input type="text" id="nombreModulo" required />
+            </div>
+            <div class="grupo-formulario">
+                <label for="descripcionModulo">Descripción:</label>
+                <textarea id="descripcionModulo" rows="3"></textarea>
+            </div>
+
+            <button type="submit" id="btn-enviar" class="botones">Agregar Módulo</button>
+            <button type="button" id="btn-cancelar" class="botones secundario" hidden>Cancelar</button>
+        </form>
+
+        <hr class="separador-seccion" />
+
+        <div class="tabla-responsiva">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del Módulo</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla-modulos">
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <nav class="navegacion-inferior">
+    <ul>
+      <li>
+        <a href="coordi-index.html" class="item-nav"> <i class="fas fa-home icono-nav"></i>
+          <span>Inicio</span>
+        </a>
+      </li>
+      <li>
+        <a href="1er-año.html" class="item-nav"> <i class="fas fa-clipboard-list icono-nav"></i>
+          <span>Registros</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="item-nav"> <i class="fas fa-chart-bar icono-nav"></i>
+          <span>Reportes</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="item-nav" data-toggle="modal" data-target="#perfilModal">
+          <i class="fas fa-user icono-nav"></i>
+          <span>Perfil</span>
+        </a>
+      </li>
+      <li>
+        <a href="admin.html" class="item-nav activo"> <i class="fas fa-wrench icono-nav"></i>
+          <span>Más</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+
+    <script src="js/admin-modules.js"></script>
+</body>
+
+</html>
