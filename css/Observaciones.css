@@ -47,7 +47,6 @@ body {
     height: 100%; /* Keep this for the container to fill the screen */
     max-width: 430px;
     background-color: #1a1a1a;
-    border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     overflow: hidden; /* Hide any overflow of the container itself */
     display: flex;
@@ -233,6 +232,10 @@ body {
     padding-top: var(--spacing-xs);
 }
 
-
+@media (min-width: 375px) {
+    .header h1{
+        margin:  -20;
+    }
+}
 
 
