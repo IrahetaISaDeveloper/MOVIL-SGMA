@@ -46,27 +46,26 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.encabezado-app {
-    background-color: var(--header-bg);
-    padding: 1em 1.5em;
+.app-header {
+    margin-bottom: 5px;
+    background-color: var(--header-bg); /* Fondo de la cabecera */
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
+    align-items: center; /* Alinea verticalmente el botón y el título */
+    justify-content: center; /* Espacia el botón a la izquierda y el título al centro */
+    flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
 }
 
-.encabezado-app h1 {
-    margin: 0;
-    font-size: 1.3em;
+.app-header h1 {
+    font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
     font-weight: 700;
     color: var(--text-light);
-    flex-grow: 1;
-    text-align: center;
-    margin-left: -40px;
+    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+    text-align: center; /* Centra el título */
+    /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
+    margin-left: -15px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
 }
 
-.boton-volver {
+.back-button {
     color: var(--text-light);
     text-decoration: none;
     padding: 0.6em 1em;
@@ -74,20 +73,21 @@ body {
     border-radius: 8px;
     font-size: 0.85em;
     transition: background-color 0.2s ease;
-    display: flex;
+    display: flex; /* Para alinear el icono y el texto */
     align-items: center;
-    gap: 0.5em;
-    flex-shrink: 0;
-    z-index: 10;
+    gap: 0.5em; /* Espacio entre el icono y el texto */
+    flex-shrink: 0; /* Evita que el botón se encoja */
+    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
 }
 
-.boton-volver:hover {
+.back-button:hover {
     background-color: var(--back-button-hover);
 }
 
-.boton-volver i {
+.back-button i {
     font-size: 1em;
 }
+
 
 .seccion {
     margin-bottom: 40px;
