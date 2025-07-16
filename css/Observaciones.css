@@ -56,29 +56,24 @@ body {
 }
 
 .header {
-    background-color: #222;
-    color: white;
-    padding: 10px 20px; /* Ajustado para mejor espaciado */
-    font-size: 0.7em;
-    border-bottom: 1px solid #444;
-    display: flex; /* Habilitar flexbox */
-    align-items: center; /* Alinear elementos verticalmente al centro */
-    position: relative; /* Necesario para el posicionamiento absoluto del h1 */
-    justify-content: flex-start; /* Asegura que el botón de retroceso quede a la izquierda */
+    background-color: var(--header-bg); /* Fondo de la cabecera */
+    padding: 1em 1.5em; /* Espaciado interno */
+    display: flex;
+    align-items: center; /* Alinea verticalmente el botón y el título */
+    justify-content: space-between; /* Espacia el botón a la izquierda y el título al centro */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
 }
 
 .header h1 {
-    margin: 0; /* Eliminar márgenes predeterminados */
-    text-align: center; /* Centrar el texto dentro del h1 */
-    position: absolute; /* Posicionamiento absoluto */
-    left: 50%; /* Mover el inicio del h1 al 50% del ancho del padre */
-    transform: translateX(-50%); /* Desplazar el h1 hacia atrás por la mitad de su propio ancho para centrarlo */
-    width: auto; /* El ancho se ajusta al contenido */
-    white-space: nowrap; /* Evita que el texto se envuelva */
-    overflow: hidden; /* Oculta el texto que se desborda */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para el texto desbordado */
-    max-width: 60%; /* Limita el ancho del título para evitar solapamiento con los botones */
-    z-index: 1; /* Asegura que el h1 esté sobre el fondo */
+    margin: 0; /* Reinicia el margen del h1 */
+    font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
+    font-weight: 700;
+    color: var(--text-light);
+    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+    text-align: center; /* Centra el título */
+    /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
+    margin-left: -40px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
 }
 
 .back-button {
@@ -92,7 +87,7 @@ body {
     display: flex; /* Para alinear el icono y el texto */
     align-items: center;
     gap: 0.5em; /* Espacio entre el icono y el texto */
-    /* max-width: 15px; ELIMINAR ESTA LÍNEA */
+    flex-shrink: 0; /* Evita que el botón se encoja */
     z-index: 10; /* Asegura que esté por encima del título si hay superposición */
 }
 
@@ -101,8 +96,7 @@ body {
 }
 
 .back-button i {
-    font-size: 1.5em;
-    /* align-items: center; ELIMINAR ESTA LÍNEA */
+    font-size: 1em;
 }
 
 .card {
