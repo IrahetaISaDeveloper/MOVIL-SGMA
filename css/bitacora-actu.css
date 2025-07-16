@@ -55,23 +55,20 @@ html, body {
 
 .app-header {
     background-color: var(--header-bg); /* Fondo de la cabecera */
-    padding: 1em 1.5em; /* Espaciado interno */
     display: flex;
     align-items: center; /* Alinea verticalmente el botón y el título */
-    justify-content: space-between; /* Espacia el botón a la izquierda y el título al centro */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separador sutil */
+    justify-content: center; /* Espacia el botón a la izquierda y el título al centro */
     flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
 }
 
 .app-header h1 {
-    margin: 0; /* Reinicia el margen del h1 */
     font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
     font-weight: 700;
     color: var(--text-light);
     flex-grow: 1; /* Permite que el título ocupe el espacio restante */
     text-align: center; /* Centra el título */
     /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
-    margin-left: -40px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
+    margin-left: -15px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
 }
 
 .back-button {
@@ -97,13 +94,7 @@ html, body {
     font-size: 1em;
 }
 
-h1 {
-    text-align: center;
-    font-weight: 700;
-    font-size: 1.8em; /* Tamaño de título para móvil */
-    margin-bottom: var(--spacing-m);
-    color: var(--text-strong);
-}
+
 
 h2 {
     font-size: 1.2em;
