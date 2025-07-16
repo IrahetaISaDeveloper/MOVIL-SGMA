@@ -72,7 +72,7 @@ body {
     flex-grow: 1; /* Permite que el título ocupe el espacio restante */
     text-align: center; /* Centra el título */
     /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
-    margin-left: -40px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
+    margin-left: -20px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
 }
 
 .back-button {
@@ -232,10 +232,5 @@ body {
     padding-top: var(--spacing-xs);
 }
 
-@media (min-width: 375px) {
-    .header h1{
-        margin:  -20;
-    }
-}
 
 
