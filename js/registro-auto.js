@@ -1,217 +1,105 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const polizaCheckbox = document.getElementById('poliza-checkbox');
-    const polizaInput = document.getElementById('poliza');
-    const placaInput = document.getElementById('placa');
-    const nivelAtencionCheckboxes = document.querySelectorAll('input[name="nivelAtencionRadio"]');
-    const operacionesEfectuarSelect = document.getElementById('operacionesEfectuar1');
-    const moduloRespuestaSelect = document.getElementById('moduloRespuesta');
-    const acceptTermsCheckbox = document.getElementById('acceptTerms');
-    const firmarBtn = document.getElementById('firmar-btn');
-    const enviarSolicitudBtn = document.getElementById('enviar-solicitud-btn');
+    const casillaPoliza = document.getElementById('casilla-poliza');
+    const entradaPoliza = document.getElementById('poliza');
+    const entradaPlaca = document.getElementById('placa');
+    const aceptarTerminosCasilla = document.getElementById('aceptarTerminos');
+    const botonEnviarSolicitud = document.getElementById('boton-enviar-solicitud');
 
-    const photoInputs = [
-        { input: document.getElementById('foto1'), preview: document.getElementById('preview1') },
-        { input: document.getElementById('foto2'), preview: document.getElementById('preview2') },
-        { input: document.getElementById('foto3'), preview: document.getElementById('preview3') },
-        { input: document.getElementById('foto4'), preview: document.getElementById('preview4') }
+    const entradasFoto = [
+        { entrada: document.getElementById('foto1'), vistaPrevia: document.getElementById('vista-previa-1') },
+        { entrada: document.getElementById('foto2'), vistaPrevia: document.getElementById('vista-previa-2') },
+        { entrada: document.getElementById('foto3'), vistaPrevia: document.getElementById('vista-previa-3') },
+        { entrada: document.getElementById('foto4'), vistaPrevia: document.getElementById('vista-previa-4') }
     ];
 
-    function handlePhotoChange(event) {
-        const input = event.target;
-        const preview = photoInputs.find(item => item.input === input).preview;
+    function manejarCambioFoto(evento) {
+        const entrada = evento.target;
+        const vistaPrevia = entradasFoto.find(item => item.entrada === entrada).vistaPrevia;
 
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
+        if (entrada.files && entrada.files[0]) {
+            const lector = new FileReader();
 
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
+            lector.onload = function (e) {
+                vistaPrevia.src = e.target.result;
+                vistaPrevia.style.display = 'block';
             };
 
-            reader.readAsDataURL(input.files[0]);
+            lector.readAsDataURL(entrada.files[0]);
         } else {
-            preview.src = '#';
-            preview.style.display = 'none';
+            vistaPrevia.src = '#';
+            vistaPrevia.style.display = 'none';
         }
-        updateSendButtonState();
+        actualizarEstadoBotonEnviar();
     }
 
-    photoInputs.forEach(item => {
-        item.input.addEventListener('change', handlePhotoChange);
+    entradasFoto.forEach(item => {
+        item.entrada.addEventListener('change', manejarCambioFoto);
     });
 
-    function areAllPhotosTaken() {
-        return photoInputs.every(item => item.input.files && item.input.files.length > 0);
+    function estanTodasLasFotosTomadas() {
+        return entradasFoto.every(item => item.entrada.files && item.entrada.files.length > 0);
     }
 
-    function updatePolizaAndPlacaStates() {
-        if (polizaCheckbox.checked) {
-            polizaInput.disabled = true;
-            polizaInput.value = '';
-            polizaInput.placeholder = 'No aplica';
-            placaInput.disabled = true;
-            placaInput.value = '';
-            placaInput.placeholder = 'No aplica';
+    function actualizarEstadosPolizaYPlaca() {
+        if (casillaPoliza.checked) {
+            entradaPoliza.disabled = true;
+            entradaPoliza.value = '';
+            entradaPoliza.placeholder = 'No aplica';
+            entradaPlaca.disabled = true;
+            entradaPlaca.value = '';
+            entradaPlaca.placeholder = 'No aplica';
         } else {
-            polizaInput.disabled = false;
-            polizaInput.placeholder = 'N° de póliza';
-            placaInput.disabled = false;
-            placaInput.placeholder = 'N° de placa';
+            entradaPoliza.disabled = false;
+            entradaPoliza.placeholder = 'N° de póliza';
+            entradaPlaca.disabled = false;
+            entradaPlaca.placeholder = 'N° de placa';
         }
     }
 
-    function handleNivelAtencionCheckbox(event) {
-        nivelAtencionCheckboxes.forEach(checkbox => {
-            if (checkbox !== event.target) checkbox.checked = false;
-        });
-
-        const selectedNivel = event.target.value;
-        moduloRespuestaSelect.innerHTML = '<option value="">Escribe</option>';
-
-        switch (selectedNivel) {
-            case '1er_anio':
-                addOptions(moduloRespuestaSelect, ['Seguridad e Higiene Ocupacional', 'Mantenimiento Preventivo y Correctivo de Motores', 'Sistema de Suspensión y Dirección', 'Sistema de Frenos', 'Sistema Eléctrico Automotriz']);
-                break;
-            case '2do_anio':
-                addOptions(moduloRespuestaSelect, ['Diagnóstico y Reparación de Sistemas de Inyección', 'Transmisiones Automáticas y Mecánicas', 'Mantenimiento de Sistemas de Climatización', 'Electrónica Automotriz Avanzada']);
-                break;
-            case '3er_anio':
-                addOptions(moduloRespuestaSelect, ['Gestión de Taller y Servicio al Cliente', 'Mantenimiento de Vehículos Híbridos y Eléctricos', 'Sistemas de Confort y Seguridad', 'Mecatrónica Automotriz']);
-                break;
-        }
-    }
-
-    function addOptions(selectElement, options) {
-        options.forEach(optionText => {
-            const option = document.createElement('option');
-            option.value = optionText;
-            option.textContent = optionText;
-            selectElement.appendChild(option);
-        });
-    }
-
-    function updateButtonStates() {
-        firmarBtn.disabled = !acceptTermsCheckbox.checked;
-        enviarSolicitudBtn.disabled = true;
-        firmarBtn.style.backgroundColor = acceptTermsCheckbox.checked ? '#881F1E' : '#555555';
-        firmarBtn.style.cursor = acceptTermsCheckbox.checked ? 'pointer' : 'not-allowed';
-        enviarSolicitudBtn.style.backgroundColor = '#555555';
-        enviarSolicitudBtn.style.cursor = 'not-allowed';
-    }
-
-    function updateSendButtonState() {
-        if (acceptTermsCheckbox.checked && firmarBtn.disabled && areAllPhotosTaken()) {
-            enviarSolicitudBtn.disabled = false;
-            enviarSolicitudBtn.style.backgroundColor = '#881F1E';
-            enviarSolicitudBtn.style.cursor = 'pointer';
+    function actualizarEstadoBotonEnviar() {
+        if (aceptarTerminosCasilla.checked && estanTodasLasFotosTomadas()) {
+            botonEnviarSolicitud.disabled = false;
+            botonEnviarSolicitud.style.backgroundColor = '#881F1E';
+            botonEnviarSolicitud.style.cursor = 'pointer';
         } else {
-            enviarSolicitudBtn.disabled = true;
-            enviarSolicitudBtn.style.backgroundColor = '#555555';
-            enviarSolicitudBtn.style.cursor = 'not-allowed';
+            botonEnviarSolicitud.disabled = true;
+            botonEnviarSolicitud.style.backgroundColor = '#555555';
+            botonEnviarSolicitud.style.cursor = 'not-allowed';
         }
     }
 
-    firmarBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-        if (!firmarBtn.disabled) {
-            firmarBtn.disabled = true;
-            firmarBtn.style.backgroundColor = '#555555';
-            firmarBtn.style.cursor = 'not-allowed';
-            updateSendButtonState();
-        }
-    });
-
-    enviarSolicitudBtn.addEventListener('click', function (event) {
-        if (!enviarSolicitudBtn.disabled) {
+    botonEnviarSolicitud.addEventListener('click', function (evento) {
+        if (!botonEnviarSolicitud.disabled) {
             lanzarGlobos();
             lanzarFuegosArtificiales();
             alert('¡Solicitud enviada (simulado)! Las fotos y datos están listos para ser procesados.');
         }
     });
 
-    polizaCheckbox.addEventListener('change', updatePolizaAndPlacaStates);
-    nivelAtencionCheckboxes.forEach(checkbox => checkbox.addEventListener('change', handleNivelAtencionCheckbox));
-    acceptTermsCheckbox.addEventListener('change', updateButtonStates);
+    casillaPoliza.addEventListener('change', actualizarEstadosPolizaYPlaca);
+    aceptarTerminosCasilla.addEventListener('change', actualizarEstadoBotonEnviar);
 
-    updatePolizaAndPlacaStates();
-    updateButtonStates();
-    moduloRespuestaSelect.innerHTML = '<option value="">Escribe</option>';
+    actualizarEstadosPolizaYPlaca();
+    actualizarEstadoBotonEnviar();
 });
 
-// NAV oculto con input
-const myInput = document.getElementById('myInput');
-const bottomNav = document.getElementById('bottomNav');
-if (myInput && bottomNav) {
-    myInput.addEventListener('focus', () => bottomNav.classList.add('hidden'));
-    myInput.addEventListener('blur', () => bottomNav.classList.remove('hidden'));
-}
+const miEntrada = document.getElementById('placa');
+const navegacionInferior = document.querySelector('.navegacion-inferior');
 
-// Modal Firma Canvas
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-let isDrawing = false;
+if (miEntrada && navegacionInferior) {
+    // Se modificó la selección para excluir los checkboxes
+    const todasLasEntradas = document.querySelectorAll('.mi-entrada:not([type="checkbox"])');
 
-function getPosition(e) {
-    const rect = canvas.getBoundingClientRect();
-    return {
-        x: (e.clientX || e.touches[0].clientX) - rect.left,
-        y: (e.clientY || e.touches[0].clientY) - rect.top
-    };
-}
-function startDrawing(e) {
-    e.preventDefault();
-    isDrawing = true;
-    const pos = getPosition(e);
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-}
-function draw(e) {
-    if (!isDrawing) return;
-    e.preventDefault();
-    const pos = getPosition(e);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-}
-function stopDrawing(e) {
-    e.preventDefault();
-    isDrawing = false;
-}
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-canvas.addEventListener('mousedown', startDrawing);
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('mouseout', stopDrawing);
-canvas.addEventListener('touchstart', startDrawing);
-canvas.addEventListener('touchmove', draw);
-canvas.addEventListener('touchend', stopDrawing);
-
-function abrirModal() {
-    const modal = document.getElementById('modalFirma');
-    const contenido = modal.querySelector('.modal-contenido');
-    contenido.classList.remove('explosion');
-    modal.style.display = 'block';
-}
-function cerrarModal() {
-    const modal = document.getElementById('modalFirma');
-    const contenido = modal.querySelector('.modal-contenido');
-    contenido.classList.add('explosion');
-    setTimeout(() => {
-        modal.style.display = 'none';
-        contenido.classList.remove('explosion');
-    }, 600);
-}
-function enviarFirma() {
-    lanzarConfeti();
-    setTimeout(() => cerrarModal(), 2000);
+    todasLasEntradas.forEach(input => {
+        input.addEventListener('focus', () => navegacionInferior.classList.add('oculto'));
+        input.addEventListener('blur', () => navegacionInferior.classList.remove('oculto'));
+    });
 }
 
 function lanzarConfeti() {
-    const myCanvas = document.getElementById('confettiCanvas');
-    const confettiInstance = confetti.create(myCanvas, { resize: true, useWorker: true });
-    confettiInstance({
+    const miLienzo = document.getElementById('lienzo-confeti');
+    const instanciaConfeti = confetti.create(miLienzo, { resize: true, useWorker: true });
+    instanciaConfeti({
         particleCount: 200,
         spread: 100,
         startVelocity: 40,
@@ -224,27 +112,27 @@ function lanzarConfeti() {
 }
 
 function lanzarGlobos() {
-    const container = document.getElementById("globos-container");
+    const contenedor = document.getElementById("contenedor-globos");
     for (let i = 0; i < 10; i++) {
         const globo = document.createElement("div");
         globo.className = "globo";
         globo.style.left = Math.random() * 90 + "%";
-        globo.style.backgroundColor = getColorAleatorio();
+        globo.style.backgroundColor = obtenerColorAleatorio();
         globo.style.animationDelay = (Math.random() * 1) + "s";
-        container.appendChild(globo);
-        setTimeout(() => container.removeChild(globo), 6000);
+        contenedor.appendChild(globo);
+        setTimeout(() => contenedor.removeChild(globo), 6000);
     }
 }
-function getColorAleatorio() {
+function obtenerColorAleatorio() {
     const colores = ["#ff0000", "#00ccff", "#ffff00", "#ff00ff", "#00ff00", "#ffa500"];
     return colores[Math.floor(Math.random() * colores.length)];
 }
 function lanzarFuegosArtificiales() {
-    const canvas = document.getElementById('confettiCanvas');
-    const confettiInstance = confetti.create(canvas, { resize: true, useWorker: true });
+    const lienzo = document.getElementById('lienzo-confeti');
+    const instanciaConfeti = confetti.create(lienzo, { resize: true, useWorker: true });
     for (let i = 0; i < 3; i++) {
         setTimeout(() => {
-            confettiInstance({
+            instanciaConfeti({
                 particleCount: 100,
                 spread: 180,
                 origin: {

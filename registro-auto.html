@@ -14,47 +14,47 @@
 
 <body>
 
-    <div class="container">
+    <div class="contenedor">
 
-        <section id="datos-vehiculo" class="section">
-            <header class="app-header">
-                <a href="mis-trabajos.html" class="back-button">
+        <section id="datos-vehiculo" class="seccion">
+            <header class="encabezado-app">
+                <a href="mis-trabajos.html" class="boton-volver">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <h1>Datos del vehículo</h1>
             </header>
 
             <form>
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="placa">Placa</label>
-                    <input class="myInput" type="text" id="placa" placeholder="N° de placa">
+                    <input class="mi-entrada" type="text" id="placa" placeholder="N° de placa">
                     <small>Formato: P123-456</small>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="poliza">Póliza</label>
-                    <div class="input-with-checkbox">
-                        <input class="myInput" type="text" id="poliza" placeholder="N° de póliza">
-                        <input type="checkbox" id="poliza-checkbox">
+                    <div class="entrada-con-casilla">
+                        <input class="mi-entrada" type="text" id="poliza" placeholder="N° de póliza">
+                        <input type="checkbox" id="casilla-poliza">
                     </div>
                     <small>Formato: P123-456</small>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="marca">Marca</label>
-                    <input class="myInput" type="text" id="marca" placeholder="Nombre">
+                    <input class="mi-entrada" type="text" id="marca" placeholder="Nombre">
                     <small>Ej: Mazda</small>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="modelo">Modelo</label>
-                    <input class="myInput" type="text" id="modelo" placeholder="Modelo">
+                    <input class="mi-entrada" type="text" id="modelo" placeholder="Modelo">
                     <small>Ej: B2900</small>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="tipo">Tipo</label>
-                    <div class="select-wrapper">
+                    <div class="envoltorio-seleccion">
                         <select id="tipo">
                             <option value="sedan">Sedan</option>
                             <option value="suv">SUV</option>
@@ -65,65 +65,48 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="color">Color</label>
-                    <input class="myInput" type="text" id="color" placeholder="Color">
+                    <input class="mi-entrada" type="text" id="color" placeholder="Color">
                     <small>Ej: Blanco</small>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="tarjetaCirculacion">Tarjeta de circulación</label>
-                    <input class="myInput" type="text" id="tarjetaCirculacion" placeholder="##">
+                    <input class="mi-entrada" type="text" id="tarjetaCirculacion" placeholder="##">
                     <small>Formato: 0/12345678</small>
                 </div>
             </form>
         </section>
 
-        <hr class="section-separator">
+        <hr class="separador-seccion">
 
-        <section id="detalles-orden" class="section">
-            <h1 class="section-title">Detalles orden de trabajo</h1>
+        <section id="detalles-orden" class="seccion">
+            <h1 class="titulo-seccion">Detalles orden de trabajo</h1>
 
             <form>
-                <div class="form-group">
-                    <label>Nivel de atención:</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-container">1er Año
-                            <input type="checkbox" name="nivelAtencionRadio" value="1er_anio">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="checkbox-container">2do Año
-                            <input type="checkbox" name="nivelAtencionRadio" value="2do_anio">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="checkbox-container">3er Año
-                            <input type="checkbox" name="nivelAtencionRadio" value="3er_anio">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="instructorResponsable">Instructor responsable</label>
-                    <input class="myInput" type="text" id="instructorResponsable" placeholder="Nombre">
+                    <input class="mi-entrada" type="text" id="instructorResponsable" placeholder="Nombre">
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="estudianteAsignado">Estudiante asignado</label>
-                    <input class="myInput" type="text" id="estudianteAsignado" placeholder="Nombre">
+                    <input class="mi-entrada" type="text" id="estudianteAsignado" placeholder="Nombre">
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="carnet">Carnet</label>
-                    <input class="myInput" type="text" id="carnet" placeholder="N° de carnet">
+                    <input class="mi-entrada" type="text" id="carnet" placeholder="N° de carnet">
                     <small>Ejemplo: 20260669</small>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="operacionesEfectuar1">Operaciones a efectuar:</label>
-                    <div class="select-wrapper">
+                    <div class="envoltorio-seleccion">
                         <select id="operacionesEfectuar1">
-                            <option value="">Escribe</option>
+                            <option value="">Selecciona</option>
                             <option value="operacion1">Operación 1</option>
                             <option value="operacion2">Operación 2</option>
                             <option value="operacion3">Operación 3</option>
@@ -131,94 +114,88 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="moduloRespuesta">Modulo al que da respuesta la practica:</label>
-                    <div class="select-wrapper">
+                    <div class="envoltorio-seleccion">
                         <select id="moduloRespuesta">
-                            <option value="">Escribe</option>
+                            <option value="">Selecciona</option>
+                            <option value="">Seguridad e Higiene Ocupacional</option>
+                            <option value="">Mantenimiento Preventivo y Correctivo de Motores</option>
+                            <option value="">Sistema de Suspensión y Dirección</option>
+                            <option value="">Sistema de Frenos</option>
+                            <option value="">Sistema Eléctrico Automotriz</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label>Operaciones a efectuar:</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-container">Preventivo
-                            <input class="myInput" type="checkbox" name="tipoOperacion" value="preventivo">
-                            <span class="checkmark"></span>
+                    <div class="grupo-casilla">
+                        <label class="contenedor-casilla">Preventivo
+                            <input class="mi-entrada" type="checkbox" name="tipoOperacion" value="preventivo">
+                            <span class="marca-verificacion"></span>
                         </label>
-                        <label class="checkbox-container">Correctivo
-                            <input class="myInput" type="checkbox" name="tipoOperacion" value="correctivo">
-                            <span class="checkmark"></span>
+                        <label class="contenedor-casilla">Correctivo
+                            <input class="mi-entrada" type="checkbox" name="tipoOperacion" value="correctivo">
+                            <span class="marca-verificacion"></span>
                         </label>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="grupo-formulario">
                     <label for="tiempoEstimado">Tiempo estimado del proceso:</label>
-                    <input class="myInput" type="text" id="tiempoEstimado" placeholder="HH/MM/SS">
-                </div>
-
-                <div class="form-group time-inputs-row">
-                    <div class="time-input-group">
-                        <label for="horaIngreso">Hora de ingreso</label>
-                        <input class="myInput" type="text" id="horaIngreso" placeholder="HH/MM/SS">
-                    </div>
-                    <div class="time-input-group">
-                        <label for="horaSalida">Hora de salida</label>
-                        <input class="myInput" type="text" id="horaSalida" placeholder="HH/MM/SS">
-                    </div>
+                    <input class="mi-entrada" type="text" id="tiempoEstimado" placeholder="00:00">
                 </div>
             </form>
         </section>
 
-        <hr class="section-separator">
+        <hr class="separador-seccion">
 
-        <section id="fotos-vehiculo" class="section">
-            <h1 class="section-title">Fotos del Vehículo</h1>
-            <div class="form-group">
+        <section id="fotos-vehiculo" class="seccion">
+            <h1 class="titulo-seccion">Fotos del Vehículo</h1>
+            <div class="grupo-formulario">
                 <label for="foto1">Foto 1 (Frontal)</label>
-                <input class="myInput" type="file" id="foto1" accept="image/*" capture="environment" class="photo-input"
+                <input class="mi-entrada" type="file" id="foto1" accept="image/*" capture="environment" class="entrada-foto"
                     required>
-                <div class="photo-preview-container">
-                    <img id="preview1" class="photo-preview" src="#" alt="Previsualización Foto 1"
+                <div class="contenedor-vista-previa-foto">
+                    <img id="vista-previa-1" class="vista-previa-foto" src="#" alt="Previsualización Foto 1"
                         style="display: none;">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="grupo-formulario">
                 <label for="foto2">Foto 2 (Trasera)</label>
-                <input class="myInput" type="file" id="foto2" accept="image/*" capture="environment" class="photo-input"
+                <input class="mi-entrada" type="file" id="foto2" accept="image/*" capture="environment" class="entrada-foto"
                     required>
-                <div class="photo-preview-container">
-                    <img id="preview2" class="photo-preview" src="#" alt="Previsualización Foto 2"
+                <div class="contenedor-vista-previa-foto">
+                    <img id="vista-previa-2" class="vista-previa-foto" src="#" alt="Previsualización Foto 2"
                         style="display: none;">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="grupo-formulario">
                 <label for="foto3">Foto 3 (Lateral Izquierda)</label>
-                <input class="myInput" type="file" id="foto3" accept="image/*" capture="environment" class="photo-input"
+                <input class="mi-entrada" type="file" id="foto3" accept="image/*" capture="environment" class="entrada-foto"
                     required>
-                <div class="photo-preview-container">
-                    <img id="preview3" class="photo-preview" src="#" alt="Previsualización Foto 3"
+                <div class="contenedor-vista-previa-foto">
+                    <img id="vista-previa-3" class="vista-previa-foto" src="#" alt="Previsualización Foto 3"
                         style="display: none;">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="grupo-formulario">
                 <label for="foto4">Foto 4 (Lateral Derecha)</label>
-                <input class="myInput" type="file" id="foto4" accept="image/*" capture="environment" class="photo-input"
+                <input class="mi-entrada" type="file" id="foto4" accept="image/*" capture="environment" class="entrada-foto"
                     required>
-                <div class="photo-preview-container">
-                    <img id="preview4" class="photo-preview" src="#" alt="Previsualización Foto 4"
+                <div class="contenedor-vista-previa-foto">
+                    <img id="vista-previa-4" class="vista-previa-foto" src="#" alt="Previsualización Foto 4"
                         style="display: none;">
                 </div>
             </div>
         </section>
 
-        <hr class="section-separator">
+        <hr class="separador-seccion">
 
-        <section id="terminos-condiciones" class="section">
-            <h1 class="section-title">Términos y Condiciones Del Servicio</h1>
-            <div class="terms-content">
+        <section id="terminos-condiciones" class="seccion">
+            <h1 class="titulo-seccion">Términos y Condiciones Del Servicio</h1>
+            <div class="contenido-terminos">
                 <p>Las actividades y servicios del taller de Mantenimiento Automotriz están orientadas a la formación y
                     prácticas técnicas de los estudiantes en los diferentes niveles académicos de la especialidad. Por
                     tal motivo se establecen los siguientes términos y condiciones a considerar al momento de solicitar
@@ -244,86 +221,81 @@
             </div>
             <form>
 
-                <button type="button" onclick="abrirModal()" class="botones">Firmar</button>
-
-                <!-- Modal -->
-                <div id="modalFirma" class="modal">
-                    <div class="modal-contenido">
-                        <span class="cerrar" onclick="cerrarModal()">&times;</span>
-                        <h2 style="color: rgb(255, 255, 255);">Firma aquí:</h2>
-                        <canvas id="canvas" width="378" height="200" style="border:1px solid #000;"></canvas>
-                        <div class="buttons">
-                            <button type="button" onclick="clearCanvas()" class="botones">Reiniciar Firma</button>
-                        </div>
-                        <div class="buttons">
-                            <button type="button" onclick="enviarFirma()" class="botones">Enviar Firma</button>
-                        </div>
-                    </div>
+                <div class="grupo-formulario">
+                    <label for="dueñoVehiculo">Nombre del propietario del vehículo</label>
+                    <input class="mi-entrada" type="text" id="dueñoVehiculo" placeholder="Nombre">
                 </div>
-                <div class="form-group">
-                    <label class="checkbox-container">
+                <div class="grupo-formulario">
+                    <label for="duiDueño">Documento unico de identidad</label>
+                    <input class="mi-entrada" type="number" id="duiDueño" placeholder="0000000-0">
+                </div>
+                <div class="grupo-formulario">
+                    <label for="telDueño">Teléfono del propietario del vehículo</label>
+                    <input class="mi-entrada" type="tel" id="telDueño" placeholder="0000-0000">
+                </div>
+                
+                <div class="grupo-formulario">
+                    <label class="contenedor-casilla">
                         Acepto los términos y condiciones de servicio del Taller de Mantenimiento Automotriz del ITR.
-                        <input class="myInput" type="checkbox" id="acceptTerms">
-                        <span class="checkmark"></span>
+                        <input class="mi-entrada" type="checkbox" id="aceptarTerminos">
+                        <span class="marca-verificacion"></span>
                     </label>
                 </div>
 
-                <button type="button" id="enviar-solicitud-btn" class="botones">Enviar Solicitud</button>
+                <button type="button" id="boton-enviar-solicitud" class="botones">Enviar Solicitud</button>
             </form>
         </section>
 
     </div>
 
-    <nav class="bottom-nav">
+    <nav class="navegacion-inferior">
         <ul>
             <li>
-                <a href="estudiante.html#inicio" class="nav-item">
-                    <i class="fas fa-home nav-icon"></i>
+                <a href="estudiante.html#inicio" class="elemento-nav">
+                    <i class="fas fa-home icono-nav"></i>
                     <span>Inicio</span>
                 </a>
             </li>
             <li>
-                <a href="registro-auto.html" class="nav-item active"> <i class="fas fa-clipboard-list nav-icon"></i>
+                <a href="registro-auto.html" class="elemento-nav activo"> <i class="fas fa-clipboard-list icono-nav"></i>
                     <span>Registrar</span>
                 </a>
             </li>
             <li>
-                <a href="mis-trabajos.html" class="nav-item">
-                    <i class="fas fa-chart-bar nav-icon"></i>
+                <a href="mis-trabajos.html" class="elemento-nav">
+                    <i class="fas fa-chart-bar icono-nav"></i>
                     <span>Mis Trabajos</span>
                 </a>
             </li>
             <li>
-                <a href="perfil.html" class="nav-item"">
-                <i class=" fas fa-id-badge nav-icon"></i>
+                <a href="perfil.html" class="elemento-nav">
+                <i class="fas fa-id-badge icono-nav"></i>
                     <span>Perfil</span>
                 </a>
             </li>
         </ul>
     </nav>
 
-    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalPerfil" tabindex="-1" aria-labelledby="etiquetaModalPerfil" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content bg-dark text-light">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="perfilModalLabel">Tu Perfil</h5>
+                    <h5 class="modal-title" id="etiquetaModalPerfil">Tu Perfil</h5>
                     <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="profile-content">
+                    <div id="contenido-perfil">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="globos-container"></div>
-    <canvas id="confettiCanvas"
+    <div id="contenedor-globos"></div>
+    <canvas id="lienzo-confeti"
         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -331,8 +303,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/registro-auto-nav.js"></script>
     <script src="js/registro-auto.js"></script>
-    <script src="js/registro-auto-firma.js"></script>
-
 
 </body>
 
