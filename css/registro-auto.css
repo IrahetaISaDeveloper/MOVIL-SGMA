@@ -573,3 +573,10 @@ small {
         flex-grow: 0;
     }
 }
+
+@media screen and (max-height: 600px) {
+  .contenedor {
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+}

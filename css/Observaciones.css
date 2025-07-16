@@ -32,34 +32,77 @@ body {
     min-height: 100vh;
 }
 
-.container {
-    width: 100%;
-    height: 100%;
-    max-width: 430px; /* Ancho típico de un teléfono */
-    background-color: #1a1a1a; /* Fondo de la app más oscuro */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+.content {
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Altura para simular un teléfono */
+    gap: 20px;
+    flex-grow: 1; /* Allow content to take up available space */
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling performance on iOS */
+}
+
+.container {
+    width: 100%;
+    height: 100%; /* Keep this for the container to fill the screen */
+    max-width: 430px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Hide any overflow of the container itself */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .header {
     background-color: #222;
     color: white;
-    padding: 15px;
-    text-align: center;
-    font-size: 1.2em;
+    padding: 10px 20px; /* Ajustado para mejor espaciado */
+    font-size: 0.7em;
     border-bottom: 1px solid #444;
+    display: flex; /* Habilitar flexbox */
+    align-items: center; /* Alinear elementos verticalmente al centro */
+    position: relative; /* Necesario para el posicionamiento absoluto del h1 */
+    justify-content: flex-start; /* Asegura que el botón de retroceso quede a la izquierda */
 }
 
-.content {
-    
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.header h1 {
+    margin: 0; /* Eliminar márgenes predeterminados */
+    text-align: center; /* Centrar el texto dentro del h1 */
+    position: absolute; /* Posicionamiento absoluto */
+    left: 50%; /* Mover el inicio del h1 al 50% del ancho del padre */
+    transform: translateX(-50%); /* Desplazar el h1 hacia atrás por la mitad de su propio ancho para centrarlo */
+    width: auto; /* El ancho se ajusta al contenido */
+    white-space: nowrap; /* Evita que el texto se envuelva */
+    overflow: hidden; /* Oculta el texto que se desborda */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para el texto desbordado */
+    max-width: 60%; /* Limita el ancho del título para evitar solapamiento con los botones */
+    z-index: 1; /* Asegura que el h1 esté sobre el fondo */
+}
+
+.back-button {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex; /* Para alinear el icono y el texto */
+    align-items: center;
+    gap: 0.5em; /* Espacio entre el icono y el texto */
+    /* max-width: 15px; ELIMINAR ESTA LÍNEA */
+    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
+}
+
+.back-button:hover {
+    background-color: var(--back-button-hover);
+}
+
+.back-button i {
+    font-size: 1.5em;
+    /* align-items: center; ELIMINAR ESTA LÍNEA */
 }
 
 .card {
@@ -170,31 +213,6 @@ body {
     box-sizing: border-box;
 }
 
-
-.back-button {
-    color: var(--text-light);
-    text-decoration: none;
-    padding: 0.6em 1em;
-    background-color: var(--back-button-bg);
-    border-radius: 8px;
-    font-size: 0.85em;
-    transition: background-color 0.2s ease;
-    display: flex; /* Para alinear el icono y el texto */
-    align-items: center;
-    gap: 0.5em; /* Espacio entre el icono y el texto */
-    max-width: 15px;
-    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
-}
-
-.back-button:hover {
-    background-color: var(--back-button-hover);
-}
-
-.back-button i {
-    font-size: 1em;
-}
-
-
 .btn {
     flex-grow: 1;
     padding: var(--spacing-m) var(--spacing-l);
@@ -209,7 +227,7 @@ body {
     transition: background-color 0.2s ease, transform 0.2s ease;
     text-align: center; /* Asegura que el texto esté centrado si no es un bloque completo */
     text-decoration: none; /* Quita subrayado de los enlaces */
-    margin-top: 50px; /* o el valor que necesites */
+    margin-top: 0px; /* o el valor que necesites */
 }
 
 
@@ -218,7 +236,7 @@ body {
     display: flex;
     flex-direction: column; /* Apila los botones en móvil */
     gap: var(--spacing-s);
-    padding-top: var(--spacing-m);
+    padding-top: var(--spacing-xs);
 }
 
 
