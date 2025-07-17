@@ -1,4 +1,3 @@
-/* Reset básico */
 * {
   margin: 0;
   box-sizing: border-box;
@@ -6,18 +5,24 @@
 
 :root {
   --app-bg: #2b2b2b;
-  --header-bg: #3a3a3a; /* Un gris un poco diferente para la cabecera */
-  --card-bg: white;
+  --header-bg: #3a3a3a;
+  /* Un gris un poco diferente para la cabecera */
+  --card-bg: #2D2D2D;
   --text-light: white;
   --text-highlight: #dcdcdc;
   --btn-bg: #8b1c1c;
   --btn-hover-bg: #a52a2a;
-  --back-button-bg: #444; /* Fondo para el botón de volver/salir */
+  --back-button-bg: #444;
+  /* Fondo para el botón de volver/salir */
   --back-button-hover: #555;
-  --font-size-welcome: 1.3rem; /* Variable para el tamaño del mensaje de bienvenida */
-  --profile-pic-size: 100px; /* Tamaño de la foto de perfil */
-  --header-height: 60px; /* Example header height */
-  --bottom-nav-height: 60px; /* Example bottom nav height */
+  --font-size-welcome: 1.3rem;
+  /* Variable para el tamaño del mensaje de bienvenida */
+  --profile-pic-size: 100px;
+  /* Tamaño de la foto de perfil */
+  --header-height: 60px;
+  /* Example header height */
+  --bottom-nav-height: 60px;
+  /* Example bottom nav height */
 }
 
 body {
@@ -26,53 +31,60 @@ body {
   color: var(--text-light);
   height: 100vh;
   display: flex;
-  flex-direction: column; /* Organiza la cabecera, el contenido y el nav en columna */
+  flex-direction: column;
 }
 
-/* --- ESTILOS DE LA CABECERA --- */
 .app-header {
   background-color: var(--header-bg);
   padding: 1em 1.5em;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* This is key for the 3-element centering */
+  justify-content: space-between;
+  /* This is key for the 3-element centering */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 100;
-  height: 60px; /* Set a fixed height for the header */
+  height: 60px;
+  /* Set a fixed height for the header */
 }
 
 .header-title {
   font-size: 1.3rem;
   margin: 0;
   color: var(--text-light);
-  text-align: center; /* This will center the text within its own flexible space */
+  text-align: center;
+  /* This will center the text within its own flexible space */
 }
 
 /* New style for the spacer div */
 .header-spacer {
-  width: 50px; /* Give it a base width roughly equal to the back button */
+  width: 50px;
+  /* Give it a base width roughly equal to the back button */
 }
 
 .back-button {
   color: var(--text-light);
   text-decoration: none;
-  padding: 0.6em 0.8em; /* Adjusted padding to make it a bit smaller */
+  padding: 0.6em 0.8em;
+  /* Adjusted padding to make it a bit smaller */
   background-color: var(--back-button-bg);
   border-radius: 8px;
   font-size: 0.9em;
   transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 0.3em; /* Reduced gap */
+  gap: 0.3em;
+  /* Reduced gap */
   flex-shrink: 0;
   z-index: 10;
   /* Set a fixed width for the button to make spacer balancing easier */
-  width: 45px; /* Adjust this width to match the visual width of the back button */
-  justify-content: center; /* Center icon within its fixed width */
+  width: 45px;
+  /* Adjust this width to match the visual width of the back button */
+  justify-content: center;
+  /* Center icon within its fixed width */
 }
 
 .back-button:hover {
@@ -80,76 +92,114 @@ body {
 }
 
 .back-button i {
-  font-size: 1.1em; /* Slightly larger icon */
+  font-size: 1.1em;
+  /* Slightly larger icon */
 }
 
-/* --- ESTILOS DEL CONTENIDO PRINCIPAL Y CENTRADO DE TARJETAS --- */
-.admin-main-content {
-  flex-grow: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  justify-content: center; /* Centra el contenido verticalmente */
-  width: 100%;
+  justify-content: center;
 }
+.chart-container {
+    margin: 10px;
+    background-color: #ffffff;
+    padding: 0px; /* Más padding para un mejor espacio */
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    max-width: 330px; /* Un poco más de ancho máximo */
+    width: 100%;
+    text-align: center; /* Centra el título */
+}
+
+.chart-container h2 {
+    color: #333; /* Color de texto oscuro para el título */
+    font-size: 1.8em; /* Tamaño de fuente del título */
+    margin-top: 5px;
+    margin-bottom: 0px; /* Espacio debajo del título */
+}
+
+/* Estilos adicionales para ApexCharts si quieres personalizar */
+.apexcharts-canvas {
+    margin: 0 auto; /* Asegura que el canvas del gráfico esté centrado */
+}
+
+/* Si quieres un tema oscuro para el gráfico, puedes configurarlo en el JS o aquí */
+/* Por ejemplo, para el texto de las etiquetas si no lo configuras en JS */
+.apexcharts-datalabels-group text {
+    fill: #333 !important; /* Asegura que el texto de los números sea oscuro */
+}
+
+.apexcharts-legend {
+    padding-top: 20px;
+    justify-content: center; /* Centra los elementos de la leyenda */
+    flex-wrap: wrap; /* Permite que la leyenda se ajuste en varias líneas */
+}
+
+.apexcharts-legend-series {
+    margin: 0 15px; /* Espacio entre los elementos de la leyenda */
+    font-size: 0.95em;
+    color: #555;
+}
+
 
 /* Menú de navegación inferior (Bottom Nav) */
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    border-top: 1px solid #444;
-    padding: 5px 0;
-    z-index: 100; /* Asegura que esté por encima de otros elementos */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-    flex-shrink: 0; /* Prevents it from shrinking */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  border-top: 1px solid #444;
+  padding: 5px 0;
+  z-index: 100;
+  /* Asegura que esté por encima de otros elementos */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+  /* Prevents it from shrinking */
 }
 
 .bottom-nav ul {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .bottom-nav li {
-    flex: 1;
-    text-align: center;
+  flex: 1;
+  text-align: center;
 }
 
 .bottom-nav .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0px 0;
-    color: #888;
-    text-decoration: none;
-    font-size: 0.75em;
-    font-weight: bold;
-    transition: color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 0;
+  color: #888;
+  text-decoration: none;
+  font-size: 0.75em;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item .nav-icon {
-    font-size: 24px;
-    margin-bottom: 4px;
-    color: #888;
-    transition: color 0.3s ease;
+  font-size: 24px;
+  margin-bottom: 4px;
+  color: #888;
+  transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item.active {
-    color: #A32F2A;
+  color: #A32F2A;
 }
 
 .bottom-nav .nav-item.active .nav-icon {
-    color: #A32F2A;
+  color: #A32F2A;
 }
 
 /* Media query para ajustar el centrado en pantallas más pequeñas */
