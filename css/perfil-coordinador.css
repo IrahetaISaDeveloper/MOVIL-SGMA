@@ -1,0 +1,360 @@
+:root {
+    --bg-app: #1E1E1E;
+    --bg-contenedor: #1E1E1E;
+    --bg-tarjeta: #2D2D2D;
+    --texto-claro: #FFFFFF;
+    --texto-secundario: #B0B0B0;
+    --texto-fuerte: #E0E0E0;
+    --azul-acento: #42A5F5;
+    --boton-primario: #66BB6A;
+    --radio-borde-principal: 20px;
+    --radio-borde-tarjeta: 16px;
+    --radio-borde-input: 10px;
+    --radio-borde-boton: 30px;
+    --espaciado-xs: 5px;
+    --espaciado-s: 10px;
+    --espaciado-m: 15px;
+    --espaciado-l: 20px;
+    --espaciado-xl: 30px;
+
+    --back-button-bg: #444; /* Reutilizado en botón de volver, borde de navegación e input */
+    --bg-encabezado: #282828;
+    --hover-boton-volver: #555;
+
+    --color-dark-variant: #3a3a3a; /* Para separador y fondo de input */
+    --color-muted: #888; /* Para texto inactivo de nav y placeholder */
+    --color-nav-activo: #A32F2A;
+    --sombra-default: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra general para tarjetas */
+
+    --spacing-xxl: 40px; /* Para espaciados de 40px (secciones, separadores) */
+    --spacing-xxs: 8px; /* Para espaciados de 8px (margen label, border-radius pequeños) */
+    --grosor-borde-fino: 1px; /* Para bordes de 1px */
+    --padding-input-vertical: 12px; /* Para el padding vertical de inputs y botones */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-app); /* No es variable porque solo se usa aquí */
+    color: var(--texto-fuerte);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding-bottom: 80px; /* No es variable porque solo se usa aquí */
+    padding-top: 0px;
+}
+
+.contenedor {
+    background-color: var(--bg-contenedor);
+    width: 100%;
+    max-width: 768px;
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.encabezado-app {
+    background-color: var(--bg-encabezado);
+    padding: 1em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--grosor-borde-fino) solid rgba(255, 255, 255, 0.1); /* No es variable porque solo se usa aquí */
+    flex-shrink: 0;
+}
+
+.encabezado-app h1 {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--texto-claro);
+    flex-grow: 1;
+    text-align: center;
+    margin-left: -40px; /* No es variable porque solo se usa aquí */
+}
+
+.btn-volver {
+    color: var(--texto-claro);
+    text-decoration: none;
+    padding: 0.6em 1em;
+    background-color: var(--back-button-bg);
+    border-radius: var(--spacing-xxs);
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.btn-volver:hover {
+    background-color: var(--hover-boton-volver);
+}
+
+.btn-volver i {
+    font-size: 1em;
+}
+
+.seccion {
+    margin-bottom: var(--spacing-xxl);
+}
+
+.seccion:last-child {
+    margin-bottom: 0;
+}
+
+.separador-seccion {
+    border: none;
+    border-top: var(--grosor-borde-fino) solid var(--color-dark-variant);
+    margin: var(--spacing-xxl) 0;
+}
+
+.grupo-formulario {
+    margin-bottom: 25px; /* No es variable porque solo se usa aquí */
+}
+
+label {
+    display: block;
+    margin-bottom: var(--spacing-xxs);
+    font-weight: bold;
+    color: #cccccc; /* No es variable porque solo se usa aquí */
+    font-size: 1.1em;
+}
+
+.navegacion-inferior {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* No es variable porque solo se usa aquí */
+    border-top: var(--grosor-borde-fino) solid var(--back-button-bg);
+    padding: var(--espaciado-xs) 0;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* Sombra única */
+}
+
+.navegacion-inferior ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.navegacion-inferior li {
+    flex: 1;
+    text-align: center;
+}
+
+.navegacion-inferior .item-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 0;
+    color: var(--color-muted);
+    text-decoration: none;
+    font-size: 0.75em;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navegacion-inferior .item-nav .icono-nav {
+    font-size: 24px; /* No es variable porque solo se usa aquí */
+    margin-bottom: 4px; /* No es variable porque solo se usa aquí */
+    color: var(--color-muted);
+    transition: color 0.3s ease;
+}
+
+.navegacion-inferior .item-nav.activo {
+    color: var(--color-nav-activo);
+}
+
+.navegacion-inferior .item-nav.activo .icono-nav {
+    color: var(--color-nav-activo);
+}
+
+.tarjeta-info-perfil {
+    background-color: var(--bg-tarjeta);
+    border-radius: var(--radio-borde-tarjeta);
+    margin: var(--espaciado-m);
+    box-shadow: var(--sombra-default);
+    max-height: 350px; /* No es variable porque solo se usa aquí */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    padding: var(--espaciado-m);
+}
+
+.tarjeta-info-perfil h2 {
+    color: var(--texto-claro);
+    font-size: 1.5em;
+    margin-bottom: var(--espaciado-xs);
+    text-align: center;
+}
+
+.perfil-visualizacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espaciado-m);
+    margin-bottom: var(--espaciado-l);
+    flex-shrink: 0;
+}
+
+.foto-perfil {
+    width: 120px; /* No es variable porque solo se usa aquí */
+    height: 120px; /* No es variable porque solo se usa aquí */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--texto-claro); /* No es variable porque solo se usa aquí */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); /* Sombra única */
+}
+
+.nombre-usuario-perfil {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--texto-claro);
+    margin: 0;
+}
+
+.item-info-perfil {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--espaciado-m);
+    color: var(--texto-secundario);
+    flex-shrink: 0;
+}
+
+.item-info-perfil i {
+    font-size: 1.2em;
+    margin-right: var(--espaciado-s);
+    color: var(--azul-acento);
+}
+
+.item-info-perfil span {
+    font-size: 1.1em;
+    color: var(--texto-claro);
+    font-weight: bold;
+}
+
+.item-info-perfil p {
+    margin: 0;
+    font-size: 1em;
+    color: var(--texto-secundario);
+}
+
+.seccion-cambiar-contrasena {
+    background-color: var(--bg-tarjeta);
+    margin: var(--espaciado-m);
+    border-radius: var(--radio-borde-tarjeta);
+    box-shadow: var(--sombra-default);
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    padding: var(--espaciado-m);
+}
+
+.seccion-cambiar-contrasena h2 {
+    color: var(--texto-claro);
+    font-size: 1.5em;
+    margin-bottom: var(--espaciado-l);
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.grupo-formulario {
+    margin-bottom: 25px; /* Reutiliza el valor directo si es el mismo que en el otro grupo-formulario */
+    flex-shrink: 0;
+}
+
+.grupo-formulario input[type="password"] {
+    width: 100%;
+    padding: var(--padding-input-vertical);
+    border: var(--grosor-borde-fino) solid var(--back-button-bg);
+    border-radius: var(--radio-borde-input);
+    background-color: var(--color-dark-variant);
+    color: var(--texto-claro);
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.grupo-formulario input[type="password"]::placeholder {
+    color: var(--color-muted);
+}
+
+.btn-actualizar-contrasena {
+    background-color: var(--boton-primario);
+    color: var(--texto-claro);
+    padding: var(--padding-input-vertical) var(--espaciado-l);
+    border: none;
+    border-radius: var(--radio-borde-boton);
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: var(--espaciado-l);
+    flex-shrink: 0;
+}
+
+.btn-actualizar-contrasena:hover {
+    background-color: #5cb85c; /* No es variable porque solo se usa aquí */
+}
+
+.mensaje-alerta {
+    margin-top: var(--espaciado-l);
+    padding: var(--espaciado-m);
+    border-radius: var(--spacing-xxs);
+    display: none;
+    font-weight: bold;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.alerta-exito {
+    background-color: #d4edda; /* No es variable */
+    color: #155724; /* No es variable */
+    border: var(--grosor-borde-fino) solid #c3e6cb; /* No es variable */
+}
+
+.alerta-error {
+    background-color: #f8d7da; /* No es variable */
+    color: #721c24; /* No es variable */
+    border: var(--grosor-borde-fino) solid #f5c6cb; /* No es variable */
+}
+
+@media (max-width: 600px) {
+    .contenedor {
+        margin: 0px auto;
+        border-radius: 0;
+    }
+
+    .encabezado-app h1 {
+        font-size: 1.2em;
+    }
+
+    .tarjeta-info-perfil h2,
+    .seccion-cambiar-contrasena h2 {
+        font-size: 1.3em;
+    }
+
+    .item-info-perfil p,
+    .item-info-perfil span,
+    .grupo-formulario label,
+    .grupo-formulario input[type="password"] {
+        font-size: 0.95em;
+    }
+
+    .btn-actualizar-contrasena {
+        padding: var(--espaciado-s) var(--espaciado-m);
+        font-size: 1em;
+    }
+}
