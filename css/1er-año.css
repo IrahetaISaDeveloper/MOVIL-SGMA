@@ -49,9 +49,10 @@ html, body {
 
 .system-dashboard {
     display: flex;
-    flex-direction: column; /* Stacks header, then main-layout */
+    flex-direction: column; /* Stacks header, main-layout */
     width: 100%;
     min-height: 100vh;
+    /* justify-content: space-between; This was pushing content apart, remove for mobile fixed nav */
 }
 
 h1 {
@@ -192,6 +193,8 @@ p {
     padding: var(--spacing-l); /* General padding for content area */
     background-color: var(--bg-main-content);
     box-sizing: border-box;
+    width: 100%; /* Ensure it takes full width */
+    padding-bottom: 70px; /* Add padding to account for fixed bottom-nav */
 }
 
 /* --- SIDEBAR (PENDING RECORDS LIST) --- */
@@ -273,50 +276,35 @@ p {
     cursor: pointer;
 }
 
-/* Menú de navegación inferior (Bottom Nav) - Floating and Icon-only */
+/* Menú de navegación inferior (Bottom Nav) - Mobile Styles (Default) */
 .bottom-nav {
-    position: fixed;
-    /* Changed from absolute to fixed to keep it in view when scrolling */
-    bottom: 20px;
-    /* Distance from the bottom of the viewport */
-    left: 50%;
-    /* Center horizontally */
-    transform: translateX(-50%);
-    /* Adjust for horizontal centering */
+    position: fixed; /* Keep it fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Full width */
     background-color: #333;
-    /* Dark background */
-    border-radius: 50px;
-    /* Make it oval/pill shaped */
-    padding: 10px 20px;
-    /* Adjust padding to control the size of the pill */
-    z-index: 1000;
-    /* Ensure it's above other content */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    /* More pronounced shadow for floating effect */
-    width: fit-content;
-    /* Shrink-wrap content */
+    padding: var(--spacing-m) 0;
+    z-index: 999;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
     display: flex;
-    /* Use flexbox for internal alignment */
     align-items: center;
-    /* Vertically align items */
     justify-content: space-around;
-    /* Distribute items */
+    flex-shrink: 0; /* Prevents it from shrinking */
 }
 
 .bottom-nav ul {
+    width: 100%; /* Ensure the ul takes full width of the nav */
     display: flex;
     justify-content: space-around;
     list-style: none;
     margin: 0;
     padding: 0;
-    /* width: 100%; No longer needed as bottom-nav width is fit-content */
 }
 
 .bottom-nav li {
-    /* flex: 1; Not needed anymore with fit-content and spacing */
+    flex: 1; /* Distribute space evenly */
     text-align: center;
-    margin: 0 15px;
-    /* Space between icons */
+    margin: 0; /* Remove individual margins as flex handles spacing */
 }
 
 .bottom-nav .nav-item {
@@ -324,40 +312,30 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5px 0;
-    /* Adjust padding to make items fit in thinner nav */
+    padding: 10px 0; /* Adjust padding to make items fit in thinner nav */
     color: #888;
     text-decoration: none;
-    /* font-size: 0.75em; Removed as there is no text */
-    /* font-weight: bold; Removed as there is no text */
     transition: color 0.3s ease, transform 0.3s ease;
-    /* Added transform for hover effect */
 }
 
 .bottom-nav .nav-item:hover {
     transform: translateY(-3px);
-    /* Slight lift on hover */
     color: #A32F2A;
-    /* Hover color */
 }
 
 .bottom-nav .nav-item .nav-icon {
     font-size: 28px;
-    /* Larger icon size */
     margin-bottom: 0;
-    /* No space needed below icon as text is removed */
     color: #888;
     transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item.active {
     color: #A32F2A;
-    /* Active color for the icon itself */
 }
 
 .bottom-nav .nav-item.active .nav-icon {
     color: #A32F2A;
-    /* Active color for the icon itself */
 }
 
 /* --- MAIN CONTENT AREA --- */
@@ -366,7 +344,6 @@ p {
     flex-direction: column; /* Stacks cards vertically on mobile */
     gap: var(--spacing-xs); /* Space between cards */
     flex-grow: 1;
-    /* On mobile, this will naturally stack after the sidebar */
 }
 
 .card {
@@ -587,7 +564,7 @@ small {
     justify-content: center;
   
     padding: 40px 20px;
-    box-sizing: var(--border-color-light);
+    box-sizing: border-box; /* Use border-box for padding */
     overflow: auto;
   }
   
@@ -706,7 +683,6 @@ small {
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
-    /* REMOVE THE LINE BELOW: display: flex; */
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
 }
@@ -784,6 +760,7 @@ small {
         grid-template-columns: 280px 1fr; /* Sidebar fixed width, main content takes rest */
         padding: 0; /* Remove main-layout padding, sections will have their own */
         gap: 0; /* Remove gap between sidebar and main-content, grid handles it */
+        padding-bottom: 0; /* Remove padding for fixed nav, as it's no longer fixed */
     }
 
     /* Hide overlay menu on desktop */
@@ -810,8 +787,44 @@ small {
         margin: var(--spacing-l) var(--spacing-xl) var(--spacing-m);
     }
 
+    .record-list {
+        padding: 0 var(--spacing-xl); /* Add padding to list within sidebar */
+    }
+
     .record-item {
-        padding: var(--spacing-m) var(--spacing-xl);
+        padding: var(--spacing-m) 0; /* Adjust padding for record items within the sidebar */
+    }
+
+    /* Bottom Nav for larger screens (non-fixed) */
+    .bottom-nav {
+        position: static; /* No longer fixed */
+        width: auto; /* Allow content to dictate width, or set 100% if needed */
+        margin-top: var(--spacing-xl); /* Add space above it */
+        box-shadow: none; /* Remove shadow if it's no longer floating */
+        border-top: 1px solid var(--border-color-dark); /* Add a top border if desired */
+        border-radius: var(--border-radius-card); /* Add some rounding if it's within a card-like section */
+        padding: var(--spacing-m) var(--spacing-l); /* Adjust padding */
+        grid-column: 1 / -1; /* Make it span all grid columns of main-layout */
+    }
+
+    .bottom-nav ul {
+        justify-content: center; /* Center items in the nav bar */
+        gap: var(--spacing-xl); /* Add gap between menu items */
+    }
+
+    .bottom-nav li {
+        flex: unset; /* Remove flex sizing */
+    }
+
+    .bottom-nav .nav-item {
+        flex-direction: row; /* Icons and text side by side */
+        gap: var(--spacing-s); /* Space between icon and text */
+        padding: var(--spacing-s) var(--spacing-m); /* Adjust padding */
+    }
+
+    .bottom-nav .nav-item .nav-icon {
+        font-size: 1.2em; /* Smaller icons for desktop */
+        margin-bottom: 0; /* Remove bottom margin */
     }
 
     /* Main content area */
