@@ -96,11 +96,12 @@ body {
   /* Slightly larger icon */
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 90px; /* Add this line to create space for the fixed bottom-nav */
 }
 .chart-container {
     margin: 10px;

@@ -203,6 +203,7 @@ p {
     /* No fixed width on mobile, takes full width */
     width: 100%;
     box-sizing: border-box;
+    flex-direction: column;
 }
 
 .sidebar-title {
@@ -276,31 +277,26 @@ p {
 /* Menú de navegación inferior (Bottom Nav) - Floating and Icon-only */
 .bottom-nav {
     position: fixed;
-    /* Changed from absolute to fixed to keep it in view when scrolling */
     bottom: 20px;
-    /* Distance from the bottom of the viewport */
     left: 50%;
-    /* Center horizontally */
     transform: translateX(-50%);
-    /* Adjust for horizontal centering */
     background-color: #333;
-    /* Dark background */
     border-radius: 50px;
-    /* Make it oval/pill shaped */
     padding: 10px 20px;
-    /* Adjust padding to control the size of the pill */
     z-index: 1000;
-    /* Ensure it's above other content */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    /* More pronounced shadow for floating effect */
     width: fit-content;
-    /* Shrink-wrap content */
     display: flex;
-    /* Use flexbox for internal alignment */
     align-items: center;
-    /* Vertically align items */
     justify-content: space-around;
-    /* Distribute items */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Add transition */
+}
+
+/* New class for hiding the bottom navigation */
+.bottom-nav.hidden-nav {
+    opacity: 0; /* Make it completely transparent */
+    transform: translateX(-50%) translateY(100px); /* Move it down out of view */
+    pointer-events: none; /* Disable interaction when hidden */
 }
 
 .bottom-nav ul {

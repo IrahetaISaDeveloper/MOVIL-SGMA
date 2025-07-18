@@ -1,52 +1,330 @@
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 0px;
-    /* Adjust this value if you add a top fixed element */
-    scroll-padding-bottom: 0px;
-    /* Adjust this value to the height of your floating nav if it overlaps content at the bottom */
+/* --- CSS VARIABLES (FOR THEME AND CONSISTENCY) --- */
+:root {
+    --bg-app: #121212; /* Main application background */
+    --bg-header: #202020; /* Header background */
+    --bg-sidebar: #2D2D2D; /* Sidebar and menu background */
+    --bg-main-content: #1E1E1E; /* Main content area background */
+    --card-bg: #2D2D2D; /* Card and section background */
+
+    --text-light: #FFFFFF; /* Primary light text */
+    --text-secondary: #B0B0B0; /* Secondary text, labels */
+    --text-strong: #E0E0E0; /* Stronger text, titles */
+
+    --accent-blue: #42A5F5; /* Blue for links, focus states */
+    --accent-green: #66BB6A; /* Green for success, accept buttons */
+    --accent-red: #EF5350; /* Red for danger, reject buttons */
+    --accent-primary: #A32F2A; /* Your primary accent color (from admin-users) */
+    --accent-primary-hover: #c03d38; /* Lighter shade for hover */
+
+    --border-color-dark: #3A3A3A; /* Dark border color */
+    --border-color-light: #555; /* Lighter border for inputs */
+
+    --border-radius-main: 20px; /* Main container and sidebar menu */
+    --border-radius-card: 16px; /* Cards and sections */
+    --border-radius-input: 10px; /* Input fields */
+    --border-radius-button: 30px; /* Pill-shaped buttons */
+    --border-radius-small: 8px; /* Smaller elements like checkboxes */
+
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 20px;
+    --spacing-xl: 30px;
+    --spacing-xxl: 40px;
+
+    --header-height: 60px; /* Defined header height */
+    --bottom-nav-height: 80px; /* Estimated height of the bottom nav + its bottom margin */
 }
 
-/* Estilos generales */
-body {
-    font-family: 'Roboto', sans-serif;
+/* --- GENERAL & BASE STYLES (MOBILE-FIRST) --- */
+html, body {
     margin: 0;
     padding: 0;
-    background-color: rgba(40, 40, 40, 1);
-    color: #f0f0f0;
-    overflow-x: hidden;
-    /* IMPORTANT: Add sufficient padding to the body bottom to prevent content from being hidden behind the floating nav */
-    padding-bottom: 100px;
-    /* Adjust this based on the final height and position of your floating nav */
+    width: 100%;
+    min-height: 100vh; /* Ensures full viewport height */
+    display: flex;
+    flex-direction: column; /* Stacks header, then main-content-wrapper, then bottom-nav */
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-light);
+    box-sizing: border-box; /* Includes padding/border in element's total width/height */
+    -webkit-font-smoothing: antialiased; /* Font smoothing for better appearance */
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
+
+/* Header Styles (adapted from admin-users.css) */
+.app-header {
+    background-color: var(--bg-header);
+    padding: 1em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.header-title {
+    font-size: 1.3em; /* Adjusted for mobile */
+    margin: 0;
+    color: var(--text-light);
+    text-align: center;
+    flex-grow: 1; /* Allows title to take available space */
+}
+
+.header-spacer {
+    width: 40px; /* Provides balance for the centered title */
+}
+
+.back-button {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.6em 0.8em;
+    background-color: #444; /* Darker background for consistency */
+    border-radius: 8px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    flex-shrink: 0;
+    z-index: 10;
+    width: 45px; /* Fixed width for button */
+    justify-content: center;
+}
+
+.back-button:hover {
+    background-color: #555;
+}
+
+
+/* Main Content Wrapper to handle padding for fixed bottom nav */
+.main-content-wrapper {
+    flex-grow: 1; /* Takes up remaining vertical space */
+    padding-bottom: var(--bottom-nav-height); /* Crucial: Add padding for the fixed bottom nav */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Content Sections */
+.content-section {
+    width: 100%;
+    max-width: 900px; /* Max width for content on larger screens */
+    padding: var(--spacing-l); /* General padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xl); /* Space between major sections */
+    box-sizing: border-box;
+}
+
+#inicio {
+    background-color: var(--bg-app); /* Use app background for the section */
+    padding-top: var(--spacing-xl); /* Add some top padding */
+}
+
+/* Card-like section for Welcome Message */
+.card-like-section {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    text-align: center;
+}
+
+#welcome-section h2 {
+    font-size: 1.8em; /* Adjusted for mobile */
+    color: var(--text-strong);
+    margin-bottom: var(--spacing-s);
+}
+
+#welcome-section p {
+    font-size: 1em;
+    color: var(--text-secondary);
+}
+
+/* Dashboard Cards Container */
+.dashboard-cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    justify-content: center;
+    gap: var(--spacing-m); /* Space between cards */
+    width: 100%;
+}
+
+/* Dashboard Card */
+.dashboard-card {
+    background-color: var(--card-bg); /* Darker background for cards */
+    border-radius: var(--border-radius-card);
+    padding: var(--spacing-l);
+    display: flex;
+    flex-direction: column; /* Stack icon and info vertically on small screens */
+    align-items: center;
+    gap: var(--spacing-s);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    flex: 1; /* Allow cards to grow and shrink */
+    min-width: 150px; /* Minimum width for cards */
+    max-width: 300px; /* Max width for cards */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon {
+    font-size: 3em; /* Slightly smaller icon for better fit */
+    color: var(--accent-primary); /* Accent color for icons */
+    margin-bottom: var(--spacing-s);
+}
+
+.card-info {
+    text-align: center; /* Center text within card info */
+}
+
+.card-label {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.card-value {
+    font-size: 1.8em; /* Slightly smaller value for better fit */
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+/* Modules in Process Section */
+.modules-in-process-section {
+    margin-top: var(--spacing-l); /* Add some space above this section */
+    padding: var(--spacing-l);
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px; /* Keep this section relatively small */
+    box-sizing: border-box;
+}
+
+.modules-in-process-section h2 {
+    font-size: 1.5em; /* Smaller title for this section */
+    color: var(--text-strong);
+    margin-bottom: var(--spacing-m);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color-dark);
+    padding-bottom: var(--spacing-s);
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    justify-content: center;
+    gap: var(--spacing-s);
+    margin-bottom: var(--spacing-m);
+}
+
+.filter-btn {
+    background-color: #444;
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--border-radius-input); /* Rounded corners like inputs */
+    padding: 8px 15px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: var(--accent-primary);
+    color: white;
+    font-weight: bold;
+}
+
+.filter-btn.active:hover {
+    background-color: var(--accent-primary-hover);
+}
+
+.modules-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+    max-height: 300px; /* Limit height to keep it small */
+    overflow-y: auto; /* Enable scrolling for the list */
+    padding-right: 5px; /* Space for scrollbar */
+}
+
+.module-item {
+    background-color: #3A3A3A;
+    border-radius: var(--border-radius-small);
+    padding: var(--spacing-s) var(--spacing-m);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 0.95em;
+    color: var(--text-light);
+}
+
+.module-title {
+    flex-grow: 1;
+    margin-right: var(--spacing-s);
+}
+
+.module-status {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-in-process {
+    background-color: var(--accent-blue);
+    color: white;
+}
+
+.status-finished {
+    background-color: var(--accent-green);
+    color: white;
+}
+
+.status-not-started {
+    background-color: var(--accent-red);
+    color: white;
+}
+
 
 /* Menú de navegación inferior (Bottom Nav) - Floating and Icon-only */
 .bottom-nav {
     position: fixed;
-    /* Changed from absolute to fixed to keep it in view when scrolling */
     bottom: 20px;
-    /* Distance from the bottom of the viewport */
     left: 50%;
-    /* Center horizontally */
     transform: translateX(-50%);
-    /* Adjust for horizontal centering */
     background-color: #333;
-    /* Dark background */
     border-radius: 50px;
-    /* Make it oval/pill shaped */
     padding: 10px 20px;
-    /* Adjust padding to control the size of the pill */
     z-index: 1000;
-    /* Ensure it's above other content */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    /* More pronounced shadow for floating effect */
     width: fit-content;
-    /* Shrink-wrap content */
     display: flex;
-    /* Use flexbox for internal alignment */
     align-items: center;
-    /* Vertically align items */
     justify-content: space-around;
-    /* Distribute items */
 }
 
 .bottom-nav ul {
@@ -55,14 +333,11 @@ body {
     list-style: none;
     margin: 0;
     padding: 0;
-    /* width: 100%; No longer needed as bottom-nav width is fit-content */
 }
 
 .bottom-nav li {
-    /* flex: 1; Not needed anymore with fit-content and spacing */
     text-align: center;
     margin: 0 15px;
-    /* Space between icons */
 }
 
 .bottom-nav .nav-item {
@@ -71,59 +346,117 @@ body {
     align-items: center;
     justify-content: center;
     padding: 5px 0;
-    /* Adjust padding to make items fit in thinner nav */
     color: #888;
     text-decoration: none;
-    /* font-size: 0.75em; Removed as there is no text */
-    /* font-weight: bold; Removed as there is no text */
     transition: color 0.3s ease, transform 0.3s ease;
-    /* Added transform for hover effect */
 }
 
 .bottom-nav .nav-item:hover {
     transform: translateY(-3px);
-    /* Slight lift on hover */
-    color: #A32F2A;
-    /* Hover color */
+    color: var(--accent-primary);
 }
 
 .bottom-nav .nav-item .nav-icon {
     font-size: 28px;
-    /* Larger icon size */
     margin-bottom: 0;
-    /* No space needed below icon as text is removed */
     color: #888;
     transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item.active {
-    color: #A32F2A;
-    /* Active color for the icon itself */
+    color: var(--accent-primary);
 }
 
 .bottom-nav .nav-item.active .nav-icon {
-    color: #A32F2A;
-    /* Active color for the icon itself */
+    color: var(--accent-primary);
 }
 
-/* Ensure that the HTML and body occupy 100% of the viewport height */
-html,
-body {
-    height: 100%;
+/* --- Media Queries for Responsiveness --- */
+
+/* For Tablets (min-width: 768px) */
+@media (min-width: 768px) {
+    .app-header {
+        padding: 1em 2em; /* Increase header padding */
+    }
+
+    .header-title {
+        font-size: 1.6em; /* Larger title on tablets */
+    }
+
+    .content-section {
+        padding: var(--spacing-xxl); /* More padding for content sections */
+    }
+
+    #welcome-section h2 {
+        font-size: 2.5em; /* Larger welcome message */
+    }
+
+    #welcome-section p {
+        font-size: 1.2em;
+    }
+
+    .dashboard-cards-container {
+        gap: var(--spacing-xl); /* More space between cards */
+    }
+
+    .dashboard-card {
+        flex-direction: row; /* Icon and info side-by-side */
+        text-align: left;
+        gap: var(--spacing-m);
+        padding: var(--spacing-xl);
+        min-width: 300px; /* Adjust min-width */
+        max-width: 400px; /* Adjust max-width */
+    }
+
+    .card-icon {
+        font-size: 3.5em;
+        margin-bottom: 0; /* Remove bottom margin when side-by-side */
+    }
+
+    .card-value {
+        font-size: 2.2em;
+    }
+
+    .modules-in-process-section {
+        max-width: 700px; /* Allow wider for tablets */
+    }
+
+    .filter-buttons {
+        gap: var(--spacing-m);
+    }
 }
 
-/* Content Sections */
-.content-section {
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #f0f0f0;
-    padding: 20px;
-    text-align: center;
-}
+/* For Larger Desktops (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .app-header {
+        max-width: 1200px; /* Limit header width */
+        margin: 0 auto; /* Center header */
+        border-radius: var(--border-radius-main) var(--border-radius-main) 0 0;
+    }
 
-#inicio {
-    background-color: #282828;
+    .main-content-wrapper {
+        max-width: 1200px; /* Limit main content width */
+        margin: 0 auto; /* Center main content */
+        border-bottom-left-radius: var(--border-radius-main);
+        border-bottom-right-radius: var(--border-radius-main);
+        overflow: hidden; /* Ensure content respects border-radius */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Add shadow to the whole content area */
+        background-color: var(--bg-main-content); /* Apply main content background */
+    }
+
+    .content-section {
+        padding: var(--spacing-xxl); /* Even more padding */
+    }
+
+    #welcome-section {
+        padding: var(--spacing-xxl);
+    }
+
+    .dashboard-cards-container {
+        gap: var(--spacing-xxl); /* Larger gap between cards */
+    }
+
+    .modules-in-process-section {
+        max-width: 800px; /* Wider for desktops */
+    }
 }

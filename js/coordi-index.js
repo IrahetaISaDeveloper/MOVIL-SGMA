@@ -52,4 +52,70 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Re-evaluate active item on hash change (useful for #inicio on coordi-index.html)
     window.addEventListener('hashchange', setActiveNavItem);
+
+    // --- New logic for Inicio page content ---
+    const welcomeMessageElement = document.getElementById('welcomeMessage');
+    const vehiclesRegisteredCountElement = document.getElementById('vehiclesRegisteredCount');
+    const studentsRegisteredCountElement = document.getElementById('studentsRegisteredCount');
+
+    // Personalized Welcome Message
+    const loggedInUserName = localStorage.getItem('loggedInUserName'); // Assuming this is set on login
+    if (welcomeMessageElement) {
+        if (loggedInUserName) {
+            welcomeMessageElement.textContent = `¡Bienvenido/a, ${loggedInUserName}!`;
+        } else {
+            welcomeMessageElement.textContent = `¡Bienvenido/a al SGMA!`;
+        }
+    }
+
+    // Dummy data for dashboard cards (replace with actual data fetching from your backend)
+    if (vehiclesRegisteredCountElement) {
+        // In a real application, you'd fetch this from your database
+        vehiclesRegisteredCountElement.textContent = '125'; // Example dummy count
+    }
+    if (studentsRegisteredCountElement) {
+        // In a real application, you'd fetch this from your database
+        studentsRegisteredCountElement.textContent = '340'; // Example dummy count
+    }
+
+    // --- Module Filtering Logic ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const moduleItems = document.querySelectorAll('.module-item');
+
+    // Function to apply the filter
+    function applyModuleFilter(filter) {
+        moduleItems.forEach(item => {
+            const status = item.dataset.status;
+            if (filter === 'all' || status === filter) {
+                item.style.display = 'flex'; // Show item
+            } else {
+                item.style.display = 'none'; // Hide item
+            }
+        });
+    }
+
+    // Add click listeners to filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to the clicked button
+            this.classList.add('active');
+
+            const filter = this.dataset.filter; // Get the filter value (e.g., 'in-process', 'finished', 'all')
+            console.log('Filtro seleccionado:', filter); // Debug: Log selected filter
+            applyModuleFilter(filter); // Apply the filter
+        });
+    });
+
+    // Initial filter application on page load (show all modules by default)
+    // Find the "Todos" button and simulate a click, or directly apply 'all' filter
+    const allFilterButton = document.querySelector('.filter-btn[data-filter="all"]');
+    if (allFilterButton) {
+        allFilterButton.classList.add('active'); // Set "Todos" as active
+        applyModuleFilter('all'); // Apply "all" filter
+    } else {
+        // Fallback if "Todos" button is not found, apply 'all' filter
+        applyModuleFilter('all');
+    }
 });
