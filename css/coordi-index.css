@@ -1,9 +1,9 @@
 html {
     scroll-behavior: smooth;
-    /* Ajusta este valor al alto de tu navbar superior si existiera, o 0 si no */
     scroll-padding-top: 0px;
-    /* Ajusta este valor al alto de tu bottom-nav */
+    /* Adjust this value if you add a top fixed element */
     scroll-padding-bottom: 0px;
+    /* Adjust this value to the height of your floating nav if it overlaps content at the bottom */
 }
 
 /* Estilos generales */
@@ -12,83 +12,116 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgba(40, 40, 40, 1);
-    color: #f0f0f0; /* Color de texto general para contraste con el fondo oscuro */
-    overflow-x: hidden; /* Evita el scroll horizontal en dispositivos móviles */
-    /* Añadir padding en la parte inferior del body para que el contenido no quede oculto por el bottom-nav */
-    padding-bottom: 0px; /* Altura del bottom-nav */
+    color: #f0f0f0;
+    overflow-x: hidden;
+    /* IMPORTANT: Add sufficient padding to the body bottom to prevent content from being hidden behind the floating nav */
+    padding-bottom: 100px;
+    /* Adjust this based on the final height and position of your floating nav */
 }
 
-/* Menú de navegación inferior (Bottom Nav) */
+/* Menú de navegación inferior (Bottom Nav) - Floating and Icon-only */
 .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333; /* Color de fondo oscuro */
-    border-top: 1px solid #444; /* Borde superior sutil */
-    padding: 5px 0;
-    z-index: 0; /* Asegura que esté por encima de otros elementos */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* Sombra superior */
+    /* Changed from absolute to fixed to keep it in view when scrolling */
+    bottom: 20px;
+    /* Distance from the bottom of the viewport */
+    left: 50%;
+    /* Center horizontally */
+    transform: translateX(-50%);
+    /* Adjust for horizontal centering */
+    background-color: #333;
+    /* Dark background */
+    border-radius: 50px;
+    /* Make it oval/pill shaped */
+    padding: 10px 20px;
+    /* Adjust padding to control the size of the pill */
+    z-index: 1000;
+    /* Ensure it's above other content */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    /* More pronounced shadow for floating effect */
+    width: fit-content;
+    /* Shrink-wrap content */
+    display: flex;
+    /* Use flexbox for internal alignment */
+    align-items: center;
+    /* Vertically align items */
+    justify-content: space-around;
+    /* Distribute items */
 }
 
 .bottom-nav ul {
     display: flex;
-    justify-content: space-around; /* Distribuye los elementos uniformemente */
+    justify-content: space-around;
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 100%;
+    /* width: 100%; No longer needed as bottom-nav width is fit-content */
 }
 
 .bottom-nav li {
-    flex: 1; /* Cada elemento ocupa el mismo espacio */
+    /* flex: 1; Not needed anymore with fit-content and spacing */
     text-align: center;
+    margin: 0 15px;
+    /* Space between icons */
 }
 
 .bottom-nav .nav-item {
     display: flex;
-    flex-direction: column; /* Icono arriba, texto abajo */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0px 0;
-    color: #888; /* Color gris para los iconos y texto inactivos */
+    padding: 5px 0;
+    /* Adjust padding to make items fit in thinner nav */
+    color: #888;
     text-decoration: none;
-    font-size: 0.75em; /* Tamaño de fuente para el texto */
-    font-weight: bold;
-    transition: color 0.3s ease; /* Transición suave para el color */
+    /* font-size: 0.75em; Removed as there is no text */
+    /* font-weight: bold; Removed as there is no text */
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Added transform for hover effect */
+}
+
+.bottom-nav .nav-item:hover {
+    transform: translateY(-3px);
+    /* Slight lift on hover */
+    color: #A32F2A;
+    /* Hover color */
 }
 
 .bottom-nav .nav-item .nav-icon {
-    /* Font Awesome icons are typically controlled by font-size and color */
-    font-size: 24px; /* Tamaño del icono Font Awesome */
-    margin-bottom: 4px; /* Espacio entre icono y texto */
-    color: #888; /* Color del icono inactivo */
-    transition: color 0.3s ease; /* Transición suave para el color del icono */
+    font-size: 28px;
+    /* Larger icon size */
+    margin-bottom: 0;
+    /* No space needed below icon as text is removed */
+    color: #888;
+    transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item.active {
-    color: #A32F2A; /* Color verde brillante para el elemento activo */
+    color: #A32F2A;
+    /* Active color for the icon itself */
 }
 
 .bottom-nav .nav-item.active .nav-icon {
-    color: #A32F2A; /* Color verde brillante para el icono activo */
+    color: #A32F2A;
+    /* Active color for the icon itself */
 }
 
-/* Asegurar que el cuerpo y el HTML ocupen el 100% de la altura de la ventana */
-html, body {
+/* Ensure that the HTML and body occupy 100% of the viewport height */
+html,
+body {
     height: 100%;
 }
 
-/* Estilos para las secciones de contenido */
+/* Content Sections */
 .content-section {
     min-height: 50vh;
     display: flex;
-    flex-direction: column; /* Permite apilar elementos en la sección */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #f0f0f0;
-    padding: 20px; /* Añadir padding para espacio */
-    text-align: center; /* Centrar texto */
+    padding: 20px;
+    text-align: center;
 }
 
 #inicio {

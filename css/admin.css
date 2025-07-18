@@ -179,59 +179,91 @@ body {
   color: var(--color-icono-flecha);
 }
 
-.navegacion-inferior {
+/* Menú de navegación inferior (Bottom Nav) - Floating and Icon-only */
+.bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    /* Changed from absolute to fixed to keep it in view when scrolling */
+    bottom: 20px;
+    /* Distance from the bottom of the viewport */
+    left: 50%;
+    /* Center horizontally */
+    transform: translateX(-50%);
+    /* Adjust for horizontal centering */
     background-color: #333;
-    border-top: 1px solid #444;
-    padding: 5px 0;
-    z-index: 100;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-    flex-shrink: 0;
+    /* Dark background */
+    border-radius: 50px;
+    /* Make it oval/pill shaped */
+    padding: 10px 20px;
+    /* Adjust padding to control the size of the pill */
+    z-index: 1000;
+    /* Ensure it's above other content */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    /* More pronounced shadow for floating effect */
+    width: fit-content;
+    /* Shrink-wrap content */
+    display: flex;
+    /* Use flexbox for internal alignment */
+    align-items: center;
+    /* Vertically align items */
+    justify-content: space-around;
+    /* Distribute items */
 }
 
-.navegacion-inferior ul {
+.bottom-nav ul {
     display: flex;
     justify-content: space-around;
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 100%;
+    /* width: 100%; No longer needed as bottom-nav width is fit-content */
 }
 
-.navegacion-inferior li {
-    flex: 1;
+.bottom-nav li {
+    /* flex: 1; Not needed anymore with fit-content and spacing */
     text-align: center;
+    margin: 0 15px;
+    /* Space between icons */
 }
 
-.navegacion-inferior .item-nav {
+.bottom-nav .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0px 0;
+    padding: 5px 0;
+    /* Adjust padding to make items fit in thinner nav */
     color: #888;
     text-decoration: none;
-    font-size: 0.75em;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    /* font-size: 0.75em; Removed as there is no text */
+    /* font-weight: bold; Removed as there is no text */
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Added transform for hover effect */
 }
 
-.navegacion-inferior .item-nav .icono-nav {
-    font-size: 24px;
-    margin-bottom: 4px;
+.bottom-nav .nav-item:hover {
+    transform: translateY(-3px);
+    /* Slight lift on hover */
+    color: #A32F2A;
+    /* Hover color */
+}
+
+.bottom-nav .nav-item .nav-icon {
+    font-size: 28px;
+    /* Larger icon size */
+    margin-bottom: 0;
+    /* No space needed below icon as text is removed */
     color: #888;
     transition: color 0.3s ease;
 }
 
-.navegacion-inferior .item-nav.activo {
+.bottom-nav .nav-item.active {
     color: #A32F2A;
+    /* Active color for the icon itself */
 }
 
-.navegacion-inferior .item-nav.activo .icono-nav {
+.bottom-nav .nav-item.active .nav-icon {
     color: #A32F2A;
+    /* Active color for the icon itself */
 }
 
 .modal-content {
