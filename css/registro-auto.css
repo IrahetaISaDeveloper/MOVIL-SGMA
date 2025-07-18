@@ -17,6 +17,7 @@
     --spacing-l: 20px;
     --spacing-xl: 30px;
     --back-button-bg: #444;
+    --primary-red: #881F1E;
 }
 
 body {
@@ -31,7 +32,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     overflow-x: hidden;
-    padding-bottom: 40px;
+    padding-bottom: 90px;
     padding-top: 0px;
 }
 
@@ -386,50 +387,67 @@ small {
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.navegacion-inferior ul {
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    border-radius: 50px;
+    padding: 10px 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    width: fit-content;
     display: flex;
+    align-items: center;
     justify-content: space-around;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
 }
 
-.navegacion-inferior li {
-    flex: 1;
-    text-align: center;
+.bottom-nav ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Make list items arrange horizontally */
+    justify-content: space-around; /* Distribute items evenly */
+    width: 100%; /* Ensure the ul takes full width of its parent */
 }
 
-.navegacion-inferior .elemento-nav {
+.bottom-nav li {
+    flex-grow: 1; /* Allow list items to grow and take equal space */
+    text-align: center; /* Center the icons within each list item */
+    margin: 0 15px; /* Adjust spacing between items */
+}
+
+.bottom-nav .nav-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Apila el icono y el texto (aunque el texto se quitará del HTML) */
     align-items: center;
     justify-content: center;
-    padding: 0px 0;
-    color: #888;
+    padding: 5px 0;
+    color: #888; /* Color por defecto del icono */
     text-decoration: none;
-    font-size: 0.75em;
-    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Remover font-size, font-weight, etc. si estaban ahí y solo quieres iconos */
+}
+
+.bottom-nav .nav-item:hover {
+    transform: translateY(-3px); /* Pequeño efecto al pasar el ratón */
+    color: var(--primary-red); /* Color al pasar el ratón, usa la variable de tu CSS */
+}
+
+.bottom-nav .nav-item .nav-icon {
+    font-size: 28px; /* Tamaño del icono, más grande para compensar la falta de texto */
+    margin-bottom: 0px; /* Asegura que no haya margen debajo del icono si no hay texto */
+    color: #888; /* Color del icono por defecto */
     transition: color 0.3s ease;
 }
 
-.navegacion-inferior .elemento-nav .icono-nav {
-    font-size: 24px;
-    margin-bottom: 4px;
-    color: #888;
-    transition: color 0.3s ease;
+.bottom-nav .nav-item.active {
+    color: var(--primary-red); /* Color del icono activo*/
 }
 
-.navegacion-inferior .elemento-nav.activo {
-    color: #A32F2A;
-}
-
-.navegacion-inferior .elemento-nav.activo .icono-nav {
-    color: #A32F2A;
-}
-
-.navegacion-inferior.oculto {
-    transform: translateY(100%);
+.bottom-nav .nav-item.active .nav-icon {
+    color: var(--primary-red); /* Color del icono activo*/
 }
 
 .botones {

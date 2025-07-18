@@ -16,7 +16,7 @@
     --spacing-m: 12px;
     --spacing-l: 16px;
     --spacing-xl: 20px;
-
+    --primary-red: #881F1E;
     /* Nuevas variables para el botón de volver y la cabecera */
     --header-bg: #282828; /* Un fondo un poco diferente para la cabecera */
     --back-button-bg: #444; /* Un gris oscuro para el fondo del botón */
@@ -27,7 +27,7 @@
 /* --- ESTILOS GENERALES Y DE BASE (MOBILE-FIRST) --- */
 html, body {
     margin: 0;
-    padding: 0;
+    padding-bottom: 0px;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -43,58 +43,74 @@ html, body {
 /* Menú de navegación inferior (Bottom Nav) */
 .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333; /* Color de fondo oscuro */
-    border-top: 1px solid #444; /* Borde superior sutil */
-    padding: 5px 0;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3); /* Sombra superior */
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    border-radius: 50px;
+    padding: 10px 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .bottom-nav ul {
-    display: flex;
-    justify-content: space-around; /* Distribuye los elementos uniformemente */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Make list items arrange horizontally */
+    justify-content: space-around; /* Distribute items evenly */
+    width: 100%; /* Ensure the ul takes full width of its parent */
 }
 
 .bottom-nav li {
-    flex: 1; /* Cada elemento ocupa el mismo espacio */
-    text-align: center;
+    flex-grow: 1; /* Allow list items to grow and take equal space */
+    text-align: center; /* Center the icons within each list item */
+    margin: 0 15px; /* Adjust spacing between items */
 }
 
 .bottom-nav .nav-item {
     display: flex;
-    flex-direction: column; /* Icono arriba, texto abajo */
+    flex-direction: column; /* Apila el icono y el texto (aunque el texto se quitará del HTML) */
     align-items: center;
     justify-content: center;
-    padding: 0px 0;
-    color: #888; /* Color gris para los iconos y texto inactivos */
+    padding: 5px 0;
+    color: #888; /* Color por defecto del icono */
     text-decoration: none;
-    font-size: 0.75em; /* Tamaño de fuente para el texto */
-    font-weight: bold;
-    transition: color 0.3s ease; /* Transición suave para el color */
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Remover font-size, font-weight, etc. si estaban ahí y solo quieres iconos */
+}
+
+.bottom-nav .nav-item:hover {
+    transform: translateY(-3px); /* Pequeño efecto al pasar el ratón */
+    color: var(--primary-red); /* Color al pasar el ratón, usa la variable de tu CSS */
 }
 
 .bottom-nav .nav-item .nav-icon {
-    /* Font Awesome icons are typically controlled by font-size and color */
-    font-size: 24px; /* Tamaño del icono Font Awesome */
-    margin-bottom: 4px; /* Espacio entre icono y texto */
-    color: #888; /* Color del icono inactivo */
-    transition: color 0.3s ease; /* Transición suave para el color del icono */
+    font-size: 28px; /* Tamaño del icono, más grande para compensar la falta de texto */
+    margin-bottom: 0px; /* Asegura que no haya margen debajo del icono si no hay texto */
+    color: #888; /* Color del icono por defecto */
+    transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item.active {
-    color: #A32F2A; /* Color verde brillante para el elemento activo */
+    color: var(--primary-red); /* Color del icono activo*/
 }
 
 .bottom-nav .nav-item.active .nav-icon {
-    color: #A32F2A; /* Color verde brillante para el icono activo */
+    color: var(--primary-red); /* Color del icono activo*/
 }
+
+.navegacion-inferior .item-nav .icono-nav {
+    font-size: 24px; /* No es variable porque solo se usa aquí */
+    margin-bottom: 4px; /* No es variable porque solo se usa aquí */
+    color: var(--color-muted);
+    transition: color 0.3s ease;
+}
+
 
 /* Nuevo contenedor principal de la app */
 .full-screen-app-container {

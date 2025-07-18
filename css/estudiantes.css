@@ -42,7 +42,7 @@ body {
   align-items: center; /* Centra el contenido horizontalmente */
   margin: 0 auto; /* Centra el contenedor horizontalmente */
   position: relative; /* Para posicionar el contenido si es necesario */
-  padding-bottom: 60px; /* Espacio para el bottom-nav, ajusta si tu nav es diferente */
+  padding-bottom: 80px; /* Espacio para el bottom-nav, ajusta si tu nav es diferente */
   box-sizing: border-box; /* Incluye padding en el width/height */
 }
 
@@ -224,16 +224,19 @@ body {
 
 /* Menú de navegación inferior (Bottom Nav) */
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    border-top: 1px solid #444;
-    padding: 5px 0;
-    z-index: 100; /* Asegura que esté por encima de otros elementos */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-    flex-shrink: 0; /* Prevents it from shrinking */
+    position: fixed; /* Lo hace flotante */
+    bottom: 20px; /* Separación de 20px del borde inferior */
+    left: 50%; /* Lo posiciona al 50% del ancho del padre */
+    transform: translateX(-50%); /* Lo mueve hacia la izquierda la mitad de su propio ancho para centrarlo */
+    background-color: #333; /* Fondo oscuro */
+    border-radius: 50px; /* Bordes muy redondeados para forma de píldora */
+    padding: 10px 20px; /* Padding interno */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra para efecto flotante */
+    width: fit-content; /* El ancho se ajusta al contenido */
+    display: flex; /* Para organizar los ítems de navegación */
+    align-items: center; /* Centra verticalmente los ítems */
+    justify-content: space-around; /* Distribuye el espacio entre los ítems */
 }
 
 .bottom-nav ul {
@@ -242,40 +245,43 @@ body {
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 100%;
 }
 
 .bottom-nav li {
-    flex: 1;
     text-align: center;
+    margin: 0 15px; /* Espacio entre los elementos del menú */
 }
 
 .bottom-nav .nav-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Apila el icono y el texto (aunque el texto se quitará del HTML) */
     align-items: center;
     justify-content: center;
-    padding: 0px 0;
-    color: #888;
+    padding: 5px 0;
+    color: #888; /* Color por defecto del icono */
     text-decoration: none;
-    font-size: 0.75em;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* Remover font-size, font-weight, etc. si estaban ahí y solo quieres iconos */
+}
+
+.bottom-nav .nav-item:hover {
+    transform: translateY(-3px); /* Pequeño efecto al pasar el ratón */
+    color: var(--primary-red); /* Color al pasar el ratón, usa la variable de tu CSS */
 }
 
 .bottom-nav .nav-item .nav-icon {
-    font-size: 24px;
-    margin-bottom: 4px;
-    color: #888;
+    font-size: 28px; /* Tamaño del icono, más grande para compensar la falta de texto */
+    margin-bottom: 0px; /* Asegura que no haya margen debajo del icono si no hay texto */
+    color: #888; /* Color del icono por defecto */
     transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item.active {
-    color: #A32F2A;
+    color: var(--btn-bg); /* Color del icono activo*/
 }
 
 .bottom-nav .nav-item.active .nav-icon {
-    color: #A32F2A;
+    color: var(--primary-red); /* Color del icono activo*/
 }
 
 /* Modal specific styles */
