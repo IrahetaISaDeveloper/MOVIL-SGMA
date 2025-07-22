@@ -1,10 +1,4 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
-
 :root {
-    /* Colores de registro-auto.css */
     --bg-app: #121212;
     --bg-container: #1E1E1E;
     --card-bg: #2D2D2D;
@@ -22,36 +16,30 @@
     --spacing-m: 15px;
     --spacing-l: 20px;
     --spacing-xl: 30px;
-
-    /* Colores y variables de admin.css (retained for header, etc.) */
     --fondo-app: #2b2b2b;
     --fondo-encabezado: #3a3a3a;
-    --fondo-tarjeta: white; /* No se usa directamente aquí, pero se mantiene */
+    --fondo-tarjeta: white;
     --texto-claro: white;
     --resaltado-texto: #dcdcdc;
-    --fondo-boton: #8b1c1c; /* Para botones principales en admin.css */
+    --fondo-boton: #8b1c1c;
     --fondo-boton-hover: #a52a2a;
-    --fondo-boton-volver: #444; /* Para el botón de regresar del header */
+    --fondo-boton-volver: #444;
     --hover-boton-volver: #555;
     --alto-encabezado: 60px;
-
-    /* Colores específicos de este diseño (admin-users.css adaptado) */
-    --header-bg: #3a3a3a; /* Un gris un poco diferente para la cabecera */
-    --btn-delete-bg: #881F1E; /* Rojo para botones de eliminar */
+    --header-bg: #3a3a3a;
+    --btn-delete-bg: #881F1E;
     --btn-delete-hover-bg: #A32F2A;
-    --btn-edit-bg: #42A5FF; /* Azul para botones de editar */
+    --btn-edit-bg: #42A5FF;
     --btn-edit-hover-bg: #1e88e5;
-
-    /* Colores para el nuevo footer/navegación (tomados de estudiantes.css) */
-    --bottom-nav-height: 60px; /* Example bottom nav height */
+    --bottom-nav-height: 60px;
     --nav-item-color: #888;
-    --nav-item-active-color: #A32F2A; /* Color activo de estudiantes.css */
+    --nav-item-active-color: #A32F2A;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-container); /* Usamos --bg-app de admin-users.css */
-    color: var(--text-light); /* Usamos --text-light de admin-users.css */
+    background-color: var(--bg-container);
+    color: var(--text-light);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -59,63 +47,58 @@ body {
     min-height: 100vh;
     margin: 0;
     overflow-x: hidden;
-    padding-bottom: var(--bottom-nav-height); /* Space for the fixed bottom navigation */
+    padding-bottom: var(--bottom-nav-height);
     padding-top: 0px;
 
 }
 
 .encabezado-app {
-  background-color: var(--fondo-encabezado);
-  padding: 1em 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  height: 60px;
+    background-color: var(--fondo-encabezado);
+    padding: 1em 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 60px;
 }
 
 .titulo-encabezado {
-  font-size: 1.3rem;
-  margin: 0;
-  color: var(--texto-claro);
-  text-align: center;
+    font-size: 1.3rem;
+    margin: 0;
+    color: var(--texto-claro);
+    text-align: center;
 }
 
 .espaciador-encabezado {
-  width: 50px;
+    width: 50px;
 }
 
 .boton-volver {
-  color: var(--texto-claro);
-  text-decoration: none;
-  padding: 0.6em 0.8em;
-  background-color: var(--fondo-boton-volver);
-  border-radius: 8px;
-  font-size: 0.9em;
-  transition: background-color 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.3em;
-  flex-shrink: 0;
-  z-index: 10;
-  width: 45px;
-  justify-content: center;
+    color: var(--texto-claro);
+    text-decoration: none;
+    padding: 0.6em 0.8em;
+    background-color: var(--fondo-boton-volver);
+    border-radius: 8px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    flex-shrink: 0;
+    z-index: 10;
+    width: 45px;
+    justify-content: center;
 }
 
 .boton-volver:hover {
-  background-color: var(--hover-boton-volver);
+    background-color: var(--hover-boton-volver);
 }
 
-.boton-volver i {
-  font-size: 1.1em;
-}
-
-/* Contenedor principal para el contenido CRUD (similar a .container de admin-users.css) */
 .contenedor {
     background-color: var(--bg-container);
     width: 100%;
@@ -125,13 +108,8 @@ body {
     box-sizing: border-box;
     border-radius: var(--border-radius-main);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    flex-grow: 1;
-    /* Permite que el contenedor crezca y ocupe espacio disponible */
-    margin-top: 0px;
-    margin-bottom: 0px;
 }
 
-/* Section Title */
 h1 {
     margin-bottom: 1.5rem;
     text-align: center;
@@ -139,7 +117,6 @@ h1 {
     color: var(--text-light);
 }
 
-/* Form Styles (from admin-users.css) */
 .formulario-modulo {
     margin-bottom: 1.5rem;
     padding: 1.5rem;
@@ -170,10 +147,6 @@ textarea {
     color: var(--text-light);
     font-size: 1.1em;
     box-sizing: border-box;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    resize: vertical;
 }
 
 input[type="text"]::placeholder,
@@ -181,25 +154,27 @@ textarea::placeholder {
     color: #888;
 }
 
-/* Button Styles (from admin-users.css) */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
 .botones {
-    margin-top: 15px;
+    width: 100%;
     padding: 14px 20px;
     border: none;
     border-radius: var(--border-radius-button);
-    font-size: 1.1em;
-    font-weight: 700;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
-    box-sizing: border-box;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     background-color: var(--button-primary);
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 .botones:hover {
-    background-color: #5cb85d;
-    transform: translateY(-2px);
+    background-color: #5cb85c;
 }
 
 .botones.secundario {
@@ -211,14 +186,12 @@ textarea::placeholder {
     background-color: #666;
 }
 
-/* Section Separator */
 .separador-seccion {
     border: none;
     border-top: 1px solid #3a3a3a;
     margin: 40px 0;
 }
 
-/* Table Styles (from admin-users.css) */
 .tabla-responsiva {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -253,33 +226,93 @@ table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* Action buttons in table */
 table button {
     margin-right: 5px;
     padding: 8px 12px;
     border: none;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 0.9em;
-    font-weight: 600;
     transition: background-color 0.2s ease;
-    white-space: nowrap;
 }
 
-table button:first-of-type {
+table button:last-child {
+    margin-right: 0;
+}
+
+table button.edit {
     background-color: var(--btn-edit-bg);
     color: white;
 }
 
-table button:first-of-type:hover {
+table button.edit:hover {
     background-color: var(--btn-edit-hover-bg);
 }
 
-table button:last-of-type {
+table button.delete {
     background-color: var(--btn-delete-bg);
     color: white;
 }
 
-table button:last-of-type:hover {
+table button.delete:hover {
     background-color: var(--btn-delete-hover-bg);
+}
+
+@media (max-width: 768px) {
+    .contenedor {
+        margin: 0;
+        border-radius: 0;
+        padding: 20px 15px;
+    }
+
+    .encabezado-app {
+        border-radius: 0;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .formulario-modulo {
+        padding: 1rem;
+    }
+
+    table th,
+    table td {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    table button {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+}
+
+.swal-custom-popup {
+    background-color: var(--card-bg) !important;
+    color: var(--text-light) !important;
+    border-radius: var(--border-radius-main) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6) !important;
+}
+
+.swal-custom-title {
+    color: var(--text-strong) !important;
+    font-weight: 700 !important;
+}
+
+.swal-custom-content {
+    color: var(--text-secondary) !important;
+}
+
+.swal-custom-confirm-button {
+    background-color: var(--button-primary) !important;
+    color: white !important;
+    border-radius: var(--border-radius-button) !important;
+    font-size: 1.1em !important;
+    padding: var(--spacing-s) var(--spacing-l) !important;
+}
+
+.swal-custom-confirm-button:hover {
+    background-color: #ad1414 !important;
 }

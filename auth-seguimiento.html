@@ -1,82 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <!-- Configuración básica del documento: codificación de caracteres, configuración del viewport para diseño responsivo. -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Título de la página que se muestra en la pestaña del navegador. -->
-    <title>Seguimiento de vehículo</title>
-    <!-- Enlaces a los iconos de favicon para asegurar una buena visualización en diferentes dispositivos. -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="imgs/favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="imgs/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="imgs/favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="imgs/favicon/site.webmanifest" />
-    <!-- Enlace a la biblioteca Font Awesome para la inclusión de iconos. -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <!-- Enlace a la hoja de estilos CSS personalizada para esta página de autenticación de seguimiento. -->
-    <link rel="stylesheet" href="css/auth-seguimiento.css" />
-  </head>
 
-  <body>
-    <!-- Contenedor principal que abarca toda la interfaz de la aplicación, simulando una pantalla de app. -->
-    <div class="contenedor-app">
-      <!-- Cabecera de la sección de autenticación. -->
-      <header class="encabezado-autenticacion">
-        <!-- Enlace/botón para regresar a la página de inicio de sesión. -->
-        <a href="login.html" class="boton-regresar">
-          <!-- Icono de flecha izquierda de Font Awesome. -->
-          <i class="fas fa-arrow-left"></i> 
-        </a>
-      </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seguimiento de vehículo</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="imgs/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="imgs/favicon/site.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="css/auth-seguimiento.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
 
-      <!-- Contenido principal de la sección de autenticación, donde se solicita la información del vehículo/DUI. -->
-      <main class="contenido-principal-autenticacion">
-        <!-- Un envoltorio para centrar y organizar los elementos dentro del contenido principal. -->
-        <div class="envoltorio-contenido">
-          <!-- Logo de la institución o empresa. -->
-          <img src="imgs/logo rical.png" alt="Logo Ricaldone" class="logo-empresa" />
-          <!-- Título principal del sistema. -->
-          <span class="titulo-principal">Sistema de Gestión de Vehículos</span>
-          <!-- Párrafo instructivo para el usuario. -->
-          <p class="descripcion-principal">
-            Ingresa tu número de placa, tarjeta de circulación o tu DUI.
-          </p>
-          <!-- Contenedor del campo de entrada y el botón de acción. -->
-          <div class="formulario-entrada">
-            <!-- Campo de entrada para que el usuario introduzca la placa, tarjeta o DUI. -->
-            <input
-              id="placa"
-              name="placa"
-              placeholder="P000-000"
-              type="text"
-              aria-label="Número de placa, tarjeta de circulación o DUI"
-            />
-            <!-- Botón para ver el seguimiento del vehículo. -->
-            <button type="button" class="boton-accion" id="verSeguimientoBtn">
-              Ver seguimiento
-            </button>
-          </div>
+<body>
+  <div class="contenedor-app">
+    <header class="encabezado-autenticacion">
+      <a href="login.html" class="boton-regresar">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+    </header>
+
+    <main class="contenido-principal-autenticacion">
+      <div class="envoltorio-contenido">
+        <img src="imgs/logo rical.png" alt="Logo Ricaldone" class="logo-empresa" />
+        <span class="titulo-principal">Sistema de Gestión de Vehículos</span>
+        <p class="descripcion-principal">
+          Ingresa tu número de placa, tarjeta de circulación o tu DUI.
+        </p>
+        <div class="formulario-entrada">
+          <input id="placa" name="placa" placeholder="P000-000" type="text"
+            aria-label="Número de placa, tarjeta de circulación o DUI" />
+          <button type="button" class="boton-accion" id="verSeguimientoBtn">
+            Ver seguimiento
+          </button>
         </div>
-      </main>
-    </div>
-    <!-- Enlace al archivo JavaScript que contiene la lógica de la página. -->
-    <script src="js/auth-seguimiento.js"></script>
-  </body>
+      </div>
+    </main>
+  </div>
+  <script src="js/auth-seguimiento.js"></script>
+</body>
+
 </html>

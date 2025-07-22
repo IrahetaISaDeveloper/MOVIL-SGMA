@@ -23,7 +23,8 @@
         <section id="datos-usuario" class="seccion">
             <div class="tarjeta-info-perfil">
                 <div class="perfil-visualizacion">
-                    <img id="fotoPerfil" class="foto-perfil" src="https://placehold.co/120x120/333333/FFFFFF?text=Sin+Foto" alt="Foto de Perfil">
+                    <img id="fotoPerfil" class="foto-perfil"
+                        src="https://placehold.co/120x120/333333/FFFFFF?text=Sin+Foto" alt="Foto de Perfil">
                     <p class="nombre-usuario-perfil" id="nombreCompletoUsuario">Cargando...</p>
                 </div>
                 <div class="item-info-perfil">
@@ -45,7 +46,8 @@
                 <form id="formularioCambioContrasena">
                     <div class="grupo-formulario">
                         <label for="contrasenaActual">Contraseña Actual</label>
-                        <input type="password" id="contrasenaActual" placeholder="Ingresa tu contraseña actual" required>
+                        <input type="password" id="contrasenaActual" placeholder="Ingresa tu contraseña actual"
+                            required>
                     </div>
                     <div class="grupo-formulario">
                         <label for="nuevaContrasena">Nueva Contraseña</label>
@@ -53,7 +55,8 @@
                     </div>
                     <div class="grupo-formulario">
                         <label for="confirmarNuevaContrasena">Confirmar Nueva Contraseña</label>
-                        <input type="password" id="confirmarNuevaContrasena" placeholder="Confirma tu nueva contraseña" required>
+                        <input type="password" id="confirmarNuevaContrasena" placeholder="Confirma tu nueva contraseña"
+                            required>
                     </div>
                     <button type="submit" class="btn-actualizar-contrasena">Actualizar Contraseña</button>
                     <div id="mensajeContrasena" class="mensaje-alerta"></div>
@@ -68,33 +71,34 @@
             <li>
                 <a href="coordi-index.html" class="nav-item">
                     <i class="fas fa-home nav-icon"></i>
-                    </a>
+                </a>
             </li>
             <li>
                 <a href="1er-año.html" class="nav-item">
                     <i class="fas fa-clipboard-list nav-icon"></i>
-                    </a>
+                </a>
             </li>
             <li>
                 <a href="reportes.html" class="nav-item">
                     <i class="fas fa-chart-bar nav-icon"></i>
-                    </a>
+                </a>
             </li>
             <li>
                 <a href="perfil-coord.html" class="nav-item active">
                     <i class="fas fa-user nav-icon"></i>
-                    </a>
+                </a>
             </li>
             <li>
                 <a href="admin.html" class="nav-item">
                     <i class="fas fa-wrench nav-icon"></i>
-                    </a>
+                </a>
             </li>
         </ul>
     </nav>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/perfil-coord-validation.js"></script>
 </body>
+
 </html>

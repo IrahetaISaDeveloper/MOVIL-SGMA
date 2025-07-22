@@ -1,35 +1,32 @@
-/* --- VARIABLES CSS --- */
 :root {
-    --bg-app: #121212; /* Fondo de la aplicación */
-    --bg-container: #1E1E1E; /* Fondo del contenedor principal */
-    --card-bg: #2D2D2D; /* Fondo de tarjetas/elementos */
+    --bg-app: #121212;
+    --bg-container: #1E1E1E;
+    --card-bg: #2D2D2D;
     --text-light: #FFFFFF;
     --text-secondary: #B0B0B0;
     --text-strong: #E0E0E0;
-    --accent-blue: #42A5F5; /* Azul para enlaces */
-    --button-primary: #66BB6A; /* Verde para botón principal (Asignar) */
+    --accent-blue: #42A5F5;
+    --button-primary: #66BB6A;
     --border-radius-main: 20px;
     --border-radius-card: 16px;
     --border-radius-input: 10px;
-    --border-radius-button: 30px; /* Bordes de píldora para botones */
+    --border-radius-button: 30px;
     --spacing-xs: 5px;
     --spacing-s: 10px;
     --spacing-m: 15px;
     --spacing-l: 20px;
     --spacing-xl: 30px;
-
-    --back-button-bg: #444; /* Un gris oscuro para el fondo del botón */
+    --back-button-bg: #444;
 }
 
-/* --- ESTILOS GENERALES Y DE BASE (MOBILE-FIRST) --- */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la vista */
-    display: flex; /* Para centrar el main-container verticalmente si es necesario */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: flex-start; /* Alinea el contenido arriba */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-app);
     color: var(--text-light);
@@ -40,33 +37,32 @@ html, body {
 
 .main-container {
     background-color: var(--bg-container);
-    width: 100%; /* Ocupa todo el ancho en móviles */
-    max-width: 550px; /* Ancho máximo para el contenedor principal */
-    min-height: calc(100vh - (var(--spacing-l) * 2)); /* Ajusta la altura para ocupar la pantalla con padding */
-    padding: var(--spacing-l); /* Padding interior para móviles */
+    width: 100%;
+    max-width: 550px;
+    min-height: calc(100vh - (var(--spacing-l) * 2));
+    padding: var(--spacing-l);
     box-sizing: border-box;
-    display: flex; /* Flexbox para apilar secciones */
+    display: flex;
     flex-direction: column;
-    gap: var(--spacing-xl); /* Espacio entre secciones */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra principal */
+    gap: var(--spacing-xl);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .app-header {
-    background-color: var(--header-bg); /* Fondo de la cabecera */
+    background-color: var(--header-bg);
     display: flex;
-    align-items: center; /* Alinea verticalmente el botón y el título */
-    justify-content: space-between; /* Espacia el botón a la izquierda y el título al centro */
-    flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
 }
 
 .app-header h1 {
-    font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
+    font-size: 1.3em;
     font-weight: 700;
     color: var(--text-light);
-    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
-    text-align: center; /* Centra el título */
-    /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
-    margin-left: -15px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
+    flex-grow: 1;
+    text-align: center;
+    margin-left: -15px;
 }
 
 .back-button {
@@ -77,11 +73,11 @@ html, body {
     border-radius: 8px;
     font-size: 0.85em;
     transition: background-color 0.2s ease;
-    display: flex; /* Para alinear el icono y el texto */
+    display: flex;
     align-items: center;
-    gap: 0.5em; /* Espacio entre el icono y el texto */
-    flex-shrink: 0; /* Evita que el botón se encoja */
-    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
+    gap: 0.5em;
+    flex-shrink: 0;
+    z-index: 10;
 }
 
 .back-button:hover {
@@ -103,23 +99,22 @@ p {
     margin: 0;
 }
 
-/* --- TARJETA DE RESUMEN (summary-card) --- */
 .summary-card {
     background-color: var(--card-bg);
     border-radius: var(--border-radius-card);
     display: flex;
-    flex-direction: column; /* Apilado por defecto en móviles */
+    flex-direction: column;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .card-image {
     width: 100%;
-    height: 180px; /* Altura fija para la imagen en móvil */
-    flex-shrink: 0; /* Evita que la imagen se encoja */
+    height: 180px;
+    flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    border-top-left-radius: var(--border-radius-card); /* Redondeado solo arriba */
+    border-top-left-radius: var(--border-radius-card);
     border-top-right-radius: var(--border-radius-card);
 }
 
@@ -129,8 +124,6 @@ p {
     object-fit: cover;
     display: block;
 }
-
-/* .image-overlay no está en tu HTML para esta página, pero si lo necesitaras, lo pondrías aquí */
 
 .card-details {
     padding: var(--spacing-l);
@@ -156,7 +149,7 @@ p {
     display: flex;
     align-items: center;
     gap: var(--spacing-s);
-    margin-top: auto; /* Empuja el enlace al fondo */
+    margin-top: auto;
     align-self: flex-start;
     padding: var(--spacing-xs) 0;
     transition: color 0.2s ease;
@@ -167,12 +160,11 @@ p {
 }
 
 .contact-link svg {
-    width: 18px; /* Tamaño del icono */
-    height: 18px; /* Tamaño del icono */
-    fill: currentColor; /* Usa el color del texto del enlace */
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
 }
 
-/* --- SECCIÓN DE ASIGNAR TRABAJO (assign-job-section) --- */
 .assign-job-section {
     background-color: var(--card-bg);
     border-radius: var(--border-radius-card);
@@ -180,7 +172,7 @@ p {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-m); /* Espacio entre grupos de formulario */
+    gap: var(--spacing-m);
 }
 
 .form-group {
@@ -202,36 +194,35 @@ p {
     padding: var(--spacing-s) var(--spacing-m);
     color: var(--text-light);
     font-size: 1em;
-    outline: none; /* Elimina el borde de enfoque por defecto */
+    outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input[type="text"]:focus {
     border-color: var(--accent-blue);
-    box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.3); /* Sombra azul al enfocar */
+    box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.3);
 }
 
-/* --- ESTILO PERSONALIZADO PARA CHECKBOX --- */
 .checkbox-group {
-    flex-direction: row; /* La etiqueta y el checkbox en la misma fila */
+    flex-direction: row;
     align-items: center;
     gap: var(--spacing-s);
-    cursor: pointer; /* Indica que todo el grupo es clickeable */
+    cursor: pointer;
 }
 
 .checkbox-group label {
-    margin-bottom: 0; /* No hay margen inferior para la etiqueta en este diseño */
+    margin-bottom: 0;
     cursor: pointer;
 }
 
 input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
-    width: 22px; /* Tamaño del checkbox */
+    width: 22px;
     height: 22px;
     background-color: #333;
     border: 2px solid #555;
-    border-radius: 5px; /* Bordes redondeados del checkbox */
+    border-radius: 5px;
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
@@ -239,7 +230,7 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-    background-color: var(--button-primary); /* Verde para marcado */
+    background-color: var(--button-primary);
     border-color: var(--button-primary);
 }
 
@@ -253,7 +244,6 @@ input[type="checkbox"]:checked::before {
     transform: translate(-50%, -50%);
 }
 
-/* --- BOTÓN ASIGNAR TRABAJO --- */
 .assign-button {
     width: 100%;
     padding: var(--spacing-m) var(--spacing-l);
@@ -262,25 +252,22 @@ input[type="checkbox"]:checked::before {
     font-size: 1.1em;
     font-weight: 700;
     color: white;
-    background-color: var(--button-primary); /* Verde para el botón de acción */
+    background-color: var(--button-primary);
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     transition: background-color 0.2s ease, transform 0.2s ease;
-    margin-top: var(--spacing-m); /* Espacio extra encima del botón */
+    margin-top: var(--spacing-m);
 }
 
 .assign-button:hover {
-    background-color: #5cb85c; /* Verde ligeramente más claro al pasar el ratón */
+    background-color: #5cb85c;
     transform: translateY(-2px);
 }
 
-/* --- MEDIA QUERIES PARA ADAPTACIÓN A PANTALLAS MÁS GRANDES --- */
-
-/* Tabletas (generalmente 600px y más) */
 @media (min-width: 600px) {
     .main-container {
-        padding: var(--spacing-xl); /* Más padding en tablets */
-        max-width: 650px; /* Permite un poco más de ancho */
+        padding: var(--spacing-xl);
+        max-width: 650px;
     }
 
     h1 {
@@ -288,15 +275,15 @@ input[type="checkbox"]:checked::before {
     }
 
     .summary-card {
-        flex-direction: row; /* Imagen y detalles lado a lado en tablets */
-        height: 200px; /* Altura fija para la tarjeta */
+        flex-direction: row;
+        height: 200px;
     }
 
     .card-image {
-        width: 250px; /* Ancho de la imagen en layout horizontal */
-        height: 100%; /* Ocupa toda la altura de la tarjeta */
-        border-top-right-radius: 0; /* Anula redondez superior derecha */
-        border-bottom-left-radius: var(--border-radius-card); /* Redondea inferior izquierda */
+        width: 250px;
+        height: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: var(--border-radius-card);
     }
 
     .card-details {
@@ -323,56 +310,51 @@ input[type="checkbox"]:checked::before {
     }
 }
 
-/* Escritorios (generalmente 900px y más) */
 @media (min-width: 900px) {
     .main-container {
-        max-width: 800px; /* Permite un ancho aún mayor */
-        flex-direction: row; /* Las secciones se ponen lado a lado */
-        align-items: flex-start; /* Alinea los elementos al inicio */
-        /* Eliminamos el gap y lo manejamos con márgenes si es necesario, o un grid */
+        max-width: 800px;
+        flex-direction: row;
+        align-items: flex-start;
         display: grid;
-        grid-template-columns: 1fr 1.2fr; /* Columna para summary, columna para formulario */
-        grid-template-rows: auto 1fr; /* Fila para título, fila para contenido */
+        grid-template-columns: 1fr 1.2fr;
+        grid-template-rows: auto 1fr;
         gap: var(--spacing-xl);
     }
 
     h1 {
-        grid-column: 1 / -1; /* Ocupa ambas columnas */
+        grid-column: 1 / -1;
         margin-bottom: var(--spacing-xl);
     }
 
     .summary-card {
-        grid-column: 1 / 2; /* Primera columna */
-        flex-direction: column; /* Vuelve a apilar imagen y detalles para ocupar el espacio vertical */
-        height: auto; /* Altura automática */
+        grid-column: 1 / 2;
+        flex-direction: column;
+        height: auto;
     }
 
     .card-image {
-        width: 100%; /* Ocupa todo el ancho de la columna */
-        height: 220px; /* Altura de la imagen en esta vista */
-        border-top-left-radius: var(--border-radius-card); /* Vuelve a redondear arriba */
+        width: 100%;
+        height: 220px;
+        border-top-left-radius: var(--border-radius-card);
         border-top-right-radius: var(--border-radius-card);
-        border-bottom-left-radius: 0; /* Asegura que la parte inferior no esté redondeada */
+        border-bottom-left-radius: 0;
     }
 
     .assign-job-section {
-        grid-column: 2 / 3; /* Segunda columna */
-        margin-top: var(--spacing-xs); /* Pequeño ajuste para alinear con el título de la card */
+        grid-column: 2 / 3;
+        margin-top: var(--spacing-xs);
     }
 
     .assign-button {
-        max-width: 300px; /* Limita el ancho del botón en desktop */
-        align-self: center; /* Centra el botón en la sección */
+        max-width: 300px;
+        align-self: center;
     }
 }
 
-
-
-
 .footer-actions {
-    margin-top: auto; /* Empuja los botones al fondo */
+    margin-top: auto;
     display: flex;
-    flex-direction: column; /* Apila los botones en móvil */
+    flex-direction: column;
     gap: var(--spacing-s);
     padding-top: var(--spacing-m);
     border-top: 1px solid #333;
@@ -382,7 +364,7 @@ input[type="checkbox"]:checked::before {
     flex-grow: 1;
     padding: var(--spacing-m) var(--spacing-l);
     border: none;
-    border-radius: var(--border-radius-button); /* Bordes muy redondeados para botones */
+    border-radius: var(--border-radius-button);
     font-size: 1.1em;
     font-weight: 700;
     color: white;
@@ -390,6 +372,34 @@ input[type="checkbox"]:checked::before {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     transition: background-color 0.2s ease, transform 0.2s ease;
-    text-align: center; /* Asegura que el texto esté centrado si no es un bloque completo */
-    text-decoration: none; /* Quita subrayado de los enlaces */
+    text-align: center;
+    text-decoration: none;
+}
+
+.swal-custom-popup {
+    background-color: var(--card-bg) !important;
+    color: var(--text-light) !important;
+    border-radius: var(--border-radius-main) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6) !important;
+}
+
+.swal-custom-title {
+    color: var(--text-strong) !important;
+    font-weight: 700 !important;
+}
+
+.swal-custom-content {
+    color: var(--text-secondary) !important;
+}
+
+.swal-custom-confirm-button {
+    background-color: var(--button-primary) !important;
+    color: white !important;
+    border-radius: var(--border-radius-button) !important;
+    font-size: 1.1em !important;
+    padding: var(--spacing-s) var(--spacing-l) !important;
+}
+
+.swal-custom-confirm-button:hover {
+    background-color: #5cb85c !important;
 }

@@ -1,5 +1,3 @@
-// admin-modules.js
-
 const form = document.getElementById('formulario-modulo');
 const moduleNameEl = document.getElementById('nombreModulo');
 const moduleDescriptionEl = document.getElementById('descripcionModulo');
@@ -8,16 +6,13 @@ const cancelBtn = document.getElementById('btn-cancelar');
 const submitBtn = document.getElementById('btn-enviar');
 const tbody = document.getElementById('cuerpo-tabla-modulos');
 
-// In-memory array to simulate database for modules
 let modules = [];
-let currentModuleId = 1; // To generate unique IDs for new modules
+let currentModuleId = 1;
 
-// Function to load modules (from in-memory array)
 function CargarModulos() {
     CargarTabla(modules);
 }
 
-// Function to render the table with modules
 function CargarTabla(modulesToLoad) {
     tbody.innerHTML = '';
     if (modulesToLoad.length === 0) {
@@ -31,20 +26,18 @@ function CargarTabla(modulesToLoad) {
             <td>${module.name}</td>
             <td>${module.description}</td>
             <td>
-                <button onclick="CargarParaEditarModulo('${module.id}')">Editar</button>
-                <button onclick="BorrarModulo('${module.id}')">Eliminar</button>
+                <button onclick="CargarParaEditarModulo('${module.id}')" class="edit">Editar</button>
+                <button onclick="BorrarModulo('${module.id}')" class="delete">Eliminar</button>
             </td>
         </tr>
         `;
     });
 }
 
-// Initial load of modules
 window.addEventListener('DOMContentLoaded', () => {
     CargarModulos();
 });
 
-// Function to delete a module
 async function BorrarModulo(id) {
     const result = await Swal.fire({
         title: '¿Estás seguro?',
@@ -54,43 +47,46 @@ async function BorrarModulo(id) {
         confirmButtonColor: '#881F1E',
         cancelButtonColor: '#555',
         confirmButtonText: 'Sí, eliminarlo!',
-        cancelButtonText: 'Cancelar'
+        cancelButtonText: 'Cancelar',
+        customClass: {
+            popup: 'swal-custom-popup',
+            title: 'swal-custom-title',
+            content: 'swal-custom-content',
+            confirmButton: 'swal-custom-confirm-button',
+            cancelButton: 'swal-custom-cancel-button'
+        },
+        buttonsStyling: false
     });
 
     if (result.isConfirmed) {
         modules = modules.filter(module => module.id !== id);
         CargarModulos();
-        Swal.fire(
-            '¡Eliminado!',
-            'El módulo ha sido eliminado.',
-            'success'
-        );
-    } else {
-        Swal.fire(
-            'Cancelado',
-            'La acción ha sido cancelada.',
-            'error'
-        );
+        Swal.fire({
+            title: '¡Eliminado!',
+            text: 'El módulo ha sido eliminado.',
+            icon: 'success',
+            customClass: {
+                popup: 'swal-custom-popup',
+                title: 'swal-custom-title',
+                content: 'swal-custom-content',
+                confirmButton: 'swal-custom-confirm-button'
+            },
+            buttonsStyling: false
+        });
     }
 }
 
-// Function to load module data into the form for editing
 function CargarParaEditarModulo(id) {
-    const moduleToEdit = modules.find(module => module.id === id);
-
-    if (moduleToEdit) {
-        moduleNameEl.value = moduleToEdit.name;
-        moduleDescriptionEl.value = moduleToEdit.description;
-        moduleIdEl.value = moduleToEdit.id;
-
+    const module = modules.find(module => module.id === id);
+    if (module) {
+        moduleIdEl.value = module.id;
+        moduleNameEl.value = module.name;
+        moduleDescriptionEl.value = module.description;
         submitBtn.textContent = 'Actualizar Módulo';
         cancelBtn.hidden = false;
-    } else {
-        Swal.fire('Error', 'Módulo no encontrado para editar.', 'error');
     }
 }
 
-// Event listener for cancel button
 cancelBtn.addEventListener('click', () => {
     form.reset();
     moduleIdEl.value = '';
@@ -98,7 +94,6 @@ cancelBtn.addEventListener('click', () => {
     cancelBtn.hidden = true;
 });
 
-// Event listener for form submission (Add/Update)
 form.addEventListener('submit', async e => {
     e.preventDefault();
 
@@ -106,14 +101,23 @@ form.addEventListener('submit', async e => {
     const description = moduleDescriptionEl.value.trim();
     const id = moduleIdEl.value;
 
-    // Basic validation
     if (!name) {
-        Swal.fire('Error', 'El nombre del módulo es obligatorio.', 'error');
+        Swal.fire({
+            title: 'Error',
+            text: 'El nombre del módulo es obligatorio.',
+            icon: 'error',
+            customClass: {
+                popup: 'swal-custom-popup',
+                title: 'swal-custom-title',
+                content: 'swal-custom-content',
+                confirmButton: 'swal-custom-confirm-button'
+            },
+            buttonsStyling: false
+        });
         return;
     }
 
     if (id) {
-        // Update existing module
         const moduleIndex = modules.findIndex(module => module.id === id);
         if (moduleIndex > -1) {
             modules[moduleIndex] = {
@@ -121,23 +125,56 @@ form.addEventListener('submit', async e => {
                 name: name,
                 description: description
             };
-            await Swal.fire('Éxito', 'Módulo actualizado correctamente.', 'success');
+            await Swal.fire({
+                title: 'Éxito',
+                text: 'Módulo actualizado correctamente.',
+                icon: 'success',
+                customClass: {
+                    popup: 'swal-custom-popup',
+                    title: 'swal-custom-title',
+                    content: 'swal-custom-content',
+                    confirmButton: 'swal-custom-confirm-button'
+                },
+                buttonsStyling: false
+            });
         } else {
-            await Swal.fire('Error', 'No se pudo encontrar el módulo para actualizar.', 'error');
+            await Swal.fire({
+                title: 'Error',
+                text: 'No se pudo encontrar el módulo para actualizar.',
+                icon: 'error',
+                customClass: {
+                    popup: 'swal-custom-popup',
+                    title: 'swal-custom-title',
+                    content: 'swal-custom-content',
+                    confirmButton: 'swal-custom-confirm-button'
+                },
+                buttonsStyling: false
+            });
         }
     } else {
-        // Add new module
         const newModule = {
-            id: 'mod-' + currentModuleId++, // Simple unique ID generation
+            id: 'mod-' + currentModuleId++,
             name: name,
             description: description
         };
         modules.push(newModule);
-        await Swal.fire('Éxito', 'Módulo agregado correctamente.', 'success');
+        await Swal.fire({
+            title: 'Éxito',
+            text: 'Módulo agregado correctamente.',
+            icon: 'success',
+            customClass: {
+                popup: 'swal-custom-popup',
+                title: 'swal-custom-title',
+                content: 'swal-custom-content',
+                confirmButton: 'swal-custom-confirm-button'
+            },
+            buttonsStyling: false
+        });
     }
 
     form.reset();
-    cancelBtn.hidden = true;
+    moduleIdEl.value = '';
     submitBtn.textContent = 'Agregar Módulo';
+    cancelBtn.hidden = true;
     CargarModulos();
 });

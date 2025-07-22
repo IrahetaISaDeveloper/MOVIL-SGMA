@@ -1,10 +1,8 @@
-/* At the very top of your admin-users.css file */
 * {
   box-sizing: border-box;
 }
 
 :root {
-    /* Colores de registro-auto.css */
     --bg-app: #121212;
     --bg-container: #1E1E1E;
     --card-bg: #2D2D2D;
@@ -23,16 +21,13 @@
     --spacing-l: 20px;
     --spacing-xl: 30px;
     --back-button-bg: #444;
-
-    /* Colores específicos de este diseño */
-    --header-bg: #3a3a3a; /* Un gris un poco diferente para la cabecera */
-    --btn-delete-bg: #881F1E; /* Rojo para botones de eliminar */
+    --header-bg: #3a3a3a;
+    --btn-delete-bg: #881F1E;
     --btn-delete-hover-bg: #A32F2A;
-    --btn-edit-bg: #42A5FF; /* Azul para botones de editar */
+    --btn-edit-bg: #42A5FF;
     --btn-edit-hover-bg: #1e88e5;
 }
 
-/* General Body and Container Styles from registro-auto.css */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-app);
@@ -43,9 +38,8 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    /* FIX: Prevent horizontal scrolling for the entire body */
-    overflow-x: hidden; /* This is the key */
-    padding-bottom: 0px; /* Space for a potential fixed bottom nav if added later */
+    overflow-x: hidden;
+    padding-bottom: 0px;
     padding-top: 0px;
 }
 
@@ -53,14 +47,13 @@ body {
     background-color: var(--bg-container);
     width: 100%;
     max-width: 768px;
-    margin: 20px auto; /* Existing margin */
+    margin: 20px auto;
     padding: 30px 20px;
     box-sizing: border-box;
     border-radius: var(--border-radius-main);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Header Styles from registro-auto.css */
 .app-header {
     background-color: var(--header-bg);
     padding: 1em 1.5em;
@@ -69,11 +62,10 @@ body {
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
-    /* FIX: Set width to 100% but also limit its overall size based on the body's flow */
-    width: 100%; /* This is correct when body has overflow-x: hidden */
-    max-width: 768px; /* Ensure it doesn't get too wide on very large screens */
-    margin-bottom: 20px; /* Space below header */
-    border-radius: var(--border-radius-main) var(--border-radius-main) 0 0; /* Rounded top corners */
+    width: 100%;
+    max-width: 768px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius-main) var(--border-radius-main) 0 0;
 }
 
 .app-header h1 {
@@ -83,7 +75,7 @@ body {
     color: var(--text-light);
     flex-grow: 1;
     text-align: center;
-    margin-left: -40px; /* Adjustment for visual centering when back-button is present */
+    margin-left: -40px;
 }
 
 .back-button {
@@ -106,21 +98,19 @@ body {
     background-color: var(--back-button-bg);
 }
 
-/* Section Title */
 h1 {
   margin-bottom: 1.5rem;
   text-align: center;
-  font-size: 2.2em; /* Larger title for sections */
+  font-size: 2.2em;
   color: var(--text-light);
 }
 
-/* Form Styles from registro-auto.css */
 .user-form {
   margin-bottom: 1.5rem;
   padding: 1.5rem;
-  background-color: var(--card-bg); /* Use card background for form */
+  background-color: var(--card-bg);
   border-radius: var(--border-radius-card);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for form card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .form-group {
@@ -131,7 +121,7 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: var(--text-secondary); /* Lighter grey for labels */
+    color: var(--text-secondary);
     font-size: 1.1em;
 }
 
@@ -143,7 +133,7 @@ select {
     padding: 14px 12px;
     border: 1px solid #444;
     border-radius: var(--border-radius-input);
-    background-color: #3a3a3a; /* Darker background for inputs */
+    background-color: #3a3a3a;
     color: var(--text-light);
     font-size: 1.1em;
     box-sizing: border-box;
@@ -158,14 +148,13 @@ input[type="password"]::placeholder {
     color: #888;
 }
 
-/* Custom Select Arrow */
 .select-wrapper {
     position: relative;
     width: 100%;
 }
 
 .select-wrapper select {
-    padding-right: 35px; /* Make space for custom arrow */
+    padding-right: 35px;
 }
 
 .select-wrapper::after {
@@ -179,7 +168,6 @@ input[type="password"]::placeholder {
     pointer-events: none;
 }
 
-/* Photo Input and Preview Styles */
 .photo-input {
     padding: 10px;
     border: 1px solid #444;
@@ -203,7 +191,7 @@ input[type="password"]::placeholder {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #2a2a2a; /* Slightly lighter than form bg */
+    background-color: #2a2a2a;
 }
 
 .photo-preview {
@@ -211,216 +199,136 @@ input[type="password"]::placeholder {
     max-height: 200px;
     border-radius: 4px;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
 }
 
-/* Button Styles from registro-auto.css */
 .botones {
-    margin-top: 15px; /* Add some space above buttons */
-    padding: 14px 20px; /* Larger padding for better touch target */
-    border: none;
-    border-radius: var(--border-radius-button); /* Pill shape */
-    font-size: 1.1em;
-    font-weight: 700;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
-    box-sizing: border-box;
+    padding: 14px 20px;
+    border: none;
+    border-radius: var(--border-radius-button);
+    background-color: var(--button-primary);
     color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    background-color: var(--btn-delete-bg); /* Default to a primary action color, e.g., the red from registro-auto */
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 .botones:hover {
-    background-color: var(--btn-delete-hover-bg);
-    transform: translateY(-2px);
+    background-color: #5cb85c;
 }
 
 .botones.secondary {
-    background-color: #555; /* A more neutral color for secondary buttons */
-    margin-top: 10px; /* Less margin for consecutive buttons */
+    background-color: #555;
+    margin-top: 10px;
 }
 
 .botones.secondary:hover {
     background-color: #666;
 }
 
-/* Section Separator */
 .section-separator {
     border: none;
     border-top: 1px solid #3a3a3a;
     margin: 40px 0;
 }
 
-/* Table Styles (Adapted from previous and new theme) */
 .table-responsive {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-top: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: var(--card-bg); /* Use card background for table */
-  border-radius: var(--border-radius-card);
-  overflow: hidden; /* Ensures rounded corners apply to content */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-card);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 table th,
 table td {
-  padding: 15px; /* Generous padding */
-  vertical-align: middle;
-  border-bottom: 1px solid #3a3a3a; /* Darker border for rows */
-  color: var(--text-light);
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #3a3a3a;
+    color: var(--text-light);
 }
 
 table th {
-  background-color: #333; /* Slightly darker header */
-  color: var(--text-strong);
-  text-align: left;
-  font-weight: bold;
+    background-color: #333;
+    color: var(--text-strong);
+    text-align: left;
+    font-weight: bold;
 }
 
 table tbody tr:last-child td {
-  border-bottom: none; /* No border for last row */
+    border-bottom: none;
 }
 
-/* Profile image in table */
-table img.profile-thumb {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #555; /* Subtle border */
-}
-
-/* Action buttons in table */
 table button {
-  margin-right: 5px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-  white-space: nowrap; /* Prevent buttons from wrapping */
+    margin-right: 5px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
 }
 
-table button:first-of-type { /* Edit button */
-    background-color: var(--btn-edit-bg); /* Blue color */
+table button:last-child {
+    margin-right: 0;
+}
+
+table button.edit {
+    background-color: var(--btn-edit-bg);
     color: white;
 }
 
-table button:first-of-type:hover {
+table button.edit:hover {
     background-color: var(--btn-edit-hover-bg);
 }
 
-table button:last-of-type { /* Delete button */
-    background-color: var(--btn-delete-bg); /* Red color */
+table button.delete {
+    background-color: var(--btn-delete-bg);
     color: white;
 }
 
-table button:last-of-type:hover {
+table button.delete:hover {
     background-color: var(--btn-delete-hover-bg);
 }
 
+img.profile-thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-blue);
+    vertical-align: middle;
+}
 
-/* --- Media Queries (Combined and Adapted) --- */
-
-/* For iPhone X, Samsung S22 (Portrait & Landscape) & general smaller screens - max-width: 800px */
-@media (max-width: 800px) {
-    body{
-        height: 100%;
-    }
-    .app-header {
-        margin-bottom: 0;
-        padding: 0.8em 1em;
-        border-radius: 0; /* No rounded corners for header on small screens */
-        /* FIX: Ensure header is truly full width on small screens if desired */
-        max-width: 100%; /* Override max-width for small screens */
-        width: 100%; /* Explicitly 100% of its parent (body) */
-    }
-    .app-header h1 {
-        font-size: 1.1em;
-        margin-left: 30px; /* Adjust centering for smaller back button */
-    }
-    .back-button {
-        margin: 10;
-        padding: 0.5em 0.8em;
-        font-size: 0.8em;
-    }
-
+@media (max-width: 768px) {
     .container {
-        margin: 0 auto; /* Remove top/bottom margin for full bleed */
+        margin: 0;
+        border-radius: 0;
         padding: 20px 15px;
-        border-radius: 0; /* No rounded corners for main container on small screens */
-        box-shadow: none; /* Remove shadow */
-        max-width: 100%; /* Ensure container also adapts */
+    }
+
+    .app-header {
+        max-width: 100%;
+        border-radius: 0;
+        margin-bottom: 15px;
     }
 
     h1 {
         font-size: 1.8em;
-        margin-bottom: 20px;
     }
 
     .user-form {
         padding: 1rem;
-        border-radius: var(--border-radius-main); /* Keep rounded corners on form card */
-    }
-
-    label {
-        font-size: 1em;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    select {
-        padding: 12px 10px;
-        font-size: 1em;
-    }
-
-    .botones {
-        padding: 14px 20px;
-        font-size: 1.1em;
-    }
-
-    table th,
-    table td {
-        padding: 10px; /* Reduce table cell padding */
-        font-size: 0.85em; /* Smaller font for table text */
-    }
-
-    table img.profile-thumb {
-        width: 45px; /* Smaller image thumbnails */
-        height: 45px;
-    }
-
-    table button {
-        font-size: 1.6em; /* Smaller button text */
-        margin: 5px;
-        padding: 6px 10px; /* Smaller button padding */
-    }
-}
-
-/* Fine-tune for very small screens (e.g., older phones, or narrow landscape) */
-@media (max-width: 480px) {
-    body{
-        margin-bottom: 0;
-    }
-    .container{
-        margin-bottom: 0;
-    }
-    .app-header{
-        margin-bottom: 0;
-    }
-    h1 {
-        font-size: 1.5em;
-    }
-    .user-form {
-        padding: 0.8rem;
     }
     table th,
     table td {
@@ -438,7 +346,6 @@ table button:last-of-type:hover {
     }
 }
 
-/* For Tablets (e.g., Samsung Tab, iPad) - min-width: 769px and max-width: 1024px */
 @media (min-width: 769px) and (max-width: 1024px) {
     body{
         max-height: 810px;
@@ -446,56 +353,65 @@ table button:last-of-type:hover {
     }
 
     .container {
-        max-width: 100%; /* Use more of the screen width */
+        max-width: 100%;
         padding: 40px 30px;
-        margin: 0 auto; /* Eliminar espacios entre divs */
+        margin: 0 auto;
         border-radius: 0%;
     }
 
     .app-header {
         max-width: 100%;
-        margin-bottom: 0; /* Eliminar espacio debajo del header */
-        border-radius: 0; /* Eliminar el header redondeado */
+        margin-bottom: 0;
+        border-radius: 0;
     }
 
   h1 {
-    font-size: 2em;
+    font-size: 3em;
   }
 
-  .user-form {
-    padding: 2rem;
-  }
+    .user-form {
+        padding: 2rem;
+    }
+    table th,
+    table td {
+        padding: 12px;
+        font-size: 1.1em;
+    }
+    table img.profile-thumb {
+        width: 80px;
+        height: 80px;
+    }
+    table button {
+        margin: 8px;
+        padding: 8px 12px;
+        font-size: 1.3em;
+    }
+}
 
-  label {
-      font-size: 1.15em;
-  }
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  select {
-      padding: 16px 14px;
-      font-size: 1.15em;
-  }
+.swal-custom-popup {
+    background-color: var(--card-bg) !important;
+    color: var(--text-light) !important;
+    border-radius: var(--border-radius-main) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6) !important;
+}
 
-  .botones {
-      padding: 16px 25px;
-      font-size: 1.2em;
-  }
+.swal-custom-title {
+    color: var(--text-strong) !important;
+    font-weight: 700 !important;
+}
 
-  table th,
-  table td {
-    padding: 18px;
-    font-size: 1em;
-  }
+.swal-custom-content {
+    color: var(--text-secondary) !important;
+}
 
-  table img.profile-thumb {
-    width: 65px;
-    height: 65px;
-  }
+.swal-custom-confirm-button {
+    background-color: var(--button-primary) !important;
+    color: white !important;
+    border-radius: var(--border-radius-button) !important;
+    font-size: 1.1em !important;
+    padding: var(--spacing-s) var(--spacing-l) !important;
+}
 
-  table button {
-    font-size: 0.95em;
-    margin: 5px;
-    padding: 9px 14px;
-  }
+.swal-custom-confirm-button:hover {
+    background-color: #ad1414 !important;
 }
