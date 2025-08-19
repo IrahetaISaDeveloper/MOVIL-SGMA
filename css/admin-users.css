@@ -415,3 +415,27 @@ img.profile-thumb {
 .swal-custom-confirm-button:hover {
     background-color: #ad1414 !important;
 }
+
+/* Modo claro */
+body.light-mode {
+    background-color: #fff;
+    color: #111;
+}
+.container.light-mode,
+.user-form.light-mode,
+table.light-mode {
+    background-color: #fff;
+    color: #111;
+}
+
+/* Modo oscuro */
+body.dark-mode {
+    background-color: #1E1E1E;
+    color: #fff;
+}
+.container.dark-mode,
+.user-form.dark-mode,
+table.dark-mode {
+    background-color: #2D2D2D;
+    color: #fff;
+}

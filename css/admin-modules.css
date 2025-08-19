@@ -316,3 +316,23 @@ table button.delete:hover {
 .swal-custom-confirm-button:hover {
     background-color: #ad1414 !important;
 }
+
+/* Modo claro */
+body.light-mode {
+    background-color: #fff;
+    color: #111;
+}
+body.light-mode .contenedor {
+    background-color: #2D2D2D;
+    color: #fff;
+}
+
+/* Modo oscuro */
+body.dark-mode {
+    background-color: #1E1E1E;
+    color: #fff;
+}
+body.dark-mode .contenedor {
+    background-color: #2D2D2D;
+    color: #fff;
+}

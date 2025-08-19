@@ -141,6 +141,23 @@ async function SubirImagen(file) {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    // --- Tema desde localStorage ---
+    const tema = localStorage.getItem("tema");
+    if (tema === "dark") {
+        document.body.classList.add("dark-mode");
+        document.body.classList.remove("light-mode");
+        document.querySelectorAll('.container, .user-form, table').forEach(el => {
+            el.classList.add("dark-mode");
+            el.classList.remove("light-mode");
+        });
+    } else {
+        document.body.classList.add("light-mode");
+        document.body.classList.remove("dark-mode");
+        document.querySelectorAll('.container, .user-form, table').forEach(el => {
+            el.classList.add("light-mode");
+            el.classList.remove("dark-mode");
+        });
+    }
     await CargarRoles();
     await CargarUsuarios();
 });

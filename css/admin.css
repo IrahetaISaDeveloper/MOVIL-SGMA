@@ -35,7 +35,27 @@ body {
   flex-direction: column;
 }
 
+/* Modo claro */
+body.light-mode {
+    background-color: #fff;
+    color: #111;
+}
 
+.card.light-mode {
+    background-color: #fff;
+    color: #111;
+}
+
+/* Modo oscuro */
+body.dark-mode {
+    background-color: #1E1E1E;
+    color: #fff;
+}
+
+.card.dark-mode {
+    background-color: #2D2D2D;
+    color: #fff;
+}
 
 @media (max-width: 500px) {
   .contenedor-app-pantalla-completa {
@@ -142,6 +162,31 @@ body {
   background-color: #f0f0f0;
   text-decoration: none;
   color: var(--color-titulo-configuracion);
+}
+
+/* Modo claro: elementos oscuros */
+body.light-mode .elemento-configuracion,
+body.light-mode .theme-switcher {
+    background-color: #3a3a3a !important;
+    color: #fff !important;
+}
+
+body.light-mode .titulo-configuracion,
+body.light-mode .descripcion-configuracion,
+body.light-mode .icono-configuracion,
+body.light-mode .icono-flecha,
+body.light-mode .theme-label,
+body.light-mode .theme-button {
+    color: #fff !important;
+}
+
+/* Elimina o comenta los estilos .dark-mode para elementos de configuración */
+.elemento-configuracion.dark-mode,
+.titulo-configuracion.dark-mode,
+.descripcion-configuracion.dark-mode,
+.icono-configuracion.dark-mode,
+.icono-flecha.dark-mode {
+    /* Elimina estos estilos o déjalos vacíos */
 }
 
 .icono-texto-configuracion {
