@@ -1,29 +1,49 @@
 /* --- CSS VARIABLES (FOR THEME AND CONSISTENCY) --- */
 :root {
-    --bg-app: #121212; /* Main application background */
-    --bg-header: #202020; /* Header background */
-    --bg-sidebar: #2D2D2D; /* Sidebar and menu background */
-    --bg-main-content: #1E1E1E; /* Main content area background */
-    --card-bg: #2D2D2D; /* Card and section background */
+    --bg-app: #121212;
+    /* Main application background */
+    --bg-header: #202020;
+    /* Header background */
+    --bg-sidebar: #2D2D2D;
+    /* Sidebar and menu background */
+    --bg-main-content: #1E1E1E;
+    /* Main content area background */
+    --card-bg: #2D2D2D;
+    /* Card and section background */
 
-    --text-light: #FFFFFF; /* Primary light text */
-    --text-secondary: #B0B0B0; /* Secondary text, labels */
-    --text-strong: #E0E0E0; /* Stronger text, titles */
+    --text-light: #FFFFFF;
+    /* Primary light text */
+    --text-secondary: #B0B0B0;
+    /* Secondary text, labels */
+    --text-strong: #E0E0E0;
+    /* Stronger text, titles */
 
-    --accent-blue: #42A5F5; /* Blue for links, focus states */
-    --accent-green: #66BB6A; /* Green for success, accept buttons */
-    --accent-red: #EF5350; /* Red for danger, reject buttons */
-    --accent-primary: #A32F2A; /* Your primary accent color (from admin-users) */
-    --accent-primary-hover: #c03d38; /* Lighter shade for hover */
+    --accent-blue: #42A5F5;
+    /* Blue for links, focus states */
+    --accent-green: #66BB6A;
+    /* Green for success, accept buttons */
+    --accent-red: #EF5350;
+    /* Red for danger, reject buttons */
+    --accent-primary: #A32F2A;
+    /* Your primary accent color (from admin-users) */
+    --accent-primary-hover: #c03d38;
+    /* Lighter shade for hover */
 
-    --border-color-dark: #3A3A3A; /* Dark border color */
-    --border-color-light: #555; /* Lighter border for inputs */
+    --border-color-dark: #3A3A3A;
+    /* Dark border color */
+    --border-color-light: #555;
+    /* Lighter border for inputs */
 
-    --border-radius-main: 20px; /* Main container and sidebar menu */
-    --border-radius-card: 16px; /* Cards and sections */
-    --border-radius-input: 10px; /* Input fields */
-    --border-radius-button: 30px; /* Pill-shaped buttons */
-    --border-radius-small: 8px; /* Smaller elements like checkboxes */
+    --border-radius-main: 20px;
+    /* Main container and sidebar menu */
+    --border-radius-card: 16px;
+    /* Cards and sections */
+    --border-radius-input: 10px;
+    /* Input fields */
+    --border-radius-button: 30px;
+    /* Pill-shaped buttons */
+    --border-radius-small: 8px;
+    /* Smaller elements like checkboxes */
 
     --spacing-xs: 5px;
     --spacing-s: 10px;
@@ -32,25 +52,33 @@
     --spacing-xl: 30px;
     --spacing-xxl: 40px;
 
-    --header-height: 60px; /* Defined header height */
-    --bottom-nav-height: 80px; /* Estimated height of the bottom nav + its bottom margin */
+    --header-height: 60px;
+    /* Defined header height */
+    --bottom-nav-height: 80px;
+    /* Estimated height of the bottom nav + its bottom margin */
 }
 
 /* --- GENERAL & BASE STYLES (MOBILE-FIRST) --- */
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100vh; /* Ensures full viewport height */
+    min-height: 100vh;
+    /* Ensures full viewport height */
     display: flex;
-    flex-direction: column; /* Stacks header, then main-content-wrapper, then bottom-nav */
+    flex-direction: column;
+    /* Stacks header, then main-content-wrapper, then bottom-nav */
     font-family: 'Roboto', sans-serif;
     background-color: var(--bg-app);
     color: var(--text-light);
-    box-sizing: border-box; /* Includes padding/border in element's total width/height */
-    -webkit-font-smoothing: antialiased; /* Font smoothing for better appearance */
+    box-sizing: border-box;
+    /* Includes padding/border in element's total width/height */
+    -webkit-font-smoothing: antialiased;
+    /* Font smoothing for better appearance */
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
 }
 
 /* Header Styles (adapted from admin-users.css) */
@@ -71,22 +99,26 @@ html, body {
 }
 
 .header-title {
-    font-size: 1.3em; /* Adjusted for mobile */
+    font-size: 1.3em;
+    /* Adjusted for mobile */
     margin: 0;
     color: var(--text-light);
     text-align: center;
-    flex-grow: 1; /* Allows title to take available space */
+    flex-grow: 1;
+    /* Allows title to take available space */
 }
 
 .header-spacer {
-    width: 40px; /* Provides balance for the centered title */
+    width: 40px;
+    /* Provides balance for the centered title */
 }
 
 .back-button {
     color: var(--text-light);
     text-decoration: none;
     padding: 0.6em 0.8em;
-    background-color: #444; /* Darker background for consistency */
+    background-color: #444;
+    /* Darker background for consistency */
     border-radius: 8px;
     font-size: 0.9em;
     transition: background-color 0.2s ease;
@@ -95,7 +127,8 @@ html, body {
     gap: 0.3em;
     flex-shrink: 0;
     z-index: 10;
-    width: 45px; /* Fixed width for button */
+    width: 45px;
+    /* Fixed width for button */
     justify-content: center;
 }
 
@@ -106,8 +139,10 @@ html, body {
 
 /* Main Content Wrapper to handle padding for fixed bottom nav */
 .main-content-wrapper {
-    flex-grow: 1; /* Takes up remaining vertical space */
-    padding-bottom: var(--bottom-nav-height); /* Crucial: Add padding for the fixed bottom nav */
+    flex-grow: 1;
+    /* Takes up remaining vertical space */
+    padding-bottom: var(--bottom-nav-height);
+    /* Crucial: Add padding for the fixed bottom nav */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,18 +152,23 @@ html, body {
 /* Content Sections */
 .content-section {
     width: 100%;
-    max-width: 900px; /* Max width for content on larger screens */
-    padding: var(--spacing-l); /* General padding */
+    max-width: 900px;
+    /* Max width for content on larger screens */
+    padding: var(--spacing-l);
+    /* General padding */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xl); /* Space between major sections */
+    gap: var(--spacing-xl);
+    /* Space between major sections */
     box-sizing: border-box;
 }
 
 #inicio {
-    background-color: var(--bg-app); /* Use app background for the section */
-    padding-top: var(--spacing-xl); /* Add some top padding */
+    background-color: var(--bg-app);
+    /* Use app background for the section */
+    padding-top: var(--spacing-xl);
+    /* Add some top padding */
 }
 
 /* Card-like section for Welcome Message */
@@ -142,7 +182,8 @@ html, body {
 }
 
 #welcome-section h2 {
-    font-size: 1.8em; /* Adjusted for mobile */
+    font-size: 1.8em;
+    /* Adjusted for mobile */
     color: var(--text-strong);
     margin-bottom: var(--spacing-s);
 }
@@ -155,25 +196,32 @@ html, body {
 /* Dashboard Cards Container */
 .dashboard-cards-container {
     display: flex;
-    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    flex-wrap: wrap;
+    /* Allow cards to wrap on smaller screens */
     justify-content: center;
-    gap: var(--spacing-m); /* Space between cards */
+    gap: var(--spacing-m);
+    /* Space between cards */
     width: 100%;
 }
 
 /* Dashboard Card */
 .dashboard-card {
-    background-color: var(--card-bg); /* Darker background for cards */
+    background-color: var(--card-bg);
+    /* Darker background for cards */
     border-radius: var(--border-radius-card);
     padding: var(--spacing-l);
     display: flex;
-    flex-direction: column; /* Stack icon and info vertically on small screens */
+    flex-direction: column;
+    /* Stack icon and info vertically on small screens */
     align-items: center;
     gap: var(--spacing-s);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    flex: 1; /* Allow cards to grow and shrink */
-    min-width: 150px; /* Minimum width for cards */
-    max-width: 300px; /* Max width for cards */
+    flex: 1;
+    /* Allow cards to grow and shrink */
+    min-width: 150px;
+    /* Minimum width for cards */
+    max-width: 300px;
+    /* Max width for cards */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     text-align: center;
 }
@@ -184,13 +232,16 @@ html, body {
 }
 
 .card-icon {
-    font-size: 3em; /* Slightly smaller icon for better fit */
-    color: var(--accent-primary); /* Accent color for icons */
+    font-size: 3em;
+    /* Slightly smaller icon for better fit */
+    color: var(--accent-primary);
+    /* Accent color for icons */
     margin-bottom: var(--spacing-s);
 }
 
 .card-info {
-    text-align: center; /* Center text within card info */
+    text-align: center;
+    /* Center text within card info */
 }
 
 .card-label {
@@ -200,25 +251,29 @@ html, body {
 }
 
 .card-value {
-    font-size: 1.8em; /* Slightly smaller value for better fit */
+    font-size: 1.8em;
+    /* Slightly smaller value for better fit */
     font-weight: bold;
     color: var(--text-light);
 }
 
 /* Modules in Process Section */
 .modules-in-process-section {
-    margin-top: var(--spacing-l); /* Add some space above this section */
+    margin-top: var(--spacing-l);
+    /* Add some space above this section */
     padding: var(--spacing-l);
     background-color: var(--card-bg);
     border-radius: var(--border-radius-card);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 600px; /* Keep this section relatively small */
+    max-width: 600px;
+    /* Keep this section relatively small */
     box-sizing: border-box;
 }
 
 .modules-in-process-section h2 {
-    font-size: 1.5em; /* Smaller title for this section */
+    font-size: 1.5em;
+    /* Smaller title for this section */
     color: var(--text-strong);
     margin-bottom: var(--spacing-m);
     text-align: center;
@@ -228,7 +283,8 @@ html, body {
 
 .filter-buttons {
     display: flex;
-    flex-wrap: wrap; /* Allow buttons to wrap */
+    flex-wrap: wrap;
+    /* Allow buttons to wrap */
     justify-content: center;
     gap: var(--spacing-s);
     margin-bottom: var(--spacing-m);
@@ -238,7 +294,8 @@ html, body {
     background-color: #444;
     color: var(--text-light);
     border: none;
-    border-radius: var(--border-radius-input); /* Rounded corners like inputs */
+    border-radius: var(--border-radius-input);
+    /* Rounded corners like inputs */
     padding: 8px 15px;
     font-size: 0.9em;
     cursor: pointer;
@@ -264,9 +321,12 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-s);
-    max-height: 300px; /* Limit height to keep it small */
-    overflow-y: auto; /* Enable scrolling for the list */
-    padding-right: 5px; /* Space for scrollbar */
+    max-height: 300px;
+    /* Limit height to keep it small */
+    overflow-y: auto;
+    /* Enable scrolling for the list */
+    padding-right: 5px;
+    /* Space for scrollbar */
 }
 
 .module-item {
@@ -376,19 +436,23 @@ html, body {
 /* For Tablets (min-width: 768px) */
 @media (min-width: 768px) {
     .app-header {
-        padding: 1em 2em; /* Increase header padding */
+        padding: 1em 2em;
+        /* Increase header padding */
     }
 
     .header-title {
-        font-size: 1.6em; /* Larger title on tablets */
+        font-size: 1.6em;
+        /* Larger title on tablets */
     }
 
     .content-section {
-        padding: var(--spacing-xxl); /* More padding for content sections */
+        padding: var(--spacing-xxl);
+        /* More padding for content sections */
     }
 
     #welcome-section h2 {
-        font-size: 2.5em; /* Larger welcome message */
+        font-size: 2.5em;
+        /* Larger welcome message */
     }
 
     #welcome-section p {
@@ -396,21 +460,26 @@ html, body {
     }
 
     .dashboard-cards-container {
-        gap: var(--spacing-xl); /* More space between cards */
+        gap: var(--spacing-xl);
+        /* More space between cards */
     }
 
     .dashboard-card {
-        flex-direction: row; /* Icon and info side-by-side */
+        flex-direction: row;
+        /* Icon and info side-by-side */
         text-align: left;
         gap: var(--spacing-m);
         padding: var(--spacing-xl);
-        min-width: 300px; /* Adjust min-width */
-        max-width: 400px; /* Adjust max-width */
+        min-width: 300px;
+        /* Adjust min-width */
+        max-width: 400px;
+        /* Adjust max-width */
     }
 
     .card-icon {
         font-size: 3.5em;
-        margin-bottom: 0; /* Remove bottom margin when side-by-side */
+        margin-bottom: 0;
+        /* Remove bottom margin when side-by-side */
     }
 
     .card-value {
@@ -418,7 +487,8 @@ html, body {
     }
 
     .modules-in-process-section {
-        max-width: 700px; /* Allow wider for tablets */
+        max-width: 700px;
+        /* Allow wider for tablets */
     }
 
     .filter-buttons {
@@ -429,23 +499,31 @@ html, body {
 /* For Larger Desktops (min-width: 1024px) */
 @media (min-width: 1024px) {
     .app-header {
-        max-width: 1200px; /* Limit header width */
-        margin: 0 auto; /* Center header */
+        max-width: 1200px;
+        /* Limit header width */
+        margin: 0 auto;
+        /* Center header */
         border-radius: var(--border-radius-main) var(--border-radius-main) 0 0;
     }
 
     .main-content-wrapper {
-        max-width: 1200px; /* Limit main content width */
-        margin: 0 auto; /* Center main content */
+        max-width: 1200px;
+        /* Limit main content width */
+        margin: 0 auto;
+        /* Center main content */
         border-bottom-left-radius: var(--border-radius-main);
         border-bottom-right-radius: var(--border-radius-main);
-        overflow: hidden; /* Ensure content respects border-radius */
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Add shadow to the whole content area */
-        background-color: var(--bg-main-content); /* Apply main content background */
+        overflow: hidden;
+        /* Ensure content respects border-radius */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        /* Add shadow to the whole content area */
+        background-color: var(--bg-main-content);
+        /* Apply main content background */
     }
 
     .content-section {
-        padding: var(--spacing-xxl); /* Even more padding */
+        padding: var(--spacing-xxl);
+        /* Even more padding */
     }
 
     #welcome-section {
@@ -453,10 +531,12 @@ html, body {
     }
 
     .dashboard-cards-container {
-        gap: var(--spacing-xxl); /* Larger gap between cards */
+        gap: var(--spacing-xxl);
+        /* Larger gap between cards */
     }
 
     .modules-in-process-section {
-        max-width: 800px; /* Wider for desktops */
+        max-width: 800px;
+        /* Wider for desktops */
     }
 }
