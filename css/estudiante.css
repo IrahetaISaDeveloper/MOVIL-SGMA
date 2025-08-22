@@ -353,6 +353,8 @@ body {
     /* Remover font-size, font-weight, etc. si estaban ahí y solo quieres iconos */
 }
 
+
+
 .bottom-nav .nav-item:hover {
     transform: translateY(-3px); /* Pequeño efecto al pasar el ratón */
     color: var(--primary-red); /* Color al pasar el ratón, usa la variable de tu CSS */
