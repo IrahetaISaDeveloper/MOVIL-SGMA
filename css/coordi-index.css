@@ -1,6 +1,7 @@
 /* --- Variables principales --- */
 :root {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     --bg-app: #121212;
     /* Main application background */
     --bg-header: #202020;
@@ -393,6 +394,109 @@ body {
     padding-bottom: var(--espaciado-s);
 }
 
+=======
+    --fondo-app: #f5f5f5;
+    --fondo-tarjeta: #ffffff;
+    --texto-oscuro: #333;
+    --texto-secundario: #6c757d;
+    --texto-fuerte: #495057;
+    --acento-rojo: #e74c3c;
+    --acento-verde: #66BB6A;
+    --acento-azul: #42A5F5;
+    --acento-primario: #A32F2A;
+    --acento-primario-hover: #c03d38;
+    --color-borde-claro: #dee2e6;
+    --radio-borde-tarjeta: 16px;
+    --radio-borde-pequeno: 8px;
+    --radio-borde-avatar: 50%;
+    --radio-borde-entrada: 10px;
+    --espaciado-xs: 5px;
+    --espaciado-s: 10px;
+    --espaciado-m: 15px;
+    --espaciado-l: 20px;
+    --espaciado-xl: 30px;
+}
+
+/* --- Layout principal --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--fondo-app);
+    color: var(--texto-oscuro);
+    min-height: 100vh;
+}
+
+/* --- Contenido principal --- */
+.contenido-principal-coordi {
+    padding: var(--espaciado-xl);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-l);
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 100px; /* Asegura espacio suficiente para bottom-nav */
+}
+
+/* --- Header usuario --- */
+.info-usuario-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--fondo-tarjeta);
+    border-radius: var(--radio-borde-tarjeta);
+    padding: var(--espaciado-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-borde-claro);
+    margin-bottom: var(--espaciado-m);
+}
+
+.avatar-usuario-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radio-borde-avatar);
+    border: 3px solid var(--acento-rojo);
+    object-fit: cover;
+    margin-right: var(--espaciado-l);
+}
+
+.datos-usuario-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.nombre-usuario-header {
+    font-weight: bold;
+    font-size: 1.3em;
+    color: var(--texto-fuerte);
+    margin-bottom: 2px;
+}
+
+.rol-usuario-header,
+.detalle-usuario-header {
+    font-size: 0.9em;
+    color: var(--texto-secundario);
+}
+
+/* --- Tarjetas principales --- */
+.tarjeta-principal {
+    background-color: var(--fondo-tarjeta);
+    border-radius: var(--radio-borde-tarjeta);
+    padding: var(--espaciado-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-borde-claro);
+}
+
+.header-tarjeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--espaciado-l);
+    border-bottom: 1px solid var(--color-borde-claro);
+    padding-bottom: var(--espaciado-s);
+}
+
+>>>>>>> Stashed changes
 .header-tarjeta h2 {
     margin: 0;
     color: var(--texto-fuerte);
@@ -450,6 +554,9 @@ body {
     color: var(--texto-oscuro);
     border: 1px solid var(--color-borde-claro);
     border-radius: var(--radio-borde-entrada);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     padding: 8px 15px;
     font-size: 0.9em;
@@ -480,6 +587,7 @@ body {
     display: flex;
     flex-direction: column;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     gap: var(--spacing-s);
     max-height: 300px;
     /* Limit height to keep it small */
@@ -488,10 +596,15 @@ body {
     padding-right: 5px;
     /* Space for scrollbar */
 =======
+=======
+>>>>>>> Stashed changes
     gap: var(--espaciado-s);
     max-height: 300px;
     overflow-y: auto;
     padding-right: 5px;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
 
@@ -616,6 +729,7 @@ body {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /* --- Media Queries for Responsiveness --- */
 
 /* For Tablets (min-width: 768px) */
@@ -707,12 +821,53 @@ body {
         max-width: 700px;
         /* Allow wider for tablets */
 =======
+=======
+/* --- Responsive --- */
+@media (max-width: 767px) {
+    .contenido-principal-coordi {
+        padding: var(--espaciado-l);
+        max-width: 100%;
+        padding-bottom: 100px;
+    }
+    .info-usuario-header {
+        padding: var(--espaciado-m);
+    }
+    .avatar-usuario-header img {
+        width: 50px;
+        height: 50px;
+        margin-right: var(--espaciado-m);
+    }
+    .nombre-usuario-header {
+        font-size: 1.1em;
+    }
+    .resumen-estado {
+        flex-direction: column;
+        gap: var(--espaciado-s);
+    }
+    .caja-estado {
+        padding: var(--espaciado-m);
+    }
+    .caja-estado .cantidad {
+        font-size: 2em;
+    }
+    .filtros-modulos {
+        flex-wrap: wrap;
+    }
+    .elemento-modulo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--espaciado-s);
+    }
+>>>>>>> Stashed changes
     .bottom-nav {
         width: 98vw;
         min-width: 0;
         max-width: 98vw;
         padding: 8px 5px;
         height: 56px;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
     .bottom-nav li {
@@ -730,6 +885,7 @@ body {
     }
 }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 /* For Larger Desktops (min-width: 1024px) */
 @media (min-width: 1024px) {
@@ -787,6 +943,23 @@ body {
         max-width: 800px;
         /* Wider for desktops */
 =======
+@media (min-width: 1025px) {
+    .contenido-principal-coordi {
+        padding: var(--espaciado-xl);
+>>>>>>> Stashed changes
+=======
+@media (min-width: 768px) and (max-width: 1024px) {
+    .contenido-principal-coordi {
+        padding: var(--espaciado-l);
+    }
+    .resumen-estado {
+        flex-wrap: wrap;
+    }
+    .caja-estado {
+        flex-basis: calc(50% - var(--espaciado-s));
+    }
+}
+
 @media (min-width: 1025px) {
     .contenido-principal-coordi {
         padding: var(--espaciado-xl);
