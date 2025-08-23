@@ -53,6 +53,7 @@
 
     --acento-primario: #A32F2A;
     --acento-primario-hover: #A32F2A;
+    --primary-red: #881F1E;
 }
 
 * {
@@ -311,34 +312,35 @@ body {
     font-weight: 500;
 }
 
-/* Menú de navegación inferior (Bottom Nav) */
 .bottom-nav {
-    position: fixed; /* Lo hace flotante */
-    bottom: 20px; /* Separación de 20px del borde inferior */
-    left: 50%; /* Lo posiciona al 50% del ancho del padre */
-    transform: translateX(-50%); /* Lo mueve hacia la izquierda la mitad de su propio ancho para centrarlo */
-    background-color: #333; /* Fondo oscuro */
-    border-radius: 50px; /* Bordes muy redondeados para forma de píldora */
-    padding: 10px 20px; /* Padding interno */
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra para efecto flotante */
-    width: fit-content; /* El ancho se ajusta al contenido */
-    display: flex; /* Para organizar los ítems de navegación */
-    align-items: center; /* Centra verticalmente los ítems */
-    justify-content: space-around; /* Distribuye el espacio entre los ítems */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    border-radius: 50px;
+    padding: 10px 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .bottom-nav ul {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Make list items arrange horizontally */
+    justify-content: space-around; /* Distribute items evenly */
+    width: 100%; /* Ensure the ul takes full width of its parent */
 }
 
 .bottom-nav li {
-    text-align: center;
-    margin: 0 15px; /* Espacio entre los elementos del menú */
+    flex-grow: 1; /* Allow list items to grow and take equal space */
+    text-align: center; /* Center the icons within each list item */
+    margin: 0 15px; /* Adjust spacing between items */
 }
 
 .bottom-nav .nav-item {
@@ -353,8 +355,6 @@ body {
     /* Remover font-size, font-weight, etc. si estaban ahí y solo quieres iconos */
 }
 
-
-
 .bottom-nav .nav-item:hover {
     transform: translateY(-3px); /* Pequeño efecto al pasar el ratón */
     color: var(--primary-red); /* Color al pasar el ratón, usa la variable de tu CSS */
@@ -368,11 +368,26 @@ body {
 }
 
 .bottom-nav .nav-item.active {
-    color: var(--btn-bg); /* Color del icono activo*/
+    color: var(--primary-red); /* Color del icono activo*/
 }
 
 .bottom-nav .nav-item.active .nav-icon {
     color: var(--primary-red); /* Color del icono activo*/
+}
+
+.botones {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    background-color: #881F1E;
 }
 
 /* Mobile Styles */
