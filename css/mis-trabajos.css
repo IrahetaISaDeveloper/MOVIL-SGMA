@@ -38,12 +38,13 @@ html, body {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
 }
 
 /* Menú de navegación inferior (Bottom Nav) */
 .bottom-nav {
     position: fixed;
-    bottom: 20px;
+    bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #333;
@@ -63,11 +64,9 @@ html, body {
     margin: 0; /* Remove default margin */
     display: flex; /* Make list items arrange horizontally */
     justify-content: space-around; /* Distribute items evenly */
-    width: 100%; /* Ensure the ul takes full width of its parent */
 }
 
 .bottom-nav li {
-    flex-grow: 1; /* Allow list items to grow and take equal space */
     text-align: center; /* Center the icons within each list item */
     margin: 0 15px; /* Adjust spacing between items */
 }
@@ -439,6 +438,11 @@ html, body {
 
     .card-image {
         height: 200px;
+    }
+
+    .bottom-nav {
+        margin-top: 10px 0px;
+        margin-bottom: 10px 0px;
     }
 }
 

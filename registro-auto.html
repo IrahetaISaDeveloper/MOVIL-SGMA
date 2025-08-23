@@ -17,11 +17,11 @@
     <div class="contenedor">
 
         <header class="app-header">
-                <a href="mis-trabajos.html" class="back-button">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <h1>Datos del vehículo</h1>
-            </header>
+            <a href="mis-trabajos.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h1>Datos del vehículo</h1>
+        </header>
         <section id="datos-vehiculo" class="seccion">
             <form>
                 <div class="grupo-formulario">
@@ -102,14 +102,9 @@
                 </div>
 
                 <div class="grupo-formulario">
-                    <label for="operacionesEfectuar1">Operaciones a efectuar:</label>
-                    <div class="envoltorio-seleccion">
-                        <select id="operacionesEfectuar1">
-                            <option value="">Selecciona</option>
-                            <option value="operacion1">Operación 1</option>
-                            <option value="operacion2">Operación 2</option>
-                            <option value="operacion3">Operación 3</option>
-                        </select>
+                    <label>Operaciones a efectuar:</label>
+                    <div id="lista-operaciones">
+                        <input class="mi-entrada" type="text" name="operaciones[]" placeholder="Ej: cambio de bujías">
                     </div>
                 </div>
 
@@ -150,8 +145,8 @@
             <h1 class="titulo-seccion">Fotos del Vehículo</h1>
             <div class="grupo-formulario">
                 <label for="foto1">Foto 1 (Frontal)</label>
-                <input class="mi-entrada" type="file" id="foto1" accept="image/*" capture="environment" class="entrada-foto"
-                    required>
+                <input class="mi-entrada" type="file" id="foto1" accept="image/*" capture="environment"
+                    class="entrada-foto" required>
                 <div class="contenedor-vista-previa-foto">
                     <img id="vista-previa-1" class="vista-previa-foto" src="#" alt="Previsualización Foto 1"
                         style="display: none;">
@@ -159,8 +154,8 @@
             </div>
             <div class="grupo-formulario">
                 <label for="foto2">Foto 2 (Trasera)</label>
-                <input class="mi-entrada" type="file" id="foto2" accept="image/*" capture="environment" class="entrada-foto"
-                    required>
+                <input class="mi-entrada" type="file" id="foto2" accept="image/*" capture="environment"
+                    class="entrada-foto" required>
                 <div class="contenedor-vista-previa-foto">
                     <img id="vista-previa-2" class="vista-previa-foto" src="#" alt="Previsualización Foto 2"
                         style="display: none;">
@@ -168,8 +163,8 @@
             </div>
             <div class="grupo-formulario">
                 <label for="foto3">Foto 3 (Lateral Izquierda)</label>
-                <input class="mi-entrada" type="file" id="foto3" accept="image/*" capture="environment" class="entrada-foto"
-                    required>
+                <input class="mi-entrada" type="file" id="foto3" accept="image/*" capture="environment"
+                    class="entrada-foto" required>
                 <div class="contenedor-vista-previa-foto">
                     <img id="vista-previa-3" class="vista-previa-foto" src="#" alt="Previsualización Foto 3"
                         style="display: none;">
@@ -177,8 +172,8 @@
             </div>
             <div class="grupo-formulario">
                 <label for="foto4">Foto 4 (Lateral Derecha)</label>
-                <input class="mi-entrada" type="file" id="foto4" accept="image/*" capture="environment" class="entrada-foto"
-                    required>
+                <input class="mi-entrada" type="file" id="foto4" accept="image/*" capture="environment"
+                    class="entrada-foto" required>
                 <div class="contenedor-vista-previa-foto">
                     <img id="vista-previa-4" class="vista-previa-foto" src="#" alt="Previsualización Foto 4"
                         style="display: none;">
@@ -228,7 +223,7 @@
                     <label for="telDueño">Teléfono del propietario del vehículo</label>
                     <input class="mi-entrada" type="tel" id="telDueño" placeholder="0000-0000">
                 </div>
-                
+
                 <div class="grupo-formulario">
                     <label class="contenedor-casilla">
                         Acepto los términos y condiciones de servicio del Taller de Mantenimiento Automotriz del ITR.
@@ -244,29 +239,29 @@
     </div>
 
     <nav class="bottom-nav">
-    <ul>
-        <li>
-            <a href="estudiante.html" class="nav-item">
-                <i class="fas fa-home nav-icon"></i>
+        <ul>
+            <li>
+                <a href="estudiante.html" class="nav-item">
+                    <i class="fas fa-home nav-icon"></i>
                 </a>
-        </li>
-        <li>
-            <a href="registro-auto.html" class="nav-item active">
-                <i class="fas fa-clipboard-list nav-icon"></i>
+            </li>
+            <li>
+                <a href="registro-auto.html" class="nav-item active">
+                    <i class="fas fa-clipboard-list nav-icon"></i>
                 </a>
-        </li>
-        <li>
-            <a href="mis-trabajos.html" class="nav-item">
-                <i class="fas fa-chart-bar nav-icon"></i>
+            </li>
+            <li>
+                <a href="mis-trabajos.html" class="nav-item">
+                    <i class="fas fa-chart-bar nav-icon"></i>
                 </a>
-        </li>
-        <li>
-            <a href="perfil.html" class="nav-item"">
-                <i class="fas fa-id-badge nav-icon"></i>
+            </li>
+            <li>
+                <a href="perfil.html" class="nav-item">
+                    <i class="fas fa-id-badge nav-icon"></i>
                 </a>
-        </li>
-    </ul>
-</nav>
+            </li>
+        </ul>
+    </nav>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
