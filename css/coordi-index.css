@@ -1,5 +1,6 @@
-/* --- CSS VARIABLES (FOR THEME AND CONSISTENCY) --- */
+/* --- Variables principales --- */
 :root {
+<<<<<<< Updated upstream
     --bg-app: #121212;
     /* Main application background */
     --bg-header: #202020;
@@ -224,13 +225,74 @@ body {
     /* Max width for cards */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     text-align: center;
+=======
+    --fondo-app: #f5f5f5;
+    --fondo-tarjeta: #ffffff;
+    --texto-oscuro: #333;
+    --texto-secundario: #6c757d;
+    --texto-fuerte: #495057;
+    --acento-rojo: #e74c3c;
+    --acento-verde: #66BB6A;
+    --acento-azul: #42A5F5;
+    --acento-primario: #A32F2A;
+    --acento-primario-hover: #c03d38;
+    --color-borde-claro: #dee2e6;
+    --radio-borde-tarjeta: 16px;
+    --radio-borde-pequeno: 8px;
+    --radio-borde-avatar: 50%;
+    --radio-borde-entrada: 10px;
+    --espaciado-xs: 5px;
+    --espaciado-s: 10px;
+    --espaciado-m: 15px;
+    --espaciado-l: 20px;
+    --espaciado-xl: 30px;
 }
 
-.dashboard-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+/* --- Layout principal --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--fondo-app);
+    color: var(--texto-oscuro);
+    min-height: 100vh;
 }
 
+/* --- Contenido principal --- */
+.contenido-principal-coordi {
+    padding: var(--espaciado-xl);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-l);
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 100px; /* Asegura espacio suficiente para bottom-nav */
+}
+
+/* --- Header usuario --- */
+.info-usuario-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--fondo-tarjeta);
+    border-radius: var(--radio-borde-tarjeta);
+    padding: var(--espaciado-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-borde-claro);
+    margin-bottom: var(--espaciado-m);
+>>>>>>> Stashed changes
+}
+
+.avatar-usuario-header img {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radio-borde-avatar);
+    border: 3px solid var(--acento-rojo);
+    object-fit: cover;
+    margin-right: var(--espaciado-l);
+}
+
+<<<<<<< Updated upstream
 .card-icon {
     font-size: 3em;
     /* Slightly smaller icon for better fit */
@@ -253,10 +315,21 @@ body {
 .card-value {
     font-size: 1.8em;
     /* Slightly smaller value for better fit */
-    font-weight: bold;
-    color: var(--text-light);
+=======
+.datos-usuario-header {
+    display: flex;
+    flex-direction: column;
 }
 
+.nombre-usuario-header {
+>>>>>>> Stashed changes
+    font-weight: bold;
+    font-size: 1.3em;
+    color: var(--texto-fuerte);
+    margin-bottom: 2px;
+}
+
+<<<<<<< Updated upstream
 /* Modules in Process Section */
 .modules-in-process-section {
     margin-top: var(--spacing-l);
@@ -279,10 +352,26 @@ body {
     text-align: center;
     border-bottom: 1px solid var(--border-color-dark);
     padding-bottom: var(--spacing-s);
+=======
+.rol-usuario-header,
+.detalle-usuario-header {
+    font-size: 0.9em;
+    color: var(--texto-secundario);
 }
 
-.filter-buttons {
+/* --- Tarjetas principales --- */
+.tarjeta-principal {
+    background-color: var(--fondo-tarjeta);
+    border-radius: var(--radio-borde-tarjeta);
+    padding: var(--espaciado-l);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-borde-claro);
+>>>>>>> Stashed changes
+}
+
+.header-tarjeta {
     display: flex;
+<<<<<<< Updated upstream
     flex-wrap: wrap;
     /* Allow buttons to wrap */
     justify-content: center;
@@ -296,30 +385,101 @@ body {
     border: none;
     border-radius: var(--border-radius-input);
     /* Rounded corners like inputs */
+=======
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--espaciado-l);
+    border-bottom: 1px solid var(--color-borde-claro);
+    padding-bottom: var(--espaciado-s);
+}
+
+.header-tarjeta h2 {
+    margin: 0;
+    color: var(--texto-fuerte);
+    font-size: 1.3em;
+}
+
+/* --- Resumen estado --- */
+.resumen-estado {
+    display: flex;
+    justify-content: space-around;
+    gap: var(--espaciado-m);
+}
+
+.caja-estado {
+    background-color: #f8f9fa;
+    border-radius: var(--radio-borde-pequeno);
+    padding: var(--espaciado-l);
+    text-align: center;
+    flex-basis: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-borde-claro);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.caja-estado:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.caja-estado .cantidad {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--acento-rojo);
+    margin-bottom: var(--espaciado-xs);
+}
+
+.caja-estado .etiqueta {
+    font-size: 0.9em;
+    color: var(--texto-secundario);
+    font-weight: 500;
+}
+
+/* --- Filtros módulos --- */
+.filtros-modulos {
+    display: flex;
+    gap: var(--espaciado-s);
+}
+
+.boton-filtro {
+    background-color: #f8f9fa;
+    color: var(--texto-oscuro);
+    border: 1px solid var(--color-borde-claro);
+    border-radius: var(--radio-borde-entrada);
+>>>>>>> Stashed changes
     padding: 8px 15px;
     font-size: 0.9em;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
-.filter-btn:hover {
-    background-color: #555;
+.boton-filtro:hover {
+    background-color: #e9ecef;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.filter-btn.active {
-    background-color: var(--accent-primary);
+.boton-filtro.active {
+    background-color: var(--acento-primario);
     color: white;
     font-weight: bold;
+    border-color: var(--acento-primario);
 }
 
-.filter-btn.active:hover {
-    background-color: var(--accent-primary-hover);
+.boton-filtro.active:hover {
+    background-color: var(--acento-primario-hover);
 }
 
-.modules-list {
+/* --- Lista módulos --- */
+.lista-modulos {
     display: flex;
     flex-direction: column;
+<<<<<<< Updated upstream
     gap: var(--spacing-s);
     max-height: 300px;
     /* Limit height to keep it small */
@@ -327,50 +487,74 @@ body {
     /* Enable scrolling for the list */
     padding-right: 5px;
     /* Space for scrollbar */
+=======
+    gap: var(--espaciado-s);
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+>>>>>>> Stashed changes
 }
 
-.module-item {
-    background-color: #3A3A3A;
-    border-radius: var(--border-radius-small);
-    padding: var(--spacing-s) var(--spacing-m);
+.elemento-modulo {
+    background-color: #f8f9fa;
+    border-radius: var(--radio-borde-pequeno);
+    padding: var(--espaciado-s) var(--espaciado-m);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    font-size: 0.95em;
-    color: var(--text-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-borde-claro);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.module-title {
-    flex-grow: 1;
-    margin-right: var(--spacing-s);
+.elemento-modulo:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.module-status {
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 0.8em;
+.elemento-modulo.in-process {
+    border-left: 5px solid var(--acento-azul);
+}
+
+.elemento-modulo.finished {
+    border-left: 5px solid var(--acento-verde);
+}
+
+.elemento-modulo.not-started {
+    border-left: 5px solid var(--acento-rojo);
+}
+
+.titulo-modulo {
+    font-weight: 500;
+    color: var(--texto-fuerte);
+}
+
+.estado-modulo {
+    font-size: 0.85em;
+    padding: 6px 12px;
+    border-radius: 20px;
     font-weight: bold;
-    text-transform: uppercase;
 }
 
-.status-in-process {
-    background-color: var(--accent-blue);
-    color: white;
+.estado-en-proceso {
+    background-color: rgba(66, 165, 245, 0.2);
+    color: var(--acento-azul);
+    border: 1px solid var(--acento-azul);
 }
 
-.status-finished {
-    background-color: var(--accent-green);
-    color: white;
+.estado-finalizado {
+    background-color: rgba(102, 187, 106, 0.2);
+    color: var(--acento-verde);
+    border: 1px solid var(--acento-verde);
 }
 
-.status-not-started {
-    background-color: var(--accent-red);
-    color: white;
+.estado-no-iniciado {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--acento-rojo);
+    border: 1px solid var(--acento-rojo);
 }
 
-
-/* Menú de navegación inferior (Bottom Nav) - Floating and Icon-only */
+/* --- Barra de navegación inferior --- */
 .bottom-nav {
     position: fixed;
     bottom: 20px;
@@ -413,7 +597,7 @@ body {
 
 .bottom-nav .nav-item:hover {
     transform: translateY(-3px);
-    color: var(--accent-primary);
+    color: #A32F2A;
 }
 
 .bottom-nav .nav-item .nav-icon {
@@ -424,13 +608,14 @@ body {
 }
 
 .bottom-nav .nav-item.active {
-    color: var(--accent-primary);
+    color: #A32F2A;
 }
 
 .bottom-nav .nav-item.active .nav-icon {
-    color: var(--accent-primary);
+    color: #A32F2A;
 }
 
+<<<<<<< Updated upstream
 /* --- Media Queries for Responsiveness --- */
 
 /* For Tablets (min-width: 768px) */
@@ -453,11 +638,31 @@ body {
     #welcome-section h2 {
         font-size: 2.5em;
         /* Larger welcome message */
+=======
+/* --- Responsive --- */
+@media (max-width: 767px) {
+    .contenido-principal-coordi {
+        padding: var(--espaciado-l);
+        max-width: 100%;
+        padding-bottom: 100px;
     }
-
-    #welcome-section p {
-        font-size: 1.2em;
+    .info-usuario-header {
+        padding: var(--espaciado-m);
     }
+    .avatar-usuario-header img {
+        width: 50px;
+        height: 50px;
+        margin-right: var(--espaciado-m);
+    }
+    .nombre-usuario-header {
+        font-size: 1.1em;
+>>>>>>> Stashed changes
+    }
+    .resumen-estado {
+        flex-direction: column;
+        gap: var(--espaciado-s);
+    }
+<<<<<<< Updated upstream
 
     .dashboard-cards-container {
         gap: var(--spacing-xl);
@@ -480,22 +685,52 @@ body {
         font-size: 3.5em;
         margin-bottom: 0;
         /* Remove bottom margin when side-by-side */
+=======
+    .caja-estado {
+        padding: var(--espaciado-m);
     }
-
-    .card-value {
-        font-size: 2.2em;
+    .caja-estado .cantidad {
+        font-size: 2em;
     }
+    .filtros-modulos {
+        flex-wrap: wrap;
+>>>>>>> Stashed changes
+    }
+    .elemento-modulo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--espaciado-s);
+    }
+<<<<<<< Updated upstream
 
     .modules-in-process-section {
         max-width: 700px;
         /* Allow wider for tablets */
+=======
+    .bottom-nav {
+        width: 98vw;
+        min-width: 0;
+        max-width: 98vw;
+        padding: 8px 5px;
+        height: 56px;
+>>>>>>> Stashed changes
     }
-
-    .filter-buttons {
-        gap: var(--spacing-m);
+    .bottom-nav li {
+        margin: 0 6px;
+    }
+    .bottom-nav .nav-item {
+        width: 40px;
+        height: 40px;
+        padding: 4px 0;
+    }
+    .bottom-nav .nav-item .nav-icon {
+        font-size: 24px;
+        width: 28px;
+        height: 28px;
     }
 }
 
+<<<<<<< Updated upstream
 /* For Larger Desktops (min-width: 1024px) */
 @media (min-width: 1024px) {
     .app-header {
@@ -524,8 +759,21 @@ body {
     .content-section {
         padding: var(--spacing-xxl);
         /* Even more padding */
+=======
+@media (min-width: 768px) and (max-width: 1024px) {
+    .contenido-principal-coordi {
+        padding: var(--espaciado-l);
     }
+    .resumen-estado {
+        flex-wrap: wrap;
+    }
+    .caja-estado {
+        flex-basis: calc(50% - var(--espaciado-s));
+>>>>>>> Stashed changes
+    }
+}
 
+<<<<<<< Updated upstream
     #welcome-section {
         padding: var(--spacing-xxl);
     }
@@ -538,5 +786,10 @@ body {
     .modules-in-process-section {
         max-width: 800px;
         /* Wider for desktops */
+=======
+@media (min-width: 1025px) {
+    .contenido-principal-coordi {
+        padding: var(--espaciado-xl);
+>>>>>>> Stashed changes
     }
 }
