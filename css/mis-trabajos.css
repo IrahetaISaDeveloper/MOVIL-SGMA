@@ -41,7 +41,8 @@ html, body {
 
 }
 
-/* Menú de navegación inferior (Bottom Nav) */
+
+/* Mobile: barra ocupa todo el ancho */
 .bottom-nav {
     position: fixed;
     bottom: 0px;
@@ -53,10 +54,27 @@ html, body {
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     width: fit-content;
+    max-width: 95vw; /* Limita el ancho en móviles */
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-bottom: 3px;
 }
+
+/* Desktop/tablet: barra más compacta y centrada */
+@media (min-width: 768px) {
+    .bottom-nav {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px; /* Ajusta el ancho máximo en escritorio */
+        max-width: 20vw;
+        border-radius: 30px;
+        padding: 10px 0;
+        margin-bottom: 10px; /* Más espacio en pantallas grandes */
+    }
+}
+
+
 
 .bottom-nav ul {
     list-style: none; /* Remove bullet points */
