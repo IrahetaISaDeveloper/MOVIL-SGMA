@@ -9,70 +9,95 @@
     <link rel="icon" type="image/png" sizes="32x32" href="imgs/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="imgs/favicon/favicon-16x16.png" />
     <link rel="manifest" href="imgs/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/coordi-index.css" />
-    <link rel="stylesheet" href="css/Modos-claro-oscuro.css" />
 </head>
 
 <body>
-    <header class="app-header">
-        <a href="login.html" class="back-button">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-        <h1 class="header-title">Inicio</h1>
-        <div class="header-spacer"></div>
-    </header>
-
-    <main class="main-content-wrapper">
-        <section id="inicio" class="content-section">
-            <div id="welcome-section" class="card-like-section">
-                <h2 id="welcomeMessage">Bienvenido al SGMA</h2>
-                <p>Tu plataforma de gestión vehicular.</p>
+    <main class="contenido-principal-coordi">
+        <div class="info-usuario-header">
+            <div class="avatar-usuario-header">
+                <img src="imgs/defaul-user.webp" alt="Avatar">
             </div>
+            <div class="datos-usuario-header">
+                <span class="nombre-usuario-header" id="nombreUsuario">FERNANDO JAVIER</span>
+                <span class="rol-usuario-header">Coordinador</span>
+                <span class="detalle-usuario-header">Mantenimiento Automotriz</span>
+            </div>
+        </div>
 
-            <div class="dashboard-cards-container">
-                <div class="dashboard-card">
-                    <i class="fas fa-car card-icon"></i>
-                    <div class="card-info">
-                        <p class="card-label">Vehículos Registrados</p>
-                        <h3 class="card-value" id="vehiclesRegisteredCount">--</h3>
+        <section class="tarjeta-principal">
+            <div class="header-tarjeta">
+                <h2>Información general vehículos</h2>
+            </div>
+            <div class="contenido-tarjeta">
+                <div class="resumen-estado">
+                    <div class="caja-estado">
+                        <span class="cantidad" id="conteoVehiculosRegistrados">243</span>
+                        <span class="etiqueta">Vehículos registrados en el año</span>
                     </div>
-                </div>
-                <div class="dashboard-card">
-                    <i class="fas fa-user-graduate card-icon"></i>
-                    <div class="card-info">
-                        <p class="card-label">Alumnos Registrados</p>
-                        <h3 class="card-value" id="studentsRegisteredCount">--</h3>
+                    <div class="caja-estado">
+                        <span class="cantidad">12</span>
+                        <span class="etiqueta">Vehículos Activos</span>
+                    </div>
+                    <div class="caja-estado">
+                        <span class="cantidad">5</span>
+                        <span class="etiqueta">En Reparación</span>
+                    </div>
+                    <div class="caja-estado">
+                        <span class="cantidad">3</span>
+                        <span class="etiqueta">En Espera</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="modules-in-process-section card-like-section">
-                <h2>Módulos de Trabajo</h2>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="in-process">En Proceso</button>
-                    <button class="filter-btn" data-filter="finished">Finalizados</button>
-                    <button class="filter-btn" data-filter="not-started">No Iniciados</button>
+        <section class="tarjeta-principal">
+            <div class="header-tarjeta">
+                <h2>Personal del taller Mantenimiento Automotriz</h2>
+            </div>
+            <div class="contenido-tarjeta">
+                <div class="resumen-estado">
+                    <div class="caja-estado">
+                        <span class="cantidad" id="conteoAlumnosRegistrados">125</span>
+                        <span class="etiqueta">Alumnos</span>
+                    </div>
+                    <div class="caja-estado">
+                        <span class="cantidad">7</span>
+                        <span class="etiqueta">Maestros</span>
+                    </div>
                 </div>
-                <div class="modules-list">
-                    <!-- Example Module Items (replace with dynamic data) -->
-                    <div class="module-item in-process" data-status="in-process">
-                        <span class="module-title">Módulo 1: Revisión de Frenos</span>
-                        <span class="module-status status-in-process">En Proceso</span>
+            </div>
+        </section>
+
+        <section class="tarjeta-principal">
+            <div class="header-tarjeta">
+                <h2>Módulos y Progreso</h2>
+                <div class="filtros-modulos">
+                    <button class="boton-filtro" data-filter="all">Todos</button>
+                    <button class="boton-filtro" data-filter="in-process">En Proceso</button>
+                    <button class="boton-filtro" data-filter="finished">Finalizados</button>
+                    <button class="boton-filtro" data-filter="not-started">No Iniciados</button>
+                </div>
+            </div>
+            <div class="contenido-tarjeta">
+                <div class="lista-modulos">
+                    <div class="elemento-modulo in-process" data-status="in-process">
+                        <span class="titulo-modulo">Módulo 1: Revisión de Frenos</span>
+                        <span class="estado-modulo estado-en-proceso">En Proceso</span>
                     </div>
-                    <div class="module-item finished" data-status="finished">
-                        <span class="module-title">Módulo 2: Cambio de Aceite</span>
-                        <span class="module-status status-finished">Finalizado</span>
+                    <div class="elemento-modulo finished" data-status="finished">
+                        <span class="titulo-modulo">Módulo 2: Cambio de Aceite</span>
+                        <span class="estado-modulo estado-finalizado">Finalizado</span>
                     </div>
-                    <div class="module-item not-started" data-status="not-started">
-                        <span class="module-title">Módulo 3: Diagnóstico Eléctrico</span>
-                        <span class="module-status status-not-started">No Iniciado</span>
+                    <div class="elemento-modulo not-started" data-status="not-started">
+                        <span class="titulo-modulo">Módulo 3: Diagnóstico Eléctrico</span>
+                        <span class="estado-modulo estado-no-iniciado">No Iniciado</span>
                     </div>
-                    <div class="module-item in-process" data-status="in-process">
-                        <span class="module-title">Módulo 4: Suspensión y Dirección</span>
-                        <span class="module-status status-in-process">En Proceso</span>
+                    <div class="elemento-modulo in-process" data-status="in-process">
+                        <span class="titulo-modulo">Módulo 4: Suspensión y Dirección</span>
+                        <span class="estado-modulo estado-en-proceso">En Proceso</span>
                     </div>
                 </div>
             </div>
@@ -82,13 +107,13 @@
     <nav class="bottom-nav">
         <ul>
             <li>
-                <a href="coordi-index.html#inicio" class="nav-item active">
+                <a href="coordi-index.html" class="nav-item active">
                     <i class="fas fa-home nav-icon"></i>
                 </a>
             </li>
             <li>
                 <a href="1er-año.html" class="nav-item">
-                    <i class="fas fa-clipboard-list nav-icon"></i>
+                    <i class="fas fa-graduation-cap nav-icon"></i>
                 </a>
             </li>
             <li>
@@ -102,8 +127,13 @@
                 </a>
             </li>
             <li>
-                <a href="admin.html" class="nav-item">
+                <a href="admin-users.html" class="nav-item">
                     <i class="fas fa-wrench nav-icon"></i>
+                </a>
+            </li>
+            <li>
+                <a href="login.html" class="nav-item">
+                    <i class="fas fa-sign-out-alt nav-icon"></i>
                 </a>
             </li>
         </ul>
@@ -111,9 +141,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/coordi-index.js"></script>
-    <script src="js/Modos-claro-oscuro.js"></script>
 </body>
 
 </html>
