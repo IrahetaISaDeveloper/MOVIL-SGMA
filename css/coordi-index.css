@@ -1,6 +1,6 @@
 /* --- Variables principales --- */
 :root {
-    --fondo-app: #f5f5f5;
+    --fondo-app: #2b2b2b;
     --fondo-tarjeta: #ffffff;
     --texto-oscuro: #333;
     --texto-secundario: #6c757d;
@@ -102,7 +102,6 @@ body {
 }
 
 .header-tarjeta h2 {
-    margin: 0;
     color: var(--texto-fuerte);
     font-size: 1.3em;
 }
@@ -112,6 +111,8 @@ body {
     display: flex;
     justify-content: space-around;
     gap: var(--espaciado-m);
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .caja-estado {
@@ -119,14 +120,17 @@ body {
     border-radius: var(--radio-borde-pequeno);
     padding: var(--espaciado-l);
     text-align: center;
-    flex-basis: 0;
-    flex-grow: 1;
+    flex: 1 1 180px;
+    min-width: 140px;
+    max-width: 220px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--color-borde-claro);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
 }
 
 .caja-estado:hover {
@@ -251,21 +255,33 @@ body {
     border: 1px solid var(--acento-rojo);
 }
 
-/* --- Barra de navegación inferior --- */
 .bottom-nav {
     position: fixed;
+    /* Changed from absolute to fixed to keep it in view when scrolling */
     bottom: 20px;
+    /* Distance from the bottom of the viewport */
     left: 50%;
+    /* Center horizontally */
     transform: translateX(-50%);
+    /* Adjust for horizontal centering */
     background-color: #333;
+    /* Dark background */
     border-radius: 50px;
-    padding: 10px 20px;
+    /* Make it oval/pill shaped */
+    padding: 10px 10px;
+    /* Adjust padding to control the size of the pill */
     z-index: 1000;
+    /* Ensure it's above other content */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    /* More pronounced shadow for floating effect */
     width: fit-content;
+    /* Shrink-wrap content */
     display: flex;
+    /* Use flexbox for internal alignment */
     align-items: center;
+    /* Vertically align items */
     justify-content: space-around;
+    /* Distribute items */
 }
 
 .bottom-nav ul {
@@ -274,11 +290,14 @@ body {
     list-style: none;
     margin: 0;
     padding: 0;
+    /* width: 100%; No longer needed as bottom-nav width is fit-content */
 }
 
 .bottom-nav li {
+    /* flex: 1; Not needed anymore with fit-content and spacing */
     text-align: center;
     margin: 0 15px;
+    /* Space between icons */
 }
 
 .bottom-nav .nav-item {
@@ -287,45 +306,59 @@ body {
     align-items: center;
     justify-content: center;
     padding: 5px 0;
+    /* Adjust padding to make items fit in thinner nav */
     color: #888;
     text-decoration: none;
+    /* font-size: 0.75em; Removed as there is no text */
+    /* font-weight: bold; Removed as there is no text */
     transition: color 0.3s ease, transform 0.3s ease;
+    /* Added transform for hover effect */
 }
 
 .bottom-nav .nav-item:hover {
     transform: translateY(-3px);
+    /* Slight lift on hover */
     color: #A32F2A;
+    /* Hover color */
 }
 
 .bottom-nav .nav-item .nav-icon {
     font-size: 28px;
+    /* Larger icon size */
     margin-bottom: 0;
+    /* No space needed below icon as text is removed */
     color: #888;
     transition: color 0.3s ease;
 }
 
 .bottom-nav .nav-item.active {
     color: #A32F2A;
+    /* Active color for the icon itself */
 }
 
 .bottom-nav .nav-item.active .nav-icon {
     color: #A32F2A;
+    /* Active color for the icon itself */
 }
 
-/* --- Responsive --- */
 @media (max-width: 767px) {
     .contenido-principal-coordi {
         padding: var(--espaciado-l);
         max-width: 100%;
         padding-bottom: 100px;
+        margin: 0 auto;
     }
     .info-usuario-header {
         padding: var(--espaciado-m);
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
     .avatar-usuario-header img {
         width: 50px;
         height: 50px;
-        margin-right: var(--espaciado-m);
+        margin-right: 0;
+        margin-bottom: var(--espaciado-s);
     }
     .nombre-usuario-header {
         font-size: 1.1em;
@@ -333,57 +366,99 @@ body {
     .resumen-estado {
         flex-direction: column;
         gap: var(--espaciado-s);
+        align-items: center;
+        width: 100%;
     }
     .caja-estado {
-        padding: var(--espaciado-m);
-    }
-    .caja-estado .cantidad {
-        font-size: 2em;
+        width: 100%;
+        min-width: 0;
+        max-width: 340px;
+        margin: 0 auto;
     }
     .filtros-modulos {
         flex-wrap: wrap;
+        justify-content: center;
     }
     .elemento-modulo {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--espaciado-s);
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
     }
-    .bottom-nav {
-        width: 98vw;
-        min-width: 0;
-        max-width: 98vw;
-        padding: 8px 5px;
-        height: 56px;
+    .header-tarjeta {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
-    .bottom-nav li {
-        margin: 0 6px;
+    .header-tarjeta h2 {
+        font-size: 1.1em;
     }
-    .bottom-nav .nav-item {
-        width: 40px;
-        height: 40px;
-        padding: 4px 0;
-    }
-    .bottom-nav .nav-item .nav-icon {
-        font-size: 24px;
-        width: 28px;
-        height: 28px;
+    .lista-modulos {
+        align-items: center;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .contenido-principal-coordi {
         padding: var(--espaciado-l);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    .info-usuario-header {
+        padding: var(--espaciado-l);
+    }
+    .avatar-usuario-header img {
+        width: 60px;
+        height: 60px;
+        margin-right: var(--espaciado-l);
     }
     .resumen-estado {
         flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
     }
     .caja-estado {
-        flex-basis: calc(50% - var(--espaciado-s));
+        flex: 1 1 180px;
+        min-width: 140px;
+        max-width: 220px;
+        margin: 0 8px;
+    }
+    .header-tarjeta {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+    }
+    .elemento-modulo {
+        max-width: 600px;
+        margin: 0 auto;
     }
 }
 
 @media (min-width: 1025px) {
     .contenido-principal-coordi {
         padding: var(--espaciado-xl);
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .info-usuario-header {
+        padding: var(--espaciado-xl);
+    }
+    .resumen-estado {
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .caja-estado {
+        flex: 1 1 180px;
+        min-width: 140px;
+        max-width: 220px;
+        margin: 0 12px;
+    }
+    .elemento-modulo {
+        max-width: 700px;
+        margin: 0 auto;
     }
 }
+
