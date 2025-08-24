@@ -72,8 +72,8 @@ main.container {
     padding: 1em 1.5em;
     display: flex;
     align-items: center;
-    justify-content: center; /* Cambiado de space-between a center */
-    position: relative; /* Para posicionar los elementos laterales */
+    justify-content: flex-start;
+    position: relative; /* Necesario para el centrado absoluto del h1 */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
     width: 100%;
@@ -87,14 +87,25 @@ main.container {
     font-size: 1.3em;
     font-weight: 700;
     color: var(--text-light);
-    flex-grow: 0;
     text-align: center;
-    margin-left: 0; /* Elimina el margen negativo */
-    position: absolute;
+    position: absolute; /* Centrado absoluto */
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: auto;
-    pointer-events: none; /* Opcional: evita que el h1 bloquee clics en los botones laterales */
+    pointer-events: none;
+    flex: unset;
+    margin-left: 0;
+}
+
+.app-header > .back-button {
+    flex-shrink: 0;
+    margin-right: 0.5em;
+}
+
+.app-header > div[style] {
+    flex-shrink: 0;
+    margin-left: 0.5em;
 }
 
 .back-button {

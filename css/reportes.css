@@ -39,7 +39,7 @@ body {
   padding: 1em 1.5em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* Centra el contenido horizontalmente */
   /* This is key for the 3-element centering */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
@@ -53,7 +53,7 @@ body {
 
 .header-title {
   font-size: 1.3rem;
-  margin: 0;
+  margin: 0 auto; /* Centra el h1 dentro del header */
   color: var(--text-light);
   text-align: center;
   /* This will center the text within its own flexible space */

@@ -79,7 +79,7 @@ body.dark-mode {
   padding: 1em 1.5em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* Centra el contenido horizontalmente */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   flex-shrink: 0;
   width: 100%;
@@ -91,7 +91,7 @@ body.dark-mode {
 
 .titulo-encabezado {
   font-size: 1.3rem;
-  margin: 0;
+  margin: 0 auto; /* Centra el h1 dentro del header */
   color: var(--texto-claro);
   text-align: center;
 }
