@@ -1,3 +1,8 @@
+//const API_URL = 'https://685b5bb389952852c2d94520.mockapi.io/tbUsers';
+//const ROLES_API_URL = 'https://685b5bb389952852c2d94520.mockapi.io/tbRoles';
+
+//const IMG_API_URL = 'https://api.imgbb.com/1/upload?key=eaf6049b5324954d994475cb0c0a6156';
+
 const API_URL = 'https://685b5bb389952852c2d94520.mockapi.io/tbUsers';
 const ROLES_API_URL = 'https://685b5bb389952852c2d94520.mockapi.io/tbRoles';
 
