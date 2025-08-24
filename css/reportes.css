@@ -159,7 +159,7 @@ main {
     /* Dark background */
     border-radius: 50px;
     /* Make it oval/pill shaped */
-    padding: 10px 20px;
+    padding: 10px 10px;
     /* Adjust padding to control the size of the pill */
     z-index: 1000;
     /* Ensure it's above other content */

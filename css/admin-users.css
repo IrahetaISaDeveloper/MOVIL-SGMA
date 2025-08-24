@@ -41,6 +41,19 @@ body {
     overflow-x: hidden;
     padding-bottom: 0px;
     padding-top: 0px;
+    width: 100vw;
+    min-width: 0;
+}
+
+main.container {
+    background-color: var(--bg-container);
+    width: 100vw;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .container {
@@ -59,7 +72,8 @@ body {
     padding: 1em 1.5em;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Cambiado de space-between a center */
+    position: relative; /* Para posicionar los elementos laterales */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
     width: 100%;
@@ -73,9 +87,14 @@ body {
     font-size: 1.3em;
     font-weight: 700;
     color: var(--text-light);
-    flex-grow: 1;
+    flex-grow: 0;
     text-align: center;
-    margin-left: -40px;
+    margin-left: 0; /* Elimina el margen negativo */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    pointer-events: none; /* Opcional: evita que el h1 bloquee clics en los botones laterales */
 }
 
 .back-button {
@@ -236,6 +255,8 @@ input[type="password"]::placeholder {
 }
 
 .table-responsive {
+    width: 100vw;
+    max-width: 100vw;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-top: 20px;
@@ -311,80 +332,77 @@ img.profile-thumb {
 }
 
 @media (max-width: 768px) {
-    .container {
+    main.container {
+        max-width: 100vw;
+        padding: 10px 2vw;
         margin: 0;
         border-radius: 0;
-        padding: 20px 15px;
+        box-shadow: none;
     }
-
     .app-header {
-        max-width: 100%;
+        max-width: 100vw;
         border-radius: 0;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+        padding: 0.7em 0.5em;
     }
-
     h1 {
-        font-size: 1.8em;
+        font-size: 1.3em;
+        margin-bottom: 1em;
     }
-
     .user-form {
-        padding: 1rem;
+        padding: 0.7em;
+    }
+    .form-group {
+        margin-bottom: 15px;
     }
     table th,
     table td {
-        padding: 8px;
-        font-size: 1em;
+        padding: 6px;
+        font-size: 0.95em;
+        word-break: break-word;
     }
     table img.profile-thumb {
-        width: 60px;
-        height: 60px;
+        width: 45px;
+        height: 45px;
     }
     table button {
-        margin: 5px;
-        padding: 5px 8px;
-        font-size: 1.2em;
+        margin: 3px;
+        padding: 4px 6px;
+        font-size: 1em;
+    }
+    .table-responsive {
+        margin-top: 10px;
+        overflow-x: auto;
+        width: 100vw;
+    }
+    table {
+        min-width: 400px;
+        font-size: 0.95em;
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-    body{
-        max-height: 810px;
-        margin-bottom: 0;
+@media (max-width: 480px) {
+    main.container {
+        padding: 5px 1vw;
     }
-
-    .container {
-        max-width: 100%;
-        padding: 40px 30px;
-        margin: 0 auto;
-        border-radius: 0%;
+    h1 {
+        font-size: 1em;
     }
-
-    .app-header {
-        max-width: 100%;
-        margin-bottom: 0;
-        border-radius: 0;
-    }
-
-  h1 {
-    font-size: 3em;
-  }
-
     .user-form {
-        padding: 2rem;
+        padding: 0.3em;
     }
     table th,
     table td {
-        padding: 12px;
-        font-size: 1.1em;
+        padding: 4px;
+        font-size: 0.85em;
     }
     table img.profile-thumb {
-        width: 80px;
-        height: 80px;
+        width: 35px;
+        height: 35px;
     }
     table button {
-        margin: 8px;
-        padding: 8px 12px;
-        font-size: 1.3em;
+        font-size: 0.9em;
+        padding: 3px 5px;
     }
 }
 

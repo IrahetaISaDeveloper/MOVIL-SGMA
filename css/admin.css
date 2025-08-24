@@ -180,14 +180,7 @@ body.light-mode .theme-button {
     color: #fff !important;
 }
 
-/* Elimina o comenta los estilos .dark-mode para elementos de configuración */
-.elemento-configuracion.dark-mode,
-.titulo-configuracion.dark-mode,
-.descripcion-configuracion.dark-mode,
-.icono-configuracion.dark-mode,
-.icono-flecha.dark-mode {
-    /* Elimina estos estilos o déjalos vacíos */
-}
+
 
 .icono-texto-configuracion {
   display: flex;
@@ -238,7 +231,7 @@ body.light-mode .theme-button {
   /* Dark background */
   border-radius: 50px;
   /* Make it oval/pill shaped */
-  padding: 10px 20px;
+  padding: 10px 10px;
   /* Adjust padding to control the size of the pill */
   z-index: 1000;
   /* Ensure it's above other content */
