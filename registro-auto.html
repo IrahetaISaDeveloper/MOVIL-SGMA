@@ -33,7 +33,8 @@
                     <label for="poliza">Póliza</label>
                     <div class="entrada-con-casilla">
                         <input class="mi-entrada" type="text" id="poliza" placeholder="N° de póliza">
-                        <input type="checkbox" id="casilla-poliza">
+                        <input type="checkbox" id="casilla-poliza-opcional" class="checkbox-poliza-opcional">
+                        <label for="casilla-poliza-opcional" style="margin-left:4px;">Póliza opcional</label>
                     </div>
                     <small>Formato: P123-456</small>
                 </div>
@@ -74,69 +75,20 @@
                     <input class="mi-entrada" type="text" id="tarjetaCirculacion" placeholder="##">
                     <small>Formato: 0/12345678</small>
                 </div>
-            </form>
-        </section>
-
-        <hr class="separador-seccion">
-
-        <section id="detalles-orden" class="seccion">
-            <h1 class="titulo-seccion">Detalles orden de trabajo</h1>
-
-            <form>
 
                 <div class="grupo-formulario">
                     <label for="instructorResponsable">Instructor responsable</label>
-                    <input class="mi-entrada" type="text" id="instructorResponsable" placeholder="Nombre">
+                    <input class="mi-entrada" type="text" id="instructorResponsable" placeholder="Nombre" readonly>
                 </div>
 
                 <div class="grupo-formulario">
                     <label for="estudianteAsignado">Estudiante asignado</label>
-                    <input class="mi-entrada" type="text" id="estudianteAsignado" placeholder="Nombre">
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="carnet">Carnet</label>
-                    <input class="mi-entrada" type="text" id="carnet" placeholder="N° de carnet">
-                    <small>Ejemplo: 20260669</small>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label>Operaciones a efectuar:</label>
-                    <div id="lista-operaciones">
-                        <input class="mi-entrada" type="text" name="operaciones[]" placeholder="Ej: cambio de bujías">
-                    </div>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="moduloRespuesta">Modulo al que da respuesta la practica:</label>
-                    <div class="envoltorio-seleccion">
-                        <select id="moduloRespuesta">
-                            <option value="">Selecciona</option>
-                            <option value="">Seguridad e Higiene Ocupacional</option>
-                            <option value="">Mantenimiento Preventivo y Correctivo de Motores</option>
-                            <option value="">Sistema de Suspensión y Dirección</option>
-                            <option value="">Sistema de Frenos</option>
-                            <option value="">Sistema Eléctrico Automotriz</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label>Operaciones a efectuar:</label>
-                    <div class="grupo-casilla">
-                        <label class="contenedor-casilla">Expo
-                            <input class="mi-entrada" type="checkbox" name="tipoOperacion" value="preventivo">
-                            <span class="marca-verificacion"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="tiempoEstimado">Tiempo estimado del proceso:</label>
-                    <input class="mi-entrada" type="text" id="tiempoEstimado" placeholder="00:00">
+                    <input class="mi-entrada" type="text" id="estudianteAsignado" placeholder="Nombre" readonly>
                 </div>
             </form>
         </section>
+
+        <hr class="separador-seccion">
 
         <hr class="separador-seccion">
 
@@ -148,33 +100,6 @@
                     class="entrada-foto" required>
                 <div class="contenedor-vista-previa-foto">
                     <img id="vista-previa-1" class="vista-previa-foto" src="#" alt="Previsualización Foto 1"
-                        style="display: none;">
-                </div>
-            </div>
-            <div class="grupo-formulario">
-                <label for="foto2">Foto 2 (Trasera)</label>
-                <input class="mi-entrada" type="file" id="foto2" accept="image/*" capture="environment"
-                    class="entrada-foto" required>
-                <div class="contenedor-vista-previa-foto">
-                    <img id="vista-previa-2" class="vista-previa-foto" src="#" alt="Previsualización Foto 2"
-                        style="display: none;">
-                </div>
-            </div>
-            <div class="grupo-formulario">
-                <label for="foto3">Foto 3 (Lateral Izquierda)</label>
-                <input class="mi-entrada" type="file" id="foto3" accept="image/*" capture="environment"
-                    class="entrada-foto" required>
-                <div class="contenedor-vista-previa-foto">
-                    <img id="vista-previa-3" class="vista-previa-foto" src="#" alt="Previsualización Foto 3"
-                        style="display: none;">
-                </div>
-            </div>
-            <div class="grupo-formulario">
-                <label for="foto4">Foto 4 (Lateral Derecha)</label>
-                <input class="mi-entrada" type="file" id="foto4" accept="image/*" capture="environment"
-                    class="entrada-foto" required>
-                <div class="contenedor-vista-previa-foto">
-                    <img id="vista-previa-4" class="vista-previa-foto" src="#" alt="Previsualización Foto 4"
                         style="display: none;">
                 </div>
             </div>
@@ -269,9 +194,29 @@
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/registro-auto-nav.js"></script>
+    <script>
+        // Solo habilita el campo de póliza si el checkbox está marcado, ambos deshabilitados si no
+        document.addEventListener('DOMContentLoaded', function() {
+            const polizaInput = document.getElementById('poliza');
+            const placaInput = document.getElementById('placa');
+            const polizaCheckbox = document.getElementById('casilla-poliza-opcional');
+            function actualizarCampos() {
+                if (polizaCheckbox.checked) {
+                    polizaInput.disabled = false;
+                    placaInput.disabled = true;
+                } else {
+                    polizaInput.disabled = true;
+                    placaInput.disabled = true;
+                }
+            }
+            // Inicializa el estado al cargar
+            actualizarCampos();
+            polizaCheckbox.addEventListener('change', actualizarCampos);
+        });
+    </script>
     <script src="js/registro-auto.js"></script>
     <script src="js/Modos-claro-oscuro.js"></script>
 

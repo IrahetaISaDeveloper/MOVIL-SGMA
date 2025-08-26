@@ -82,8 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnLogout = document.getElementById("btnLogout");
     if (saludo && appCard && btnLogout) {
         const nombre = localStorage.getItem("nombre");
-        const tema = localStorage.getItem("tema");
-        if (!nombre || !tema) {
+        if (!nombre) {
             window.location.href = "index.html";
         } else {
             saludo.textContent = `¡Hola de nuevo, ${nombre} 👽👻`;
@@ -91,52 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
         btnLogout.addEventListener("click", () => {
             localStorage.clear();
             window.location.href = "index.html";
-        });
-    }
-
-    // --- TEMA: Manejo de botones de tema ---
-    const lightModeBtn = document.getElementById("light-mode");
-    const darkModeBtn = document.getElementById("dark-mode");
-
-    // Aplica el tema guardado al cargar la página
-    const temaGuardado = localStorage.getItem("tema");
-    if (temaGuardado === "dark") {
-        document.body.classList.add("dark-mode");
-        document.body.classList.remove("light-mode");
-        if (appCard) {
-            appCard.classList.add("dark-mode");
-            appCard.classList.remove("light-mode");
-        }
-    } else {
-        document.body.classList.add("light-mode");
-        document.body.classList.remove("dark-mode");
-        if (appCard) {
-            appCard.classList.add("light-mode");
-            appCard.classList.remove("dark-mode");
-        }
-    }
-
-    // Listeners para los botones de tema
-    if (lightModeBtn) {
-        lightModeBtn.addEventListener("click", () => {
-            document.body.classList.add("light-mode");
-            document.body.classList.remove("dark-mode");
-            if (appCard) {
-                appCard.classList.add("light-mode");
-                appCard.classList.remove("dark-mode");
-            }
-            localStorage.setItem("tema", "light"); // <-- Guarda el tema seleccionado
-        });
-    }
-    if (darkModeBtn) {
-        darkModeBtn.addEventListener("click", () => {
-            document.body.classList.add("dark-mode");
-            document.body.classList.remove("light-mode");
-            if (appCard) {
-                appCard.classList.add("dark-mode");
-                appCard.classList.remove("light-mode");
-            }
-            localStorage.setItem("tema", "dark"); // <-- Guarda el tema seleccionado
         });
     }
 

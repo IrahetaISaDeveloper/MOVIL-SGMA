@@ -35,15 +35,15 @@ function CargarTabla(modulesToLoad) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    // --- Tema desde localStorage ---
-    const tema = localStorage.getItem("tema");
-    if (tema === "dark") {
-        document.body.classList.add("dark-mode");
-        document.body.classList.remove("light-mode");
-    } else {
-        document.body.classList.add("light-mode");
-        document.body.classList.remove("dark-mode");
-    }
+    // --- Eliminar manejo de tema desde localStorage ---
+    // const tema = localStorage.getItem("tema");
+    // if (tema === "dark") {
+    //     document.body.classList.add("dark-mode");
+    //     document.body.classList.remove("light-mode");
+    // } else {
+    //     document.body.classList.add("light-mode");
+    //     document.body.classList.remove("dark-mode");
+    // }
     CargarModulos();
 });
 

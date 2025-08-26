@@ -193,7 +193,56 @@ small {
     flex-grow: 1;
 }
 
-.entrada-con-casilla input[type="checkbox"],
+.entrada-con-casilla input[type="checkbox"]:not(.checkbox-poliza-opcional) {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.checkbox-poliza-opcional {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #666;
+    border-radius: 5px;
+    background-color: #444;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+    margin-right: 6px;
+}
+
+.checkbox-poliza-opcional:checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.checkbox-poliza-opcional:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    display: block;
+}
+
+.entrada-con-casilla label[for="casilla-poliza-opcional"] {
+    margin-left: 4px;
+    font-size: 1em;
+    color: #cccccc;
+    cursor: pointer;
+}
+
 .contenedor-casilla input[type="checkbox"] {
     position: absolute;
     opacity: 0;
