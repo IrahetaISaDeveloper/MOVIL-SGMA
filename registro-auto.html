@@ -2,52 +2,63 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Vehículo y Servicio</title>
-    <link rel="stylesheet" href="css/registro-auto.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/registro-auto.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 
 <body>
-
     <div class="contenedor">
-
         <header class="app-header">
-            <a href="estudiante.html" class="back-button">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <h1>Datos del vehículo</h1>
+            <div class="header-content">
+                <h1>Datos del vehículo</h1>
+                <nav class="breadcrumb-pasos" aria-label="Progreso de registro">
+                    <div class="paso activo" title="Registrar vehículo">
+                        <i class="fa fa-car"></i>
+                    </div>
+                    <div class="paso" title="Entradas">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <div class="paso" title="Orden de trabajo">
+                        <i class="fa fa-file-alt"></i>
+                    </div>
+                    <div class="linea-progreso">
+                        <div class="relleno"></div>
+                    </div>
+                </nav>
+            </div>
         </header>
         <section id="datos-vehiculo" class="seccion">
             <form>
                 <div class="grupo-formulario">
                     <label for="placa">Placa</label>
-                    <input class="mi-entrada" type="text" id="placa" placeholder="N° de placa">
+                    <input class="mi-entrada" type="text" id="placa" placeholder="N° de placa" />
                     <small>Formato: P123-456</small>
                 </div>
 
                 <div class="grupo-formulario">
                     <label for="poliza">Póliza</label>
                     <div class="entrada-con-casilla">
-                        <input class="mi-entrada" type="text" id="poliza" placeholder="N° de póliza">
-                        <input type="checkbox" id="casilla-poliza-opcional" class="checkbox-poliza-opcional">
-                        <label for="casilla-poliza-opcional" style="margin-left:4px;">Póliza opcional</label>
+                        <input class="mi-entrada" type="text" id="poliza" placeholder="N° de póliza" />
+                        <input type="checkbox" id="casilla-poliza-opcional" class="checkbox-poliza-opcional" />
+                        <label for="casilla-poliza-opcional" style="margin-left: 4px"></label>
                     </div>
                     <small>Formato: P123-456</small>
                 </div>
 
                 <div class="grupo-formulario">
                     <label for="marca">Marca</label>
-                    <input class="mi-entrada" type="text" id="marca" placeholder="Nombre">
+                    <input class="mi-entrada" type="text" id="marca" placeholder="Nombre" />
                     <small>Ej: Mazda</small>
                 </div>
 
                 <div class="grupo-formulario">
                     <label for="modelo">Modelo</label>
-                    <input class="mi-entrada" type="text" id="modelo" placeholder="Modelo">
+                    <input class="mi-entrada" type="text" id="modelo" placeholder="Modelo" />
                     <small>Ej: B2900</small>
                 </div>
 
@@ -66,100 +77,124 @@
 
                 <div class="grupo-formulario">
                     <label for="color">Color</label>
-                    <input class="mi-entrada" type="text" id="color" placeholder="Color">
+                    <input class="mi-entrada" type="text" id="color" placeholder="Color" />
                     <small>Ej: Blanco</small>
                 </div>
 
                 <div class="grupo-formulario">
                     <label for="tarjetaCirculacion">Tarjeta de circulación</label>
-                    <input class="mi-entrada" type="text" id="tarjetaCirculacion" placeholder="##">
+                    <input class="mi-entrada" type="text" id="tarjetaCirculacion" placeholder="##" />
                     <small>Formato: 0/12345678</small>
                 </div>
 
                 <div class="grupo-formulario">
                     <label for="instructorResponsable">Instructor responsable</label>
-                    <input class="mi-entrada" type="text" id="instructorResponsable" placeholder="Nombre" readonly>
+                    <input class="mi-entrada" type="text" id="instructorResponsable" placeholder="Nombre" readonly />
                 </div>
 
                 <div class="grupo-formulario">
                     <label for="estudianteAsignado">Estudiante asignado</label>
-                    <input class="mi-entrada" type="text" id="estudianteAsignado" placeholder="Nombre" readonly>
+                    <input class="mi-entrada" type="text" id="estudianteAsignado" placeholder="Nombre" readonly />
                 </div>
             </form>
         </section>
 
-        <hr class="separador-seccion">
+        <hr class="separador-seccion" />
 
-        <hr class="separador-seccion">
+        <hr class="separador-seccion" />
 
         <section id="fotos-vehiculo" class="seccion">
             <h1 class="titulo-seccion">Fotos del Vehículo</h1>
             <div class="grupo-formulario">
                 <label for="foto1">Foto 1 (Frontal)</label>
                 <input class="mi-entrada" type="file" id="foto1" accept="image/*" capture="environment"
-                    class="entrada-foto" required>
+                    class="entrada-foto" required />
                 <div class="contenedor-vista-previa-foto">
                     <img id="vista-previa-1" class="vista-previa-foto" src="#" alt="Previsualización Foto 1"
-                        style="display: none;">
+                        style="display: none" />
                 </div>
             </div>
         </section>
 
-        <hr class="separador-seccion">
+        <hr class="separador-seccion" />
 
         <section id="terminos-condiciones" class="seccion">
             <h1 class="titulo-seccion">Términos y Condiciones Del Servicio</h1>
             <div class="contenido-terminos">
-                <p>Las actividades y servicios del taller de Mantenimiento Automotriz están orientadas a la formación y
-                    prácticas técnicas de los estudiantes en los diferentes niveles académicos de la especialidad. Por
-                    tal motivo se establecen los siguientes términos y condiciones a considerar al momento de solicitar
-                    un servicio para su vehículo:</p>
-                <p>1. La autorización de órdenes de trabajo queda bajo criterio del docente asignado a cada nivel
-                    formativo, considerando que dicha solicitud debe ser afín a los módulos formativos en proceso.</p>
-                <p>2. Únicamente serán autorizadas órdenes de trabajo menores (máximo 2 horas) y medianas (máximo 8
-                    horas).</p>
-                <p>3. Al finalizar el proceso de Mantenimiento y reparación respectivo, el vehículo debe ser retirado
-                    del taller de forma inmediata. Por ningún motivo se permite la permanencia de éste después de
-                    efectuado el proceso.</p>
-                <p>4. Es terminantemente prohibida la permanencia de vehículos por un periodo mayor jornada formativa.
-                    Exceptuando proyectos de exposición y módulos que conllevan procesos de trabajo complejos.</p>
-                <p>5. La institución no realiza cobros por servicios de reparación mantenimiento, por lo cual no se
-                    permite realizar pagos a estudiantes ni instructores en concepto de servicios o compra de materiales
-                    y repuestos.</p>
-                <p>6. Es obligación del propietario del vehículo proporcionar el material y repuestos necesarios para la
-                    ejecución del proceso a realizar en su vehículo según diagnóstico.</p>
-                <p>7. Por tratarse de un proceso de mantenimiento y reparación con fines formativos para los
-                    estudiantes, la institución no responderá de ninguna consecuencia y no se hace responsable por
-                    daños, golpes, pérdidas o fallas en el vehículo en el ingreso al taller, durante y después de
-                    efectuado el proceso en el vehículo.</p>
+                <p>
+                    Las actividades y servicios del taller de Mantenimiento Automotriz
+                    están orientadas a la formación y prácticas técnicas de los
+                    estudiantes en los diferentes niveles académicos de la especialidad.
+                    Por tal motivo se establecen los siguientes términos y condiciones a
+                    considerar al momento de solicitar un servicio para su vehículo:
+                </p>
+                <p>
+                    1. La autorización de órdenes de trabajo queda bajo criterio del
+                    docente asignado a cada nivel formativo, considerando que dicha
+                    solicitud debe ser afín a los módulos formativos en proceso.
+                </p>
+                <p>
+                    2. Únicamente serán autorizadas órdenes de trabajo menores (máximo 2
+                    horas) y medianas (máximo 8 horas).
+                </p>
+                <p>
+                    3. Al finalizar el proceso de Mantenimiento y reparación respectivo,
+                    el vehículo debe ser retirado del taller de forma inmediata. Por
+                    ningún motivo se permite la permanencia de éste después de efectuado
+                    el proceso.
+                </p>
+                <p>
+                    4. Es terminantemente prohibida la permanencia de vehículos por un
+                    periodo mayor jornada formativa. Exceptuando proyectos de exposición
+                    y módulos que conllevan procesos de trabajo complejos.
+                </p>
+                <p>
+                    5. La institución no realiza cobros por servicios de reparación
+                    mantenimiento, por lo cual no se permite realizar pagos a
+                    estudiantes ni instructores en concepto de servicios o compra de
+                    materiales y repuestos.
+                </p>
+                <p>
+                    6. Es obligación del propietario del vehículo proporcionar el
+                    material y repuestos necesarios para la ejecución del proceso a
+                    realizar en su vehículo según diagnóstico.
+                </p>
+                <p>
+                    7. Por tratarse de un proceso de mantenimiento y reparación con
+                    fines formativos para los estudiantes, la institución no responderá
+                    de ninguna consecuencia y no se hace responsable por daños, golpes,
+                    pérdidas o fallas en el vehículo en el ingreso al taller, durante y
+                    después de efectuado el proceso en el vehículo.
+                </p>
             </div>
             <form>
-
                 <div class="grupo-formulario">
                     <label for="dueñoVehiculo">Nombre del propietario del vehículo</label>
-                    <input class="mi-entrada" type="text" id="dueñoVehiculo" placeholder="Nombre">
+                    <input class="mi-entrada" type="text" id="dueñoVehiculo" placeholder="Nombre" />
                 </div>
                 <div class="grupo-formulario">
                     <label for="duiDueño">Documento unico de identidad</label>
-                    <input class="mi-entrada" type="number" id="duiDueño" placeholder="0000000-0">
+                    <input class="mi-entrada" type="number" id="duiDueño" placeholder="0000000-0" />
                 </div>
                 <div class="grupo-formulario">
                     <label for="telDueño">Teléfono del propietario del vehículo</label>
-                    <input class="mi-entrada" type="tel" id="telDueño" placeholder="0000-0000">
+                    <input class="mi-entrada" type="tel" id="telDueño" placeholder="0000-0000" />
                 </div>
 
                 <div class="grupo-formulario">
                     <label class="contenedor-casilla">
-                        Acepto los términos y condiciones de servicio del Taller de Mantenimiento Automotriz del ITR.
-                        <input class="mi-entrada" type="checkbox" id="aceptarTerminos">
+                        Acepto los términos y condiciones de servicio del Taller de
+                        Mantenimiento Automotriz del ITR.
+                        <input class="mi-entrada" type="checkbox" id="aceptarTerminos" />
                         <span class="marca-verificacion"></span>
                     </label>
                 </div>
 
-                <button type="button" id="boton-enviar-solicitud" class="botones">Enviar Solicitud</button>
+                <button type="button" id="boton-enviar-solicitud" class="botones">
+                    Pasar al siguiente paso
+                </button>
             </form>
         </section>
-
     </div>
 
     <nav class="bottom-nav">
@@ -192,17 +227,18 @@
         </ul>
     </nav>
 
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/registro-auto-nav.js"></script>
     <script>
         // Solo habilita el campo de póliza si el checkbox está marcado, ambos deshabilitados si no
-        document.addEventListener('DOMContentLoaded', function() {
-            const polizaInput = document.getElementById('poliza');
-            const placaInput = document.getElementById('placa');
-            const polizaCheckbox = document.getElementById('casilla-poliza-opcional');
+        document.addEventListener("DOMContentLoaded", function () {
+            const polizaInput = document.getElementById("poliza");
+            const placaInput = document.getElementById("placa");
+            const polizaCheckbox = document.getElementById(
+                "casilla-poliza-opcional"
+            );
             function actualizarCampos() {
                 if (polizaCheckbox.checked) {
                     polizaInput.disabled = false;
@@ -214,12 +250,68 @@
             }
             // Inicializa el estado al cargar
             actualizarCampos();
-            polizaCheckbox.addEventListener('change', actualizarCampos);
+            polizaCheckbox.addEventListener("change", actualizarCampos);
         });
+
+        // Barra de progreso de pasos
+        const steps = document.querySelectorAll(".progress-step");
+        const lines = document.querySelectorAll(".progress-line");
+
+        function updateProgressBar(currentStep) {
+            steps.forEach((step, index) => {
+                step.classList.remove("completed", "current");
+                if (index < currentStep) {
+                    step.classList.add("completed");
+                } else if (index === currentStep) {
+                    step.classList.add("current");
+                }
+            });
+
+            lines.forEach((line, index) => {
+                line.classList.remove("completed");
+                if (index < currentStep) {
+                    line.classList.add("completed");
+                }
+            });
+
+            // Animación para la primera línea
+            const line1 = document.getElementById('progress-line-1');
+            if (currentStep > 0) {
+                line1.classList.add('animate-red');
+            } else {
+                line1.classList.remove('animate-red');
+            }
+        }
+
+        // Inicializa en el paso 1 (índice 0)
+        updateProgressBar(0);
+        // Para avanzar de paso: updateProgressBar(1); updateProgressBar(2);
+
+        // Breadcrumb animación y estado
+        function updateBreadcrumb(currentStep) {
+            const steps = document.querySelectorAll('.breadcrumb-steps .step');
+            const lines = document.querySelectorAll('.breadcrumb-steps .step-line');
+            steps.forEach((step, idx) => {
+                step.classList.remove('active', 'completed');
+                if (idx < currentStep) {
+                    step.classList.add('completed');
+                } else if (idx === currentStep) {
+                    step.classList.add('active');
+                }
+            });
+            lines.forEach((line, idx) => {
+                line.classList.remove('filled');
+                if (idx < currentStep) {
+                    line.classList.add('filled');
+                }
+            });
+        }
+        // Inicializa en el paso 0 (primer paso)
+        updateBreadcrumb(0);
+        // Para avanzar de paso: updateBreadcrumb(1); updateBreadcrumb(2);
     </script>
     <script src="js/registro-auto.js"></script>
     <script src="js/Modos-claro-oscuro.js"></script>
-
 </body>
 
 </html>

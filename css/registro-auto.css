@@ -75,46 +75,29 @@ body {
 
 .app-header {
     margin-bottom: 5px;
-    background-color: var(--header-bg); /* Fondo de la cabecera */
+    background-color: var(--header-bg);
     display: flex;
-    align-items: center; /* Alinea verticalmente el botón y el título */
-    justify-content: center; /* Espacia el botón a la izquierda y el título al centro */
-    flex-shrink: 0; /* Evita que la cabecera se encoja si el contenido es grande */
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .app-header h1 {
-    font-size: 1.3em; /* Tamaño de fuente para el título en la cabecera */
+    font-size: 1.3em;
     font-weight: 700;
     color: var(--text-light);
-    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
-    text-align: center; /* Centra el título */
-    /* Ajusta el margen si el botón es más grande o más pequeño, o usa absolute positioning para mayor control */
-    margin-left: -15px; /* Un ajuste para que el título se centre mejor teniendo en cuenta el botón */
+    text-align: center;
+    margin: 0 0 10px 0;
+    flex-grow: 0;
+    /* Elimina margin-left para centrar */
 }
-
-.back-button {
-    color: var(--text-light);
-    text-decoration: none;
-    padding: 0.6em 1em;
-    background-color: var(--back-button-bg);
-    border-radius: 8px;
-    font-size: 0.85em;
-    transition: background-color 0.2s ease;
-    display: flex; /* Para alinear el icono y el texto */
-    align-items: center;
-    gap: 0.5em; /* Espacio entre el icono y el texto */
-    flex-shrink: 0; /* Evita que el botón se encoja */
-    z-index: 10; /* Asegura que esté por encima del título si hay superposición */
-}
-
-.back-button:hover {
-    background-color: var(--back-button-hover);
-}
-
-.back-button i {
-    font-size: 1em;
-}
-
 
 .seccion {
     margin-bottom: 40px;
@@ -655,6 +638,24 @@ small {
         padding: 14px 20px;
         font-size: 1.1em;
     }
+
+    .breadcrumb-pasos {
+        max-width: 98vw;
+        height: 44px;
+    }
+    .breadcrumb-pasos .paso {
+        width: 44px;
+        height: 44px;
+    }
+    .breadcrumb-pasos .paso .fa {
+        font-size: 1.5em;
+        padding: 7px;
+    }
+    .breadcrumb-pasos .linea-progreso {
+        left: 22px;
+        right: 22px;
+        height: 6px;
+    }
 }
 
 @media (min-width: 601px) {
@@ -672,4 +673,105 @@ small {
     justify-content: flex-start;
     padding-top: 20px;
   }
+}
+
+/* Breadcrumb de pasos - diseño profesional y elegante */
+.breadcrumb-pasos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separar los iconos */
+    margin: 0 auto 32px auto;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+    height: 48px;
+    background: none;
+}
+
+.breadcrumb-pasos .paso {
+    position: relative;
+    z-index: 2;
+    background: #232323;
+    border: 2px solid #353535;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.breadcrumb-pasos .paso:first-child {
+    margin-left: 0;
+}
+
+.breadcrumb-pasos .paso:last-child {
+    margin-right: 0;
+}
+
+.breadcrumb-pasos .paso .fa {
+    font-size: 1.35em;
+    color: #b8b8b8;
+    background: none;
+    border-radius: 50%;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.breadcrumb-pasos .paso.activo {
+    border-color: #ad1414;
+    box-shadow: 0 4px 16px rgba(173,20,20,0.08);
+}
+
+.breadcrumb-pasos .paso.activo .fa {
+    color: #ad1414;
+    animation: parpadeoPaso 2s infinite; /* Más lento */
+}
+
+.breadcrumb-pasos .paso.completed {
+    border-color: #ad1414;
+}
+
+.breadcrumb-pasos .paso.completed .fa {
+    color: #ad1414;
+    opacity: 0.7;
+}
+
+@keyframes parpadeoPaso {
+    0%, 100% { color: #ad1414; }
+    50% { color: #e74c3c; }
+}
+
+.breadcrumb-pasos .linea-progreso {
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    right: 22px;
+    height: 4px;
+    background: #353535; /* Fondo uniforme gris */
+    border-radius: 2px;
+    z-index: 1;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.breadcrumb-pasos .linea-progreso .relleno {
+    height: 100%;
+    width: 33.33%;
+    background: #ad1414; /* Solo rojo, sin gradiente */
+    border-radius: 2px;
+    animation: parpadeoLinea 2s infinite;
+    box-shadow: 0 1px 6px rgba(173,20,20,0.07);
+}
+
+@keyframes parpadeoLinea {
+    0%, 100% { background: #ad1414; }
+    50% { background: #e74c3c; }
 }
