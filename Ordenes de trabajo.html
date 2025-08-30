@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div id="task-modal" class="modal">
+                    <div id="task-modal" class="modal" style="display:none;">
                         <div class="modal-content">
                             <span class="close-button">&times;</span>
                             <div class="modal-header">
@@ -158,6 +158,29 @@
 
     </div>
     <script src="js/Ordenes de trabajo.js"></script>
+    <script>
+    // Modal control: solo se abre al hacer clic en el botón FAB
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById('task-modal');
+        var fab = document.querySelector('.fab');
+        var closeBtn = document.querySelector('.close-button');
+
+        fab.addEventListener('click', function () {
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+        // Cerrar modal al hacer clic fuera del contenido
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>
