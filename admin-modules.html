@@ -8,6 +8,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/admin-modules.css">
     <link rel="stylesheet" href="css/Modos-claro-oscuro.css">
+    <style>
+      .tabla-responsiva {
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 20px;
+      }
+      .tabla-responsiva table {
+        min-width: 600px;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .tabla-responsiva th, .tabla-responsiva td {
+        padding: 10px 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        white-space: nowrap;
+      }
+      .tabla-responsiva th {
+        background: #27ae60;
+        color: #111;
+        font-weight: bold;
+        font-size: 17px;
+      }
+      .tabla-responsiva td {
+        font-size: 16px;
+      }
+      .tabla-responsiva select, #comboLevel {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background: #f5f5f5;
+        color: #222;
+        margin-top: 4px;
+        margin-bottom: 8px;
+      }
+    </style>
 </head>
 
 <body>
@@ -27,8 +65,8 @@
                 <input type="text" id="nombreModulo" required />
             </div>
             <div class="grupo-formulario">
-                <label for="descripcionModulo">Descripción:</label>
-                <textarea id="descripcionModulo" rows="3"></textarea>
+                <label for="comboLevel">Año Académico:</label>
+                <select id="comboLevel" required></select>
             </div>
 
             <button type="submit" id="btn-enviar" class="botones">Agregar Módulo</button>
@@ -43,7 +81,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre del Módulo</th>
-                        <th>Descripción</th>
+                        <th>Año</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>

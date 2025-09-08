@@ -31,42 +31,148 @@ document.addEventListener('DOMContentLoaded', function() {
         nombreUsuarioElemento.textContent = nombreUsuarioLogeado.toUpperCase();
     }
 
-    // Conteos (dummy data, puedes conectar con backend)
-    const conteoVehiculosRegistradosElemento = document.getElementById('conteoVehiculosRegistrados');
-    const conteoAlumnosRegistradosElemento = document.getElementById('conteoAlumnosRegistrados');
-    if (conteoVehiculosRegistradosElemento) {
-        conteoVehiculosRegistradosElemento.textContent = '125';
-    }
-    if (conteoAlumnosRegistradosElemento) {
-        conteoAlumnosRegistradosElemento.textContent = '340';
-    }
-
-    // Filtros de módulos
-    const botonesFiltro = document.querySelectorAll('.boton-filtro');
-    const elementosModulo = document.querySelectorAll('.elemento-modulo');
-    function aplicarFiltroModulos(filtro) {
-        elementosModulo.forEach(item => {
-            const estado = item.dataset.status;
-            if (filtro === 'all' || estado === filtro) {
-                item.style.display = 'flex';
+    // Mostrar solo los módulos del año seleccionado
+    function mostrarModulosPorAno(ano) {
+        document.querySelectorAll('.elemento-modulo').forEach(function (modulo) {
+            if (modulo.getAttribute('data-year') === ano) {
+                modulo.style.display = '';
             } else {
-                item.style.display = 'none';
+                modulo.style.display = 'none';
             }
         });
     }
-    botonesFiltro.forEach(boton => {
-        boton.addEventListener('click', function() {
-            botonesFiltro.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            const filtro = this.dataset.filter;
-            aplicarFiltroModulos(filtro);
+
+    // Selección visual y funcional de filtro por año
+    document.querySelectorAll('.boton-filtro[data-year]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.boton-filtro[data-year]').forEach(function (b) {
+                b.classList.remove('activo');
+            });
+            btn.classList.add('activo');
+            mostrarModulosPorAno(btn.getAttribute('data-year'));
         });
     });
-    const botonFiltroTodos = document.querySelector('.boton-filtro[data-filter="all"]');
-    if (botonFiltroTodos) {
-        botonFiltroTodos.classList.add('active');
-        aplicarFiltroModulos('all');
-    } else {
-        aplicarFiltroModulos('all');
+
+    // Mostrar por defecto los de primer año
+    mostrarModulosPorAno('primer');
+
+    // Consulta y muestra datos reales de vehículos
+    fetch('http://localhost:8080/api/vehicles/getDataVehicles?page=0&size=50', {
+        method: 'GET'
+    })
+    .then(res => res.json())
+    .then(data => {
+        let vehicles = [];
+        if (data && data.data && Array.isArray(data.data.content)) {
+            vehicles = data.data.content;
+        }
+        const totalElem = document.getElementById('total-vehiculos');
+        if (totalElem) totalElem.textContent = vehicles.length;
+        const ptcCount = vehicles.filter(v => v.maintenanceEXPO === 1).length;
+        const ptcElem = document.getElementById('vehiculos-ptc');
+        if (ptcElem) ptcElem.textContent = ptcCount;
+    })
+    .catch(() => {
+        const totalElem = document.getElementById('total-vehiculos');
+        const ptcElem = document.getElementById('vehiculos-ptc');
+        if (totalElem) totalElem.textContent = '0';
+        if (ptcElem) ptcElem.textContent = '0';
+    });
+
+    // Consulta y muestra cantidad de alumnos
+    fetch('http://localhost:8080/api/students/getDataStudents', {
+        method: 'GET'
+    })
+    .then(res => res.json())
+    .then(data => {
+        let students = [];
+        if (data && data.data && Array.isArray(data.data.content)) {
+            students = data.data.content;
+        }
+        const alumnosElem = document.getElementById('alumnos-registrados');
+        if (alumnosElem) alumnosElem.textContent = students.length;
+    })
+    .catch(() => {
+        const alumnosElem = document.getElementById('alumnos-registrados');
+        if (alumnosElem) alumnosElem.textContent = '0';
+    });
+
+    // Consulta y muestra cantidad de instructores
+    fetch('http://localhost:8080/api/instructors/getDataInstructors', {
+        method: 'GET'
+    })
+    .then(res => res.json())
+    .then(data => {
+        let instructors = [];
+        if (data && data.data && Array.isArray(data.data.content)) {
+            instructors = data.data.content;
+        }
+        const instructoresElem = document.getElementById('maestros-registrados');
+        if (instructoresElem) instructoresElem.textContent = instructors.length;
+    })
+    .catch(() => {
+        const instructoresElem = document.getElementById('maestros-registrados');
+        if (instructoresElem) instructoresElem.textContent = '0';
+    });
+
+    // Mostrar módulos por año dinámicamente
+    let allModules = [];
+
+    function renderModulosPorAno(levelId) {
+        const lista = document.querySelector('.lista-modulos');
+        if (!lista) return;
+        lista.innerHTML = '';
+        let modulosFiltrados;
+        if (levelId === 'todos') {
+            modulosFiltrados = allModules;
+        } else {
+            let numId = 1;
+            if (levelId === 'primer') numId = 1;
+            else if (levelId === 'segundo') numId = 2;
+            else if (levelId === 'tercero') numId = 3;
+            modulosFiltrados = allModules.filter(m => m.levelId === numId);
+        }
+        if (modulosFiltrados.length === 0) {
+            lista.innerHTML = '<div style="color:#888;text-align:center;">No hay módulos para este año.</div>';
+            return;
+        }
+        modulosFiltrados.forEach(modulo => {
+            lista.innerHTML += `
+                <div class="elemento-modulo" data-year="${modulo.levelId}">
+                    <span class="titulo-modulo">${modulo.moduleName || '-'}</span>
+                    <span class="nivel-modulo">${modulo.levelName || '-'}</span>
+                </div>
+            `;
+        });
     }
+
+    // Cargar módulos desde el endpoint y mostrar por año
+    async function cargarModulosYMostrar() {
+        try {
+            const res = await fetch('http://localhost:8080/api/modules/getAllModules');
+            const data = await res.json();
+            if (data && data.data && Array.isArray(data.data.content)) {
+                allModules = data.data.content;
+            } else if (Array.isArray(data)) {
+                allModules = data;
+            } else {
+                allModules = [];
+            }
+            renderModulosPorAno('todos');
+            document.querySelectorAll('.boton-filtro[data-year]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.boton-filtro[data-year]').forEach(function (b) {
+                        b.classList.remove('activo');
+                    });
+                    btn.classList.add('activo');
+                    renderModulosPorAno(btn.getAttribute('data-year'));
+                });
+            });
+        } catch (error) {
+            const lista = document.querySelector('.lista-modulos');
+            if (lista) lista.innerHTML = '<div style="color:#888;text-align:center;">No se pudieron cargar los módulos.</div>';
+        }
+    }
+
+    cargarModulosYMostrar();
 });

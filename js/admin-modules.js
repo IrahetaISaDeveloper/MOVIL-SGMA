@@ -1,66 +1,104 @@
-const form = document.getElementById('formulario-modulo');
-const moduleNameEl = document.getElementById('nombreModulo');
-const moduleDescriptionEl = document.getElementById('descripcionModulo');
-const moduleIdEl = document.getElementById('idModulo');
-const cancelBtn = document.getElementById('btn-cancelar');
-const submitBtn = document.getElementById('btn-enviar');
-const tbody = document.getElementById('cuerpo-tabla-modulos');
+const MODULES_API_URL = 'http://localhost:8080/api/modules';
+const LEVELS_API_URL = 'http://localhost:8080/api/levels/getDataLevels';
 
-const API_BASE = 'http://localhost:8080/api/modules/';
+const formulario = document.getElementById('formulario-modulo');
+const nombreModuloEl = document.getElementById('nombreModulo');
+const idModuloEl = document.getElementById('idModulo');
+const comboLevelEl = document.getElementById('comboLevel');
+const botonCancelar = document.getElementById('btn-cancelar');
+const botonEnviar = document.getElementById('btn-enviar');
+const cuerpoTabla = document.getElementById('cuerpo-tabla-modulos');
 
-let modules = [];
+let modulos = [];
+let levels = [];
 
-async function CargarModulos() {
+async function cargarLevels() {
     try {
-        const res = await fetch(API_BASE + 'getAllModules');
-        if (!res.ok) throw new Error('Error al obtener módulos');
-        modules = await res.json();
-        CargarTabla(modules);
-    } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center;">No se pudieron cargar los módulos.</td></tr>`;
-        Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            customClass: {
-                popup: 'swal-custom-popup',
-                title: 'swal-custom-title',
-                content: 'swal-custom-content',
-                confirmButton: 'swal-custom-confirm-button'
-            },
-            buttonsStyling: false
+        const res = await fetch(LEVELS_API_URL);
+        const data = await res.json();
+        levels = Array.isArray(data) ? data : (data.data || []);
+        comboLevelEl.innerHTML = '';
+        levels.forEach(level => {
+            const opcion = document.createElement('option');
+            opcion.value = level.id || level.levelId;
+            opcion.textContent = level.levelName;
+            comboLevelEl.appendChild(opcion);
         });
+    } catch (error) {}
+}
+
+async function cargarModulos() {
+    try {
+        const res = await fetch(`${MODULES_API_URL}/getAllModules`);
+        const data = await res.json();
+        if (data && data.data && Array.isArray(data.data.content)) {
+            modulos = data.data.content;
+        } else {
+            modulos = [];
+        }
+        cargarTabla(modulos);
+    } catch (error) {
+        cuerpoTabla.innerHTML = `<tr><td colspan="4" style="text-align: center;">No se pudieron cargar los módulos.</td></tr>`;
     }
 }
 
-function CargarTabla(modulesToLoad) {
-    tbody.innerHTML = '';
-    if (!modulesToLoad || modulesToLoad.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center;">No hay módulos registrados.</td></tr>`;
+function cargarTabla(modulosACargar) {
+    cuerpoTabla.innerHTML = '';
+    if (!modulosACargar || modulosACargar.length === 0) {
+        cuerpoTabla.innerHTML = `<tr><td colspan="4" style="text-align: center;">No hay módulos registrados.</td></tr>`;
         return;
     }
-    modulesToLoad.forEach(module => {
-        tbody.innerHTML += `
+    modulosACargar.forEach(modulo => {
+        cuerpoTabla.innerHTML += `
         <tr>
-            <td>${module.id}</td>
-            <td>${module.name}</td>
-            <td>${module.description}</td>
+            <td>${modulo.moduleId}</td>
+            <td>${modulo.moduleName}</td>
+            <td>${modulo.levelName || ''}</td>
             <td>
-                <button onclick="CargarParaEditarModulo('${module.id}')" class="edit">Editar</button>
-                <button onclick="BorrarModulo('${module.id}')" class="delete">Eliminar</button>
+                <button onclick="cargarParaEditarModulo('${modulo.moduleId}')">Editar</button>
+                <button onclick="borrarModulo('${modulo.moduleId}')">Eliminar</button>
             </td>
         </tr>
         `;
     });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    CargarModulos();
+function cargarParaEditarModulo(id) {
+    const moduloAEditar = modulos.find(modulo => String(modulo.moduleId) === String(id));
+    if (moduloAEditar) {
+        nombreModuloEl.value = moduloAEditar.moduleName;
+        idModuloEl.value = moduloAEditar.moduleId;
+        // Buscar el option correcto por id
+        let levelIdValue = moduloAEditar.levelId || moduloAEditar.levelID || moduloAEditar.level_id;
+        if (levelIdValue) {
+            comboLevelEl.value = String(levelIdValue);
+        }
+        botonEnviar.textContent = 'Actualizar Módulo';
+        botonCancelar.hidden = false;
+    } else {
+        botonEnviar.textContent = 'Agregar Módulo';
+        botonCancelar.hidden = true;
+        Swal.fire({
+            title: 'Error',
+            text: 'Módulo no encontrado para editar.',
+            icon: 'error',
+            customClass: {
+                popup: 'swal-custom-popup',
+                title: 'swal-custom-title',
+                htmlContainer: 'swal-custom-content',
+                confirmButton: 'swal-custom-confirm-button'
+            }
+        });
+    }
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+    await cargarLevels();
+    await cargarModulos();
 });
 
-// Eliminar un módulo
-async function BorrarModulo(id) {
-    const result = await Swal.fire({
+async function borrarModulo(id) {
+    const resultado = await Swal.fire({
         title: '¿Estás seguro?',
         text: "¡No podrás revertir esto!",
         icon: 'warning',
@@ -72,75 +110,58 @@ async function BorrarModulo(id) {
         customClass: {
             popup: 'swal-custom-popup',
             title: 'swal-custom-title',
-            content: 'swal-custom-content',
+            htmlContainer: 'swal-custom-content',
             confirmButton: 'swal-custom-confirm-button',
             cancelButton: 'swal-custom-cancel-button'
-        },
-        buttonsStyling: false
+        }
     });
 
-    if (result.isConfirmed) {
+    if (resultado.isConfirmed) {
         try {
-            const res = await fetch(API_BASE + 'deleteModule/' + id, { method: 'DELETE' });
-            if (!res.ok) throw new Error('No se pudo eliminar el módulo');
-            await Swal.fire({
+            await fetch(`${MODULES_API_URL}/deleteModule/${id}`, { method: 'DELETE' });
+            await cargarModulos();
+            Swal.fire({
                 title: '¡Eliminado!',
                 text: 'El módulo ha sido eliminado.',
                 icon: 'success',
                 customClass: {
                     popup: 'swal-custom-popup',
                     title: 'swal-custom-title',
-                    content: 'swal-custom-content',
+                    htmlContainer: 'swal-custom-content',
                     confirmButton: 'swal-custom-confirm-button'
-                },
-                buttonsStyling: false
+                }
             });
-            CargarModulos();
-        } catch (err) {
+        } catch {
             Swal.fire({
                 title: 'Error',
-                text: err.message,
+                text: 'No se pudo eliminar el módulo.',
                 icon: 'error',
                 customClass: {
                     popup: 'swal-custom-popup',
                     title: 'swal-custom-title',
-                    content: 'swal-custom-content',
+                    htmlContainer: 'swal-custom-content',
                     confirmButton: 'swal-custom-confirm-button'
-                },
-                buttonsStyling: false
+                }
             });
         }
     }
 }
 
-// Cargar datos para editar
-function CargarParaEditarModulo(id) {
-    const module = modules.find(module => module.id == id);
-    if (module) {
-        moduleIdEl.value = module.id;
-        moduleNameEl.value = module.name;
-        moduleDescriptionEl.value = module.description;
-        submitBtn.textContent = 'Actualizar Módulo';
-        cancelBtn.hidden = false;
-    }
-}
-
-cancelBtn.addEventListener('click', () => {
-    form.reset();
-    moduleIdEl.value = '';
-    submitBtn.textContent = 'Agregar Módulo';
-    cancelBtn.hidden = true;
+botonCancelar.addEventListener('click', () => {
+    formulario.reset();
+    idModuloEl.value = '';
+    botonEnviar.textContent = 'Agregar Módulo';
+    botonCancelar.hidden = true;
 });
 
-// Crear o actualizar módulo
-form.addEventListener('submit', async e => {
+formulario.addEventListener('submit', async e => {
     e.preventDefault();
 
-    const name = moduleNameEl.value.trim();
-    const description = moduleDescriptionEl.value.trim();
-    const id = moduleIdEl.value;
+    const nombre = nombreModuloEl.value.trim();
+    const id = idModuloEl.value;
+    const levelId = comboLevelEl.value;
 
-    if (!name) {
+    if (!nombre) {
         Swal.fire({
             title: 'Error',
             text: 'El nombre del módulo es obligatorio.',
@@ -148,39 +169,38 @@ form.addEventListener('submit', async e => {
             customClass: {
                 popup: 'swal-custom-popup',
                 title: 'swal-custom-title',
-                content: 'swal-custom-content',
+                htmlContainer: 'swal-custom-content',
                 confirmButton: 'swal-custom-confirm-button'
-            },
-            buttonsStyling: false
+            }
         });
         return;
     }
-
-    if (!description) {
+    if (!levelId) {
         Swal.fire({
             title: 'Error',
-            text: 'La descripción del módulo es obligatoria.',
+            text: 'Debes seleccionar un año académico.',
             icon: 'error',
             customClass: {
                 popup: 'swal-custom-popup',
                 title: 'swal-custom-title',
-                content: 'swal-custom-content',
+                htmlContainer: 'swal-custom-content',
                 confirmButton: 'swal-custom-confirm-button'
-            },
-            buttonsStyling: false
+            }
         });
         return;
     }
 
     if (id) {
-        // Actualizar módulo
         try {
-            const res = await fetch(API_BASE + 'updateModule/' + id, {
+            await fetch(`${MODULES_API_URL}/updateModule/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, description })
+                body: JSON.stringify({
+                    moduleId: id,
+                    moduleName: nombre,
+                    levelId: Number(levelId)
+                })
             });
-            if (!res.ok) throw new Error('No se pudo actualizar el módulo');
             await Swal.fire({
                 title: 'Éxito',
                 text: 'Módulo actualizado correctamente.',
@@ -188,39 +208,33 @@ form.addEventListener('submit', async e => {
                 customClass: {
                     popup: 'swal-custom-popup',
                     title: 'swal-custom-title',
-                    content: 'swal-custom-content',
+                    htmlContainer: 'swal-custom-content',
                     confirmButton: 'swal-custom-confirm-button'
-                },
-                buttonsStyling: false
+                }
             });
-            form.reset();
-            moduleIdEl.value = '';
-            submitBtn.textContent = 'Agregar Módulo';
-            cancelBtn.hidden = true;
-            CargarModulos();
-        } catch (err) {
-            Swal.fire({
+        } catch {
+            await Swal.fire({
                 title: 'Error',
-                text: err.message,
+                text: 'No se pudo actualizar el módulo.',
                 icon: 'error',
                 customClass: {
                     popup: 'swal-custom-popup',
                     title: 'swal-custom-title',
-                    content: 'swal-custom-content',
+                    htmlContainer: 'swal-custom-content',
                     confirmButton: 'swal-custom-confirm-button'
-                },
-                buttonsStyling: false
+                }
             });
         }
     } else {
-        // Crear módulo
         try {
-            const res = await fetch(API_BASE + 'newModule', {
+            await fetch(`${MODULES_API_URL}/addNewModule`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, description })
+                body: JSON.stringify({
+                    moduleName: nombre,
+                    levelId: Number(levelId)
+                })
             });
-            if (!res.ok) throw new Error('No se pudo agregar el módulo');
             await Swal.fire({
                 title: 'Éxito',
                 text: 'Módulo agregado correctamente.',
@@ -228,29 +242,28 @@ form.addEventListener('submit', async e => {
                 customClass: {
                     popup: 'swal-custom-popup',
                     title: 'swal-custom-title',
-                    content: 'swal-custom-content',
+                    htmlContainer: 'swal-custom-content',
                     confirmButton: 'swal-custom-confirm-button'
-                },
-                buttonsStyling: false
+                }
             });
-            form.reset();
-            moduleIdEl.value = '';
-            submitBtn.textContent = 'Agregar Módulo';
-            cancelBtn.hidden = true;
-            CargarModulos();
-        } catch (err) {
-            Swal.fire({
+        } catch {
+            await Swal.fire({
                 title: 'Error',
-                text: err.message,
+                text: 'No se pudo agregar el módulo.',
                 icon: 'error',
                 customClass: {
                     popup: 'swal-custom-popup',
                     title: 'swal-custom-title',
-                    content: 'swal-custom-content',
+                    htmlContainer: 'swal-custom-content',
                     confirmButton: 'swal-custom-confirm-button'
-                },
-                buttonsStyling: false
+                }
             });
         }
     }
+
+    formulario.reset();
+    idModuloEl.value = '';
+    botonCancelar.hidden = true;
+    botonEnviar.textContent = 'Agregar Módulo';
+    await cargarModulos();
 });

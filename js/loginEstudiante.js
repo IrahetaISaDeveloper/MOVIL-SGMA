@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch('http://localhost:8080/api/instructorAuth/instructorLogin', {
+                const response = await fetch('http://localhost:8080/api/studentsAuth/studentLogin', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -65,6 +65,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 if (response.ok) {
+                    let studentId = null;
+                    try {
+                        const contentType = response.headers.get('content-type');
+                        if (contentType && contentType.includes('application/json')) {
+                            const responseData = await response.json();
+                            if (responseData && responseData.student && responseData.student.id) {
+                                studentId = responseData.student.id;
+                            }
+                        }
+                    } catch (e) {
+                        // Si falla el parseo, continúa sin guardar el id
+                    }
+                    if (studentId) {
+                        localStorage.setItem('studentId', studentId);
+                    }
                     Swal.fire({
                         icon: 'success',
                         title: 'Inicio de sesión exitoso',
@@ -72,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         timer: 1500,
                         showConfirmButton: false
                     }).then(() => {
-                        window.location.href = 'coordi-index.html';
+                        window.location.href = 'estudiante.html';
                     });
                 } else {
                     const errorText = await response.text();
@@ -102,21 +117,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Ejemplo: consulta autenticada usando la cookie creada por el backend
-    async function obtenerDatosInstructor() {
+    async function obtenerDatosEstudiante() {
         try {
-            const response = await fetch('http://localhost:8080/api/instructorAuth/meInstructor', {
+            const response = await fetch('http://localhost:8080/api/studentsAuth/meStudent', {
                 method: 'GET',
                 credentials: 'include',
             });
             const data = await response.json();
             if (data.authenticated) {
-                console.log('Datos del instructor:', data.instructor);
+                console.log('Datos del estudiante:', data.student);
             } else {
                 console.log('No autenticado');
             }
         } catch (error) {
-            console.error('Error obteniendo datos del instructor:', error);
+            console.error('Error obteniendo datos del estudiante:', error);
         }
     }
-    // obtenerDatosInstructor();
+    // obtenerDatosEstudiante();
 });
