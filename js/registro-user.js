@@ -9,11 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedGradoText = document.getElementById('selected-grado-text');
 
     // 1. Cargar años desde la API y llenar el combobox
-    fetch('http://localhost:8080/api/students')
+    fetch('http://localhost:8080/api/grades/getAll')
         .then(res => res.json())
         .then(data => {
             // Suponiendo que data es un array de objetos con propiedad 'year'
-            // Extraer años únicos
             const years = [...new Set(data.map(e => e.year))].filter(Boolean);
             gradoOptions.innerHTML = '';
             gradoSelect.innerHTML = '<option value="" selected>Selecciona tu año</option>';
