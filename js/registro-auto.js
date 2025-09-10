@@ -9,9 +9,16 @@ function agregarVehiculo(dataVehiculo) {
     .then(response => response.json())
     .then(result => {
         if (result && result.success) {
-            alert('Vehículo registrado exitosamente');
+            Swal.fire({
+                icon: 'success',
+                title: 'Solicitud enviada',
+                text: 'La solicitud se envió correctamente. Ahora debes esperar que los administradores la acepten para poder registrar la entrada y la orden de trabajo.',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                window.location.href = 'mis-trabajos.html';
+            });
         } else {
-            alert('Error al registrar el vehículo');
+            Swal.fire('Error al registrar el vehículo', '', 'error');
         }
     })
     .catch(error => {
@@ -41,10 +48,10 @@ function cargarEstudiantes() {
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('estudianteAsignado');
-            if (select && Array.isArray(data)) {
+            if (select && data && data.data && Array.isArray(data.data.content)) {
                 select.innerHTML = '<option value="">Seleccione un estudiante</option>';
-                data.forEach(est => {
-                    select.innerHTML += `<option value="${est.studentId}">${est.studentName} ${est.studentLastName}</option>`;
+                data.data.content.forEach(est => {
+                    select.innerHTML += `<option value="${est.studentId}">${est.firstName} ${est.lastName}</option>`;
                 });
             }
         })
@@ -83,22 +90,64 @@ function registrarVehiculoDesdeFormulario() {
     }
     const estudianteSelect = document.getElementById('estudianteAsignado');
     const estudianteId = estudianteSelect ? parseInt(estudianteSelect.value) : null;
+    // Validaciones
+    const ownerDui = document.getElementById('duiDueño').value;
+    const brand = document.getElementById('marca').value;
+    const model = document.getElementById('modelo').value;
+    const circulationCardNumber = document.getElementById('tarjetaCirculacion').value;
+    const vehicleImage = document.getElementById('foto1').value;
+    // Usar SweetAlert para validaciones
+    if (!ownerDui || !/^\d{8}-\d{1}$/.test(ownerDui)) {
+        Swal.fire('Error', 'El DUI debe tener el formato 12345678-9.', 'error');
+        return;
+    }
+    if (plateNumber && !/^[A-Z]{1,3}[0-9]{3,4}$/.test(plateNumber)) {
+        Swal.fire('Error', 'La placa debe tener el formato ABC1234.', 'error');
+        return;
+    }
+    if (brand.length < 3) {
+        Swal.fire('Error', 'La marca debe tener al menos 3 caracteres.', 'error');
+        return;
+    }
+    if (model.length < 3) {
+        Swal.fire('Error', 'El modelo debe tener al menos 3 caracteres.', 'error');
+        return;
+    }
+    if (circulationCardNumber.length < 8) {
+        Swal.fire('Error', 'El número de tarjeta de circulación debe tener al menos 8 dígitos.', 'error');
+        return;
+    }
+    if (!vehicleImage) {
+        Swal.fire('Error', 'La imagen del vehículo es obligatoria.', 'error');
+        return;
+    }
+    // Validar aceptación de términos y condiciones
+    const terminosCheckbox = document.getElementById('aceptarTerminos');
+    if (!terminosCheckbox || !terminosCheckbox.checked) {
+        Swal.fire('Debes aceptar los términos y condiciones para continuar.', '', 'warning');
+        return;
+    }
+    // Obtener valor de mantenimiento EXPO
+    const mantenimientoExpoCheckbox = document.getElementById('mantenimientoExpo');
+    const mantenimientoEXPO = (mantenimientoExpoCheckbox && mantenimientoExpoCheckbox.checked) ? 1 : 0;
+    // Validar vehicleId
+    const vehicleId = 1; // Debe ser mayor que 0, puedes ajustar según tu lógica
     const dataVehiculo = {
-        vehicleId: 0,
+        vehicleId: vehicleId,
         plateNumber: plateNumber,
         hasPolicy: polizaCheckbox.checked ? 1 : 0,
         policyNumber: policyNumber,
-        brand: document.getElementById('marca').value,
-        model: document.getElementById('modelo').value,
+        brand: brand,
+        model: model,
         typeId: 1,
         color: document.getElementById('color').value,
-        circulationCardNumber: document.getElementById('tarjetaCirculacion').value,
+        circulationCardNumber: circulationCardNumber,
         ownerName: document.getElementById('dueñoVehiculo').value,
-        ownerDui: document.getElementById('duiDueño').value,
+        ownerDui: ownerDui,
         ownerPhone: document.getElementById('telDueño').value,
-        vehicleImage: document.getElementById('foto1').value,
-        studentId: estudianteId, // Usar el id seleccionado
-        maintenanceEXPO: 0,
+        vehicleImage: vehicleImage,
+        studentId: estudianteId,
+        maintenanceEXPO: mantenimientoEXPO,
         idStatus: 1,
         typeName: document.getElementById('tipo').value,
         studentName: '',

@@ -88,6 +88,14 @@
                 </div>
 
                 <div class="grupo-formulario">
+                    <label class="contenedor-casilla">
+                        Mantenimiento EXPO
+                        <input class="mi-entrada" type="checkbox" id="mantenimientoExpo" />
+                        <span class="marca-verificacion"></span>
+                    </label>
+                </div>
+
+                <div class="grupo-formulario">
                     <label for="estudianteAsignado">Estudiante asignado</label>
                     <select class="mi-entrada" id="estudianteAsignado">
                         <option value="">Seleccione un estudiante</option>
@@ -171,7 +179,7 @@
                 </div>
                 <div class="grupo-formulario">
                     <label for="duiDueño">Documento unico de identidad</label>
-                    <input class="mi-entrada" type="number" id="duiDueño" placeholder="0000000-0" />
+                    <input class="mi-entrada" type="text" id="duiDueño" placeholder="12345678-9" maxlength="10" />
                 </div>
                 <div class="grupo-formulario">
                     <label for="telDueño">Teléfono del propietario del vehículo</label>
@@ -187,6 +195,7 @@
                     </label>
                 </div>
 
+                
                 <button type="button" id="boton-enviar-solicitud" class="botones">
                     Pasar al siguiente paso
                 </button>
