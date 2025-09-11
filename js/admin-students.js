@@ -167,10 +167,11 @@ form.addEventListener('submit', async e => {
     studentCard = document.getElementById('studentCard').value.trim();
   }
 
-  if (!studentCard || studentCard.length < 5) {
+  // Validaciones según DTO
+  if (!studentCard || studentCard.length !== 8) {
     Swal.fire({
         title: 'Error',
-        text: 'El carnet debe tener al menos 5 caracteres.',
+        text: 'El carnet debe tener exactamente 8 caracteres.',
         icon: 'error',
         customClass: {
             popup: 'swal-custom-popup',
@@ -182,10 +183,10 @@ form.addEventListener('submit', async e => {
     });
     return;
   }
-  if (!fullName || fullName.length < 3) {
+  if (!fullName || fullName.length < 5 || fullName.length > 50) {
     Swal.fire({
         title: 'Error',
-        text: 'El nombre debe tener al menos 3 caracteres.',
+        text: 'El nombre debe tener entre 5 y 50 caracteres.',
         icon: 'error',
         customClass: {
             popup: 'swal-custom-popup',
@@ -197,10 +198,10 @@ form.addEventListener('submit', async e => {
     });
     return;
   }
-  if (lastName !== undefined && lastName.length < 2) {
+  if (!lastName || lastName.length < 5 || lastName.length > 50) {
     Swal.fire({
         title: 'Error',
-        text: 'El apellido debe tener al menos 2 caracteres.',
+        text: 'El apellido debe tener entre 5 y 50 caracteres.',
         icon: 'error',
         customClass: {
             popup: 'swal-custom-popup',
@@ -212,10 +213,10 @@ form.addEventListener('submit', async e => {
     });
     return;
   }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!email || !/^[0-9]{8}@ricaldone\.edu\.sv$/.test(email)) {
     Swal.fire({
         title: 'Error',
-        text: 'Por favor, introduce un formato de correo electrónico válido.',
+        text: 'El correo debe ser institucional y tener el formato 8 dígitos + @ricaldone.edu.sv.',
         icon: 'error',
         customClass: {
             popup: 'swal-custom-popup',
@@ -227,10 +228,10 @@ form.addEventListener('submit', async e => {
     });
     return;
   }
-  if (!isEditing && (!password || password.length < 6)) {
+  if (!isEditing && (!password || password.length < 8 || password.length > 255)) {
     Swal.fire({
         title: 'Error',
-        text: 'La contraseña debe tener al menos 6 caracteres.',
+        text: 'La contraseña debe tener entre 8 y 255 caracteres.',
         icon: 'error',
         customClass: {
             popup: 'swal-custom-popup',
@@ -242,10 +243,10 @@ form.addEventListener('submit', async e => {
     });
     return;
   }
-  if (!gradeId) {
+  if (!gradeId || isNaN(gradeId) || Number(gradeId) <= 0) {
     Swal.fire({
         title: 'Error',
-        text: 'Por favor, selecciona un grupo.',
+        text: 'Por favor, selecciona un grupo válido.',
         icon: 'error',
         customClass: {
             popup: 'swal-custom-popup',

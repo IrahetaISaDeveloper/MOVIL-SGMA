@@ -60,6 +60,23 @@ function cargarEstudiantes() {
         });
 }
 
+function cargarTiposVehiculo() {
+    fetch('http://localhost:8080/api/vehicle-types/getAllTypes')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('tipo');
+            if (select && Array.isArray(data)) {
+                select.innerHTML = '<option value="">Seleccione tipo</option>';
+                data.forEach(tipo => {
+                    select.innerHTML += `<option value="${tipo.typeId}">${tipo.typeName}</option>`;
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar tipos de vehículo:', error);
+        });
+}
+
 window.addEventListener('DOMContentLoaded', function() {
     const polizaCheckbox = document.getElementById('casilla-poliza-opcional');
     if (polizaCheckbox) {
@@ -74,10 +91,44 @@ window.addEventListener('DOMContentLoaded', function() {
         });
     }
     cargarEstudiantes();
+    cargarTiposVehiculo();
 });
 
 // Variable global para el id del usuario logueado
 let studentId = null; // Asigna el valor real desde tu sistema de login, por ejemplo: localStorage.getItem('studentId')
+
+function subirImagenVehiculo(archivo) {
+    const fd = new FormData();
+    fd.append('image', archivo);
+    fd.append('folder', 'vehicles');
+    return fetch('http://localhost:8080/api/image/upload-to-folder', {
+        method: 'POST',
+        body: fd
+    })
+    .then(response => response.json())
+    .then(obj => {
+        if (obj.url) {
+            return obj.url;
+        } else {
+            throw new Error('URL de imagen no encontrada en la respuesta del servidor.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al subir imagen:', error);
+        Swal.fire('Error', 'No se pudo subir la imagen del vehículo.', 'error');
+        return null;
+    });
+}
+
+document.getElementById('foto1').addEventListener('change', async function() {
+    const archivo = this.files[0];
+    if (archivo) {
+        const url = await subirImagenVehiculo(archivo);
+        if (url) {
+            this.setAttribute('data-url', url);
+        }
+    }
+});
 
 function registrarVehiculoDesdeFormulario() {
     const polizaCheckbox = document.getElementById('casilla-poliza-opcional');
@@ -95,7 +146,8 @@ function registrarVehiculoDesdeFormulario() {
     const brand = document.getElementById('marca').value;
     const model = document.getElementById('modelo').value;
     const circulationCardNumber = document.getElementById('tarjetaCirculacion').value;
-    const vehicleImage = document.getElementById('foto1').value;
+    const fotoInput = document.getElementById('foto1');
+    const vehicleImage = fotoInput.getAttribute('data-url') || '';
     // Usar SweetAlert para validaciones
     if (!ownerDui || !/^\d{8}-\d{1}$/.test(ownerDui)) {
         Swal.fire('Error', 'El DUI debe tener el formato 12345678-9.', 'error');
@@ -118,7 +170,7 @@ function registrarVehiculoDesdeFormulario() {
         return;
     }
     if (!vehicleImage) {
-        Swal.fire('Error', 'La imagen del vehículo es obligatoria.', 'error');
+        Swal.fire('Error', 'La imagen del vehículo es obligatoria y debe subirse correctamente.', 'error');
         return;
     }
     // Validar aceptación de términos y condiciones

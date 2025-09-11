@@ -273,6 +273,39 @@ async function subirImagen(archivo) {
   }
 }
 
+async function subirImagenCloudinary(archivo) {
+  const fd = new FormData();
+  fd.append('image', archivo);
+  fd.append('folder', 'instructors');
+  try {
+    const res = await fetch('http://localhost:8080/api/image/upload-to-folder', {
+      method: 'POST',
+      body: fd
+    });
+    const obj = await res.json();
+    if (obj.url) {
+      return obj.url;
+    } else {
+      throw new Error('URL de imagen no encontrada en la respuesta del servidor.');
+    }
+  } catch (error) {
+    console.error('Error al subir imagen:', error);
+    Swal.fire({
+        title: 'Error',
+        text: 'No se pudo subir la imagen de perfil.',
+        icon: 'error',
+        customClass: {
+            popup: 'swal-custom-popup',
+            title: 'swal-custom-title',
+            content: 'swal-custom-content',
+            confirmButton: 'swal-custom-confirm-button'
+        },
+        buttonsStyling: false
+    });
+    return null;
+  }
+}
+
 form.addEventListener('submit', async e => {
   e.preventDefault();
   const fullName = fullNameEl.value.trim();
@@ -288,10 +321,10 @@ form.addEventListener('submit', async e => {
     lastName = document.getElementById('apellidos').value.trim();
   }
 
-  if (!fullName || fullName.length < 3) {
+  if (!fullName || fullName.length < 5) {
     Swal.fire({
         title: 'Error',
-        text: 'El nombre debe tener al menos 3 caracteres.',
+        text: 'El nombre debe tener al menos 5 caracteres.',
         icon: 'error',
         customClass: {
             popup: 'swal-custom-popup',
@@ -380,7 +413,7 @@ form.addEventListener('submit', async e => {
   }
 
   if (fotoPerfilFileEl.files.length > 0) {
-    const nuevaUrlFoto = await subirImagen(fotoPerfilFileEl.files[0]);
+    const nuevaUrlFoto = await subirImagenCloudinary(fotoPerfilFileEl.files[0]);
     if (nuevaUrlFoto) {
       instructorImage = nuevaUrlFoto;
     } else {

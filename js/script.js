@@ -19,7 +19,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (loginButton) {
-        loginButton.addEventListener('click', async function() {
+        // Si el botón está dentro de un formulario, previene el submit
+        const loginForm = loginButton.closest('form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+            });
+        }
+        loginButton.addEventListener('click', async function(event) {
+            event.preventDefault();
+            if (loginButton.disabled) return; // Evita múltiples envíos
+            loginButton.disabled = true;
             const usernameInput = document.getElementById('username-input');
 
             if (!usernameInput || !passwordInput) {
@@ -89,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'No se pudo conectar con el servidor. Intenta más tarde.',
                 });
             }
+            loginButton.disabled = false;
         });
     } else {
         console.error("Error: Botón de inicio de sesión no encontrado.");
