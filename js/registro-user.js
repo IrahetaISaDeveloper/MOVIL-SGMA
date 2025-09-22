@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedGradoText = document.getElementById('selected-grado-text');
 
     // 1. Cargar años desde la API y llenar el combobox
-    fetch('https://sgma-66ec41075156.herokuapp.com/api/grades/getAll')
+    fetch('https://sgma-66ec41075156.herokuapp.com/api/grades/getAllGrades')
         .then(res => res.json())
         .then(data => {
             // Suponiendo que data es un array de objetos con propiedad 'year'
