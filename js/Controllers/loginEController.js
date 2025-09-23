@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const contrasena = document.getElementById("password-input")?.value || '';
 
     // Referencia y estado del botón "Ingresar"
-    const btnIngresar = document.getElementById("login-btn");
+    const btnIngresar = document.getElementById("iniciarSesion");
     let originalText;
 
     try {
