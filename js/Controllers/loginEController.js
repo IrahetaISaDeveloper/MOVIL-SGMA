@@ -4,7 +4,7 @@
 // - Usa authService: login() y me() para validar sesión tras login
 // -------------------------------------------------------------
 
-import { login, me } from '../services/authService.js';
+import { login, me } from '../Services/AuthEService.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('loginForm');
