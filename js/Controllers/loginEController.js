@@ -1,7 +1,7 @@
 // js/controllers/loginController.js
 // -------------------------------------------------------------
 // Controlador de login.
-// - Gestiona envío del formulario y estados de UI (alerta/botón)
+// - Gestiona envío del formulario y estados de UI (botón)
 // - Usa authService: login() y me() para validar sesión tras login
 // -------------------------------------------------------------
 
@@ -10,21 +10,11 @@ import { loginStudent, me } from '../Services/AuthStudentService.js';
 document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('loginForm');
 
-  // Contenedor de alertas: si no existe en el DOM, se crea antes del formulario.
-  const alertBox = document.getElementById('loginAlert') || (() => {
-    const a = document.createElement('div');
-    a.id = 'loginAlert';
-    a.className = 'alert alert-danger d-none'; // oculto por defecto
-    form?.parentElement?.insertBefore(a, form); // inserta el alert encima del form
-    return a;
-  })();
-
   // Maneja el submit del formulario de login.
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    alertBox.classList.add('d-none'); // oculta alert previo
 
-    // 1) Obtención tolerante de campos (acepta varios selectores equivalentes)
+    // 1) Obtención tolerante de campos
     const correo = (document.getElementById("username-input")?.value || '').trim();
     const contrasena = document.getElementById("password-input")?.value || '';
 
@@ -41,24 +31,21 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       // 3) Llama al servicio de login (envía credenciales, espera cookie de sesión)
-      await loginStudent({ email : correo, password : contrasena });
+      await loginStudent({ email: correo, password: contrasena });
 
       // 4) Verifica sesión con /me para confirmar que la cookie quedó activa
       const info = await me(); // el service incluye credentials:'include'
       if (info?.authenticated) {
-        // 5) Redirección a la página principal si autenticado
+        // Redirección a la página principal si autenticado
         window.location.href = 'estudiante.html';
       } else {
-        // Entre líneas: si no se refleja autenticación, alerta de cookie/sesión
-        alertBox.textContent = 'Error de Cookie';
-        alertBox.classList.remove('d-none');
+        console.error('Error de autenticación: la sesión no se activó.');
       }
     } catch (err) {
-      // 6) Muestra mensaje de error de backend/red o fallback genérico
-      alertBox.textContent = err?.message || 'No fue posible iniciar sesión.';
-      alertBox.classList.remove('d-none');
+      // Muestra mensaje de error en la consola
+      console.error('Error en el login:', err?.message || 'No fue posible iniciar sesión.');
     } finally {
-      // 7) Restaura estado del botón (habilita y devuelve texto original)
+      // 5) Restaura estado del botón (habilita y devuelve texto original)
       if (btnIngresar) {
         btnIngresar.removeAttribute("disabled");
         if (originalText) btnIngresar.innerHTML = originalText;
