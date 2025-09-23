@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     alertBox.classList.add('d-none'); // oculta alert previo
 
     // 1) Obtención tolerante de campos (acepta varios selectores equivalentes)
-    const correo = (document.querySelector('#correo, #email, [name=correo], [name=email], input[type=email]')?.value || '').trim();
-    const contrasena = document.querySelector('#contrasena, #password, [name=contrasena], [name=password], input[type=password]')?.value || '';
+    const correo = document.querySelector('[name=correo]')?.value.trim() || '';
+    const contrasena = document.querySelector('[name=contrasena]')?.value || '';
 
     // Referencia y estado del botón "Ingresar"
     const btnIngresar = document.getElementById("btnIngresar");
