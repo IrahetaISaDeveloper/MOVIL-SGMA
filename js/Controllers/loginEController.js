@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     alertBox.classList.add('d-none'); // oculta alert previo
 
     // 1) Obtención tolerante de campos (acepta varios selectores equivalentes)
-    const correo = (document.querySelector('#username-input, #username-input, [name=correo], [name=email], input[type=text]')?.value || '').trim();
-    const contrasena = document.querySelector('#password-input, #password-input, [name=contrasena], [name=password], input[type=password]')?.value || '';
+    const correo = (document.getElementById("username-input")?.value || '').trim();
+    const contrasena = document.getElementById("password-input")?.value || '';
 
     // Referencia y estado del botón "Ingresar"
     const btnIngresar = document.getElementById("login-btn");
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const info = await me(); // el service incluye credentials:'include'
       if (info?.authenticated) {
         // 5) Redirección a la página principal si autenticado
-        window.location.href = 'loginEstudiante.html';
+        window.location.href = 'estudiante.html';
       } else {
         // Entre líneas: si no se refleja autenticación, alerta de cookie/sesión
         alertBox.textContent = 'Error de Cookie';
