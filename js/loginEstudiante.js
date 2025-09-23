@@ -118,9 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ejemplo: consulta autenticada usando la cookie creada por el backend
     async function obtenerDatosEstudiante() {
         try {
-            const response = await fetch('http://localhost:8080/api/studentsAuth/meStudent', {
+            const response = await fetch('https://sgma-66ec41075156.herokuapp.com/api/studentsAuth/meStudent', {
                 method: 'GET',
-                credentials: 'include',
             });
             const data = await response.json();
             if (data.authenticated) {
