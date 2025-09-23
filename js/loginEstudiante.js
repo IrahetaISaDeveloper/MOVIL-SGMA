@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Validación de correo institucional
+            // Validación de correo institucional (mejorada)
             if (!email.endsWith('@ricaldone.edu.sv')) {
                 Swal.fire({
                     icon: 'error',
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         }
                     } catch (e) {
-                        // Si falla el parseo, continúa sin guardar el id
+                        console.error('Error procesando la respuesta JSON:', e);
                     }
                     if (studentId) {
                         localStorage.setItem('studentId', studentId);
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error de inicio de sesión',
-                        text: errorText.includes('Credenciales') ? 'Credenciales incorrectas.' : errorText,
+                        text: errorText.includes('Credenciales') ? 'Credenciales incorrectas.' : 'Error inesperado. Intenta más tarde.',
                     });
                 }
             } catch (error) {
