@@ -1,5 +1,3 @@
-import { login, me } from './Services/AuthEService.js';
-
 document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.getElementById('login-btn');
     const passwordInput = document.getElementById('password-input');
@@ -33,11 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const correo = usernameInput.value.trim();
-            const contrasena = passwordInput.value.trim();
+            const email = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
 
             // Validación de campos vacíos
-            if (!correo || !contrasena) {
+            if (!email || !password) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Campos Vacíos',
@@ -47,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Validación de correo institucional
-            if (!correo.endsWith('@ricaldone.edu.sv')) {
+            if (!email.endsWith('@ricaldone.edu.sv')) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Correo inválido',
@@ -57,21 +55,53 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                await login({ correo, contrasena });
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Inicio de sesión exitoso',
-                    text: 'Bienvenido al sistema.',
-                    timer: 1500,
-                    showConfirmButton: false
-                }).then(() => {
-                    window.location.href = 'estudiante.html';
+                const response = await fetch('https://sgma-66ec41075156.herokuapp.com/api/studentsAuth/studentLogin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ email, password })
                 });
+
+                if (response.ok) {
+                    let studentId = null;
+                    try {
+                        const contentType = response.headers.get('content-type');
+                        if (contentType && contentType.includes('application/json')) {
+                            const responseData = await response.json();
+                            if (responseData && responseData.student && responseData.student.id) {
+                                studentId = responseData.student.id;
+                            }
+                        }
+                    } catch (e) {
+                        // Si falla el parseo, continúa sin guardar el id
+                    }
+                    if (studentId) {
+                        localStorage.setItem('studentId', studentId);
+                    }
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Inicio de sesión exitoso',
+                        text: 'Bienvenido al sistema.',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'estudiante.html';
+                    });
+                } else {
+                    const errorText = await response.text();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de inicio de sesión',
+                        text: errorText.includes('Credenciales') ? 'Credenciales incorrectas.' : errorText,
+                    });
+                }
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error de inicio de sesión',
-                    text: error.message || 'Credenciales incorrectas.',
+                    title: 'Error de Conexión',
+                    text: 'No se pudo conectar con el servidor. Intenta más tarde.',
                 });
             }
         });
@@ -89,7 +119,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ejemplo: consulta autenticada usando la cookie creada por el backend
     async function obtenerDatosEstudiante() {
         try {
-            const data = await me();
+            const response = await fetch('https://sgma-66ec41075156.herokuapp.com/api/studentsAuth/meStudent', {
+                method: 'GET',
+            });
+            const data = await response.json();
             if (data.authenticated) {
                 console.log('Datos del estudiante:', data.student);
             } else {
