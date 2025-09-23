@@ -5,7 +5,7 @@
 // - Usa authService: login() y me() para validar sesión tras login
 // -------------------------------------------------------------
 
-import { login, me } from '../services/authService.js';
+import { loginStudent, me } from '../Services/AuthStudentService.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('loginForm');
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       // 3) Llama al servicio de login (envía credenciales, espera cookie de sesión)
-      await login({ email : correo, password : contrasena });
+      await loginStudent({ email : correo, password : contrasena });
 
       // 4) Verifica sesión con /me para confirmar que la cookie quedó activa
       const info = await me(); // el service incluye credentials:'include'

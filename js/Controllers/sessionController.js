@@ -1,4 +1,4 @@
-import {me, logout} from "../Services/AuthEService.js";
+import {me, logout} from "../Services/AuthStudentService.js";
 
 export const auth = {
     ok : false,
