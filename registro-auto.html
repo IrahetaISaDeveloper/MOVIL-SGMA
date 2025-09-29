@@ -66,11 +66,7 @@
                     <label for="tipo">Tipo</label>
                     <div class="envoltorio-seleccion">
                         <select id="tipo">
-                            <option value="sedan">Sedan</option>
-                            <option value="suv">SUV</option>
-                            <option value="camioneta">Camioneta</option>
-                            <option value="moto">Moto</option>
-                            <option value="otro">Otro</option>
+                            <option value="">Seleccionar tipo...</option>
                         </select>
                     </div>
                 </div>
@@ -95,12 +91,6 @@
                     </label>
                 </div>
 
-                <div class="grupo-formulario">
-                    <label for="estudianteAsignado">Estudiante asignado</label>
-                    <select class="mi-entrada" id="estudianteAsignado">
-                        <option value="">Seleccione un estudiante</option>
-                    </select>
-                </div>
             </form>
         </section>
 
@@ -236,7 +226,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/registro-auto-nav.js"></script>
     <script>
         // Solo habilita el campo de póliza si el checkbox está marcado, ambos deshabilitados si no
         document.addEventListener("DOMContentLoaded", function () {
@@ -251,7 +240,7 @@
                     placaInput.disabled = true;
                 } else {
                     polizaInput.disabled = true;
-                    placaInput.disabled = true;
+                    placaInput.disabled = false; // Habilita placa por defecto
                 }
             }
             // Inicializa el estado al cargar
@@ -316,7 +305,7 @@
         updateBreadcrumb(0);
         // Para avanzar de paso: updateBreadcrumb(1); updateBreadcrumb(2);
     </script>
-    <script src="js/registro-auto.js"></script>
+    <script type="module" src="js/controllers/registro-autoController.js"></script>
 </body>
 
 </html>

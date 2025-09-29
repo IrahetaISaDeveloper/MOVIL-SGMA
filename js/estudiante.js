@@ -43,41 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Simular datos de estadísticas (aquí conectarías con tu base de datos)
     cargarEstadisticas();
+    cargarCantidadVehiculos();
+    cargarTrabajosEnProgreso();
+    cargarTrabajosCompletados();
 
     // Animaciones de entrada
     animarElementos();
 });
 
 function cargarEstadisticas() {
-    // Simular carga de datos desde la base de datos
-    // En una implementación real, harías una petición AJAX/fetch a tu backend
-    
-    const estadisticasSimuladas = {
-        vehiculos: Math.floor(Math.random() * 10) + 1,
-        trabajosActivos: Math.floor(Math.random() * 5),
-        trabajosCompletados: Math.floor(Math.random() * 15) + 5
-    };
-
-    // Animar los números
-    animarContador('totalVehiculos', estadisticasSimuladas.vehiculos);
-    animarContador('trabajosActivos', estadisticasSimuladas.trabajosActivos);
-    animarContador('trabajosCompletados', estadisticasSimuladas.trabajosCompletados);
-}
-
-function animarContador(elementId, valorFinal) {
-    const elemento = document.getElementById(elementId);
-    if (!elemento) return;
-
-    let valorActual = 0;
-    const incremento = valorFinal / 50; // 50 pasos para la animación
-    const intervalo = setInterval(() => {
-        valorActual += incremento;
-        if (valorActual >= valorFinal) {
-            valorActual = valorFinal;
-            clearInterval(intervalo);
-        }
-        elemento.textContent = Math.floor(valorActual);
-    }, 30);
+    // Aquí puedes implementar la carga real de trabajos activos y completados si tienes endpoints.
+    // Por ahora, no se generan datos aleatorios para vehículos.
 }
 
 function animarElementos() {
@@ -120,4 +96,86 @@ function actualizarEstadisticas() {
 function notificarCambioEstado() {
     // Función para mostrar notificaciones cuando cambien los estados de los trabajos
     // Se puede implementar con toast notifications o similar
+}
+
+function cargarCantidadVehiculos() {
+    const studentId = obtenerStudentIdDesdeCookie();
+    if (!studentId) return;
+
+    fetch(`https://sgma-66ec41075156.herokuapp.com/api/getVehiclesByStudentId/${studentId}`)
+        .then(response => response.json())
+        .then(data => {
+            const totalVehiculos = document.getElementById('totalVehiculos');
+            if (!totalVehiculos) return;
+            if (data && data.data && data.data.vehicles) {
+                totalVehiculos.textContent = data.data.vehicles.length;
+            } else {
+                totalVehiculos.textContent = '0';
+            }
+        })
+        .catch(() => {
+            const totalVehiculos = document.getElementById('totalVehiculos');
+            if (totalVehiculos) totalVehiculos.textContent = '0';
+        });
+}
+
+function cargarTrabajosEnProgreso() {
+    const studentId = obtenerStudentIdDesdeCookie();
+    if (!studentId) return;
+
+    fetch(`https://sgma-66ec41075156.herokuapp.com/api/getWorkOrdersByStudentIdAndStatus2/${studentId}`)
+        .then(response => response.json())
+        .then(data => {
+            const trabajosActivos = document.getElementById('trabajosActivos');
+            if (!trabajosActivos) return;
+            if (data && data.workOrders) {
+                trabajosActivos.textContent = data.workOrders.length;
+            } else {
+                trabajosActivos.textContent = '0';
+            }
+        })
+        .catch(() => {
+            const trabajosActivos = document.getElementById('trabajosActivos');
+            if (trabajosActivos) trabajosActivos.textContent = '0';
+        });
+}
+
+function cargarTrabajosCompletados() {
+    const studentId = obtenerStudentIdDesdeCookie();
+    if (!studentId) return;
+
+    fetch(`https://sgma-66ec41075156.herokuapp.com/api/getWorkOrdersByStudentIdAndStatus3/${studentId}`)
+        .then(response => response.json())
+        .then(data => {
+            const trabajosCompletados = document.getElementById('trabajosCompletados');
+            if (!trabajosCompletados) return;
+            if (data && data.workOrders) {
+                trabajosCompletados.textContent = data.workOrders.length;
+            } else {
+                trabajosCompletados.textContent = '0';
+            }
+        })
+        .catch(() => {
+            const trabajosCompletados = document.getElementById('trabajosCompletados');
+            if (trabajosCompletados) trabajosCompletados.textContent = '0';
+        });
+}
+
+// Obtiene el studentId del token de sesión en la cookie
+function obtenerStudentIdDesdeCookie() {
+    const nombreCookie = 'sessionToken';
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [nombre, valor] = cookie.trim().split('=');
+        if (nombre === nombreCookie) {
+            try {
+                // Suponiendo que el token es un JWT y el studentId está en el payload
+                const payload = JSON.parse(atob(valor.split('.')[1]));
+                return payload.studentId;
+            } catch {
+                return null;
+            }
+        }
+    }
+    return null;
 }

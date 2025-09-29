@@ -58,7 +58,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 3px;
+    margin-bottom: 20px;
 }
 
 /* Desktop/tablet: barra más compacta y centrada */
