@@ -1,8 +1,6 @@
+import { me } from "./services/authServiceStudents.js";
 // Elemento donde se mostrarán las tarjetas
 const trabajosContainer = document.getElementById('trabajos-container');
-
-// Obtener el ID del usuario logueado (ajusta según tu sistema de autenticación)
-const studentId = localStorage.getItem('studentId');
 
 // Función para mostrar tarjetas de carga
 function mostrarTarjetasCargando(cantidad = 3) {
@@ -52,10 +50,18 @@ function renderizarTarjetas(vehiculos) {
 async function cargarTrabajos() {
     mostrarTarjetasCargando();
     try {
-        const res = await fetch('http://localhost:8080/api/vehicles/getDataVehicles');
+        const usuario = await me();
+        const studentId = usuario?.student?.id;
+        if (!studentId) {
+            trabajosContainer.innerHTML = '<p>No se pudo obtener el ID del estudiante.</p>';
+            return;
+        }
+        const res = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudent/${studentId}`, {
+            credentials: 'include'
+        });
         const data = await res.json();
-        // Filtrar por idStatus = 3 y studentId del usuario logueado
-        const vehiculos = data.filter(v => v.idStatus === 3 && v.studentId == studentId);
+        // Filtrar por idStatus = 3 (trabajos completados)
+        const vehiculos = data.data?.vehicles?.filter(v => v.idStatus === 3) || [];
         renderizarTarjetas(vehiculos);
     } catch (error) {
         trabajosContainer.innerHTML = '<p>Error al cargar los trabajos.</p>';

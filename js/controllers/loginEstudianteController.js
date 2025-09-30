@@ -1,34 +1,93 @@
 import { login, me } from '../services/authServiceStudents.js';
 
-// Adaptación de login usando los campos del HTML de index.html
 document.addEventListener('DOMContentLoaded', async () => {
-  // No hay form, así que usamos el botón y los campos directamente
-  const btnLogin = document.getElementById('login-btn');
-  // Opcional: puedes usar SweetAlert2 para mostrar errores
+  const form = document.getElementById('loginForm');
 
-  btnLogin?.addEventListener('click', async (e) => {
+  // Maneja el submit del formulario de login.
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Tomar los valores de los campos del HTML
-    const email = (document.getElementById('username-input')?.value || '').trim();
-    const password = document.getElementById('password-input')?.value || '';
+    // Obtención de campos del formulario
+    const email = (document.querySelector('#email, [name=email], input[type=email]')?.value || '').trim();
+    const password = document.querySelector('#password, [name=password], input[type=password]')?.value || '';
 
+    // Validación básica
     if (!email || !password) {
-      Swal.fire('Error', 'Ingrese su correo y contraseña', 'error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Por favor completa todos los campos'
+      });
       return;
     }
 
+    // Referencia y estado del botón "Iniciar Sesión"
+    const btnIngresar = document.getElementById("login-btn");
+    let originalText;
+
     try {
-      await login({ email, password }); // Cambia aquí los nombres de los campos
+      // Desactiva botón para evitar reenvíos múltiples y muestra feedback de carga
+      if (btnIngresar) {
+        originalText = btnIngresar.innerHTML;
+        btnIngresar.setAttribute("disabled", "disabled");
+        btnIngresar.innerHTML = 'Ingresando…';
+      }
+
+      // Llama al servicio de login (envía credenciales, espera cookie de sesión)
+      await login({ email, password });
+
+      // Verifica sesión con /meInstructor para confirmar que la cookie quedó activa
       const info = await me();
+      console.log("Información de sesión:", info); // Agrega este registro
       if (info?.authenticated) {
-        window.location.href = 'estudiante.html';
+        // Redirección a la página principal si autenticado
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Inicio de sesión exitoso',
+          timer: 1500,
+          showConfirmButton: false
+        }).then(() => {
+          console.log("Redirigiendo a estudiante.html"); // Agrega este registro
+          window.location.replace('estudiante.html');
+        });
       } else {
-        Swal.fire('Error', 'No se pudo autenticar la sesión', 'error');
+        // Si no se refleja autenticación, alerta de cookie/sesión
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error de Cookie o sesión no válida'
+        });
       }
     } catch (err) {
-      Swal.fire('Error', err?.message || 'No fue posible iniciar sesión.', 'error');
+      // Muestra mensaje de error de backend/red o fallback genérico
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: err?.message || 'No fue posible iniciar sesión.'
+      });
+    } finally {
+      // Restaura estado del botón (habilita y devuelve texto original)
+      if (btnIngresar) {
+        btnIngresar.removeAttribute("disabled");
+        if (originalText) btnIngresar.innerHTML = originalText;
+      }
     }
   });
-});
 
+  // Funcionalidad del toggle de contraseña
+  const togglePassword = document.getElementById('toggle-password');
+  const passwordInput = document.getElementById('password');
+  
+  if (togglePassword && passwordInput) {
+    togglePassword.addEventListener('click', function() {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+      
+      const icon = this.querySelector('i');
+      if (icon) {
+        icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+      }
+    });
+  }
+});

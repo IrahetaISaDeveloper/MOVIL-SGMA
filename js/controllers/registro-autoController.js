@@ -38,10 +38,10 @@ async function cargarTiposVehiculo() {
     try {
         selectTipo.innerHTML = '<option value="">Cargando...</option>';
         
-        const response = await fetch(`${API_BASE}/vehicle/getAllVehiclesTypes`, {
+        const response = await fetch(`${API_BASE}/vehicleTypes/getAllVehiclesTypes`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            credentials: 'include' // para enviar cookies si es necesario
+            credentials: 'include'
         });
         
         if (!response.ok) {
@@ -165,9 +165,10 @@ async function procesarRegistro() {
         console.log('Datos a enviar:', vehicleData);
 
         // Registrar vehículo
-        const response = await fetch(`${API_BASE}/vehicle/newVehicle`, {
+        const response = await fetch(`${API_BASE}/vehicles/newVehicle`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(vehicleData)
         });
 
@@ -203,6 +204,7 @@ async function subirImagen(archivo) {
 
         const response = await fetch(`${API_BASE}/cloudinary/upload-to-folder`, {
             method: 'POST',
+            credentials: 'include',
             body: formData
         });
 
@@ -221,3 +223,4 @@ async function subirImagen(archivo) {
         throw new Error('Error al subir imagen: ' + error.message);
     }
 }
+

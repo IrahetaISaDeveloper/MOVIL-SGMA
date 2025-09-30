@@ -1,3 +1,4 @@
+import{me} from '../js/services/authServiceStudents.js';
 document.addEventListener('DOMContentLoaded', () => {
     // Elementos del header
     const nombreUsuarioHeader = document.getElementById('nombreUsuarioHeader');
@@ -98,84 +99,66 @@ function notificarCambioEstado() {
     // Se puede implementar con toast notifications o similar
 }
 
-function cargarCantidadVehiculos() {
-    const studentId = obtenerStudentIdDesdeCookie();
-    if (!studentId) return;
-
-    fetch(`https://sgma-66ec41075156.herokuapp.com/api/getVehiclesByStudentId/${studentId}`)
-        .then(response => response.json())
-        .then(data => {
-            const totalVehiculos = document.getElementById('totalVehiculos');
-            if (!totalVehiculos) return;
-            if (data && data.data && data.data.vehicles) {
-                totalVehiculos.textContent = data.data.vehicles.length;
-            } else {
-                totalVehiculos.textContent = '0';
-            }
-        })
-        .catch(() => {
-            const totalVehiculos = document.getElementById('totalVehiculos');
-            if (totalVehiculos) totalVehiculos.textContent = '0';
+async function cargarCantidadVehiculos() {
+    try {
+        const user = await me();
+        if (!user || !user.student || !user.student.id) throw new Error('No user ID');
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudent/${user.student.id}`, {
+            credentials: 'include'
         });
-}
-
-function cargarTrabajosEnProgreso() {
-    const studentId = obtenerStudentIdDesdeCookie();
-    if (!studentId) return;
-
-    fetch(`https://sgma-66ec41075156.herokuapp.com/api/getWorkOrdersByStudentIdAndStatus2/${studentId}`)
-        .then(response => response.json())
-        .then(data => {
-            const trabajosActivos = document.getElementById('trabajosActivos');
-            if (!trabajosActivos) return;
-            if (data && data.workOrders) {
-                trabajosActivos.textContent = data.workOrders.length;
-            } else {
-                trabajosActivos.textContent = '0';
-            }
-        })
-        .catch(() => {
-            const trabajosActivos = document.getElementById('trabajosActivos');
-            if (trabajosActivos) trabajosActivos.textContent = '0';
-        });
-}
-
-function cargarTrabajosCompletados() {
-    const studentId = obtenerStudentIdDesdeCookie();
-    if (!studentId) return;
-
-    fetch(`https://sgma-66ec41075156.herokuapp.com/api/getWorkOrdersByStudentIdAndStatus3/${studentId}`)
-        .then(response => response.json())
-        .then(data => {
-            const trabajosCompletados = document.getElementById('trabajosCompletados');
-            if (!trabajosCompletados) return;
-            if (data && data.workOrders) {
-                trabajosCompletados.textContent = data.workOrders.length;
-            } else {
-                trabajosCompletados.textContent = '0';
-            }
-        })
-        .catch(() => {
-            const trabajosCompletados = document.getElementById('trabajosCompletados');
-            if (trabajosCompletados) trabajosCompletados.textContent = '0';
-        });
-}
-
-// Obtiene el studentId del token de sesión en la cookie
-function obtenerStudentIdDesdeCookie() {
-    const nombreCookie = 'sessionToken';
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-        const [nombre, valor] = cookie.trim().split('=');
-        if (nombre === nombreCookie) {
-            try {
-                // Suponiendo que el token es un JWT y el studentId está en el payload
-                const payload = JSON.parse(atob(valor.split('.')[1]));
-                return payload.studentId;
-            } catch {
-                return null;
-            }
+        const data = await response.json();
+        const totalVehiculos = document.getElementById('totalVehiculos');
+        if (!totalVehiculos) return;
+        if (data && data.data && data.data.vehicles) {
+            totalVehiculos.textContent = data.data.vehicles.length;
+        } else {
+            totalVehiculos.textContent = '0';
         }
+    } catch {
+        const totalVehiculos = document.getElementById('totalVehiculos');
+        if (totalVehiculos) totalVehiculos.textContent = '0';
     }
-    return null;
 }
+
+async function cargarTrabajosEnProgreso() {
+    try {
+        const user = await me();
+        if (!user || !user.student || !user.student.id) throw new Error('No user ID');
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentAndStatus2/${user.student.id}`, {
+            credentials: 'include'
+        });
+        const data = await response.json();
+        const trabajosActivos = document.getElementById('trabajosActivos');
+        if (!trabajosActivos) return;
+        if (data && data.workOrders) {
+            trabajosActivos.textContent = data.workOrders.length;
+        } else {
+            trabajosActivos.textContent = '0';
+        }
+    } catch {
+        const trabajosActivos = document.getElementById('trabajosActivos');
+        if (trabajosActivos) trabajosActivos.textContent = '0';
+    }
+}
+
+async function cargarTrabajosCompletados() {
+    try {
+        const user = await me();
+        if (!user || !user.student || !user.student.id) throw new Error('No user ID');
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentAndStatus3/${user.student.id}`, {
+            credentials: 'include'
+        });
+        const data = await response.json();
+        const trabajosCompletados = document.getElementById('trabajosCompletados');
+        if (!trabajosCompletados) return;
+        if (data && data.workOrders) {
+            trabajosCompletados.textContent = data.workOrders.length;
+        } else {
+            trabajosCompletados.textContent = '0';
+        }
+    } catch {
+        const trabajosCompletados = document.getElementById('trabajosCompletados');
+        if (trabajosCompletados) trabajosCompletados.textContent = '0';
+    }
+}
+

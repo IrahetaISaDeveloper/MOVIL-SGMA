@@ -1,9 +1,19 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Simulated user data loading
-    document.getElementById('nombreCompletoUsuario').textContent = 'Javier Iraheta';
-    document.getElementById('correoUsuario').textContent = '20230669@ricaldone.edu.sv';
-    document.getElementById('rolUsuario').textContent = 'Estudiante';
-    // You would typically fetch this data from an API
+import { me } from './services/authServiceStudents.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load real user data
+    try {
+        const userData = await me();
+        if (userData && userData.student) {
+            const student = userData.student;
+            document.getElementById('nombreCompletoUsuario').textContent = `${student.names} ${student.lastNames}`;
+            document.getElementById('correoUsuario').textContent = student.email;
+            document.getElementById('rolUsuario').textContent = 'Estudiante';
+        }
+    } catch (error) {
+        console.error('Error loading user data:', error);
+        // Keep default values if there's an error
+    }
 
     const formularioCambioContrasena = document.getElementById('formularioCambioContrasena');
     const contrasenaActualInput = document.getElementById('contrasenaActual');

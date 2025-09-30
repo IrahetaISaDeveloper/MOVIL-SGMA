@@ -1,4 +1,4 @@
-import { auth, renderUsuario, requireAuth} from './sessionControllerStudents.js'
+
 import { getOrdersById2, getOrdersById3 } from '../services/workOrdersService.js';
 import { getVehiclesByStudentId } from '../services/vehiclesService.js';
 

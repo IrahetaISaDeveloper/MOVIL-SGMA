@@ -1,4 +1,4 @@
-import { me, logout } from "../services/authServiceStudents.js";
+/*import { me, logout } from "../services/authServiceStudents.js";
 
 // Estado de sesión global
 export const auth = {
@@ -94,4 +94,4 @@ export const role = {
 // Refresca automáticamente la sesión y el menú al volver con botón Atrás (bfcache)
 window.addEventListener("pageshow", async () => {
   await renderUsuario();
-});
+});*/
