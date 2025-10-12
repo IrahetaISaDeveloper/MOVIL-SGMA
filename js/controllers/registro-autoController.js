@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.location.href = 'index.html';
             return;
         }
-        currentUser = userInfo.user;
+        currentUser = userInfo.student; // Cambiar de userInfo.user a userInfo.student
         console.log('Usuario autenticado:', currentUser);
     } catch (error) {
         console.error('Error al verificar autenticación:', error);
@@ -154,7 +154,7 @@ async function procesarRegistro() {
             color: color,
             circulationCard: tarjeta,
             vehicleImage: imageUrl,
-            studentId: { studentId: currentUser.studentId },
+            studentId: currentUser.id, // Cambiar de currentUser.studentId a currentUser.id
             maintenanceExpo: mantenimientoExpo ? 1 : 0,
             status: 1,
             ownerName: nombreProp,
@@ -163,6 +163,7 @@ async function procesarRegistro() {
         };
 
         console.log('Datos a enviar:', vehicleData);
+        console.log('Student ID del usuario:', currentUser.id); // Cambiar a currentUser.id
 
         // Registrar vehículo
         const response = await fetch(`${API_BASE}/vehicles/newVehicle`, {
@@ -202,7 +203,7 @@ async function subirImagen(archivo) {
         formData.append('image', archivo);
         formData.append('folder', 'vehicles');
 
-        const response = await fetch(`${API_BASE}/cloudinary/upload-to-folder`, {
+        const response = await fetch(`${API_BASE}/images/upload-to-folder`, {
             method: 'POST',
             credentials: 'include',
             body: formData

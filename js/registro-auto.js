@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // --- Configuración Global ---
     const API_BASE_URL = "https://sgma-66ec41075156.herokuapp.com";
-    const CLOUDINARY_FOLDER = "vehicles"; // Carpeta para subir imágenes de vehículos
     
     // Referencias a elementos del DOM
     const botonEnviar = document.getElementById("boton-enviar-solicitud");
@@ -274,11 +273,15 @@ document.addEventListener("DOMContentLoaded", () => {
         errores.push(validarCampo('color', color, reglasValidacion.color));
         errores.push(validarCampo('tarjetaCirculacion', tarjetaCirculacion, reglasValidacion.tarjetaCirculacion));
         errores.push(validarCampo('estudianteAsignado', studentId, reglasValidacion.estudianteAsignado));
-        errores.push(validarCampo('foto1', fotoFile, reglasValidacion.foto1));
         errores.push(validarCampo('dueñoVehiculo', ownerName, reglasValidacion.dueñoVehiculo));
         errores.push(validarCampo('duiDueño', ownerDui, reglasValidacion.duiDueño));
         errores.push(validarCampo('telDueño', ownerPhone, reglasValidacion.telDueño));
         errores.push(validarCampo('aceptarTerminos', aceptarTerminos, reglasValidacion.aceptarTerminos));
+
+        // Validación básica de imagen (sin subida aún)
+        if (!fotoFile) {
+            errores.push('La imagen del vehículo es obligatoria.');
+        }
 
         // Filtrar errores nulos y unir
         const erroresFinales = errores.filter(e => e !== null);
@@ -310,39 +313,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Subida de Imagen a Cloudinary ---
 
-    /**
-     * Sube la imagen a Cloudinary.
-     * @param {File} file Archivo de la imagen.
-     * @returns {string|null} URL de la imagen subida o null si falla.
-     */
-    const uploadImageToCloudinary = async (file) => {
-        try {
-            const formData = new FormData();
-            formData.append('image', file);
-            formData.append('folder', CLOUDINARY_FOLDER); // Se usa el endpoint con folder
-
-            const url = `${API_BASE_URL}/api/images/upload-to-folder`; // Endpoint Cloudinary
-
-            const response = await fetch(url, {
-                method: 'POST',
-                body: formData, // No Content-Type; el navegador lo establece automáticamente para FormData
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || `Error ${response.status} al subir la imagen.`);
-            }
-
-            const apiResponse = await response.json();
-            // Asumiendo que el JSON de respuesta tiene la 'url'
-            return apiResponse.url; 
-
-        } catch (error) {
-            console.error("Error en Cloudinary:", error);
-            mostrarAlerta("Error de Imagen", "No se pudo subir la imagen del vehículo: " + error.message, "error");
-            return null;
+    async function subirImagen(archivo) {
+      // Subida de imagen a Cloudinary usando el endpoint backend
+      const fd = new FormData();
+      fd.append('image', archivo);
+      fd.append('folder', 'vehicles');
+      try {
+        const res = await fetch('https://sgma-66ec41075156.herokuapp.com/api/images/upload-to-folder', {
+          method: 'POST',
+          credentials: 'include',
+          body: fd
+        });
+        const obj = await res.json();
+        if (obj.url) {
+          return obj.url;
+        } else {
+          throw new Error('URL de imagen no encontrada en la respuesta de Cloudinary.');
         }
-    };
+      } catch (error) {
+        console.error('Error al subir imagen:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de Subida',
+          text: 'No se pudo subir la imagen. Intenta de nuevo.',
+          customClass: {
+            popup: 'swal-custom-popup',
+            title: 'swal-custom-title',
+            content: 'swal-custom-content',
+            confirmButton: 'swal-custom-confirm-button'
+          }
+        });
+        return null;
+      }
+    }
 
     // --- Registro Final del Vehículo ---
 
@@ -402,14 +405,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return; // Detener si hay errores de validación
         }
 
-        // Obtener el archivo de imagen
-        const fotoFile = fotoInput.files[0];
-        if (!fotoFile) {
-            // Este caso ya debería ser manejado por validarFormularioYRecopilarDatos, pero es una buena práctica
-            mostrarAlerta("Error de Imagen", "Debe seleccionar un archivo para la foto.", "error");
-            return; 
-        }
-
         // Mostrar alerta de carga
         Swal.fire({
             title: 'Subiendo y Registrando...',
@@ -422,16 +417,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         
-        // 2. Subir imagen a Cloudinary
-        const imageUrl = await uploadImageToCloudinary(fotoFile);
-
-        if (!imageUrl) {
-            Swal.close(); // Cerrar la alerta de carga si falló la subida
-            return; // Detener si falla la subida de imagen
+        // 2. Manejo de imagen del vehículo (similar al patrón de instructor)
+        let vehicleImage = '';
+        if (fotoInput.files.length > 0) {
+            const nuevaUrlFoto = await subirImagen(fotoInput.files[0]);
+            if (nuevaUrlFoto) {
+                vehicleImage = nuevaUrlFoto;
+            } else {
+                Swal.close();
+                mostrarAlerta("Error de Imagen", "No se pudo subir la imagen del vehículo.", "error");
+                return;
+            }
+        }
+        
+        if (!vehicleImage) {
+            Swal.close();
+            mostrarAlerta("Error de Imagen", "La imagen del vehículo es obligatoria.", "error");
+            return;
         }
 
         // 3. Llenar DTO con URL y registrar
-        vehicleDTO.vehicleImage = imageUrl; // Asignar la URL de Cloudinary
+        vehicleDTO.vehicleImage = vehicleImage; // Asignar la URL de Cloudinary
         
         const registroExitoso = await registrarVehiculo(vehicleDTO);
 
