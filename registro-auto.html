@@ -35,52 +35,43 @@
         <section id="datos-vehiculo" class="seccion">
             <form>
                 <div class="grupo-formulario">
-                    <label for="placa">Placa</label>
-                    <input class="mi-entrada" type="text" id="placa" placeholder="N° de placa" />
-                    <small>Formato: P123-456</small>
+                    <label for="placa">Placa *</label>
+                    <input class="mi-entrada" type="text" id="placa" placeholder="ABC1234" maxlength="10" />
+                    <small>Formato obligatorio: ABC1234 (1-3 letras seguidas de 3-4 números)</small>
                 </div>
 
                 <div class="grupo-formulario">
-                    <label for="poliza">Póliza</label>
-                    <div class="entrada-con-casilla">
-                        <input class="mi-entrada" type="text" id="poliza" placeholder="N° de póliza" />
-                        <input type="checkbox" id="casilla-poliza-opcional" class="checkbox-poliza-opcional" />
-                        <label for="casilla-poliza-opcional" style="margin-left: 4px"></label>
-                    </div>
-                    <small>Formato: P123-456</small>
+                    <label for="marca">Marca *</label>
+                    <input class="mi-entrada" type="text" id="marca" placeholder="Toyota" maxlength="50" />
+                    <small>Mínimo 3 caracteres, máximo 50</small>
                 </div>
 
                 <div class="grupo-formulario">
-                    <label for="marca">Marca</label>
-                    <input class="mi-entrada" type="text" id="marca" placeholder="Nombre" />
-                    <small>Ej: Mazda</small>
+                    <label for="modelo">Modelo *</label>
+                    <input class="mi-entrada" type="text" id="modelo" placeholder="Corolla" maxlength="50" />
+                    <small>Mínimo 3 caracteres, máximo 50</small>
                 </div>
 
                 <div class="grupo-formulario">
-                    <label for="modelo">Modelo</label>
-                    <input class="mi-entrada" type="text" id="modelo" placeholder="Modelo" />
-                    <small>Ej: B2900</small>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="tipo">Tipo</label>
+                    <label for="tipo">Tipo de Vehículo *</label>
                     <div class="envoltorio-seleccion">
                         <select id="tipo">
                             <option value="">Seleccionar tipo...</option>
                         </select>
                     </div>
+                    <small>Campo obligatorio</small>
                 </div>
 
                 <div class="grupo-formulario">
-                    <label for="color">Color</label>
-                    <input class="mi-entrada" type="text" id="color" placeholder="Color" />
-                    <small>Ej: Blanco</small>
+                    <label for="color">Color *</label>
+                    <input class="mi-entrada" type="text" id="color" placeholder="Blanco" maxlength="30" />
+                    <small>Mínimo 4 caracteres, máximo 30</small>
                 </div>
 
                 <div class="grupo-formulario">
-                    <label for="tarjetaCirculacion">Tarjeta de circulación</label>
-                    <input class="mi-entrada" type="text" id="tarjetaCirculacion" placeholder="##" />
-                    <small>Formato: 0/12345678</small>
+                    <label for="tarjetaCirculacion">Tarjeta de Circulación *</label>
+                    <input class="mi-entrada" type="text" id="tarjetaCirculacion" placeholder="12345678901234567890" maxlength="20" />
+                    <small>Exactamente 20 caracteres (obligatorio)</small>
                 </div>
 
                 <div class="grupo-formulario">
@@ -164,28 +155,30 @@
             </div>
             <form>
                 <div class="grupo-formulario">
-                    <label for="dueñoVehiculo">Nombre del propietario del vehículo</label>
-                    <input class="mi-entrada" type="text" id="dueñoVehiculo" placeholder="Nombre" />
+                    <label for="dueñoVehiculo">Nombre del Propietario *</label>
+                    <input class="mi-entrada" type="text" id="dueñoVehiculo" placeholder="Juan Pérez" maxlength="100" />
+                    <small>Mínimo 5 caracteres, máximo 100</small>
                 </div>
                 <div class="grupo-formulario">
-                    <label for="duiDueño">Documento unico de identidad</label>
+                    <label for="duiDueño">DUI del Propietario *</label>
                     <input class="mi-entrada" type="text" id="duiDueño" placeholder="12345678-9" maxlength="10" />
+                    <small>Formato: 12345678-9 (exactamente 10 caracteres)</small>
                 </div>
                 <div class="grupo-formulario">
-                    <label for="telDueño">Teléfono del propietario del vehículo</label>
-                    <input class="mi-entrada" type="tel" id="telDueño" placeholder="0000-0000" />
+                    <label for="telDueño">Teléfono del Propietario *</label>
+                    <input class="mi-entrada" type="tel" id="telDueño" placeholder="7890-1234" maxlength="10" />
+                    <small>Entre 7 y 10 caracteres</small>
                 </div>
 
                 <div class="grupo-formulario">
                     <label class="contenedor-casilla">
                         Acepto los términos y condiciones de servicio del Taller de
-                        Mantenimiento Automotriz del ITR.
+                        Mantenimiento Automotriz del ITR. *
                         <input class="mi-entrada" type="checkbox" id="aceptarTerminos" />
                         <span class="marca-verificacion"></span>
                     </label>
                 </div>
 
-                
                 <button type="button" id="boton-enviar-solicitud" class="botones">
                     Pasar al siguiente paso
                 </button>
