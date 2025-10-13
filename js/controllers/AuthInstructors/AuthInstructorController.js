@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             // Llama al servicio de login (envía credenciales, espera cookie de sesión)
-            await login({ emailInstructor, passwordInstructor });
+            await loginInstructor({ emailInstructor, passwordInstructor });
 
             // Verifica sesión con /meInstructor para confirmar que la cookie quedó activa
-            const info = await me();
+            const info = await meInstructor();
             console.log("Información de sesión:", info); // Agrega este registro
             if (info?.authenticated) {
 
