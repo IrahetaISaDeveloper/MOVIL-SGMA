@@ -43,7 +43,7 @@ body {
 
 .titulo-pagina {
     color: var(--text-color-light);
-    font-size: 1.8rem; /* Equivalent to 29px if root font-size is 16px */
+    font-size: 25px; /* Equivalent to 29px if root font-size is 16px */
     margin-bottom: 30px;
 }
 
@@ -63,14 +63,14 @@ body {
 
 .nombre-sistema {
     color: var(--text-color-light);
-    font-size: 1.5rem; /* Equivalent to 24px */
+    font-size: 18px; /* Equivalent to 24px */
     margin-bottom: 10px;
     line-height: 1.2;
 }
 
 .descripcion-formulario {
     color: var(--link-color);
-    font-size: 0.9rem; /* Equivalent to 14px */
+    font-size: 15px; /* Equivalent to 14px */
 }
 
 .seccion-formulario {
@@ -89,7 +89,7 @@ body {
 .grupo-campo label {
     display: block;
     color: var(--text-color-light);
-    font-size: 0.9rem; /* Equivalent to 14px */
+    font-size: 15px; /* Equivalent to 14px */
     margin-bottom: 5px;
 }
 
@@ -127,7 +127,7 @@ body {
 .enlace-recuperar-contrasena {
     color: var(--link-color);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 15px;
     margin-bottom: 30px;
     align-self: center;
 }
@@ -164,7 +164,7 @@ body {
 
 .texto-registro {
     color: var(--text-color-light);
-    font-size: 0.9rem;
+    font-size: 15px;
     margin-top: 15px;
     text-align: center;
 }
@@ -193,23 +193,24 @@ body {
     }
 
     .titulo-pagina {
-        font-size: 1.6rem; /* Slightly smaller title */
+        font-size: 15px; /* Slightly smaller title */
         margin-bottom: 25px;
+        text-align: center;
     }
 
     .logo {
-        width: 100px; /* Smaller logo */
+        width: 60px; /* Smaller logo */
     }
 
     .nombre-sistema {
-        font-size: 1.3rem; /* Smaller system name */
+        font-size: 10px; /* Smaller system name */
     }
 
     .descripcion-formulario,
     .grupo-campo label,
     .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 0.85rem; /* Smaller text */
+        font-size: 8px; /* Smaller text */
     }
 
     .grupo-campo input {
@@ -239,22 +240,23 @@ body {
     }
 
     .titulo-pagina {
-        font-size: 1.7rem;
+        font-size: 18px;
+        text-align: center;
     }
 
     .logo {
-        width: 110px;
+        width: 100px;
     }
 
     .nombre-sistema {
-        font-size: 1.4rem;
+        font-size: 12px;
     }
 
     .descripcion-formulario,
     .grupo-campo label,
     .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 0.875rem;
+        font-size: 10px;
     }
 
     .grupo-campo input {
@@ -285,8 +287,9 @@ body {
     }
 
     .titulo-pagina {
-        font-size: 2rem;
+        font-size: 25px;
         margin-bottom: 35px;
+        text-align: center;
     }
 
     .logo {
@@ -294,14 +297,14 @@ body {
     }
 
     .nombre-sistema {
-        font-size: 1.6rem;
+        font-size: 15px;
     }
 
     .descripcion-formulario,
     .grupo-campo label,
     .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 0.95rem;
+        font-size: 15px;
     }
 
     .grupo-campo input {
@@ -332,8 +335,9 @@ body {
     }
 
     .titulo-pagina {
-        font-size: 2.2rem;
+        font-size: 30px;
         margin-bottom: 40px;
+        text-align: center;
     }
 
     .logo {
@@ -341,14 +345,14 @@ body {
     }
 
     .nombre-sistema {
-        font-size: 1.7rem;
+        font-size: 20px;
     }
 
     .descripcion-formulario,
     .grupo-campo label,
     .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 1rem;
+        font-size: 15px;
     }
 
     .grupo-campo input {
