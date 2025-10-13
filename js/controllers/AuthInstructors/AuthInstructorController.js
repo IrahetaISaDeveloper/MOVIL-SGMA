@@ -1,95 +1,92 @@
-import { loginInstructor, meInstructor } from '../services/AuthInstructors/AuthInstructorsService.js';
+import { loginInstructor, meInstructor } from '../../services/AuthInstructors/authInstructorService.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const form = document.getElementById('authInstructor');
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('authForm');
+  const togglePassword = document.getElementById('toggle-password');
+  const passwordInput = document.getElementById('passwordInstructor');
 
-    // Maneja el submit del formulario de login.
-    form?.addEventListener('submit', async (e) => {
-        e.preventDefault();
+  // 🔐 Toggle de mostrar/ocultar contraseña
+  if (togglePassword && passwordInput) {
+    togglePassword.addEventListener('click', function () {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
 
-        // Obtención de campos del formulario
-        const emailInstructor = (document.querySelector('#emailInstructor, [name=emailInstructor], input[type=text]')?.value || '').trim();
-        const passwordInstructor = document.querySelector('#passwordInstructor, [name=passwordInstructor], input[type=password]')?.value || '';
-
-        // Validación básica
-        if (!emailInstructor || !passwordInstructor) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor completa todos los campos'
-            });
-            return;
-        }
-
-        // Referencia y estado del botón "Iniciar Sesión"
-        const authBtn = document.getElementById("authBtn");
-        let originalText;
-
-        try {
-            // Desactiva botón para evitar reenvíos múltiples y muestra feedback de carga
-            if (authBtn) {
-                originalText = authBtn.innerHTML;
-                authBtn.setAttribute("disabled", "disabled");
-                authBtn.innerHTML = 'Ingresando…';
-            }
-
-            // Llama al servicio de login (envía credenciales, espera cookie de sesión)
-            await loginInstructor({ emailInstructor, passwordInstructor });
-
-            // Verifica sesión con /meInstructor para confirmar que la cookie quedó activa
-            const info = await meInstructor();
-            console.log("Información de sesión:", info); // Agrega este registro
-            if (info?.authenticated) {
-
-                // Redirección a la página principal si autenticado
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Inicio de sesión exitoso',
-                    timer: 1500,
-                    showConfirmButton: false
-                }).then(() => {
-                    console.log("Redirigiendo a coordi-index.html"); // Agrega este registro
-                    window.location.replace('coordi-index.html');
-                });
-            } else {
-
-                // Si no se refleja autenticación, alerta de cookie/sesión
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error de Cookie o sesión no válida'
-                });
-            }
-        } catch (err) {
-            // Muestra mensaje de error de backend/red o fallback genérico
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: err?.message || 'No fue posible iniciar sesión.'
-            });
-        } finally {
-            // Restaura estado del botón (habilita y devuelve texto original)
-            if (authBtn) {
-                authBtn.removeAttribute("disabled");
-                if (originalText) authBtn.innerHTML = originalText;
-            }
-        }
+      const icon = this.querySelector('i');
+      if (icon) {
+        icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+      }
     });
+  }
 
-    // Funcionalidad del toggle de contraseña
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInstructor = document.getElementById('passwordInstructor');
+  // 🧠 Manejo del formulario de inicio de sesión
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    if (togglePassword && passwordInstructor) {
-        togglePassword.addEventListener('click', function () {
-            const type = passwordInstructor.type === 'password' ? 'text' : 'password';
-            passwordInstructor.type = type;
+      const emailInstructor = document.getElementById('emailInstructor').value.trim();
+      const passwordInstructor = document.getElementById('passwordInstructor').value;
 
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
-            }
+      if (!emailInstructor || !passwordInstructor) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Campos vacíos',
+          text: 'Por favor completa todos los campos.',
         });
-    }
+        return;
+      }
+
+      const authBtn = document.getElementById('authBtn');
+      const originalText = authBtn ? authBtn.innerHTML : '';
+
+      try {
+        if (authBtn) {
+          authBtn.disabled = true;
+          authBtn.innerHTML = 'Ingresando...';
+        }
+
+        // Llama al servicio de login
+        await loginInstructor({ emailInstructor, passwordInstructor });
+
+        // Verifica si la sesión quedó activa
+        const info = await meInstructor();
+        console.log('Información de sesión:', info);
+
+        if (info?.authenticated) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Inicio de sesión exitoso',
+            text: 'Bienvenido al sistema.',
+            timer: 1500,
+            showConfirmButton: false,
+          }).then(() => {
+            window.location.replace('coordi-index.html');
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error de sesión',
+            text: 'No se pudo validar la sesión o cookie.',
+          });
+        }
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al iniciar sesión',
+          text: err?.message || 'No fue posible iniciar sesión.',
+        });
+      } finally {
+        if (authBtn) {
+          authBtn.disabled = false;
+          authBtn.innerHTML = originalText;
+        }
+      }
+    });
+  } else {
+    // Si el formulario no existe, muestra error
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'No se encontró el formulario de autenticación.',
+    });
+  }
 });
