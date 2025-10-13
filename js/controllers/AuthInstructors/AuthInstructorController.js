@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Obtención de campos del formulario
         const emailInstructor = (document.querySelector('#emailInstructor, [name=emailInstructor], input[type=text]')?.value || '').trim();
-        const passwordInstructor = document.querySelector('#passwordInstructor, [name=passwordInstructor], input[type=passwordInstructor]')?.value || '';
+        const passwordInstructor = document.querySelector('#passwordInstructor, [name=passwordInstructor], input[type=password]')?.value || '';
 
         // Validación básica
         if (!emailInstructor || !passwordInstructor) {
