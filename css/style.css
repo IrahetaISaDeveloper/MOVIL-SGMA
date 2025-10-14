@@ -199,18 +199,18 @@ body {
     }
 
     .logo {
-        width: 60px; /* Smaller logo */
+        width: 95px; /* Smaller logo */
     }
 
     .nombre-sistema {
-        font-size: 10px; /* Smaller system name */
+        font-size: 13px; /* Smaller system name */
     }
 
     .descripcion-formulario,
     .grupo-campo label,
     .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 8px; /* Smaller text */
+        font-size: 12px; /* Smaller text */
     }
 
     .grupo-campo input {
@@ -249,14 +249,14 @@ body {
     }
 
     .nombre-sistema {
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .descripcion-formulario,
     .grupo-campo label,
     .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 10px;
+        font-size: 13px;
     }
 
     .grupo-campo input {
@@ -345,14 +345,14 @@ body {
     }
 
     .nombre-sistema {
-        font-size: 20px;
+        font-size: 25px;
     }
 
     .descripcion-formulario,
     .grupo-campo label,
     .enlace-recuperar-contrasena,
     .texto-registro {
-        font-size: 15px;
+        font-size: 20px;
     }
 
     .grupo-campo input {
