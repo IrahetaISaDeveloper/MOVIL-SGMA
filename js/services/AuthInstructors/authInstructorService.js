@@ -2,12 +2,12 @@ const API_AUTH = "https://sgma-66ec41075156.herokuapp.com/api/instructorsAuth";
 const API_INSTRUCTORS = "https://sgma-66ec41075156.herokuapp.com/api/instructors";
 
 // Login de instructor
-export async function loginInstructor({ emailInstructor, passwordInstructor }) {
+export async function login({ email, password }) {
   const r = await fetch(`${API_AUTH}/instructorLogin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
-    body: JSON.stringify({ emailInstructor, passwordInstructor }),
+    body: JSON.stringify({ email, password }),
   });
 
   if (!r.ok) {
@@ -19,8 +19,13 @@ export async function loginInstructor({ emailInstructor, passwordInstructor }) {
 }
 
 // Verifica la sesión del instructor
-export async function meInstructor() {
-  const info = await fetch(`${API_AUTH}/meInstructor`, { credentials: "include" });
+export async function me() {
+  const info = await fetch(`${API_AUTH}/meInstructor`, {
+    credentials: "include"
+  });
+
+    console.log("Estado de autenticación:", info);
+
   return info.ok ? info.json() : { authenticated: false };
 }
 

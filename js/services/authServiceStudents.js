@@ -9,7 +9,12 @@ export async function login({ email, password }) {
     credentials: "include", // incluye cookies en la solicitud
     body: JSON.stringify({ email, password }), // credenciales en el cuerpo
   });
-  if (!r.ok) throw new Error(await r.text().catch(() => "")); // lanza error si falla
+
+ if (!r.ok) {
+    const errText = await r.text().catch(() => "Error desconocido en el servidor.");
+    throw new Error(errText);
+  }
+
   return true; // devuelve true en caso de éxito
 }
 
