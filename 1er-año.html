@@ -16,43 +16,38 @@
             <aside class="panel-lateral">
                 <div class="tarjeta-sidebar">
                     <div class="header-sidebar">
-                        <h3>Pendientes de Revisión</h3>
-                        <span class="badge-contador">4</span>
+                        <h3 id="sidebar-title">Pendientes de Revisión</h3>
+                        <span class="badge-contador">0</span>
                     </div>
                     <div class="lista-registros">
-                        <!-- Los registros pendientes se cargarán dinámicamente aquí -->
+                        <!-- El contenido se llena dinámicamente con JS -->
                     </div>
                 </div>
             </aside>
+
             <main class="contenido-principal">
                 <section class="tarjeta-principal">
                     <div class="header-tarjeta">
                         <h2><i class="fas fa-clipboard-list"></i> Registro de Vehículos</h2>
                         <div class="controles-header">
-                            <button class="btn-exportar">
+                            <!--<button class="btn-exportar">
                                 <i class="fas fa-download"></i>
                                 Exportar
-                            </button>
+                            </button>-->
                         </div>
                     </div>
                     
                     <div class="controles-filtro">
                         <div class="buscador">
                             <i class="fas fa-search"></i>
-                            <input type="text" id="buscarRegistro" placeholder="Buscar por placa, marca o modelo...">
+                            <input type="text" id="buscarRegistro" placeholder="Buscar por placa, marca, modelo, estudiante, propietario o estado...">
                         </div>
                         <div class="filtros">
-                            <select id="filtroAnio" class="select-filtro">
-                                <option value="all">Todos los años</option>
-                                <option value="1er">Primer Año</option>
-                                <option value="2do">Segundo Año</option>
-                                <option value="3er">Tercer Año</option>
-                            </select>
                             <select id="filtroEstado" class="select-filtro">
                                 <option value="all">Todos los estados</option>
-                                <option value="pendiente">Pendiente</option>
-                                <option value="proceso">En proceso</option>
-                                <option value="completado">Completado</option>
+                                <option value="1,2">En aprobación</option>
+                                <option value="3">Aprobado</option>
+                                <option value="4">Rechazado</option>
                             </select>
                         </div>
                     </div>
@@ -69,13 +64,13 @@
                                     <th>Estado</th>
                                     <th>Estudiante</th>
                                     <th>Propietario</th>
-                                    <th>Teléfono</th>
+                                    <th>Tel. Propietario</th>
                                     <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Las filas de vehículos se cargarán dinámicamente aquí -->
+                                <!-- Los datos se llenan dinámicamente con JS -->
                             </tbody>
                         </table>
                     </div>
@@ -111,26 +106,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Contenido del modal existente pero con mejor diseño -->
                 <div class="modal-tabs">
-                    <button class="tab-btn activo" data-tab="vehiculo">Vehículo</button>
+                    <button class="tab-btn activo" data-tab="vehiculo">Información del Vehículo</button>
                     <button class="tab-btn" data-tab="orden">Orden de Trabajo</button>
-                    <button class="tab-btn" data-tab="terminos">Términos</button>
                 </div>
                 
                 <div class="tab-content activo" id="tab-vehiculo">
-                    <!-- Contenido de vehículo -->
-                </div>
-                
-                <div class="tab-content" id="tab-orden">
-                    <!-- Contenido de orden -->
-                </div>
-                
-                <div class="tab-content" id="tab-terminos">
-                    <!-- Contenido de términos -->
+                    <!-- Contenido del vehículo se llena dinámicamente -->
                 </div>
             </div>
             <div class="modal-footer">
+                <button class="btn-imprimir" id="btn-imprimir-reporte">
+                    <i class="fas fa-print"></i>
+                    Imprimir Reporte
+                </button>
                 <button class="btn-modal secundario">Rechazar</button>
                 <button class="btn-modal primario">Aprobar</button>
             </div>
@@ -172,7 +161,7 @@
         </ul>
     </nav>
 
-    <script src="js/1er-año.js"></script>
+    <script type="module" src="js/1er-año.js"></script>
 </body>
 
 </html>
