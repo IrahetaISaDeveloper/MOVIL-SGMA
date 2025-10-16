@@ -29,7 +29,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--app-bg);
   color: var(--text-light);
-  height: 100vh;
+  min-height: 100vh; /* Changed from height: 100vh */
   display: flex;
   flex-direction: column;
 }
@@ -100,79 +100,364 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  padding: 15px 10px 100px 10px; /* Increased bottom padding for fixed nav */
+  min-height: calc(100vh - 60px);
+  flex: 1;
+}
+
+/* Statistics Cards Styles */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 350px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  /*background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60, #3498db);*/
+  border-radius: 16px 16px 0 0;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 90px; /* Add this line to create space for the fixed bottom-nav */
+  font-size: 18px;
+  color: white;
+  flex-shrink: 0;
 }
+
+.stat-icon.estudiantes {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.stat-icon.vehiculos {
+  background: linear-gradient(135deg, #27ae60, #229954);
+}
+
+.stat-icon.instructores {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.stat-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #7f8c8d;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-change {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.stat-change.positive {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.stat-change.negative {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.stat-change.neutral {
+  background: rgba(149, 165, 166, 0.1);
+  color: #95a5a6;
+}
+
+.loading-stat {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Enhanced Chart Container Styles */
 .chart-container {
-    margin: 10px;
+    margin: 12px 0;
     background-color: #ffffff;
-    padding: 0px; /* Más padding para un mejor espacio */
-    border-radius: 12px; /* Bordes más redondeados */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
-    max-width: 330px; /* Un poco más de ancho máximo */
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    max-width: 350px;
     width: 100%;
-    text-align: center; /* Centra el título */
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: visible;
+    min-height: 200px;
 }
+
+.chart-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  /*background: linear-gradient(90deg, #e74c3c, #f39c12);*/
+  border-radius: 16px 16px 0 0;
+}
+/*
+.chart-container:nth-child(2)::before {
+  background: linear-gradient(90deg, #e74c3c, #f39c12); 
+}
+
+.chart-container:nth-child(3)::before {
+  background: linear-gradient(90deg, #27ae60, #f39c12); 
+}
+
+.chart-container:nth-child(4)::before {
+  background: linear-gradient(90deg, #9b59b6, #8e44ad); 
+}
+
+.chart-container:nth-child(5)::before {
+  background: linear-gradient(90deg, #e74c3c, #c0392b); 
+}*/
 
 .chart-container h2 {
-    color: #333; /* Color de texto oscuro para el título */
-    font-size: 1.8em; /* Tamaño de fuente del título */
-    margin-top: 5px;
-    margin-bottom: 0px; /* Espacio debajo del título */
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    position: relative;
+    line-height: 1.2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Estilos adicionales para ApexCharts si quieres personalizar */
+/* Print button styles */
+.print-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.print-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #1f5e8a);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+
+.print-btn i {
+    font-size: 11px;
+}
+
+/* Enhanced ApexCharts customization */
 .apexcharts-canvas {
-    margin: 0 auto; /* Asegura que el canvas del gráfico esté centrado */
-}
-
-/* Si quieres un tema oscuro para el gráfico, puedes configurarlo en el JS o aquí */
-/* Por ejemplo, para el texto de las etiquetas si no lo configuras en JS */
-.apexcharts-datalabels-group text {
-    fill: #333 !important; /* Asegura que el texto de los números sea oscuro */
+    margin: 0 auto;
+    width: 100% !important; /* Ensure charts take full width */
 }
 
 .apexcharts-legend {
-    padding-top: 20px;
-    justify-content: center; /* Centra los elementos de la leyenda */
-    flex-wrap: wrap; /* Permite que la leyenda se ajuste en varias líneas */
+    padding-top: 15px;
+    justify-content: center !important;
+    flex-wrap: wrap;
 }
 
 .apexcharts-legend-series {
-    margin: 0 15px; /* Espacio entre los elementos de la leyenda */
-    font-size: 0.95em;
+    margin: 0 6px 5px 6px;
+    font-size: 0.85em;
     color: #555;
 }
 
+/* Fix for ApexCharts responsive behavior */
+.apexcharts-inner {
+    width: 100% !important;
+}
 
-/* Menú de navegación inferior (Bottom Nav) - Floating and Icon-only */
-.bottom-nav {
-    position: fixed;
-    /* Changed from absolute to fixed to keep it in view when scrolling */
-    bottom: 20px;
-    /* Distance from the bottom of the viewport */
-    left: 50%;
-    /* Center horizontally */
-    transform: translateX(-50%);
-    /* Adjust for horizontal centering */
-    background-color: #333;
-    /* Dark background */
-    border-radius: 50px;
-    /* Make it oval/pill shaped */
-    padding: 10px 10px;
-    /* Adjust padding to control the size of the pill */
-    z-index: 1000;
-    /* Ensure it's above other content */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    /* More pronounced shadow for floating effect */
-    width: fit-content;
-    /* Shrink-wrap content */
-    display: flex;
-    /* Use flexbox for internal alignment */
+/* Ensure proper spacing for data labels */
+.apexcharts-datalabel-label {
+    font-size: 12px !important;
+}
+
+.apexcharts-datalabel-value {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+/* Mobile responsiveness enhancements */
+@media (max-width: 480px) {
+  main {
+    padding: 15px 10px 110px 10px; /* Increased for fixed nav */
+  }
+  
+  .stats-section {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 300px;
+  }
+  
+  .stat-card {
+    padding: 12px;
+  }
+  
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .stat-number {
+    font-size: 20px;
+  }
+  
+  .stat-label {
+    font-size: 11px;
+  }
+  
+  .chart-container {
+    max-width: 300px;
+    padding: 12px;
+    margin: 10px 0;
+    min-height: 180px;
+    overflow: visible; /* Ensure visibility */
+  }
+  
+  .chart-container h2 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 8px;
     align-items: center;
-    /* Vertically align items */
+  }
+  
+  .print-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  
+  .print-btn i {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  main {
+    padding: 15px 10px 120px 10px; /* Even more for very small screens */
+  }
+  
+  .stats-section {
+    max-width: 280px;
+  }
+  
+  .stat-card {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .stat-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+  }
+  
+  .stat-number {
+    font-size: 18px;
+  }
+  
+  .chart-container {
+    max-width: 280px;
+    padding: 10px;
+    margin: 8px 0;
+    min-height: 160px;
+    overflow: visible; /* Ensure visibility */
+  }
+  
+  .chart-container h2 {
+    font-size: 1em;
+    margin-bottom: 8px;
+  }
+  
+  .print-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}
+
+/* Add scroll behavior for better UX with multiple charts */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Menú de navegación inferior (Bottom Nav) - Fixed and always visible */
+.bottom-nav {
+    position: fixed; /* Changed back to fixed */
+    bottom: 20px; /* Fixed at bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center transform */
+    background-color: #333;
+    border-radius: 50px;
+    padding: 10px 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    width: fit-content;
+    display: flex;
+    align-items: center;
     justify-content: space-around;
-    /* Distribute items */
 }
 
 .bottom-nav ul {
@@ -237,5 +522,48 @@ main {
   .admin-main-content {
     justify-content: flex-start;
     padding-top: 20px;
+  }
+}
+
+
+
+
+/* Print styles for individual charts */
+@media print {
+  .print-btn,
+  .bottom-nav,
+  .app-header {
+    display: none !important;
+  }
+  
+  .chart-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    page-break-after: always;
+  }
+  
+  .chart-container:last-child {
+    page-break-after: auto;
+  }
+  
+  .chart-container h2 {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+    color: #000 !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  main {
+    padding: 0 !important;
+  }
+  
+  .stats-section {
+    display: none !important;
   }
 }

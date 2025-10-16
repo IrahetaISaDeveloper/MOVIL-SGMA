@@ -19,18 +19,92 @@
   </header>
 
   <main>
+    <!-- Statistics Cards Section -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <div class="stat-icon estudiantes">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">
+            <span id="estudiantes-count" class="loading-stat">...</span>
+          </div>
+          <div class="stat-label">Estudiantes</div>
+          <div id="estudiantes-change" class="stat-change">...</div>
+        </div>
+      </div>
 
+      <div class="stat-card">
+        <div class="stat-icon vehiculos">
+          <i class="fas fa-car"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">
+            <span id="vehiculos-count" class="loading-stat">...</span>
+          </div>
+          <div class="stat-label">Vehículos</div>
+          <div id="vehiculos-change" class="stat-change">...</div>
+        </div>
+      </div>
 
-    <div class="chart-container">
-      <h2>Alumnos Registrados por Año</h2>
+      <div class="stat-card">
+        <div class="stat-icon instructores">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">
+            <span id="instructores-count" class="loading-stat">...</span>
+          </div>
+          <div class="stat-label">Instructores</div>
+          <div id="instructores-change" class="stat-change">...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Section -->
+    <div class="chart-container" id="chart-container-students">
+      <h2>
+        Estudiantes por Año
+        <button class="print-btn" onclick="printChart('chart-container-students', 'Estudiantes por Año')">
+          <i class="fas fa-print"></i>
+          Imprimir
+        </button>
+      </h2>
       <div id="chart-alumnos"></div>
     </div>
 
-    <div class="chart-container">
-      <h2>Registros de Autos</h2>
+    <div class="chart-container" id="chart-container-vehicles">
+      <h2>
+        Vehículos por Tipo
+        <button class="print-btn" onclick="printChart('chart-container-vehicles', 'Vehículos por Tipo')">
+          <i class="fas fa-print"></i>
+          Imprimir
+        </button>
+      </h2>
       <div id="chart-autos-registrados"></div>
     </div>
 
+    <div class="chart-container" id="chart-container-instructors-level">
+      <h2>
+        Instructores por Año
+        <button class="print-btn" onclick="printChart('chart-container-instructors-level', 'Instructores por Año')">
+          <i class="fas fa-print"></i>
+          Imprimir
+        </button>
+      </h2>
+      <div id="chart-instructores-level"></div>
+    </div>
+
+    <div class="chart-container" id="chart-container-instructors-role">
+      <h2>
+        Instructores por Rol
+        <button class="print-btn" onclick="printChart('chart-container-instructors-role', 'Instructores por Rol')">
+          <i class="fas fa-print"></i>
+          Imprimir
+        </button>
+      </h2>
+      <div id="chart-instructores-rol"></div>
+    </div>
 
   </main>
 
