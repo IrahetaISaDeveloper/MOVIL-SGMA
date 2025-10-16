@@ -14,12 +14,12 @@
     <main class="contenido-principal-coordi">
         <div class="info-usuario-header">
             <div class="avatar-usuario-header">
-                <img src="imgs/defaul-user.webp" alt="Avatar">
+                <img src="imgs/defaul-user.webp" alt="Avatar" id="userAvatar">
             </div>
             <div class="datos-usuario-header">
-                <span class="nombre-usuario-header">FERNANDO JAVIER</span>
-                <span class="rol-usuario-header">Coordinador</span>
-                <span class="detalle-usuario-header">Mantenimiento Automotriz</span>
+                <span class="nombre-usuario-header" id="userNameHeader">Cargando...</span>
+                <span class="rol-usuario-header" id="userRolHeader">Cargando...</span>
+                <span class="detalle-usuario-header" id="userDetailsHeader">Cargando...</span>
             </div>
         </div>
 
@@ -30,11 +30,11 @@
             <div class="contenido-tarjeta">
                 <div class="resumen-estado">
                     <div class="caja-estado">
-                        <span class="cantidad" id="total-vehiculos">0</span>
+                        <span class="cantidad" id="allVehicles">...</span>
                         <span class="etiqueta">Vehículos registrados en el año</span>
                     </div>
                     <div class="caja-estado">
-                        <span class="cantidad" id="vehiculos-ptc">0</span>
+                        <span class="cantidad" id="ptcVehicles">...</span>
                         <span class="etiqueta">Vehículos PTC</span>
                     </div>
                 </div>
@@ -66,12 +66,12 @@
             <div class="contenido-tarjeta">
                 <div class="resumen-estado">
                     <div class="caja-estado">
-                        <span class="cantidad" id="alumnos-registrados">0</span>
+                        <span class="cantidad" id="registeredStudents">...</span>
                         <span class="etiqueta">Alumnos</span>
                     </div>
                     <div class="caja-estado">
-                        <span class="cantidad" id="maestros-registrados">0</span>
-                        <span class="etiqueta">Maestros</span>
+                        <span class="cantidad" id="registeredInstructors">...</span>
+                        <span class="etiqueta">Docentes</span>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="js/controllers/AuthInstructors/AuthInstructorController.js"></script>
+    <script type="module" src="js/coordi-index.js"></script>
 
 </body>
 
