@@ -1,4 +1,7 @@
+const API_BASE_URL = 'https://sgma-66ec41075156.herokuapp.com/api';
+
 import{me} from '../js/services/authServiceStudents.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Elementos del header
     const nombreUsuarioHeader = document.getElementById('nombreUsuarioHeader');
@@ -7,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const avatarUsuarioHeader = document.getElementById('avatarUsuarioHeader');
 
     // Elementos de estadísticas
-    const totalVehiculos = document.getElementById('totalVehiculos');
-    const trabajosActivos = document.getElementById('trabajosActivos');
-    const trabajosCompletados = document.getElementById('trabajosCompletados');
+    const totalVehiculos = document.getElementById('allVehicles');
+    const trabajosActivos = document.getElementById('activeWorks');
+    const trabajosCompletados = document.getElementById('completeWorks');
 
     // Datos del usuario desde localStorage
     const loggedInUserName = localStorage.getItem('loggedInUserName');
@@ -103,7 +106,7 @@ async function cargarCantidadVehiculos() {
     try {
         const user = await me();
         if (!user || !user.student || !user.student.id) throw new Error('No user ID');
-        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudent/${user.student.id}`, {
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudentId/${user.student.id}`, {
             credentials: 'include'
         });
         const data = await response.json();

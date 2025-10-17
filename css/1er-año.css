@@ -1008,3 +1008,89 @@ body {
         width: 120px;
     }
 }
+
+.bottom-nav {
+  position: fixed;
+  /* Changed from absolute to fixed to keep it in view when scrolling */
+  bottom: 20px;
+  /* Distance from the bottom of the viewport */
+  left: 50%;
+  /* Center horizontally */
+  transform: translateX(-50%);
+  /* Adjust for horizontal centering */
+  background-color: #333;
+  /* Dark background */
+  border-radius: 50px;
+  /* Make it oval/pill shaped */
+  padding: 10px 10px;
+  /* Adjust padding to control the size of the pill */
+  z-index: 1000;
+  /* Ensure it's above other content */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  /* More pronounced shadow for floating effect */
+  width: fit-content;
+  /* Shrink-wrap content */
+  display: flex;
+  /* Use flexbox for internal alignment */
+  align-items: center;
+  /* Vertically align items */
+  justify-content: space-around;
+  /* Distribute items */
+}
+
+.bottom-nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* width: 100%; No longer needed as bottom-nav width is fit-content */
+}
+
+.bottom-nav li {
+  /* flex: 1; Not needed anymore with fit-content and spacing */
+  text-align: center;
+  margin: 0 15px;
+  /* Space between icons */
+}
+
+.bottom-nav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0;
+  /* Adjust padding to make items fit in thinner nav */
+  color: #888;
+  text-decoration: none;
+  /* font-size: 0.75em; Removed as there is no text */
+  /* font-weight: bold; Removed as there is no text */
+  transition: color 0.3s ease, transform 0.3s ease;
+  /* Added transform for hover effect */
+}
+
+.bottom-nav .nav-item:hover {
+  transform: translateY(-3px);
+  /* Slight lift on hover */
+  color: #A32F2A;
+  /* Hover color */
+}
+
+.bottom-nav .nav-item .nav-icon {
+  font-size: 28px;
+  /* Larger icon size */
+  margin-bottom: 0;
+  /* No space needed below icon as text is removed */
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.bottom-nav .nav-item.active {
+  color: #A32F2A;
+  /* Active color for the icon itself */
+}
+
+.bottom-nav .nav-item.active .nav-icon {
+  color: #A32F2A;
+  /* Active color for the icon itself */
+}

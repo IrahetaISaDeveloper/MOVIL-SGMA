@@ -277,7 +277,7 @@ window.showVehicleModal = function(vehicleId) {
             </div>
         `;
     } else if (tabVehiculo) {
-        tabVehiculo.innerHTML = '<div style="color:#888;text-align:center;">No se encontraron datos del vehículo.</div>';
+        tabVehiculo.innerHTML = '<div style="color:#888;text-align:center;">No se encontraronclos los datos del vehículo.</div>';
     }
 }
 
@@ -405,7 +405,7 @@ function bindEventListeners() {
                 
                 const newStatus = userRole === 'Animador' ? 2 : 3;
                 
-                const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/updateStatus/${vehiculoSeleccionado.vehicleId}?newStatus=${newStatus}`, {
+                const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/updateStatusVehicle/${vehiculoSeleccionado.vehicleId}?newStatus=${newStatus}`, {
                     method: 'PUT',
                     credentials: 'include',
                     headers: {
@@ -460,7 +460,7 @@ function bindEventListeners() {
                     return;
                 }
                 
-                const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/updateStatus/${vehiculoSeleccionado.vehicleId}?newStatus=4`, {
+                const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/updateStatusVehicle/${vehiculoSeleccionado.vehicleId}?newStatus=4`, {
                     method: 'PUT',
                     credentials: 'include',
                     headers: {
