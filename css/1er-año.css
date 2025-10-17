@@ -1024,8 +1024,8 @@ body {
   /* Make it oval/pill shaped */
   padding: 10px 10px;
   /* Adjust padding to control the size of the pill */
-  z-index: 1000;
-  /* Ensure it's above other content */
+  z-index: 999;
+  /* Ensure it's below modal but above other content */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
   /* More pronounced shadow for floating effect */
   width: fit-content;
