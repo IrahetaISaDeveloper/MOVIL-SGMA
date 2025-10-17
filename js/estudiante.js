@@ -103,31 +103,30 @@ function notificarCambioEstado() {
 }
 
 async function cargarCantidadVehiculos() {
+    const totalVehiculos = document.getElementById('allVehicles');
+    if (!totalVehiculos) return;
+
     try {
         const user = await me();
         if (!user || !user.student || !user.student.id) throw new Error('No user ID');
+
         const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudentId/${user.student.id}`, {
             credentials: 'include'
         });
         const data = await response.json();
-        const totalVehiculos = document.getElementById('totalVehiculos');
-        if (!totalVehiculos) return;
-        if (data && data.data && data.data.vehicles) {
-            totalVehiculos.textContent = data.data.vehicles.length;
-        } else {
-            totalVehiculos.textContent = '0';
-        }
+
+        totalVehiculos.textContent = data?.data?.cantidad?.toString() ?? '0';
     } catch {
-        const totalVehiculos = document.getElementById('totalVehiculos');
-        if (totalVehiculos) totalVehiculos.textContent = '0';
+        totalVehiculos.textContent = '0';
     }
 }
+
 
 async function cargarTrabajosEnProgreso() {
     try {
         const user = await me();
         if (!user || !user.student || !user.student.id) throw new Error('No user ID');
-        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentAndStatus2/${user.student.id}`, {
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentIdAndStatus2/${user.student.id}`, {
             credentials: 'include'
         });
         const data = await response.json();
@@ -148,7 +147,7 @@ async function cargarTrabajosCompletados() {
     try {
         const user = await me();
         if (!user || !user.student || !user.student.id) throw new Error('No user ID');
-        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentAndStatus3/${user.student.id}`, {
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentIdAndStatus3/${user.student.id}`, {
             credentials: 'include'
         });
         const data = await response.json();

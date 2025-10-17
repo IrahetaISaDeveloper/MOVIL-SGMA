@@ -56,17 +56,22 @@ async function cargarTrabajos() {
             trabajosContainer.innerHTML = '<p>No se pudo obtener el ID del estudiante.</p>';
             return;
         }
-        const res = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudent/${studentId}`, {
+
+        const res = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudentId/${studentId}`, {
             credentials: 'include'
         });
         const data = await res.json();
-        // Filtrar por idStatus = 3 (trabajos completados)
-        const vehiculos = data.data?.vehicles?.filter(v => v.idStatus === 3) || [];
+
+        // ✅ Ajuste: el backend devuelve "vehiculos", no "vehicles"
+        const vehiculos = data.data?.vehiculos?.filter(v => v.idStatus === 3) || [];
         renderizarTarjetas(vehiculos);
+
     } catch (error) {
+        console.error(error);
         trabajosContainer.innerHTML = '<p>Error al cargar los trabajos.</p>';
     }
 }
+
 
 // Ejecutar al cargar la página
 window.addEventListener('DOMContentLoaded', cargarTrabajos);
