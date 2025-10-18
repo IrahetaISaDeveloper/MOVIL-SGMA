@@ -491,7 +491,8 @@ async function handleFormSubmit(e) {
         firstName: fullNameEl.value.trim(),
         lastName: apellidosEl.value.trim(),
         email: emailEl.value.trim(),
-        gradeId: Number(idGradeEl.value)
+        gradeId: Number(idGradeEl.value),
+        roleId: 5
     };
     
     if (!isEditing || (isEditing && passwordEl.value.trim())) {
