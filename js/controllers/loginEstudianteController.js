@@ -75,6 +75,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // Funcionalidad del botón "Seguimiento de Vehículo"
+  const vehicleTrackingBtn = document.getElementById('vehicle-tracking-btn');
+  if (vehicleTrackingBtn) {
+    vehicleTrackingBtn.addEventListener('click', function() {
+      // Redirigir a la página de seguimiento de vehículos
+      window.location.href = 'auth-seguimiento.html';
+    });
+  }
+
   // Funcionalidad del toggle de contraseña
   const togglePassword = document.getElementById('toggle-password');
   const passwordInput = document.getElementById('password');
