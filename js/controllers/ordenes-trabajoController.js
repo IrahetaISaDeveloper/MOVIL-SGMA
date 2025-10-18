@@ -6,9 +6,22 @@ class OrdenesTrabajoController {
         this.user = null;
         this.vehicles = [];
         this.workOrders = [];
+        this.filteredOrders = [];
         this.modules = [];
         this.modal = null;
         this.form = null;
+        // Propiedades de paginación para órdenes
+        this.currentPage = 1;
+        this.ordersPerPage = 4;
+        this.totalOrders = 0;
+        // Propiedades de búsqueda
+        this.searchTerm = '';
+        this.searchInput = null;
+        // Propiedades de paginación para vehículos
+        this.currentVehiclePage = 1;
+        this.vehiclesPerPage = 3;
+        this.totalVehicles = 0;
+        this.filteredVehicles = [];
     }
 
     async init() {
@@ -49,6 +62,9 @@ class OrdenesTrabajoController {
         // Previsualización de imagen
         this.imagenInput = document.getElementById('imagen-trabajo');
         this.vistaPrevia = document.getElementById('vista-previa-imagen');
+        
+        // Buscador
+        this.searchInput = document.getElementById('search-orders');
     }
 
     bindEvents() {
@@ -89,6 +105,15 @@ class OrdenesTrabajoController {
         this.imagenInput.addEventListener('change', (e) => {
             this.handleImagePreview(e);
         });
+
+        // Buscador de órdenes
+        if (this.searchInput) {
+            this.searchInput.addEventListener('input', (e) => {
+                this.searchTerm = e.target.value.toLowerCase().trim();
+                this.currentPage = 1; // Resetear a primera página
+                this.filterAndDisplayOrders();
+            });
+        }
     }
 
     async loadUserVehicles() {
@@ -112,38 +137,23 @@ class OrdenesTrabajoController {
             }
 
             console.log('Vehículos extraídos:', vehicles);
-            console.log('Cantidad de vehículos:', vehicles.length);
             
-            // Debug: Mostrar IDs de vehículos
-            if (vehicles.length > 0) {
-                console.log('IDs de vehículos disponibles:', vehicles.map(v => v.vehicleId));
-                console.log('Detalles de vehículos:', vehicles.map(v => ({
-                    id: v.vehicleId,
-                    placa: v.plateNumber,
-                    studentId: v.studentId
-                })));
-            }
-
             this.vehicles = vehicles;
-            this.displayVehicles(vehicles);
+            this.filteredVehicles = [...vehicles];
+            this.displayVehicles();
             this.populateVehicleSelect(vehicles);
 
         } catch (error) {
             console.error('Error al cargar vehículos:', error);
             this.showError('Error al cargar los vehículos');
-            this.displayVehicles([]);
+            this.displayVehicles();
         }
     }
 
-    displayVehicles(vehicles) {
-        if (!Array.isArray(vehicles)) {
-            console.error('vehicles no es un array:', vehicles);
-            vehicles = [];
-        }
+    displayVehicles() {
+        this.totalVehicles = this.filteredVehicles.length;
 
-        console.log('Mostrando vehículos:', vehicles);
-        
-        if (vehicles.length === 0) {
+        if (this.filteredVehicles.length === 0) {
             this.listaVehiculos.innerHTML = `
                 <div class="empty-state">
                     <i class="fas fa-car"></i>
@@ -158,10 +168,16 @@ class OrdenesTrabajoController {
             return;
         }
 
-        const vehiculosHTML = vehicles.map(vehicle => {
+        // Calcular paginación para vehículos
+        const totalPages = Math.ceil(this.totalVehicles / this.vehiclesPerPage);
+        const startIndex = (this.currentVehiclePage - 1) * this.vehiclesPerPage;
+        const endIndex = startIndex + this.vehiclesPerPage;
+        const paginatedVehicles = this.filteredVehicles.slice(startIndex, endIndex);
+
+        // Generar HTML de los vehículos
+        const vehiculosHTML = paginatedVehicles.map(vehicle => {
             console.log('Procesando vehículo:', vehicle);
             
-            // Usar las propiedades correctas según la respuesta del API
             const placa = vehicle.plateNumber || 'Sin placa';
             const marca = vehicle.brand || 'Sin marca';
             const modelo = vehicle.model || 'Sin modelo';
@@ -207,29 +223,105 @@ class OrdenesTrabajoController {
             `;
         }).join('');
 
-        this.listaVehiculos.innerHTML = vehiculosHTML;
+        // Generar HTML de paginación para vehículos
+        const vehiclePaginationHTML = this.createVehiclePaginationHTML(totalPages);
+        
+        // Mostrar vehículos y paginación
+        this.listaVehiculos.innerHTML = vehiculosHTML + vehiclePaginationHTML;
+        
+        // Agregar event listeners para paginación de vehículos
+        this.bindVehiclePaginationEvents();
     }
 
-    populateVehicleSelect(vehicles) {
-        if (!Array.isArray(vehicles)) {
-            vehicles = [];
+    createVehiclePaginationHTML(totalPages) {
+        if (totalPages <= 1) return '';
+
+        const startItem = (this.currentVehiclePage - 1) * this.vehiclesPerPage + 1;
+        const endItem = Math.min(this.currentVehiclePage * this.vehiclesPerPage, this.totalVehicles);
+
+        let paginationHTML = `
+            <div class="vehicle-pagination-container">
+                <button class="pagination-button" id="prev-vehicle-page" ${this.currentVehiclePage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-left"></i>
+                    Anterior
+                </button>
+                
+                <div class="pagination-numbers">
+        `;
+
+        // Generar números de página
+        const startPage = Math.max(1, this.currentVehiclePage - 2);
+        const endPage = Math.min(totalPages, this.currentVehiclePage + 2);
+
+        if (startPage > 1) {
+            paginationHTML += `<span class="page-number" data-vehicle-page="1">1</span>`;
+            if (startPage > 2) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
         }
 
-        console.log('Poblando select con vehículos:', vehicles);
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHTML += `<span class="page-number ${i === this.currentVehiclePage ? 'active' : ''}" data-vehicle-page="${i}">${i}</span>`;
+        }
 
-        this.vehiculoSelect.innerHTML = '<option value="">Seleccione un vehículo...</option>';
-        
-        vehicles.forEach(vehicle => {
-            console.log('Agregando vehículo al select:', vehicle);
-            const option = document.createElement('option');
-            option.value = vehicle.vehicleId;
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+            paginationHTML += `<span class="page-number" data-vehicle-page="${totalPages}">${totalPages}</span>`;
+        }
+
+        paginationHTML += `
+                </div>
+                
+                <button class="pagination-button" id="next-vehicle-page" ${this.currentVehiclePage === totalPages ? 'disabled' : ''}>
+                    Siguiente
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
             
-            const placa = vehicle.plateNumber || 'Sin placa';
-            const marca = vehicle.brand || 'Sin marca';
-            const modelo = vehicle.model || '';
-            
-            option.textContent = `${placa} - ${marca} ${modelo}`.trim();
-            this.vehiculoSelect.appendChild(option);
+            <div class="pagination-info">
+                Mostrando ${startItem}-${endItem} de ${this.totalVehicles} vehículos
+            </div>
+        `;
+
+        return paginationHTML;
+    }
+
+    bindVehiclePaginationEvents() {
+        // Botón anterior para vehículos
+        const prevVehicleBtn = document.getElementById('prev-vehicle-page');
+        if (prevVehicleBtn) {
+            prevVehicleBtn.addEventListener('click', () => {
+                if (this.currentVehiclePage > 1) {
+                    this.currentVehiclePage--;
+                    this.displayVehicles();
+                }
+            });
+        }
+
+        // Botón siguiente para vehículos
+        const nextVehicleBtn = document.getElementById('next-vehicle-page');
+        if (nextVehicleBtn) {
+            nextVehicleBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(this.totalVehicles / this.vehiclesPerPage);
+                if (this.currentVehiclePage < totalPages) {
+                    this.currentVehiclePage++;
+                    this.displayVehicles();
+                }
+            });
+        }
+
+        // Números de página para vehículos
+        const vehiclePageNumbers = document.querySelectorAll('[data-vehicle-page]');
+        vehiclePageNumbers.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const page = parseInt(btn.dataset.vehiclePage);
+                if (page !== this.currentVehiclePage) {
+                    this.currentVehiclePage = page;
+                    this.displayVehicles();
+                }
+            });
         });
     }
 
@@ -292,6 +384,34 @@ class OrdenesTrabajoController {
         });
     }
 
+    populateVehicleSelect(vehicles) {
+        if (!Array.isArray(vehicles)) {
+            vehicles = [];
+        }
+
+        console.log('Poblando select con vehículos:', vehicles);
+
+        this.vehiculoSelect.innerHTML = '<option value="">Seleccione un vehículo...</option>';
+        
+        if (vehicles.length === 0) {
+            this.vehiculoSelect.innerHTML += '<option value="" disabled>No hay vehículos disponibles</option>';
+            return;
+        }
+        
+        vehicles.forEach(vehicle => {
+            console.log('Agregando vehículo al select:', vehicle);
+            const option = document.createElement('option');
+            option.value = vehicle.vehicleId;
+            
+            const placa = vehicle.plateNumber || 'Sin placa';
+            const marca = vehicle.brand || '';
+            const modelo = vehicle.model || '';
+            
+            option.textContent = `${placa} - ${marca} ${modelo}`.trim();
+            this.vehiculoSelect.appendChild(option);
+        });
+    }
+
     async loadWorkOrders() {
         try {
             console.log('Cargando órdenes de trabajo del estudiante:', this.user.student.id);
@@ -305,7 +425,7 @@ class OrdenesTrabajoController {
             }
 
             const data = await response.json();
-            console.log('Respuesta de órdenes de trabajo:', data);
+            console.log('Respuesta completa de órdenes de trabajo:', data);
 
             // Extraer órdenes según la estructura del API
             let orders = [];
@@ -313,93 +433,330 @@ class OrdenesTrabajoController {
                 orders = data.workOrders;
             }
 
-            console.log('Órdenes extraídas:', orders);
-            console.log('Cantidad de órdenes:', orders.length);
+            console.log('Órdenes extraídas del API:', orders);
+            console.log('Cantidad total de órdenes:', orders.length);
             
-            this.workOrders = orders;
+            // Mostrar todas las órdenes y sus estados para debug
+            orders.forEach(order => {
+                console.log(`Orden ${order.workOrderId}: Estado ${order.idStatus} (${this.getStatusText(order.idStatus)})`);
+            });
+            
             this.displayWorkOrders(orders);
 
         } catch (error) {
             console.error('Error al cargar órdenes de trabajo:', error);
             this.showError('Error al cargar las órdenes de trabajo');
-            this.displayWorkOrders([]);
+            // Mostrar mensaje de error en lugar de array vacío
+            if (this.listaOrdenes) {
+                this.listaOrdenes.innerHTML = `
+                    <div class="empty-orders-modern">
+                        <i class="fas fa-exclamation-triangle" style="color: #f44336;"></i>
+                        <h3>Error al cargar órdenes</h3>
+                        <p>No se pudieron cargar las órdenes de trabajo. Por favor, intenta recargar la página.</p>
+                        <button onclick="location.reload()" class="clear-search-button">
+                            <i class="fas fa-refresh"></i>
+                            Recargar
+                        </button>
+                    </div>
+                `;
+            }
         }
     }
 
     displayWorkOrders(orders) {
-        if (orders.length === 0) {
-            this.listaOrdenes.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-tasks"></i>
-                    <h3>Órdenes de Trabajo</h3>
-                    <p>Una vez que crees órdenes de trabajo, aparecerán aquí.</p>
-                    <p style="margin-top: 10px; font-size: 0.9em; color: #888;">
-                        <i class="fas fa-info-circle"></i> 
-                        Puedes crear una nueva orden haciendo clic en el botón +
-                    </p>
-                </div>
-            `;
+        console.log('displayWorkOrders llamado con:', orders);
+        console.log('Cantidad de órdenes recibidas:', orders.length);
+        
+        // Filtrar solo órdenes en proceso de aprobación (1,2) o aprobadas en progreso (3)
+        const filteredByStatus = orders.filter(order => [1, 2, 3].includes(order.idStatus));
+        console.log('Órdenes filtradas por estado (1,2,3):', filteredByStatus);
+        console.log('Cantidad de órdenes filtradas:', filteredByStatus.length);
+        
+        this.workOrders = filteredByStatus;
+        this.filterAndDisplayOrders();
+    }
+
+    filterAndDisplayOrders() {
+        console.log('filterAndDisplayOrders llamado');
+        console.log('workOrders:', this.workOrders);
+        console.log('searchTerm:', this.searchTerm);
+        
+        // Verificar que el elemento listaOrdenes existe
+        if (!this.listaOrdenes) {
+            console.error('Elemento lista-ordenes no encontrado');
             return;
         }
 
-        const ordenesHTML = orders.map(order => {
-            console.log('Procesando orden:', order); // Debug para ver estructura real
+        // Filtrar órdenes según el término de búsqueda
+        if (this.searchTerm === '') {
+            this.filteredOrders = [...this.workOrders];
+        } else {
+            this.filteredOrders = this.workOrders.filter(order => {
+                const vehiclePlate = (order.vehiclePlateNumber || '').toLowerCase();
+                const moduleName = (order.moduleName || '').toLowerCase();
+                const orderNumber = order.workOrderId.toString();
+                const description = (order.description || '').toLowerCase();
+                
+                return vehiclePlate.includes(this.searchTerm) ||
+                       moduleName.includes(this.searchTerm) ||
+                       orderNumber.includes(this.searchTerm) ||
+                       description.includes(this.searchTerm);
+            });
+        }
+
+        console.log('Órdenes después del filtro de búsqueda:', this.filteredOrders);
+        this.totalOrders = this.filteredOrders.length;
+
+        if (this.filteredOrders.length === 0) {
+            console.log('No hay órdenes para mostrar');
+            if (this.searchTerm === '') {
+                this.listaOrdenes.innerHTML = `
+                    <div class="empty-orders-modern">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No tienes órdenes de trabajo activas</h3>
+                        <p>Las órdenes de trabajo aparecerán aquí cuando estén en proceso de aprobación o aprobadas para trabajar.</p>
+                    </div>
+                `;
+            } else {
+                this.listaOrdenes.innerHTML = `
+                    <div class="empty-orders-modern">
+                        <i class="fas fa-search"></i>
+                        <h3>No se encontraron resultados</h3>
+                        <p>No hay órdenes que coincidan con "${this.searchTerm}"</p>
+                        <button onclick="document.getElementById('search-orders').value=''; document.getElementById('search-orders').dispatchEvent(new Event('input'))" class="clear-search-button">
+                            <i class="fas fa-times"></i>
+                            Limpiar búsqueda
+                        </button>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        // Calcular paginación
+        const totalPages = Math.ceil(this.totalOrders / this.ordersPerPage);
+        const startIndex = (this.currentPage - 1) * this.ordersPerPage;
+        const endIndex = startIndex + this.ordersPerPage;
+        const paginatedOrders = this.filteredOrders.slice(startIndex, endIndex);
+
+        console.log('Órdenes paginadas a mostrar:', paginatedOrders);
+
+        // Generar HTML de las órdenes
+        const ordenesHTML = paginatedOrders.map(order => this.createModernWorkOrderCard(order)).join('');
+        
+        // Generar HTML de paginación
+        const paginationHTML = this.createPaginationHTML(totalPages);
+        
+        console.log('HTML generado para órdenes:', ordenesHTML);
+        
+        // Mostrar órdenes y paginación
+        this.listaOrdenes.innerHTML = ordenesHTML + paginationHTML;
+        
+        // Agregar event listeners para paginación
+        this.bindPaginationEvents();
+    }
+
+    createPaginationHTML(totalPages) {
+        if (totalPages <= 1) return '';
+
+        const startItem = (this.currentPage - 1) * this.ordersPerPage + 1;
+        const endItem = Math.min(this.currentPage * this.ordersPerPage, this.totalOrders);
+
+        let paginationHTML = `
+            <div class="pagination-container">
+                <button class="pagination-button" id="prev-page" ${this.currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-left"></i>
+                    Anterior
+                </button>
+                
+                <div class="pagination-numbers">
+        `;
+
+        // Generar números de página
+        const startPage = Math.max(1, this.currentPage - 2);
+        const endPage = Math.min(totalPages, this.currentPage + 2);
+
+        if (startPage > 1) {
+            paginationHTML += `<span class="page-number" data-page="1">1</span>`;
+            if (startPage > 2) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHTML += `<span class="page-number ${i === this.currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
+        }
+
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            }
+            paginationHTML += `<span class="page-number" data-page="${totalPages}">${totalPages}</span>`;
+        }
+
+        paginationHTML += `
+                </div>
+                
+                <button class="pagination-button" id="next-page" ${this.currentPage === totalPages ? 'disabled' : ''}>
+                    Siguiente
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
             
-            // Mapear estado numérico a texto
-            const getStatusText = (idStatus) => {
-                switch(idStatus) {
-                    case 1: return 'Pendiente';
-                    case 2: return 'En Proceso';
-                    case 3: return 'Completado';
-                    case 4: return 'Cancelado';
-                    default: return 'Desconocido';
+            <div class="pagination-info">
+                ${this.searchTerm ? `Mostrando ${startItem}-${endItem} de ${this.totalOrders} resultados para "${this.searchTerm}"` : `Mostrando ${startItem}-${endItem} de ${this.totalOrders} órdenes`}
+            </div>
+        `;
+
+        return paginationHTML;
+    }
+
+    bindPaginationEvents() {
+        // Botón anterior
+        const prevBtn = document.getElementById('prev-page');
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    this.filterAndDisplayOrders();
                 }
-            };
+            });
+        }
 
-            const statusText = getStatusText(order.idStatus);
-            const statusClass = statusText.toLowerCase().replace(' ', '-');
-            
-            // Manejar campos que pueden ser null o undefined
-            const vehiclePlate = order.vehiclePlateNumber || 'Vehículo no especificado';
-            const moduleName = order.moduleName || 'Sin módulo asignado';
-            const estimatedTime = order.estimatedTime ? `${order.estimatedTime} horas` : 'Tiempo no especificado';
-            const hasImage = order.workOrderImage && 
-                            order.workOrderImage !== 'sin_imagen' && 
-                            order.workOrderImage !== null && 
-                            order.workOrderImage.trim() !== '';
+        // Botón siguiente
+        const nextBtn = document.getElementById('next-page');
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(this.totalOrders / this.ordersPerPage);
+                if (this.currentPage < totalPages) {
+                    this.currentPage++;
+                    this.filterAndDisplayOrders();
+                }
+            });
+        }
 
-            return `
-                <div class="orden-card" data-id="${order.workOrderId}">
-                    <div class="orden-header">
-                        <div class="orden-numero">Orden #${order.workOrderId}</div>
-                        <div class="orden-estado estado-${statusClass}">
+        // Números de página
+        const pageNumbers = document.querySelectorAll('.page-number');
+        pageNumbers.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const page = parseInt(btn.dataset.page);
+                if (page !== this.currentPage) {
+                    this.currentPage = page;
+                    this.filterAndDisplayOrders();
+                }
+            });
+        });
+    }
+
+    createModernWorkOrderCard(order) {
+        const statusText = this.getStatusText(order.idStatus);
+        const statusClass = this.getStatusClass(order.idStatus);
+        
+        const vehiclePlate = order.vehiclePlateNumber || 'Sin placa';
+        const moduleName = order.moduleName || 'Sin módulo';
+        const estimatedTime = order.estimatedTime || 'No especificado';
+        const description = order.description || '';
+        const hasImage = order.workOrderImage && 
+                         order.workOrderImage !== 'sin_imagen' && 
+                         order.workOrderImage !== null && 
+                         order.workOrderImage.trim() !== '';
+
+        return `
+            <div class="work-order-card">
+                <div class="work-order-header">
+                    <div class="order-title-row">
+                        <div class="order-number">
+                            <i class="fas fa-hashtag"></i>
+                            Orden ${order.workOrderId}
+                        </div>
+                        <div class="order-status-modern status-${statusClass}-modern">
                             ${statusText}
                         </div>
                     </div>
-                    <div class="orden-vehiculo">
-                        <i class="fas fa-car"></i> ${vehiclePlate}
+                    <div class="vehicle-info-modern">
+                        <i class="fas fa-car"></i>
+                        <span>${vehiclePlate}</span>
                     </div>
-                    <div class="orden-modulo">
-                        <i class="fas fa-book"></i> ${moduleName}
-                    </div>
-                    <div class="orden-meta">
-                        <div class="orden-tiempo">
-                            <i class="fas fa-clock"></i> ${estimatedTime}
+                </div>
+
+                <div class="work-order-content">
+                    <div class="info-grid-modern">
+                        <div class="info-item-modern">
+                            <div class="info-label-modern">
+                                <i class="fas fa-book"></i>
+                                Módulo
+                            </div>
+                            <div class="info-value-modern">${moduleName}</div>
                         </div>
-                        <div class="orden-imagen">
-                            <i class="fas fa-image"></i> ${hasImage ? 'Con imagen' : 'Sin imagen'}
+                        <div class="info-item-modern">
+                            <div class="info-label-modern">
+                                <i class="fas fa-clock"></i>
+                                Tiempo Estimado
+                            </div>
+                            <div class="info-value-modern">${estimatedTime} ${estimatedTime !== 'No especificado' ? 'horas' : ''}</div>
                         </div>
                     </div>
-                    ${hasImage ? `
-                        <div class="orden-imagen-preview" style="margin-top: 10px;">
-                            <img src="${order.workOrderImage}" alt="Imagen de orden" style="max-width: 100%; height: auto; border-radius: 8px; max-height: 200px; object-fit: cover;" onerror="this.style.display='none';" />
+
+                    ${description ? `
+                        <div class="description-section-modern">
+                            <div class="description-header-modern">
+                                <i class="fas fa-clipboard-list"></i>
+                                Descripción del Trabajo
+                            </div>
+                            <div class="description-text-modern">${description}</div>
                         </div>
                     ` : ''}
-                </div>
-            `;
-        }).join('');
 
-        this.listaOrdenes.innerHTML = ordenesHTML;
+                    <div class="order-image-section-modern">
+                        ${hasImage ? `
+                            <div class="order-image-container-modern">
+                                <img src="${order.workOrderImage}" alt="Imagen de orden" class="order-image-modern" />
+                                <div class="image-overlay-badge-modern">
+                                    <i class="fas fa-image"></i>
+                                    Evidencia
+                                </div>
+                            </div>
+                        ` : `
+                            <div class="no-image-placeholder-modern">
+                                <i class="fas fa-image"></i>
+                                <span>Sin imagen adjunta</span>
+                            </div>
+                        `}
+                    </div>
+                </div>
+
+                <div class="work-order-footer">
+                    <div class="time-info-modern">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Creada recientemente</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    getStatusText(idStatus) {
+        switch(idStatus) {
+            case 1: return 'En Aprobación del Animador';
+            case 2: return 'En Aprobación del Coordinador';
+            case 3: return 'Aprobado - En Progreso';
+            case 4: return 'Completado';
+            case 5: return 'Rechazado';
+            case 6: return 'Atrasado';
+            default: return 'Desconocido';
+        }
+    }
+
+    getStatusClass(idStatus) {
+        switch(idStatus) {
+            case 1: return 'en-aprobacion-animador';
+            case 2: return 'en-aprobacion-coordinador';
+            case 3: return 'aprobado-progreso';
+            case 4: return 'completado';
+            case 5: return 'rechazado';
+            case 6: return 'atrasado';
+            default: return 'pendiente';
+        }
     }
 
     openModal() {
@@ -409,12 +766,14 @@ class OrdenesTrabajoController {
         }
         
         this.modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        // Bloquear scroll del body y ocultar bottom-nav
+        document.body.classList.add('modal-open');
     }
 
     closeModal() {
         this.modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        // Restaurar scroll del body y mostrar bottom-nav
+        document.body.classList.remove('modal-open');
         this.form.reset();
         this.vistaPrevia.style.display = 'none';
     }
@@ -430,112 +789,6 @@ class OrdenesTrabajoController {
             reader.readAsDataURL(file);
         } else {
             this.vistaPrevia.style.display = 'none';
-        }
-    }
-
-    /**
-     * Verifica si un vehículo existe y pertenece al estudiante
-     * @param {number} vehicleId - ID del vehículo a verificar
-     * @returns {Promise<boolean>} - true si el vehículo existe y es válido
-     */
-    async verifyVehicle(vehicleId) {
-        try {
-            const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudentId/${this.user.student.id}`, {
-                credentials: 'include'
-            });
-
-            if (!response.ok) {
-                return false;
-            }
-
-            const data = await response.json();
-            const vehicles = data.success && data.data && data.data.vehiculos ? data.data.vehiculos : [];
-            
-            const vehicleExists = vehicles.some(v => v.vehicleId === parseInt(vehicleId));
-            console.log(`Verificación de vehículo ID ${vehicleId}:`, vehicleExists);
-            
-            return vehicleExists;
-        } catch (error) {
-            console.error('Error al verificar vehículo:', error);
-            return false;
-        }
-    }
-
-    /**
-     * Verifica si un vehículo específico existe en el servidor (verificación directa)
-     * @param {number} vehicleId - ID del vehículo a verificar
-     * @returns {Promise<boolean>} - true si el vehículo existe en el servidor
-     */
-    async verifyVehicleInServer(vehicleId) {
-        try {
-            console.log(`Verificando vehículo ID ${vehicleId} en el servidor...`);
-            
-            // Intentar obtener el vehículo específico
-            const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehicleById/${vehicleId}`, {
-                credentials: 'include'
-            });
-
-            console.log(`Response status para vehículo ${vehicleId}:`, response.status);
-
-            if (response.status === 404) {
-                console.log(`Vehículo ${vehicleId} no encontrado (404)`);
-                return false;
-            }
-
-            if (!response.ok) {
-                console.log(`Error al verificar vehículo ${vehicleId}:`, response.status);
-                return false;
-            }
-
-            const data = await response.json();
-            console.log(`Datos del vehículo ${vehicleId}:`, data);
-
-            // Verificar que el vehículo pertenece al estudiante actual
-            if (data.success && data.data) {
-                const vehicle = data.data;
-                const belongsToStudent = vehicle.studentId === this.user.student.id;
-                console.log(`Vehículo ${vehicleId} pertenece al estudiante ${this.user.student.id}:`, belongsToStudent);
-                return belongsToStudent;
-            }
-
-            return false;
-        } catch (error) {
-            console.error(`Error al verificar vehículo ${vehicleId} en servidor:`, error);
-            return false;
-        }
-    }
-
-    /**
-     * Verificación simple del vehículo antes de crear la orden
-     * @param {number} vehicleId - ID del vehículo a verificar
-     * @returns {Promise<Object|null>} - Datos del vehículo o null si no existe
-     */
-    async getVehicleDetails(vehicleId) {
-        try {
-            console.log(`Obteniendo detalles del vehículo ID ${vehicleId}...`);
-            
-            const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehicleById/${vehicleId}`, {
-                credentials: 'include'
-            });
-
-            console.log(`Response status para getVehicleById ${vehicleId}:`, response.status);
-
-            if (!response.ok) {
-                console.log(`Error al obtener vehículo ${vehicleId}:`, response.status);
-                return null;
-            }
-
-            const data = await response.json();
-            console.log(`Datos completos del vehículo ${vehicleId}:`, data);
-
-            if (data.success && data.data) {
-                return data.data;
-            }
-
-            return null;
-        } catch (error) {
-            console.error(`Error al obtener detalles del vehículo ${vehicleId}:`, error);
-            return null;
         }
     }
 
@@ -584,28 +837,41 @@ class OrdenesTrabajoController {
         try {
             console.log('Iniciando creación de orden de trabajo...');
             
-            const vehicleId = this.vehiculoSelect.value;
-            const moduleId = this.moduloSelect.value;
-            const descripcionElement = document.getElementById('descripcion-trabajo');
-            const descripcion = descripcionElement ? descripcionElement.value : '';
-            const tiempoEstimado = document.getElementById('tiempo-estimado').value;
-            const imagenFile = this.imagenInput.files[0];
+            // Obtener referencias directas a los elementos para debug
+            const vehiculoSelectEl = document.getElementById('vehiculo-select');
+            const moduloSelectEl = document.getElementById('modulo-select');
+            const descripcionEl = document.getElementById('descripcion-trabajo');
+            const tiempoEstimadoEl = document.getElementById('tiempo-estimado');
+            const imagenFileEl = document.getElementById('imagen-trabajo');
 
-            console.log('Datos del formulario:', {
-                vehicleId,
-                moduleId,
-                tiempoEstimado,
+            // Debug: Verificar que los elementos existen
+            console.log('Elementos del formulario encontrados:', {
+                vehiculoSelect: !!vehiculoSelectEl,
+                moduloSelect: !!moduloSelectEl,
+                descripcionElement: !!descripcionEl,
+                tiempoEstimadoElement: !!tiempoEstimadoEl,
+                imagenElement: !!imagenFileEl
+            });
+
+            // Extraer valores con verificación de existencia
+            const vehicleId = vehiculoSelectEl ? vehiculoSelectEl.value : '';
+            const moduleId = moduloSelectEl ? moduloSelectEl.value : '';
+            const descripcion = descripcionEl ? descripcionEl.value.trim() : '';
+            const tiempoEstimado = tiempoEstimadoEl ? tiempoEstimadoEl.value.trim() : '';
+            const imagenFile = imagenFileEl ? imagenFileEl.files[0] : null;
+
+            console.log('Valores RAW extraídos del formulario:', {
+                vehicleId: vehicleId,
+                moduleId: moduleId,
+                descripcion: `"${descripcion}"`,
+                tiempoEstimado: `"${tiempoEstimado}"`,
                 tieneImagen: !!imagenFile,
-                descripcionLength: descripcion.trim().length
+                descripcionLength: descripcion.length,
+                tiempoEstimadoLength: tiempoEstimado.length
             });
 
             // Validaciones
             console.log('Iniciando validaciones...');
-            console.log('Usuario actual:', {
-                id: this.user?.student?.id,
-                email: this.user?.student?.email,
-                fullName: this.user?.student?.fullName
-            });
             
             if (!vehicleId) {
                 console.log('Error: No se seleccionó vehículo');
@@ -623,11 +889,17 @@ class OrdenesTrabajoController {
 
             // Validar tiempo estimado (requerido por el DTO)
             if (!tiempoEstimado || parseFloat(tiempoEstimado) <= 0) {
-                console.log('Error: Tiempo estimado inválido');
+                console.log('Error: Tiempo estimado inválido', { 
+                    tiempoEstimado: `"${tiempoEstimado}"`, 
+                    parsed: parseFloat(tiempoEstimado),
+                    isEmpty: tiempoEstimado === '',
+                    isNull: tiempoEstimado === null,
+                    isUndefined: tiempoEstimado === undefined
+                });
                 this.showError('Debe especificar un tiempo estimado válido');
                 return;
             }
-            console.log('✓ Tiempo estimado validado:', tiempoEstimado, 'tipo:', typeof tiempoEstimado);
+            console.log('✓ Tiempo estimado validado:', `"${tiempoEstimado}"`, 'parsed:', parseFloat(tiempoEstimado));
 
             console.log('✓ Todas las validaciones pasaron correctamente');
 
@@ -695,42 +967,20 @@ class OrdenesTrabajoController {
 
             console.log('Vehículo validado:', selectedVehicle);
 
-            // TEMPORAL: Comentar verificación en servidor para diagnosticar
-            // console.log('Verificando vehículo en el servidor...');
-            // const vehicleExists = await this.verifyVehicleInServer(parseInt(vehicleId));
-            // if (!vehicleExists) {
-            //     console.error('Vehículo no encontrado en el servidor');
-            //     Swal.close();
-            //     this.showError(`El vehículo con ID ${vehicleId} no existe en el servidor. Contacte al administrador.`);
-            //     return;
-            // }
-            // console.log('Vehículo verificado en el servidor');
-
             // Crear el objeto de la orden de trabajo según el DTO esperado
-            // IMPORTANTE: estimatedTime debe ser string según el DTO y workOrderImage debe tener valor
             const workOrderData = {
                 vehicleId: parseInt(vehicleId),
                 moduleId: parseInt(moduleId),
-                estimatedTime: tiempoEstimado.toString(), // Convertir a string según DTO
-                workOrderImage: workOrderImage || "sin_imagen", // Valor por defecto si no hay imagen
+                estimatedTime: parseFloat(tiempoEstimado),
+                description: descripcion || "", 
+                workOrderImage: workOrderImage || "sin_imagen",
                 idStatus: 1
             };
 
-            console.log('DTO creado:', workOrderData);
-            console.log('Verificando tipos de datos en DTO:');
-            console.log('- vehicleId:', workOrderData.vehicleId, 'tipo:', typeof workOrderData.vehicleId);
-            console.log('- moduleId:', workOrderData.moduleId, 'tipo:', typeof workOrderData.moduleId);
-            console.log('- estimatedTime:', workOrderData.estimatedTime, 'tipo:', typeof workOrderData.estimatedTime);
-            console.log('- workOrderImage:', workOrderData.workOrderImage, 'tipo:', typeof workOrderData.workOrderImage);
-            console.log('- idStatus:', workOrderData.idStatus, 'tipo:', typeof workOrderData.idStatus);
+            console.log('DTO revertido con estimatedTime como número:', workOrderData);
+
             console.log('Iniciando petición HTTP...');
             console.log('Enviando orden de trabajo:', workOrderData);
-            console.log('Detalles del vehículo seleccionado:', {
-                vehicleId: selectedVehicle.vehicleId,
-                plateNumber: selectedVehicle.plateNumber,
-                studentId: selectedVehicle.studentId,
-                currentUserId: this.user.student.id
-            });
 
             const response = await fetch('https://sgma-66ec41075156.herokuapp.com/api/workOrders/newWorkOrder', {
                 method: 'POST',
@@ -764,7 +1014,12 @@ class OrdenesTrabajoController {
                 if (result.Estado === 'Completado' || result.status === 'success' || result.success === true) {
                     this.showSuccess('Orden de trabajo creada exitosamente');
                     this.closeModal();
-                    // Recargar la lista de órdenes para mostrar la nueva orden
+                    // Resetear paginación y búsqueda, luego recargar
+                    this.currentPage = 1;
+                    this.searchTerm = '';
+                    if (this.searchInput) {
+                        this.searchInput.value = '';
+                    }
                     await this.loadWorkOrders();
                 } else {
                     throw new Error(result.message || result.Descripción || 'Respuesta inesperada del servidor');

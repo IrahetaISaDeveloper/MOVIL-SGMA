@@ -1,166 +1,196 @@
 const API_BASE_URL = 'https://sgma-66ec41075156.herokuapp.com/api';
 
-import{me} from '../js/services/authServiceStudents.js';
+import { me } from './services/authServiceStudents.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Elementos del header
-    const nombreUsuarioHeader = document.getElementById('nombreUsuarioHeader');
-    const rolUsuarioHeader = document.getElementById('rolUsuarioHeader');
-    const detalleUsuarioHeader = document.getElementById('detalleUsuarioHeader');
-    const avatarUsuarioHeader = document.getElementById('avatarUsuarioHeader');
+let user = null; // Variable global para el usuario
 
-    // Elementos de estadísticas
-    const totalVehiculos = document.getElementById('allVehicles');
-    const trabajosActivos = document.getElementById('activeWorks');
-    const trabajosCompletados = document.getElementById('completeWorks');
-
-    // Datos del usuario desde localStorage
-    const loggedInUserName = localStorage.getItem('loggedInUserName');
-    const loggedInUserPhoto = localStorage.getItem('loggedInUserPhoto');
-    const loggedInUserRole = localStorage.getItem('loggedInUserRole') || 'Estudiante';
-    const loggedInUserDetail = localStorage.getItem('loggedInUserDetail') || 'Taller Automotriz';
-
-    // Configurar información del usuario en el header
-    if (nombreUsuarioHeader) {
-        nombreUsuarioHeader.textContent = loggedInUserName || 'Usuario';
-    }
-    if (rolUsuarioHeader) {
-        rolUsuarioHeader.textContent = loggedInUserRole;
-    }
-    if (detalleUsuarioHeader) {
-        detalleUsuarioHeader.textContent = loggedInUserDetail;
-    }
-
-    if (avatarUsuarioHeader && loggedInUserPhoto) {
-        avatarUsuarioHeader.src = loggedInUserPhoto;
-    } else if (avatarUsuarioHeader) {
-        avatarUsuarioHeader.src = 'imgs/defaul-user.webp';
-    }
-
-    // Event listener para el perfil del usuario
-    const perfilUsuarioNav = document.getElementById('perfilUsuarioNav');
-    if (perfilUsuarioNav) {
-        perfilUsuarioNav.addEventListener('click', () => {
-            window.location.href = 'perfil.html';
-        });
-    }
-
-    // Simular datos de estadísticas (aquí conectarías con tu base de datos)
-    cargarEstadisticas();
-    cargarCantidadVehiculos();
-    cargarTrabajosEnProgreso();
-    cargarTrabajosCompletados();
-
-    // Animaciones de entrada
-    animarElementos();
-});
-
-function cargarEstadisticas() {
-    // Aquí puedes implementar la carga real de trabajos activos y completados si tienes endpoints.
-    // Por ahora, no se generan datos aleatorios para vehículos.
-}
-
-function animarElementos() {
-    // Observador para animaciones de entrada
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    });
-
-    // Observar elementos que necesitan animación
-    const elementosAnimados = document.querySelectorAll('.tarjeta, .estadistica-item, .tarjeta-bienvenida');
-    elementosAnimados.forEach(elemento => {
-        elemento.style.opacity = '0';
-        elemento.style.transform = 'translateY(20px)';
-        elemento.style.transition = 'all 0.6s ease';
-        observer.observe(elemento);
-    });
-}
-
-function mostrarAyuda() {
-    alert('¡Bienvenido al Sistema de Gestión del Taller de Mantenimiento Automotriz!\n\n' +
-          'Aquí puedes:\n' +
-          '• Registrar tus vehículos para mantenimiento\n' +
-          '• Revisar el progreso de tus trabajos\n' +
-          '• Actualizar tu perfil personal\n' +
-          '• Ver el historial de tus trabajos\n\n' +
-          'Si necesitas ayuda adicional, contacta con el Animador de la especialidad.');
-}
-
-// Funciones auxiliares para futuras implementaciones
-function actualizarEstadisticas() {
-    // Función para actualizar estadísticas en tiempo real
-    cargarEstadisticas();
-}
-
-function notificarCambioEstado() {
-    // Función para mostrar notificaciones cuando cambien los estados de los trabajos
-    // Se puede implementar con toast notifications o similar
-}
-
-async function cargarCantidadVehiculos() {
-    const totalVehiculos = document.getElementById('allVehicles');
-    if (!totalVehiculos) return;
-
+// Función para inicializar la aplicación
+async function inicializarApp() {
     try {
-        const user = await me();
-        if (!user || !user.student || !user.student.id) throw new Error('No user ID');
-
-        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudentId/${user.student.id}`, {
-            credentials: 'include'
-        });
-        const data = await response.json();
-
-        totalVehiculos.textContent = data?.data?.cantidad?.toString() ?? '0';
-    } catch {
-        totalVehiculos.textContent = '0';
-    }
-}
-
-
-async function cargarTrabajosEnProgreso() {
-    try {
-        const user = await me();
-        if (!user || !user.student || !user.student.id) throw new Error('No user ID');
-        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentIdAndStatus2/${user.student.id}`, {
-            credentials: 'include'
-        });
-        const data = await response.json();
-        const trabajosActivos = document.getElementById('trabajosActivos');
-        if (!trabajosActivos) return;
-        if (data && data.workOrders) {
-            trabajosActivos.textContent = data.workOrders.length;
-        } else {
-            trabajosActivos.textContent = '0';
+        // Primero autenticar al usuario
+        user = await me();
+        console.log('Usuario autenticado:', user);
+        
+        if (!user || !user.student) {
+            console.error('Usuario no autenticado o sin datos de estudiante');
+            window.location.href = 'loginEstudiante.html';
+            return;
         }
-    } catch {
-        const trabajosActivos = document.getElementById('trabajosActivos');
-        if (trabajosActivos) trabajosActivos.textContent = '0';
+
+        // Una vez autenticado, cargar todos los datos
+        await Promise.all([
+            cargarDatosUsuario(),
+            cargarTrabajosEnProgreso(),
+            cargarTrabajosCompletados(),
+            cargarVehiculosRegistrados()  // Agregar esta línea
+        ]);
+
+    } catch (error) {
+        console.error('Error al inicializar la aplicación:', error);
+        // En caso de error de autenticación, redirigir al login
+        window.location.href = 'loginEstudiante.html';
+    }
+}
+
+function cargarDatosUsuario() {
+    if (!user || !user.student) {
+        console.error('Usuario no disponible para cargar datos');
+        return;
+    }
+
+    try {
+        const nombreElement = document.getElementById('nombre-estudiante');
+        const correoElement = document.getElementById('correo-estudiante');
+        const codigoElement = document.getElementById('codigo-estudiante');
+        const nivelElement = document.getElementById('nivel-estudiante');
+
+        if (nombreElement) {
+            nombreElement.textContent = `${user.student.firstName} ${user.student.lastName}`;
+        }
+        if (correoElement) {
+            correoElement.textContent = user.student.email || 'No disponible';
+        }
+        if (codigoElement) {
+            codigoElement.textContent = user.student.studentCode || 'No disponible';
+        }
+        if (nivelElement) {
+            nivelElement.textContent = user.student.levelName || 'No disponible';
+        }
+
+        console.log('Datos de usuario cargados correctamente');
+    } catch (error) {
+        console.error('Error al cargar datos del usuario:', error);
     }
 }
 
 async function cargarTrabajosCompletados() {
+    if (!user || !user.student) {
+        console.error('Usuario no disponible para cargar trabajos completados');
+        return;
+    }
+
     try {
-        const user = await me();
-        if (!user || !user.student || !user.student.id) throw new Error('No user ID');
-        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentIdAndStatus3/${user.student.id}`, {
+        console.log('Cargando trabajos completados...');
+        
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentIdAndStatus4/${user.student.id}`, {
+            method: 'GET',
             credentials: 'include'
         });
-        const data = await response.json();
-        const trabajosCompletados = document.getElementById('trabajosCompletados');
-        if (!trabajosCompletados) return;
-        if (data && data.workOrders) {
-            trabajosCompletados.textContent = data.workOrders.length;
-        } else {
-            trabajosCompletados.textContent = '0';
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    } catch {
-        const trabajosCompletados = document.getElementById('trabajosCompletados');
-        if (trabajosCompletados) trabajosCompletados.textContent = '0';
+
+        const data = await response.json();
+        console.log('Respuesta de trabajos completados:', data);
+
+        // Usar la propiedad 'cantidad' del backend para actualizar el DOM
+        const cantidadElement = document.getElementById('completeWorks');
+        if (cantidadElement && data.cantidad !== undefined) {
+            cantidadElement.textContent = data.cantidad;
+            console.log('Cantidad de trabajos completados actualizada:', data.cantidad);
+        } else {
+            console.warn('No se encontró el elemento completeWorks o la propiedad cantidad en la respuesta');
+        }
+
+    } catch (error) {
+        console.error('Error al cargar trabajos completados:', error);
+        // En caso de error, mostrar 0 en lugar de dejar el valor anterior
+        const cantidadElement = document.getElementById('completeWorks');
+        if (cantidadElement) {
+            cantidadElement.textContent = '0';
+        }
     }
 }
+
+async function cargarTrabajosEnProgreso() {
+    if (!user || !user.student) {
+        console.error('Usuario no disponible para cargar trabajos en progreso');
+        return;
+    }
+
+    try {
+        console.log('Cargando trabajos en progreso...');
+        
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/getWorkOrdersByStudentIdAndStatus3/${user.student.id}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Respuesta de trabajos en progreso:', data);
+
+        // Usar la propiedad 'cantidad' del backend para actualizar el DOM
+        const cantidadElement = document.getElementById('activeWorks');
+        if (cantidadElement && data.cantidad !== undefined) {
+            cantidadElement.textContent = data.cantidad;
+            console.log('Cantidad de trabajos en progreso actualizada:', data.cantidad);
+        } else {
+            console.warn('No se encontró el elemento activeWorks o la propiedad cantidad en la respuesta');
+        }
+
+
+    } catch (error) {
+        console.error('Error al cargar trabajos en progreso:', error);
+        // En caso de error, mostrar 0 en lugar de dejar el valor anterior
+        const cantidadElement = document.getElementById('activeWorks');
+        if (cantidadElement) {
+            cantidadElement.textContent = '0';
+        }
+    }
+}
+
+async function cargarVehiculosRegistrados() {
+    if (!user || !user.student) {
+        console.error('Usuario no disponible para cargar vehículos registrados');
+        return;
+    }
+
+    try {
+        console.log('Cargando vehículos registrados...');
+        
+        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/vehicles/getVehiclesByStudentId/${user.student.id}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Respuesta de vehículos registrados:', data);
+
+        // Extraer vehículos según la estructura del API
+        let vehicles = [];
+        
+        if (data.success && data.data && data.data.vehiculos) {
+            vehicles = data.data.vehiculos;
+        }
+
+        // Usar la cantidad de vehículos para actualizar el DOM
+        const cantidadElement = document.getElementById('allVehicles');
+        if (cantidadElement) {
+            cantidadElement.textContent = vehicles.length;
+            console.log('Cantidad de vehículos registrados actualizada:', vehicles.length);
+        } else {
+            console.warn('No se encontró el elemento allVehicles');
+        }
+
+    } catch (error) {
+        console.error('Error al cargar vehículos registrados:', error);
+        // En caso de error, mostrar 0 en lugar de dejar el valor anterior
+        const cantidadElement = document.getElementById('allVehicles');
+        if (cantidadElement) {
+            cantidadElement.textContent = '0';
+        }
+    }
+}
+
+// Cuando el DOM esté listo, inicializar la aplicación
+document.addEventListener('DOMContentLoaded', inicializarApp);
 
