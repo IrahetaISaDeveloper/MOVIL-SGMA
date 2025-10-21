@@ -888,7 +888,7 @@ label[for="mantenimientoExpo"] {
 
 .breadcrumb-pasos .linea-progreso .relleno {
     height: 100%;
-    width: 33.33%;
+    width: 0%;
     background: #ad1414; /* Solo rojo, sin gradiente */
     border-radius: 2px;
     animation: parpadeoLinea 2s infinite;

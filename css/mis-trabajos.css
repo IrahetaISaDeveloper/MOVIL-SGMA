@@ -74,6 +74,120 @@ html, body {
     }
 }
 
+.breadcrumb-pasos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separar los iconos */
+    margin: 0 auto 32px auto;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+    height: 48px;
+    background: none;
+}
+
+.breadcrumb-pasos .paso {
+    position: relative;
+    z-index: 2;
+    background: #232323;
+    border: 2px solid #353535;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.breadcrumb-pasos .paso:first-child {
+    margin-left: 0;
+}
+
+.breadcrumb-pasos .paso:last-child {
+    margin-right: 0;
+}
+
+.breadcrumb-pasos .paso .fa {
+    font-size: 1.35em;
+    color: #b8b8b8;
+    background: none;
+    border-radius: 50%;
+    padding: 0;
+    transition: color 0.3s;
+}
+
+.breadcrumb-pasos .paso.activo {
+    border-color: #ad1414;
+    box-shadow: 0 4px 16px rgba(173,20,20,0.08);
+}
+
+.breadcrumb-pasos .paso.completado {
+    border-color: #01ff4d;
+    box-shadow: 0 4px 16px rgba(173,20,20,0.08);
+}
+
+.breadcrumb-pasos .paso.completado .fa {
+    color: #01ff4d;
+    animation: parpadeoPaso2 2s infinite; /* Más lento */
+}
+
+.breadcrumb-pasos .paso.activo .fa {
+    color: #ad1414;
+    animation: parpadeoPaso 2s infinite; /* Más lento */
+}
+
+.breadcrumb-pasos .paso.completed {
+    border-color: #ad1414;
+}
+
+.breadcrumb-pasos .paso.completed .fa {
+    color: #ad1414;
+    opacity: 0.7;
+}
+
+@keyframes parpadeoPaso {
+    0%, 100% { color: #ad1414; }
+    50% { color: #e74c3c; }
+}
+
+@keyframes parpadeoPaso2 {
+    0%, 100% { color: #01ff4d; }
+    50% { color: #06a814; }
+}
+
+.breadcrumb-pasos .linea-progreso {
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    right: 22px;
+    height: 4px;
+    background: #353535; /* Fondo uniforme gris */
+    border-radius: 2px;
+    z-index: 1;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.breadcrumb-pasos .linea-progreso .relleno2 {
+    height: 100%;
+    width: 100%;
+    background: #ad1414; /* Solo rojo, sin gradiente */
+    border-radius: 2px;
+    animation: parpadeoLinea2 2s infinite;
+    box-shadow: 0 1px 6px rgba(173,20,20,0.07);
+}
+
+@keyframes parpadeoLinea2 {
+    0%, 100% { background: #01ff4d; }
+    75% { background: #06a814; }
+}
 
 
 .bottom-nav ul {

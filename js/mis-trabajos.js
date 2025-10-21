@@ -438,6 +438,21 @@ class MisTrabajosController {
             title: `Orden de Trabajo #${order.workOrderId}`,
             html: `
                 <div style="text-align: left; padding: 10px;">
+                    <nav class="breadcrumb-pasos" aria-label="Progreso de registro">
+                    <div class="paso completado" title="Registrar vehículo">
+                        <i class="fa fa-car"></i>
+                    </div>
+                    <div class="paso completado" title="Entradas">
+                        <i class="fa fa-list"></i>
+                    </div>
+                    <div class="paso activo" title="Orden de trabajo">
+                        <i class="fa fa-file-alt"></i>
+                    </div>
+                    <div class="linea-progreso">
+                        <div class="relleno2"></div>
+                    </div>
+                </nav>
+
                     <div style="background: rgba(66, 165, 245, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         <h4 style="color: #42A5F5; margin: 0 0 10px 0;"><i class="fas fa-car"></i> Detalles del Vehículo</h4>
                         <p><strong>Placa:</strong> ${order.vehiclePlateNumber || 'Sin placa'}</p>
@@ -455,15 +470,17 @@ class MisTrabajosController {
             `,
             showCancelButton: true,
             showDenyButton: true,
+            showCloseButton: true,
             confirmButtonText: 'Finalizar Orden',
             denyButtonText: 'Atrasar Orden',
-            cancelButtonText: 'Cerrar',
+            cancelButtonText: 'Nueva Observación',
+            closeButtonAriaLabel: 'Cerrar',
             customClass: {
                 popup: 'swal-custom-popup',
                 title: 'swal-custom-title',
                 content: 'swal-custom-content',
                 confirmButton: 'swal-custom-confirm-button',
-                cancelButton: 'swal-custom-cancel-button',
+                cancelButton: 'swal-custom-observation-button',
                 denyButton: 'swal-custom-cancel-button'
             }
         }).then((result) => {
@@ -471,6 +488,8 @@ class MisTrabajosController {
                 this.completeOrder(order.workOrderId);
             } else if (result.isDenied) {
                 this.delayOrder(order.workOrderId);
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                this.showCreateObservationModal(order.workOrderId);
             }
         });
     }
@@ -485,50 +504,97 @@ class MisTrabajosController {
                 </div>
             `,
             showCancelButton: true,
+            showDenyButton: true,
             confirmButtonText: 'Ver Detalles de la Orden',
+            denyButtonText: 'Nueva Observación',
             cancelButtonText: 'Cerrar',
             customClass: {
                 popup: 'swal-custom-popup',
                 title: 'swal-custom-title',
                 content: 'swal-custom-content',
                 confirmButton: 'swal-custom-confirm-button',
+                denyButton: 'swal-custom-observation-button',
                 cancelButton: 'swal-custom-cancel-button'
             }
         }).then((result) => {
             if (result.isConfirmed) {
                 this.showOrderDetailsOnly(order);
+            } else if (result.isDenied) {
+                this.showCreateObservationModal(order.workOrderId);
             }
         });
     }
 
-    showOrderDetailsOnly(order) {
-        Swal.fire({
-            title: `Orden de Trabajo #${order.workOrderId}`,
-            html: `
-                <div style="text-align: left; padding: 10px;">
-                    <div style="background: rgba(66, 165, 245, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <h4 style="color: #42A5F5; margin: 0 0 10px 0;"><i class="fas fa-car"></i> Detalles del Vehículo</h4>
-                        <p><strong>Placa:</strong> ${order.vehiclePlateNumber || 'Sin placa'}</p>
-                        <p><strong>Marca:</strong> ${order.vehicleBrand || 'No especificada'}</p>
-                        <p><strong>Modelo:</strong> ${order.vehicleModel || 'No especificado'}</p>
+    async showOrderDetailsOnly(order) {
+        try {
+            const observations = await this.getObservations(order.workOrderId);
+            
+            Swal.fire({
+                title: `Orden de Trabajo #${order.workOrderId}`,
+                html: `
+                    <div style="text-align: left; padding: 10px;">
+                        <div style="background: rgba(66, 165, 245, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: #42A5F5; margin: 0 0 10px 0;"><i class="fas fa-car"></i> Detalles del Vehículo</h4>
+                            <p><strong>Placa:</strong> ${order.vehiclePlateNumber || 'Sin placa'}</p>
+                            <p><strong>Marca:</strong> ${order.vehicleBrand || 'No especificada'}</p>
+                            <p><strong>Modelo:</strong> ${order.vehicleModel || 'No especificado'}</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: #42A5F5; margin: 0 0 10px 0;"><i class="fas fa-clipboard-list"></i> Detalles de la Orden</h4>
+                            <p><strong>Módulo:</strong> ${order.moduleName || 'Sin módulo'}</p>
+                            <p><strong>Tiempo Estimado:</strong> ${order.estimatedTime || 'No especificado'} horas</p>
+                            <p><strong>Estado:</strong> ${this.getStatusText(order.idStatus)}</p>
+                            ${order.description ? `<p><strong>Descripción:</strong> ${order.description}</p>` : ''}
+                        </div>
+                        ${this.generateObservationsHTML(observations)}
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px;">
-                        <h4 style="color: #42A5F5; margin: 0 0 10px 0;"><i class="fas fa-clipboard-list"></i> Detalles de la Orden</h4>
-                        <p><strong>Módulo:</strong> ${order.moduleName || 'Sin módulo'}</p>
-                        <p><strong>Tiempo Estimado:</strong> ${order.estimatedTime || 'No especificado'} horas</p>
-                        <p><strong>Estado:</strong> ${this.getStatusText(order.idStatus)}</p>
-                        ${order.description ? `<p><strong>Descripción:</strong> ${order.description}</p>` : ''}
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Nueva Observación',
+                cancelButtonText: 'Cerrar',
+                customClass: {
+                    popup: 'swal-custom-popup swal-wide',
+                    title: 'swal-custom-title',
+                    content: 'swal-custom-content',
+                    confirmButton: 'swal-custom-observation-button',
+                    cancelButton: 'swal-custom-cancel-button'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.showCreateObservationModal(order.workOrderId);
+                }
+            });
+        } catch (error) {
+            console.error('Error loading observations:', error);
+            // Show modal without observations
+            Swal.fire({
+                title: `Orden de Trabajo #${order.workOrderId}`,
+                html: `
+                    <div style="text-align: left; padding: 10px;">
+                        <div style="background: rgba(66, 165, 245, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h4 style="color: #42A5F5; margin: 0 0 10px 0;"><i class="fas fa-car"></i> Detalles del Vehículo</h4>
+                            <p><strong>Placa:</strong> ${order.vehiclePlateNumber || 'Sin placa'}</p>
+                            <p><strong>Marca:</strong> ${order.vehicleBrand || 'No especificada'}</p>
+                            <p><strong>Modelo:</strong> ${order.vehicleModel || 'No especificado'}</p>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px;">
+                            <h4 style="color: #42A5F5; margin: 0 0 10px 0;"><i class="fas fa-clipboard-list"></i> Detalles de la Orden</h4>
+                            <p><strong>Módulo:</strong> ${order.moduleName || 'Sin módulo'}</p>
+                            <p><strong>Tiempo Estimado:</strong> ${order.estimatedTime || 'No especificado'} horas</p>
+                            <p><strong>Estado:</strong> ${this.getStatusText(order.idStatus)}</p>
+                            ${order.description ? `<p><strong>Descripción:</strong> ${order.description}</p>` : ''}
+                        </div>
                     </div>
-                </div>
-            `,
-            confirmButtonText: 'Cerrar',
-            customClass: {
-                popup: 'swal-custom-popup',
-                title: 'swal-custom-title',
-                content: 'swal-custom-content',
-                confirmButton: 'swal-custom-confirm-button'
-            }
-        });
+                `,
+                confirmButtonText: 'Cerrar',
+                customClass: {
+                    popup: 'swal-custom-popup',
+                    title: 'swal-custom-title',
+                    content: 'swal-custom-content',
+                    confirmButton: 'swal-custom-confirm-button'
+                }
+            });
+        }
     }
 
     showDelayedModal(order) {
@@ -552,140 +618,258 @@ class MisTrabajosController {
                 </div>
             `,
             showCancelButton: true,
+            showDenyButton: true,
             confirmButtonText: 'Finalizar Orden',
+            denyButtonText: 'Nueva Observación',
             cancelButtonText: 'Cerrar',
             customClass: {
                 popup: 'swal-custom-popup',
                 title: 'swal-custom-title',
                 content: 'swal-custom-content',
                 confirmButton: 'swal-custom-confirm-button',
+                denyButton: 'swal-custom-observation-button',
                 cancelButton: 'swal-custom-cancel-button'
             }
         }).then((result) => {
             if (result.isConfirmed) {
                 this.completeOrder(order.workOrderId);
+            } else if (result.isDenied) {
+                this.showCreateObservationModal(order.workOrderId);
             }
         });
     }
 
-    async delayOrder(orderId) {
-        const result = await Swal.fire({
-            icon: 'question',
-            title: '¿Atrasar orden?',
-            text: '¿Estás seguro de que quieres atrasar esta orden de trabajo?',
+    showCreateObservationModal(workOrderId) {
+        Swal.fire({
+            title: 'Nueva Observación',
+            html: `
+                <div style="text-align: left; padding: 10px;">
+                    <div style="margin-bottom: 15px;">
+                        <label for="observation-description" style="display: block; margin-bottom: 5px; font-weight: bold; color: #42A5F5;">
+                            <i class="fas fa-pen"></i> Descripción del trabajo realizado *
+                        </label>
+                        <textarea id="observation-description" 
+                                  placeholder="Describe detalladamente el trabajo realizado, herramientas utilizadas, problemas encontrados, etc." 
+                                  style="width: 100%; min-height: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; resize: vertical; font-family: Arial, sans-serif;"
+                                  required></textarea>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label for="observation-image" style="display: block; margin-bottom: 5px; font-weight: bold; color: #42A5F5;">
+                            <i class="fas fa-camera"></i> Imagen (opcional)
+                        </label>
+                        <input type="file" id="observation-image" accept="image/*" 
+                               style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                        <small style="color: #666; font-size: 12px;">
+                            Sube una imagen del trabajo realizado, herramientas utilizadas, o reporta algún accidente si ocurrió.
+                        </small>
+                    </div>
+                    
+                    <div id="image-preview" style="margin-top: 10px; text-align: center; display: none;">
+                        <img id="preview-img" style="max-width: 200px; max-height: 200px; border-radius: 5px; border: 1px solid #ddd;">
+                    </div>
+                </div>
+            `,
             showCancelButton: true,
-            confirmButtonText: 'Sí, atrasar',
+            confirmButtonText: 'Crear Observación',
             cancelButtonText: 'Cancelar',
             customClass: {
-                popup: 'swal-custom-popup',
+                popup: 'swal-custom-popup swal-wide',
                 title: 'swal-custom-title',
                 content: 'swal-custom-content',
                 confirmButton: 'swal-custom-confirm-button',
                 cancelButton: 'swal-custom-cancel-button'
-            }
-        });
-
-        if (result.isConfirmed) {
-            try {
-                await this.updateOrderStatus(orderId, 6);
-                
-                await Swal.fire({
-                    icon: 'success',
-                    title: '¡Orden atrasada!',
-                    text: 'La orden de trabajo ha sido marcada como atrasada',
-                    customClass: {
-                        popup: 'swal-custom-popup',
-                        title: 'swal-custom-title',
-                        content: 'swal-custom-content',
-                        confirmButton: 'swal-custom-confirm-button'
-                    }
-                });
-                
-                await this.loadWorkOrders();
-            } catch (error) {
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error al atrasar la orden de trabajo: ' + error.message,
-                    customClass: {
-                        popup: 'swal-custom-popup',
-                        title: 'swal-custom-title',
-                        content: 'swal-custom-content',
-                        confirmButton: 'swal-custom-confirm-button'
-                    }
-                });
-            }
-        }
-    }
-
-    async completeOrder(orderId) {
-        const result = await Swal.fire({
-            icon: 'question',
-            title: '¿Finalizar orden?',
-            text: '¿Estás seguro de que quieres finalizar esta orden de trabajo?',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, finalizar',
-            cancelButtonText: 'Cancelar',
-            customClass: {
-                popup: 'swal-custom-popup',
-                title: 'swal-custom-title',
-                content: 'swal-custom-content',
-                confirmButton: 'swal-custom-confirm-button',
-                cancelButton: 'swal-custom-cancel-button'
-            }
-        });
-
-        if (result.isConfirmed) {
-            try {
-                await this.updateOrderStatus(orderId, 4);
-                
-                await Swal.fire({
-                    icon: 'success',
-                    title: '¡Orden finalizada!',
-                    text: 'La orden de trabajo ha sido finalizada exitosamente',
-                    customClass: {
-                        popup: 'swal-custom-popup',
-                        title: 'swal-custom-title',
-                        content: 'swal-custom-content',
-                        confirmButton: 'swal-custom-confirm-button'
-                    }
-                });
-                
-                await this.loadWorkOrders();
-            } catch (error) {
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Error al finalizar la orden de trabajo: ' + error.message,
-                    customClass: {
-                        popup: 'swal-custom-popup',
-                        title: 'swal-custom-title',
-                        content: 'swal-custom-content',
-                        confirmButton: 'swal-custom-confirm-button'
-                    }
-                });
-            }
-        }
-    }
-
-    async updateOrderStatus(orderId, newStatus) {
-        const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/workOrders/${orderId}/status`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Student-Id': this.user.student.id.toString()
             },
-            credentials: 'include',
-            body: JSON.stringify({ idStatus: newStatus })
+            didOpen: () => {
+                const imageInput = document.getElementById('observation-image');
+                const preview = document.getElementById('image-preview');
+                const previewImg = document.getElementById('preview-img');
+                
+                imageInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            previewImg.src = e.target.result;
+                            preview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        preview.style.display = 'none';
+                    }
+                });
+            },
+            preConfirm: () => {
+                const description = document.getElementById('observation-description').value.trim();
+                const imageFile = document.getElementById('observation-image').files[0];
+                
+                if (!description) {
+                    Swal.showValidationMessage('La descripción es obligatoria');
+                    return false;
+                }
+                
+                return {
+                    description: description,
+                    imageFile: imageFile
+                };
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await this.createObservation(workOrderId, result.value.description, result.value.imageFile);
+            }
         });
+    }
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Error al actualizar el estado');
+    async createObservation(workOrderId, description, imageFile) {
+        try {
+            Swal.fire({
+                title: 'Creando observación...',
+                text: 'Por favor espera mientras se guarda la observación',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            let imageUrl = null;
+            
+            // Si hay imagen, subirla primero
+            if (imageFile) {
+                const formData = new FormData();
+                formData.append('image', imageFile);
+
+                const imageResponse = await fetch('https://sgma-66ec41075156.herokuapp.com/api/images/upload', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include'
+                });
+
+                if (imageResponse.ok) {
+                    const imageData = await imageResponse.json();
+                    imageUrl = imageData.imageUrl;
+                }
+            }
+
+            // Crear la observación con los nombres de campo correctos para la base de datos
+            const observationData = {
+                workOrderId: workOrderId,
+                studentId: this.user.student.id,
+                observacion: description,  // Cambiar 'description' por 'observacion'
+                imageUrl: imageUrl        // Cambiar 'observationImage' por 'imageUrl'
+            };
+
+            const response = await fetch('https://sgma-66ec41075156.herokuapp.com/api/observations/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(observationData),
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al crear la observación');
+            }
+
+            await Swal.fire({
+                icon: 'success',
+                title: '¡Observación creada!',
+                text: 'La observación ha sido registrada exitosamente',
+                customClass: {
+                    popup: 'swal-custom-popup',
+                    title: 'swal-custom-title',
+                    content: 'swal-custom-content',
+                    confirmButton: 'swal-custom-confirm-button'
+                }
+            });
+
+        } catch (error) {
+            console.error('Error creating observation:', error);
+            await Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al crear la observación: ' + error.message,
+                customClass: {
+                    popup: 'swal-custom-popup',
+                    title: 'swal-custom-title',
+                    content: 'swal-custom-content',
+                    confirmButton: 'swal-custom-confirm-button'
+                }
+            });
+        }
+    }
+
+    async getObservations(workOrderId) {
+        try {
+            const response = await fetch(`https://sgma-66ec41075156.herokuapp.com/api/observations/workOrder/${workOrderId}`, {
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data.observations || [];
+        } catch (error) {
+            console.error('Error fetching observations:', error);
+            return [];
+        }
+    }
+
+    generateObservationsHTML(observations) {
+        if (!observations || observations.length === 0) {
+            return `
+                <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 8px; text-align: center;">
+                    <h4 style="color: #FFC107; margin: 0 0 10px 0;"><i class="fas fa-sticky-note"></i> Observaciones</h4>
+                    <p style="margin: 0; color: #666;">No hay observaciones registradas para esta orden</p>
+                </div>
+            `;
         }
 
-        return response.json();
+        let observationsHTML = `
+            <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 8px;">
+                <h4 style="color: #FFC107; margin: 0 0 15px 0;"><i class="fas fa-sticky-note"></i> Observaciones (${observations.length})</h4>
+        `;
+
+        observations.forEach((observation, index) => {
+            // Ajustar para los nombres de campo correctos de la base de datos
+            const hasImage = observation.imageUrl && 
+                           observation.imageUrl !== 'sin_imagen' && 
+                           observation.imageUrl !== null && 
+                           observation.imageUrl.trim() !== '';
+
+            observationsHTML += `
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 6px; margin-bottom: ${index < observations.length - 1 ? '10px' : '0'};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <strong style="color: #FFC107;">Observación #${index + 1}</strong>
+                        <small style="color: #888;">
+                            <i class="fas fa-calendar"></i>
+                            ${observation.createdAt ? new Date(observation.createdAt).toLocaleDateString('es-ES') : 'Fecha no disponible'}
+                        </small>
+                    </div>
+                    <p style="margin: 8px 0; line-height: 1.4;">${observation.observacion || observation.description || ''}</p>
+                    ${hasImage ? `
+                        <div style="margin-top: 10px; text-align: center;">
+                            <img src="${observation.imageUrl}" 
+                                 alt="Imagen de observación" 
+                                 style="max-width: 150px; max-height: 150px; border-radius: 5px; border: 1px solid #ddd; cursor: pointer;"
+                                 onclick="window.open('${observation.imageUrl}', '_blank')">
+                            <br>
+                            <small style="color: #888;">Click para ver en tamaño completo</small>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        });
+
+        observationsHTML += `</div>`;
+        return observationsHTML;
     }
+
 }
 
 // Variable global para el controlador

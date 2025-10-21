@@ -186,6 +186,10 @@ class OrdenesTrabajoController {
             const tarjeta = vehicle.circulationCardNumber || 'N/A';
             const expo = vehicle.maintenanceEXPO === 1;
             
+            // Obtener estado del vehículo
+            const statusText = this.getVehicleStatusText(vehicle.idStatus);
+            const statusClass = this.getVehicleStatusClass(vehicle.idStatus);
+            
             return `
                 <div class="vehiculo-card" data-id="${vehicle.vehicleId}">
                     ${vehicle.vehicleImage ? `
@@ -209,8 +213,8 @@ class OrdenesTrabajoController {
                                 <p>${marca} ${modelo}</p>
                             </div>
                         </div>
-                        <div class="vehiculo-estado estado-disponible">
-                            Disponible
+                        <div class="vehiculo-estado ${statusClass}">
+                            ${statusText}
                         </div>
                     </div>
                     <div class="vehiculo-detalles">
@@ -389,17 +393,22 @@ class OrdenesTrabajoController {
             vehicles = [];
         }
 
-        console.log('Poblando select con vehículos:', vehicles);
+        console.log('Poblando select con vehículos (todos):', vehicles);
+
+        // Filtrar solo vehículos aprobados (idStatus = 1)
+        const approvedVehicles = vehicles.filter(vehicle => vehicle.idStatus === 3);
+        console.log('Vehículos aprobados (idStatus = 3):', approvedVehicles);
 
         this.vehiculoSelect.innerHTML = '<option value="">Seleccione un vehículo...</option>';
         
-        if (vehicles.length === 0) {
-            this.vehiculoSelect.innerHTML += '<option value="" disabled>No hay vehículos disponibles</option>';
+        if (approvedVehicles.length === 0) {
+            this.vehiculoSelect.innerHTML += '<option value="" disabled>No hay vehículos aprobados disponibles</option>';
+            console.log('No hay vehículos aprobados para mostrar en el select');
             return;
         }
         
-        vehicles.forEach(vehicle => {
-            console.log('Agregando vehículo al select:', vehicle);
+        approvedVehicles.forEach(vehicle => {
+            console.log('Agregando vehículo aprobado al select:', vehicle);
             const option = document.createElement('option');
             option.value = vehicle.vehicleId;
             
@@ -759,9 +768,41 @@ class OrdenesTrabajoController {
         }
     }
 
+    getVehicleStatusText(idStatus) {
+        switch(idStatus) {
+            case 1: return 'Pendiente de Aprobación';
+            case 2: return 'En Revisión';
+            case 3: return 'Aprobado';
+            case 4: return 'Rechazado';
+            case 5: return 'En Mantenimiento';
+            case 6: return 'Fuera de Servicio';
+            default: return 'Estado Desconocido';
+        }
+    }
+
+    getVehicleStatusClass(idStatus) {
+        switch(idStatus) {
+            case 1: return 'estado-pendiente';
+            case 2: return 'estado-revision';
+            case 3: return 'estado-aprobado';
+            case 4: return 'estado-rechazado';
+            case 5: return 'estado-mantenimiento';
+            case 6: return 'estado-fuera-servicio';
+            default: return 'estado-desconocido';
+        }
+    }
+
     openModal() {
+        // Filtrar vehículos aprobados para la validación del modal
+        const approvedVehicles = this.vehicles.filter(vehicle => vehicle.idStatus === 3);
+        
         if (this.vehicles.length === 0) {
             this.showError('Debes tener al menos un vehículo registrado para crear una orden de trabajo');
+            return;
+        }
+        
+        if (approvedVehicles.length === 0) {
+            this.showError('No tienes vehículos aprobados disponibles. Los vehículos deben ser aprobados por los animadores y coordinadores antes de poder crear órdenes de trabajo.');
             return;
         }
         
@@ -946,13 +987,14 @@ class OrdenesTrabajoController {
 
             console.log('Preparando DTO de orden de trabajo...');
 
-            // Validar que el vehículo seleccionado existe en la lista cargada
+            // Validar que el vehículo seleccionado existe en la lista cargada Y está aprobado
             console.log('Validando vehículo en lista local...');
             console.log('ID de vehículo seleccionado:', vehicleId, typeof vehicleId);
             console.log('Lista de vehículos disponibles:', this.vehicles.map(v => ({
                 id: v.vehicleId,
                 tipo: typeof v.vehicleId,
-                placa: v.plateNumber
+                placa: v.plateNumber,
+                estado: v.idStatus
             })));
             
             const selectedVehicle = this.vehicles.find(v => v.vehicleId === parseInt(vehicleId));
@@ -965,7 +1007,15 @@ class OrdenesTrabajoController {
                 return;
             }
 
-            console.log('Vehículo validado:', selectedVehicle);
+            // Validar que el vehículo esté aprobado (idStatus = 1)
+            if (selectedVehicle.idStatus !== 3) {
+                console.error('Vehículo no está aprobado:', selectedVehicle);
+                Swal.close();
+                this.showError('El vehículo seleccionado no está aprobado. Solo se pueden crear órdenes de trabajo con vehículos aprobados por los animadores y coordinadores.');
+                return;
+            }
+
+            console.log('Vehículo validado y aprobado:', selectedVehicle);
 
             // Crear el objeto de la orden de trabajo según el DTO esperado
             const workOrderData = {
